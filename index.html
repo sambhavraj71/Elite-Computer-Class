@@ -1,11 +1,432 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Code Vora Academy</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
+  <!-- Font Awesome CDN (Latest version) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
 </head>
 <body>
-    <h1>Elite Computer Class</h1>
+
+  <!-- Header -->
+  <header class="main-header">
+    <div class="top-bar">
+      <div class="logo">
+        <img src="logo.jpg" alt="Logo">
+        <h1>Elite Computer Classes</h1>
+      </div>
+
+      <div class="top-right">
+        <input type="text" placeholder="What do you want to learn?" />
+        <!-- <a href="#" class="login-icon" title="Login">
+          <i class="fas fa-user-circle"></i>
+        </a> -->
+      </div>
+    </div>
+
+    <div class="nav-bar-container">
+      <div class="menu-toggle" id="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+      <nav class="navbar" id="navbar">
+        <a href="index.html">Home</a>
+        <a href="courses.html">Courses</a>
+        <a href="category.html">Category</a>
+        <a href="student.html">Student Zone</a>
+        <a href="admission.html">Admission</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#about_us">About Us</a>
+      </nav>
+    </div>
+  </header>
+  <!-- Banner Carousel -->
+  <section class="banner">
+    <div class="slider">
+      <img src="banner1.jpg" class="slide active" />
+      <img src="banner2.jpg" class="slide" />
+      <img src="banner3.jpg" class="slide" />
+      <img src="banner4.jpg" class="slide" />
+      <img src="banner1.jpg" class="slide" />
+    </div>
+    <div class="slider-nav">
+  <div class="slider-dot active"></div>
+  <div class="slider-dot"></div>
+  <div class="slider-dot"></div>
+  <div class="slider-dot"></div>
+  <div class="slider-dot"></div>
+</div>
+
+<button class="slider-arrow prev"><i class="fas fa-chevron-left"></i></button>
+<button class="slider-arrow next"><i class="fas fa-chevron-right"></i></button>
+  </section>
+
+  <!-- Study Sections -->
+  <section id="study" class="study-section">
+    <h2>Popular Courses</h2>
+    <div class="study-grid">
+        <div><i class="fas fa-laptop-code"></i> ADCA</div>
+        <div><i class="fas fa-scroll"></i> ADCA+</div>
+        <div><i class="fas fa-user-graduate"></i> PGDCA</div>
+        <div><i class="fas fa-certificate"></i> DCA</div>
+        
+    </div>
+
+    <h2>Popular Category</h2>
+    <div class="study-grid">
+        <div><i class="fas fa-graduation-cap"></i> Computer Courses</div>
+        <div><i class="fas fa-laptop-code"></i> Computer Project</div>
+        <div><i class="fas fa-file-pdf"></i> PDF Notes</div>
+        <div><i class="fas fa-book-reader"></i> Beltron DEO Preparation</div>
+        
+    </div>
+
+    <h2>About Us</h2>
+    <section id="about_us" class="about-us">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Our Institute</h2>
+                <p>Discover what makes us different and why we're the right choice for your educational journey</p>
+            </div>
+            
+            <!-- About Institute Section -->
+            <div class="about-institute">
+                <div class="about-content">
+                    <h3>Transforming Education Since 1995</h3>
+                    <p>Founded in 1995, our institute has been at the forefront of educational innovation, providing students with the skills and knowledge needed to succeed in today's competitive world.</p>
+                    <p>With a team of dedicated educators and state-of-the-art facilities, we create an environment where students can thrive academically and personally.</p>
+                    <p>Our holistic approach to education focuses on developing critical thinking, creativity, and practical skills that prepare students for real-world challenges.</p>
+                    
+                    <div class="stats">
+                        <div class="stat-item">
+                            <h4>8+</h4>
+                            <p>Years of Excellence</p>
+                        </div>
+                        <div class="stat-item">
+                            <h4>3K+</h4>
+                            <p>Students Trained</p>
+                        </div>
+                        <div class="stat-item">
+                            <h4>70%</h4>
+                            <p>Success Rate</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="elite.jpg" alt="Our Institute Campus">
+                </div>
+            </div>
+            
+            <!-- Success Stories Section -->
+            <div class="success-stories">
+                <div class="section-title">
+                    <h2>Success Stories</h2>
+                    <p>Hear from our alumni who have made their mark in various industries</p>
+                </div>
+                
+                <div class="stories-container">
+                    <div class="story-card">
+                        <div class="story-image">
+                            <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Success Story">
+                        </div>
+                        <div class="story-content">
+                            <h3>Sarah Johnson</h3>
+                            <p>"The institute provided me with not just technical skills but also the confidence to pursue my dreams. Today I'm a lead developer at a Fortune 500 company."</p>
+                            <div class="story-meta">
+                                <i class="fas fa-briefcase"></i>
+                                <span>Software Engineer at TechCorp</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="story-card">
+                        <div class="story-image">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Success Story">
+                        </div>
+                        <div class="story-content">
+                            <h3>Michael Chen</h3>
+                            <p>"The practical approach to learning helped me start my own business right after graduation. The mentorship I received was invaluable."</p>
+                            <div class="story-meta">
+                                <i class="fas fa-briefcase"></i>
+                                <span>Founder of GreenSolutions</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="story-card">
+                        <div class="story-image">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Success Story">
+                        </div>
+                        <div class="story-content">
+                            <h3>Priya Patel</h3>
+                            <p>"The international exposure and industry connections I gained through the institute opened doors I never thought possible in my career."</p>
+                            <div class="story-meta">
+                                <i class="fas fa-briefcase"></i>
+                                <span>Marketing Director at GlobalBrands</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Gallery Section -->
+            <div id="gallery" class="gallery-section">
+                <div class="section-title">
+                    <h2>Our Gallery</h2>
+                    <p>A glimpse into life at our institute</p>
+                </div>
+                
+                <div class="gallery-container">
+                    <!-- Sample images - replace with your actual images -->
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Campus Life">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1541178735493-479c1a27ed24?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Classroom">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Library">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Lab">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Meeting">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Workshop">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Event">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1541178735493-479c1a27ed24?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Sports">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <!-- Add more gallery items as needed -->
+                </div>
+                
+                <div class="view-more">
+                    <a href="#" class="btn">View More Photos</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Why Choose Us Section -->
+        <div class="why-choose-us">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Why Choose Us</h2>
+                    <p>Here's what sets us apart from other institutions</p>
+                </div>
+                
+                <div class="features">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <h3>Expert Faculty</h3>
+                        <p>Learn from industry experts and experienced educators who are passionate about teaching and mentoring students.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3>Modern Curriculum</h3>
+                        <p>Our courses are regularly updated to reflect the latest industry trends and technological advancements.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h3>Career Support</h3>
+                        <p>Dedicated placement cell with strong industry connections to help you launch your career successfully.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-globe-americas"></i>
+                        </div>
+                        <h3>Global Perspective</h3>
+                        <p>International collaborations and exchange programs to give you a truly global educational experience.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-flask"></i>
+                        </div>
+                        <h3>Research Opportunities</h3>
+                        <p>State-of-the-art labs and research facilities for students interested in innovation and discovery.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Vibrant Community</h3>
+                        <p>Join a diverse community of learners with numerous clubs, societies, and extracurricular activities.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+  </section>
+
+
+  <!--Contact-->
+  <section id="contact">
+  <h2>Contact Us</h2>
+  <div class="container">
+  
+    <!-- Contact Info -->
+    <div class="info">
+      <h3>Coaching Institute Info</h3>
+      <p><strong>Address:</strong> ABC Coaching, 123 Main Street, New Delhi, Delhi - 110001</p>
+      <p><strong>Phone:</strong> +91 98765 43210</p>
+      <p><strong>Email:</strong> contact@abccoaching.com</p>
+
+      <h4>Important Links</h4>
+      <ul>
+        <li><a href="/about.html">About Us</a></li>
+        <li><a href="/courses.html">Courses</a></li>
+        <li><a href="/admission.html">Admission</a></li>
+        <li><a href="/faq.html">FAQs</a></li>
+      </ul>
+    </div>
+
+    <!-- Google Map with Marker -->
+    <div class="map">
+      <h3>Our Location</h3>
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14013.41638475826!2d77.21672115!3d28.64480085!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd0bde4d5d07%3A0x7a7f5ad5378b9372!2sConnaught%20Place%2C%20New%20Delhi!5e0!3m2!1sen!2sin!4v1717000000000!5m2!1sen!2sin" 
+        width="100%" 
+        height="250" 
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </div>
+
+  <!-- Contact Form -->
+  <div class="form-section" style="margin-top: 40px;">
+  <h3>Ask Your Question</h3>
+  <iframe 
+    src="https://docs.google.com/forms/d/e/1FAIpQLSeYourFormID/viewform?embedded=true" 
+    width="100%" 
+    height="800" 
+    frameborder="0" 
+    marginheight="0" 
+    marginwidth="0">
+    Loading…
+  </iframe>
+</div>
+</section>
+
+  <!-- Footer -->
+  <footer class="coaching-footer">
+  <div class="footer-container">
+    
+    
+
+    <!-- Courses Section -->
+    <div class="footer-section courses-section">
+      <h3>Our Courses <i class="fas fa-laptop-code"></i></h3>
+      <div class="course-columns">
+        <ul>
+          <li><i class="fas fa-certificate"></i> ADCA</li>
+          <li><i class="fas fa-certificate"></i> DCA</li>
+          <li><i class="fas fa-certificate"></i> PGDCA</li>
+        </ul>
+        <ul>
+          <li><i class="fas fa-certificate"></i> Beltron Prep</li>
+          <li><i class="fas fa-certificate"></i> Tally</li>
+          <li><i class="fas fa-certificate"></i> Web Design</li>
+        </ul>
+        <ul>
+          <li><i class="fas fa-certificate"></i> Programming</li>
+          <li><i class="fas fa-certificate"></i> DTP</li>
+          <li><i class="fas fa-certificate"></i> More...</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-section quick-links">
+      <h3>Quick Links <i class="fas fa-link"></i></h3>
+      <ul>
+        <li><a href="#"><i class="fas fa-chevron-right"></i> Home</a></li>
+        <li><a href="#"><i class="fas fa-chevron-right"></i> About Us</a></li>
+        <li><a href="#"><i class="fas fa-chevron-right"></i> Courses</a></li>
+        <li><a href="#"><i class="fas fa-chevron-right"></i> Batches</a></li>
+        <li><a href="#"><i class="fas fa-chevron-right"></i> Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="footer-section contact-section">
+      <h3>Contact Us <i class="fas fa-phone-alt"></i></h3>
+      <ul>
+        <li><i class="fas fa-map-marker-alt"></i> Rajendra Nagar, Patna, Bihar</li>
+        <li><i class="fas fa-envelope"></i> info@computercare.com</li>
+        <li><i class="fas fa-phone"></i> +91 9876543210</li>
+      </ul>
+    </div>
+
+    <!-- Social Media Links -->
+    <div class="footer-section social-section">
+      <h3>Follow Us <i class="fas fa-share-alt"></i></h3>
+      <div class="justion">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Bottom -->
+  <div class="footer-bottom">
+    <p>© 2023 Computer Care Coaching Center. All Rights Reserved.</p>
+    <p class="codevora-credit">
+      Crafted with <i class="fas fa-heart"></i> by 
+      <span class="codevora-tooltip">CodeVoraOfficial
+        <span class="tooltip-text">Special thanks to our tech partners</span>
+      </span>
+    </p>
+  </div>
+</footer>
+
+
 </body>
 </html>
