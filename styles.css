@@ -14,182 +14,163 @@
 }
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
 
-body {
-  font-family: 'Segoe UI', sans-serif;
-}
+        /* Header styles */
+        .main-header {
+            width: 100%;
+            top:0;
+            z-index: 1000;
+            position: sticky;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
 
-.main-header {
-  color: linear-gradient(90deg, #4a6bff, #ff6b6b);
-  background-color: white;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* optional: adds shadow */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            border-bottom: 1px solid #eee;
+        }
 
-}
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
 
-.top-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  flex-wrap: wrap;
-}
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
 
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+        .logo h1 {
+            font-size: 1.5rem;
+            color: #333;
+        }
 
-.logo img {
-  height: 50px;
-}
+        .top-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
 
-.logo h1 {
-  font-size: 20px;
- color: linear-gradient(90deg, #4a6bff, #ff6b6b);
-}
+        .top-right input {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            min-width: 250px;
+            outline: none;
+        }
 
-.top-right {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  z-index: 100;
-}
+        .login-icon {
+            font-size: 1.5rem;
+            color: #555;
+        }
 
-.top-right input {
-  width: 200px;
-  height: 40px;
-  padding: 0 15px;
-  border: none;
-  border-radius: 20px;
-  background: #f0f0f0;
-  color: #333;
-  font-size: 16px;
-  font-weight: 500;
-  outline: none;
-  cursor: pointer;
-  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  position: relative;
-  background-clip: padding-box;
-  border: 2px solid transparent; /* Transparent border for the gradient to show through */
-  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-.top-right input::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  z-index: -1;
-  border-radius: 20px;
-  background: linear-gradient(
-    135deg,
-    rgba(74, 107, 255, 0.3) 0%,
-    rgba(255, 107, 107, 0.1) 100%
-  );
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
+        /* Navigation styles */
+        .nav-bar-container {
+            padding: 0 5%;
+            position: relative;
+        }
 
+        .navbar {
+            display: flex;
+            gap: 20px;
+            padding: 15px 0;
+        }
 
-.top-right input::placeholder {
-  color: transparent;
-  transition: color 0.3s ease;
-}
+        .navbar a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            padding: 5px 0;
+            position: relative;
+            transition: color 0.3s;
+        }
 
-.top-right input:focus, 
-.top-right input:not(:placeholder-shown) {
-  width: 400px;
-  cursor: text;
-  background: #fff;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
+        .navbar a:hover {
+            color: #0066cc;
+        }
 
-.top-right input:focus::placeholder {
-  color: #aaa;
-}
+        .navbar a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #0066cc;
+            transition: width 0.3s;
+        }
 
-/* Optional: Add a search icon */
-.top-right input {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'%3E%3C/circle%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'%3E%3C/line%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: 12px center;
-  background-size: 16px;
-  padding-left: 40px;
-}
+        .navbar a:hover::after {
+            width: 100%;
+        }
 
-.top-right input:focus, 
-.top-right input:not(:placeholder-shown) {
-  background-position: 15px center;
-}
+        /* Mobile menu toggle */
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 15px;
+            color: #333;
+        }
 
-.top-right input:focus::before,
-.top-right input:hover::before {
-  opacity: 1;
-  animation: gradientBorder 2s infinite alternate;
-}
+/*---------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------Admission Model-----------------------------------------------------------------------------*/
 
-@keyframes gradientBorder {
-  0% {
-    background: linear-gradient(
-      135deg,
-      rgba(74, 107, 255, 0.3) 0%,
-      rgba(255, 107, 107, 0.1) 100%
-    );
-  }
-  100% {
-    background: linear-gradient(
-      135deg,
-      rgba(74, 107, 255, 0.5) 0%,
-      rgba(255, 107, 107, 0.3) 100%
-    );
-  }
-}
-.menu-toggle {
+.modal {
   display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+  position: relative;
+  margin: 5% auto;
+  background: #fff;
+  border-radius: 12px;
+  padding: 0;
+  width: 90%;
+  max-width: 800px;
+  height: 80%;
+}
+
+.modal-content iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 12px;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
   font-size: 26px;
-  cursor: pointer;
-   color: linear-gradient(90deg, #4a6bff, #ff6b6b);
-  padding: 10px 20px;
-}
-
-.nav-bar-container {
-  padding: 0 20px 10px;
-  justify-content: flex-end;
-}
-
-.navbar {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: right;
-  gap: 20px;
-}
-
-.navbar a {
-  color: linear-gradient(90deg, #4a6bff, #ff6b6b);
-  text-decoration: none;
-  padding: 6px 10px;
   font-weight: bold;
-  transition: background 0.3s;
-  justify-content: flex-end;
-  text-align: right;
+  cursor: pointer;
+  color: #888;
 }
 
-.navbar a:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 4px;
+.close:hover {
+  color: red;
 }
 
 
+/*----------------------------------Admission Model-----------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------*/
 
 /* Banner with Parallax Effect */
 .banner {
@@ -1413,10 +1394,16 @@ footer.coaching-footer {
     padding: 10px 0;
   }
   
-  .top-bar {
-    padding: 10px 15px;
-    position: relative;
-  }
+    .top-bar {
+      flex-direction: column;
+      gap: 15px;
+        padding: 15px;
+    }
+
+    .top-right input {
+      width: 100%;
+      min-width: auto;
+    }
   
   .logo h1 {
     font-size: 18px;
@@ -1751,6 +1738,48 @@ footer.coaching-footer {
 }
 
 @media (max-width:768px) {
+  
+  .nav-bar-container {
+                padding: 0;
+                
+            }
+
+            .menu-toggle {
+                display: block;
+                text-align: right;
+                background-color: black;
+            }
+
+            .navbar {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: #fff;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                z-index: 1000;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                padding: 0;
+            }
+
+            .navbar.active {
+                display: flex;
+            }
+
+            .navbar a {
+                padding: 12px 20px;
+                border-bottom: 1px solid #eee;
+            }
+
+            .navbar a:hover {
+                background-color: #f5f5f5;
+            }
+
+            .navbar a::after {
+                display: none;
+            }
+
   .study-grid{
      grid-template-columns: repeat(2, 1fr);
   }

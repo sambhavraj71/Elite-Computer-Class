@@ -1,52 +1,73 @@
 console.log("Welcome to Code Vora Academy!");
 
-// Menu Toggle Functionality
-document.getElementById('menu-toggle')?.addEventListener('click', () => {
-  document.getElementById('navbar')?.classList.toggle('active');
-});
+ document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menu-toggle');
+            const navbar = document.getElementById('navbar');
 
-document.addEventListener('DOMContentLoaded', function() {
-  // Mobile menu toggle
-  const menuToggle = document.querySelector('.menu-toggle');
-  const navContainer = document.querySelector('.nav-bar-container');
-  const topRight = document.querySelector('.top-right');
-  
-  if (menuToggle) {
-    menuToggle.addEventListener('click', function() {
-      navContainer.classList.toggle('active');
-      this.classList.toggle('active');
-      
-      // Hide search bar when menu is open
-      if (navContainer.classList.contains('active')) {
-        topRight.classList.remove('active');
-      }
-    });
-  }
-  
-  // Optional: Toggle search bar with a separate button if needed
-  // You would need to add a search toggle button in your HTML
-  const searchToggle = document.querySelector('.search-toggle');
-  if (searchToggle) {
-    searchToggle.addEventListener('click', function() {
-      topRight.classList.toggle('active');
-      
-      // Hide menu when search is open
-      if (topRight.classList.contains('active')) {
-        navContainer.classList.remove('active');
-        menuToggle.classList.remove('active');
-      }
-    });
-  }
-  
-  // Close menu when clicking on a link (optional)
-  const navLinks = document.querySelectorAll('.navbar a');
-  navLinks.forEach(link => {
-    link.addEventListener('click', function() {
-      navContainer.classList.remove('active');
-      menuToggle.classList.remove('active');
-    });
+            menuToggle.addEventListener('click', function() {
+                navbar.classList.toggle('active');
+                
+                // Change icon between bars and times
+                const icon = menuToggle.querySelector('i');
+                if (navbar.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+
+            // Close menu when clicking on a link (for mobile)
+            const navLinks = document.querySelectorAll('.navbar a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 768) {
+                        navbar.classList.remove('active');
+                        const icon = menuToggle.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                });
+            });
+
+            // Close menu when clicking outside (for mobile)
+            document.addEventListener('click', function(event) {
+                if (window.innerWidth <= 768 && navbar.classList.contains('active')) {
+                    if (!navbar.contains(event.target) && !menuToggle.contains(event.target)) {
+                        navbar.classList.remove('active');
+                        const icon = menuToggle.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                }
+            });
+        });
+
+
+// ----------------------------------------------------------------------------------------------------------------------//
+//---------------------------Admission Model----------------------------------------------------------------------------//
+// Open modal on click
+  document.getElementById("openAdmissionBtn").addEventListener("click", function (e) {
+    e.preventDefault(); // Prevent default link behavior
+    document.getElementById("admissionModal").style.display = "block";
   });
-});
+
+  // Close modal
+  document.querySelector(".close").addEventListener("click", function () {
+    document.getElementById("admissionModal").style.display = "none";
+  });
+
+  // Close on outside click
+  window.addEventListener("click", function (event) {
+    const modal = document.getElementById("admissionModal");
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+//---------------------------Admission Model----------------------------------------------------------------------------//
+// ----------------------------------------------------------------------------------------------------------------------//
+
 
 // Slideshow Functionality
 function initSlideshow() {

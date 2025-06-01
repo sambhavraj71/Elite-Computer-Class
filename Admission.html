@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Admission Form</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 30px;
+      width: 90%;
+      max-width: 600px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      color: #333;
+    }
+
+    h2 {
+      text-align: center;
+      color: #0a3d62;
+      margin-bottom: 20px;
+      font-size: 28px;
+    }
+
+    label {
+      font-weight: 600;
+      margin-top: 15px;
+      display: block;
+      color: #1e272e;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px 12px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.8);
+      font-size: 15px;
+      box-shadow: inset 1px 1px 5px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 1);
+      box-shadow: 0 0 5px #5f27cd;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(to right, #5f27cd, #341f97);
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 12px;
+      margin-top: 25px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background: linear-gradient(to right, #341f97, #5f27cd);
+    }
+
+    .required {
+      color: red;
+    }
+
+    @media (max-width: 600px) {
+      h2 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>🎓 Student Admission Form</h2>
+  <form id="admissionForm">
+    <label>Full Name <span class="required">*</span></label>
+    <input type="text" id="name" required>
+
+    <label>Father's Name <span class="required">*</span></label>
+    <input type="text" id="fatherName" required>
+
+    <label>Email <span class="required">*</span></label>
+    <input type="email" id="email" required>
+
+    <label>Mobile Number <span class="required">*</span></label>
+    <input type="tel" id="mobile" required>
+
+    <label>Address <span class="required">*</span></label>
+    <textarea id="address" rows="3" required></textarea>
+
+    <label>Select Course <span class="required">*</span></label>
+    <select id="course" required>
+      <option value="">-- Select --</option>
+      <option value="Basic Computer">Basic Computer</option>
+      <option value="MS Office">MS Office</option>
+      <option value="Tally Prime">Tally Prime</option>
+      <option value="C/C++ Programming">C/C++ Programming</option>
+      <option value="Web Development">Web Development</option>
+      <option value="Other">Other</option>
+    </select>
+
+    <label>Batch Time</label>
+    <select id="batch">
+      <option value="Morning">Morning (8am - 10am)</option>
+      <option value="Afternoon">Afternoon (12pm - 2pm)</option>
+      <option value="Evening">Evening (4pm - 6pm)</option>
+    </select>
+
+    <button type="submit" class="btn">📩 Submit</button>
+  </form>
+</div>
+
+<script>
+  document.getElementById('admissionForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value;
+    const fatherName = document.getElementById('fatherName').value;
+    const email = document.getElementById('email').value;
+    const mobile = document.getElementById('mobile').value;
+    const address = document.getElementById('address').value;
+    const course = document.getElementById('course').value;
+    const batch = document.getElementById('batch').value;
+
+    const phoneNumber = "917361065324"; // 👈 Replace with your number (e.g. 91XXXXXXXXXX)
+
+    const message = `*🎓 New Admission Form*\n\n` +
+      `👤 *Name:* ${name}\n` +
+      `👨‍👧 *Father's Name:* ${fatherName}\n` +
+      `📧 *Email:* ${email}\n` +
+      `📱 *Mobile:* ${mobile}\n` +
+      `🏠 *Address:* ${address}\n` +
+      `📚 *Course:* ${course}\n` +
+      `🕒 *Batch:* ${batch}`;
+
+    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  });
+</script>
+
+</body>
+</html>

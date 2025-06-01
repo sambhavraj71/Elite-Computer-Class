@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Institute Popular Categories</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #e0eafc, #cfdef3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .category-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .category-section h2 {
+            font-size: 2.5rem;
+            color: #1a2a44;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .study-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            justify-items: center;
+        }
+
+        .study-grid div {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 250px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .study-grid div:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .study-grid div i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .study-grid div:hover i {
+            transform: scale(1.2);
+        }
+
+        .study-grid div:nth-child(1) i { color: #ff6b6b; }
+        .study-grid div:nth-child(2) i { color: #4ecdc4; }
+        .study-grid div:nth-child(3) i { color: #45b7d1; }
+        .study-grid div:nth-child(4) i { color: #96ce79; }
+
+        .study-grid div:hover:nth-child(1) { background: linear-gradient(45deg, #ff6b6b, #ff8787); color: #fff; }
+        .study-grid div:hover:nth-child(2) { background: linear-gradient(45deg, #4ecdc4, #6be6de); color: #fff; }
+        .study-grid div:hover:nth-child(3) { background: linear-gradient(45deg, #45b7d1, #62c9e4); color: #fff; }
+        .study-grid div:hover:nth-child(4) { background: linear-gradient(45deg, #96ce79, #a8de8b); color: #fff; }
+
+        .study-grid div span {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+
+        .study-grid div:hover span {
+            color: #fff;
+        }
+
+        .study-grid div::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .study-grid div:hover::before {
+            left: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .study-grid {
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            }
+
+            .study-grid div {
+                max-width: 200px;
+            }
+
+            .category-section h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="category-section">
+            <h2>Popular Category</h2>
+        </div>
+        <div class="study-grid">
+            <div data-category="computer-courses">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Computer Courses</span>
+            </div>
+            <div data-category="computer-project">
+                <i class="fas fa-laptop-code"></i>
+                <span>Computer Project</span>
+            </div>
+            <div data-category="pdf-notes">
+                <i class="fas fa-file-pdf"></i>
+                <span>PDF Notes</span>
+            </div>
+            <div data-category="beltron-deo">
+                <i class="fas fa-book-reader"></i>
+                <span>Beltron DEO Preparation</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const boxes = document.querySelectorAll('.study-grid div');
+
+            boxes.forEach((box, index) => {
+                // Load animation
+                box.style.opacity = '0';
+                box.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    box.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    box.style.opacity = '1';
+                    box.style.transform = 'translateY(0)';
+                }, 100 * index);
+
+                // Click event
+                box.addEventListener('click', () => {
+                    const category = box.getAttribute('data-category');
+                    console.log(`Category clicked: ${category}`);
+                    // Add navigation or action here, e.g., redirect to category page
+                    // window.location.href = `/category/${category}`;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
