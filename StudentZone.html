@@ -1,99 +1,534 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="StudentZone.css" />
-  <script defer src="StudentZone.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <title>Elite Computer Classes - Student Zone</title>
+    <style>
+        :root {
+            --sky-blue-light: #00BFFF;
+            --sky-blue-dark: #1E90FF;
+            --orange-light: #FF7F50;
+            --orange-dark: #FF4500;
+            --navy-light: #003366;
+            --navy-dark: #000080;
+            --white: #FFFFFF;
+            --gray-light: #F7F7F7;
+            --gray-dark: #333333;
+            --primary-color: #4a6bff;
+            --secondary-color: #6c757d;
+            --dark-color: #343a40;
+            --light-color: #f8f9fa;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.2);
+            --border-radius: 12px;
+            --header-height: 80px;
+            --max-content-width: 1440px;
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --gradient: linear-gradient(135deg, #4a6bff 0%, #6b8cff 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+            background-color: var(--gray-light);
+            color: var(--gray-dark);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(to right, var(--navy-light), var(--navy-dark));
+            color: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            white-space: nowrap;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--orange-light);
+        }
+
+        .logo h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .logo h1 span.elite {
+            color: var(--sky-blue-light);
+        }
+
+        .logo h1 span.classes {
+            color: var(--orange-light);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--white);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            transform: rotate(90deg);
+        }
+
+        nav {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.5rem;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: background 0.3s, color 0.3s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        nav a:hover {
+            background: var(--sky-blue-light);
+            color: var(--navy-dark);
+            transform: scale(1.05);
+        }
+
+        nav a i {
+            font-size: 0.9rem;
+            transition: transform 0.3s;
+        }
+
+        nav a:hover i {
+            transform: rotate(360deg);
+        }
+
+        /* Toggle Menu Close Button */
+        .nav-close {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: var(--white);
+            background: var(--orange-light);
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+            z-index: 1001;
+        }
+
+        .nav-close.active {
+            display: flex;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .nav-close:hover {
+            background: var(--orange-dark);
+            transform: scale(1.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Popular Courses Section */
+        .popular-categories {
+            padding: 60px 0;
+        }
+
+        .popular-heading {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--navy-dark);
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .popular-heading::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background: var(--orange-light);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: var(--max-content-width);
+            margin: 0 auto;
+        }
+
+        .category-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            animation: cardPop 0.5s ease-out forwards;
+        }
+
+        .category-card:nth-child(1) { animation-delay: 0.1s; }
+        .category-card:nth-child(2) { animation-delay: 0.2s; }
+        .category-card:nth-child(3) { animation-delay: 0.3s; }
+        .category-card:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes cardPop {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .category-card img {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            border-bottom: 3px solid var(--orange-light);
+        }
+
+        .category-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 15px 0;
+        }
+
+        .category-icon i {
+            font-size: 2.5rem;
+            color: var(--sky-blue-light);
+            border: 2px solid var(--orange-light);
+            border-radius: 50%;
+            padding: 10px;
+            transition: transform 0.3s;
+        }
+
+        .category-card:hover .category-icon i {
+            transform: rotate(360deg);
+        }
+
+        .category-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--navy-dark);
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .category-count {
+            font-size: 0.9rem;
+            color: var(--gray-dark);
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .category-desc {
+            font-size: 0.85rem;
+            color: var(--secondary-color);
+            text-align: center;
+            padding: 0 15px;
+            margin-bottom: 15px;
+        }
+
+        .category-card a {
+            display: inline-block;
+            background: var(--sky-blue-light);
+            color: var(--white);
+            padding: 8px 16px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px solid var(--orange-light);
+            transition: background 0.3s, transform 0.3s;
+            margin: 0 auto 15px;
+            text-align: center;
+        }
+
+        .category-card a:hover {
+            background: var(--sky-blue-dark);
+            transform: scale(1.05);
+        }
+
+        .Explore {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .Explore a {
+            background: var(--sky-blue-light);
+            color: var(--white);
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px solid var(--orange-light);
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .Explore a:hover {
+            background: var(--sky-blue-dark);
+            transform: scale(1.05);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100vh;
+                width: 100vw;
+                background: linear-gradient(to bottom, var(--navy-dark), var(--navy-light));
+                flex-direction: column;
+                padding: 80px 20px 20px;
+                transform: translateX(100%);
+                transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+                box-shadow: none;
+                z-index: 1000;
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+
+            nav.active {
+                transform: translateX(0);
+                animation: slideInMenu 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+            }
+
+            @keyframes slideInMenu {
+                from { transform: translateX(100%); opacity: 0.5; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+
+            nav:not(.active) {
+                animation: slideOutMenu 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+            }
+
+            @keyframes slideOutMenu {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0.5; }
+            }
+
+            nav a {
+                font-size: 1.2rem;
+                padding: 15px 20px;
+                margin: 8px 0;
+                border-radius: 8px;
+                background: rgba(255, 255, 255, 0.1);
+                transition: background 0.3s, transform 0.3s, opacity 0.3s;
+                width: 100%;
+                text-align: left;
+                border-left: 3px solid transparent;
+                opacity: 0;
+                transform: translateX(20px);
+            }
+
+            nav.active a {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+            nav.active a:nth-child(2) { transition-delay: 0.1s; }
+            nav.active a:nth-child(3) { transition-delay: 0.2s; }
+            nav.active a:nth-child(4) { transition-delay: 0.3s; }
+            nav.active a:nth-child(5) { transition-delay: 0.4s; }
+            nav.active a:nth-child(6) { transition-delay: 0.5s; }
+            nav.active a:nth-child(7) { transition-delay: 0.6s; }
+            nav.active a:nth-child(8) { transition-delay: 0.7s; }
+
+            nav a:hover {
+                background: rgba(0, 191, 255, 0.3);
+                transform: translateX(10px);
+                border-left: 3px solid var(--sky-blue-light);
+            }
+
+            nav a i {
+                font-size: 1.2rem;
+                margin-right: 12px;
+            }
+
+            .logo h1 {
+                font-size: 1.2rem;
+            }
+
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+
+            .category-name {
+                font-size: 1rem;
+            }
+
+            .category-desc {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo h1 {
+                font-size: 1rem;
+            }
+
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (min-width: 1440px) {
+            .categories-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+
+            .category-name {
+                font-size: 1.3rem;
+            }
+
+            .header-content {
+                padding: 20px 5%;
+            }
+        }
+    </style>
 </head>
 <body>
-      <!-- Header -->
-  <header class="main-header">
-    <div class="top-bar">
-      <div class="logo">
-        <img src="logo.jpg" alt="Logo">
-        <h1>Elite Computer Classes</h1>
-      </div>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img src="logo.jpg" alt="Logo">
+                <h1><span class="elite">ELITE</span> <span class="classes">COMPUTER CLASSES</span></h1>
+            </div>
+            <button class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="navbar">
+                <button class="nav-close" id="nav-close"><i class="fas fa-times"></i></button>
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="courses.html"><i class="fas fa-book-open"></i> Courses</a>
+                <a href="category.html"><i class="fas fa-layer-group"></i> Category</a>
+                <a href=""><i class="fas fa-user-graduate"></i> Student Zone</a>
+                <a href="Admission.html"><i class="fas fa-file-signature"></i> Admission</a>
+                <a href="gallery.html"><i class="fas fa-images"></i> Gallery</a>
+                <a href="#about_us"><i class="fas fa-info-circle"></i> About Us</a>
+            </nav>
+        </div>
+    </header>
 
-      <div class="top-right">
-        <input type="text" placeholder="What do you want to learn?" />
-        <!-- <a href="#" class="login-icon" title="Login">
-          <i class="fas fa-user-circle"></i>
-        </a> -->
-      </div>
-    </div>
-
-    
-<div class="nav-bar-container">
-  <div class="menu-toggle" id="menu-toggle">
-    <div class="hamburger">
-      <span class="bar bar-top"></span>
-      <span class="bar bar-middle"></span>
-      <span class="bar bar-bottom"></span>
-    </div>
-  </div>
-  <nav class="navbar" id="navbar">
-    <a href="index.html"><i class="fas fa-home"></i> Home</a>
-    <a href="courses.html"><i class="fas fa-book-open"></i> Courses</a>
-    <a href="category.html"><i class="fas fa-layer-group"></i> Category</a>
-    <a href=""><i class="fas fa-user-graduate"></i> Student Zone</a>
-    <a href="Admission.html"><i class="fas fa-file-signature"></i> Admission</a>
-    <a href="gallery.html"><i class="fas fa-images"></i> Gallery</a>
-    <a href="#about_us"><i class="fas fa-info-circle"></i> About Us</a>
-  </nav>
-</div>
-  </header>
-
-  
-
-<!------------------Main Content of Student Zone ------------------------->
-
-
-<div class="container">
+    <!-- Main Content of Student Zone -->
+    <div class="container">
         <!-- Popular Courses Section -->
         <section class="popular-categories">
             <h4 class="popular-heading"><i class="fas fa-graduation-cap"></i> Popular Courses</h4>
             <div class="categories-grid">
                 <div class="category-card">
+                    <img src="./Images/Courses/ADCA.jpg" alt="ADCA Course">
                     <div class="category-icon">
                         <i class="fas fa-laptop-code"></i>
                     </div>
                     <h3 class="category-name">ADCA</h3>
-                    <p class="category-count">12 Months | 8500$</p>
+                    <p class="category-count">12 Months | $8500</p>
+                    <p class="category-desc">Advanced Diploma in Computer Applications with comprehensive training in software and programming.</p>
+                    <a href="details/adca.html">Learn More</a>
                 </div>
                 <div class="category-card">
+                    <img src="./Images/Courses/ADCA+.jpg" alt="ADCA+ Course">
                     <div class="category-icon">
                         <i class="fas fa-paint-brush"></i>
                     </div>
                     <h3 class="category-name">ADCA+</h3>
-                    <p class="category-count">12 Months | 8500$</p>
+                    <p class="category-count">12 Months | $8500</p>
+                    <p class="category-desc">Enhanced ADCA with additional modules in advanced software and project management.</p>
+                    <a href="details/adca+.html">Learn More</a>
                 </div>
                 <div class="category-card">
+                    <img src="./Images/Courses/PGDCA.jpg" alt="PGDCA Course">
                     <div class="category-icon">
                         <i class="fas fa-chart-line"></i>
                     </div>
                     <h3 class="category-name">PGDCA</h3>
-                    <p class="category-count">12 Months | 5500$</p>
+                    <p class="category-count">12 Months | $5500</p>
+                    <p class="category-desc">Post Graduate Diploma in Computer Applications for in-depth IT skills and career growth.</p>
+                    <a href="details/pgdca.html">Learn More</a>
                 </div>
                 <div class="category-card">
+                    <img src="./Images/Courses/DCA.jpg" alt="DCA Course">
                     <div class="category-icon">
                         <i class="fas fa-chart-line"></i>
                     </div>
                     <h3 class="category-name">DCA</h3>
-                    <p class="category-count">3 Months | 2200$</p>
+                    <p class="category-count">3 Months | $2200</p>
+                    <p class="category-desc">Diploma in Computer Applications covering essential software and office tools.</p>
+                    <a href="details/dca.html">Learn More</a>
                 </div>
-                
             </div>
-           <div class="Explore">
-    <a href="Category.html">
-        Explore
-        <i class="fas fa-arrow-right"></i>
-        <!-- Sparkle particles will be added via JavaScript -->
-    </a>
-</div>
-
+            <div class="Explore">
+                <a href="Category.html">
+                    Explore
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
         </section>
         <!-- Popular Categories Section -->
         <section class="popular-categories">
@@ -124,19 +559,16 @@
                     <div class="category-icon">
                         <i class="fas fa-camera"></i>
                     </div>
-                    <h3 class="category-name">Beltron DEO Prepration</h3>
+                    <h3 class="category-name">Beltron DEO Preparation</h3>
                     <p class="category-count">10+ Subject</p>
                 </div>
-                
             </div>
-           <div class="Explore">
-    <a href="Category.html">
-        Explore
-        <i class="fas fa-arrow-right"></i>
-        <!-- Sparkle particles will be added via JavaScript -->
-    </a>
-</div>
-
+            <div class="Explore">
+                <a href="Category.html">
+                    Explore
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
         </section>
 
         <!-- Gallery Section -->
@@ -203,25 +635,45 @@
         </section>
     </div>
 
+    <script defer src="StudentZone.js"></script>
+    <script>
+        // Toggle Menu
+        const menuToggle = document.getElementById('menu-toggle');
+        const navbar = document.getElementById('navbar');
+        const navClose = document.getElementById('nav-close');
+        const body = document.body;
 
+        function toggleMenu() {
+            navbar.classList.toggle('active');
+            navClose.classList.toggle('active');
+            const icon = menuToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+            body.style.overflow = navbar.classList.contains('active') ? 'hidden' : 'auto';
+        }
 
+        menuToggle.addEventListener('click', toggleMenu);
 
+        navClose.addEventListener('click', () => {
+            navbar.classList.remove('active');
+            navClose.classList.remove('active');
+            const icon = menuToggle.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+            body.style.overflow = 'auto';
+        });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!------------------Main Content of Student Zone ------------------------->
+        const navLinks = document.querySelectorAll('#navbar a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navbar.classList.remove('active');
+                navClose.classList.remove('active');
+                const icon = menuToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                body.style.overflow = 'auto';
+            });
+        });
+    </script>
 </body>
 </html>

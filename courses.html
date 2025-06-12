@@ -1,12 +1,23 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <title>Elite Computer Classes</title>
     <style>
         :root {
+            --sky-blue-light: #00BFFF;
+            --sky-blue-dark: #1E90FF;
+            --orange-light: #FF7F50;
+            --orange-dark: #FF4500;
+            --navy-light: #003366;
+            --navy-dark: #000080;
+            --white: #FFFFFF;
+            --gray-light: #F7F7F7;
+            --gray-dark: #333333;
             --primary-color: #4a6bff;
             --secondary-color: #6c757d;
             --dark-color: #343a40;
@@ -24,154 +35,149 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
-        /* Header styles */
-        .main-header {
+        html, body {
             width: 100%;
+            overflow-x: hidden;
+            background-color: var(--gray-light);
+            color: var(--gray-dark);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(to right, var(--navy-light), var(--navy-dark));
+            color: var(--white);
+            position: sticky;
             top: 0;
             z-index: 1000;
-            position: sticky;
-            background-color: #fff;
-            box-shadow: var(--shadow);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
-        .top-bar {
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 5%;
-            max-width: var(--max-content-width);
-            margin: 0 auto;
+            padding: 15px 0;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
+            white-space: nowrap;
         }
 
         .logo img {
-            height: 40px;
-            width: auto;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--orange-light);
         }
 
         .logo h1 {
-            font-size: clamp(1.2rem, 3vw, 1.5rem);
-            color: var(--dark-color);
+            font-size: 1.4rem;
+            font-weight: 700;
+            display: inline-block;
         }
 
-        /* Navigation styles */
-        .nav-bar-container {
-            display: none; /* Hidden by default on mobile */
+        .logo h1 span.elite {
+            color: var(--sky-blue-light);
         }
 
-        .navbar {
-            display: flex;
-            gap: 20px;
-            padding: 15px 5%;
-            max-width: var(--max-content-width);
-            margin: 0 auto;
+        .logo h1 span.classes {
+            color: var(--orange-light);
         }
 
-        .navbar a {
-            text-decoration: none;
-            color: var(--dark-color);
-            font-weight: 500;
-            padding: 5px 0;
-            position: relative;
-            transition: var(--transition);
-        }
-
-        .navbar a:hover {
-            color: var(--primary-color);
-        }
-
-        .navbar a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--primary-color);
-            transition: var(--transition);
-        }
-
-        .navbar a:hover::after {
-            width: 100%;
-        }
-
-        /* Stylish Menu Toggle */
         .menu-toggle {
             display: none;
             font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--white);
             cursor: pointer;
-            color: var(--primary-color);
-            background: var(--gradient);
-            border-radius: 50%;
-            padding: 10px;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
         }
 
         .menu-toggle:hover {
-            transform: scale(1.1);
-            box-shadow: var(--shadow-hover);
+            transform: rotate(90deg);
         }
 
-        .menu-toggle i {
-            transition: var(--transition);
+        nav {
+            display: flex;
+            gap: 15px;
+            align-items: center;
         }
 
-        /* Modal styles */
-        .modal {
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.5rem;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: background 0.3s, color 0.3s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        nav a:hover {
+            background: var(--sky-blue-light);
+            color: var(--navy-dark);
+            transform: scale(1.05);
+        }
+
+        nav a i {
+            font-size: 0.9rem;
+            transition: transform 0.3s;
+        }
+
+        nav a:hover i {
+            transform: rotate(360deg);
+        }
+
+        /* Toggle Menu Close Button */
+        .nav-close {
             display: none;
             position: fixed;
-            z-index: 999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.6);
-        }
-
-        .modal-content {
-            position: relative;
-            margin: 5% auto;
-            background: #fff;
-            border-radius: var(--border-radius);
-            padding: 0;
-            width: 90%;
-            max-width: 800px;
-            height: 80vh;
-        }
-
-        .modal-content iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: var(--border-radius);
-        }
-
-        .close {
-            position: absolute;
-            top: 10px;
+            top: 20px;
             right: 20px;
-            font-size: 26px;
-            font-weight: bold;
+            font-size: 1.5rem;
+            color: var(--white);
+            background: var(--orange-light);
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-            color: var(--secondary-color);
+            transition: background 0.3s, transform 0.3s;
+            z-index: 1001;
         }
 
-        .close:hover {
-            color: red;
+        .nav-close.active {
+            display: flex;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .nav-close:hover {
+            background: var(--orange-dark);
+            transform: scale(1.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         /* Course styles */
@@ -251,55 +257,87 @@
         }
 
         /* Responsive Design */
-        @media (min-width: 769px) {
-            .nav-bar-container {
-                display: block;
-            }
-            .menu-toggle {
-                display: none;
-            }
-        }
-
         @media (max-width: 768px) {
             .menu-toggle {
-                display: flex;
+                display: block;
             }
 
-            .nav-bar-container {
-                display: block;
-                position: absolute;
-                top: 100%;
+            nav {
+                position: fixed;
+                top: 0;
                 left: 0;
-                width: 100%;
-                background-color: #fff;
-                box-shadow: var(--shadow);
-                border-radius: 0 0 var(--border-radius) var(--border-radius);
-                overflow: hidden;
-                max-height: 0;
-                transition: max-height 0.4s ease-in-out;
-            }
-
-            .nav-bar-container.active {
-                max-height: 500px; /* Adjust based on menu items */
-            }
-
-            .navbar {
+                height: 100vh;
+                width: 100vw;
+                background: linear-gradient(to bottom, var(--navy-dark), var(--navy-light));
                 flex-direction: column;
-                padding: 0;
+                padding: 80px 20px 20px;
+                transform: translateX(100%);
+                transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+                box-shadow: none;
+                z-index: 1000;
+                overflow-y: auto;
+                overflow-x: hidden;
             }
 
-            .navbar a {
+            nav.active {
+                transform: translateX(0);
+                animation: slideInMenu 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+            }
+
+            @keyframes slideInMenu {
+                from { transform: translateX(100%); opacity: 0.5; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+
+            nav:not(.active) {
+                animation: slideOutMenu 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+            }
+
+            @keyframes slideOutMenu {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0.5; }
+            }
+
+            nav a {
+                font-size: 1.2rem;
                 padding: 15px 20px;
-                border-bottom: 1px solid #eee;
-                display: block;
+                margin: 8px 0;
+                border-radius: 8px;
+                background: rgba(255, 255, 255, 0.1);
+                transition: background 0.3s, transform 0.3s, opacity 0.3s;
+                width: 100%;
+                text-align: left;
+                border-left: 3px solid transparent;
+                opacity: 0;
+                transform: translateX(20px);
             }
 
-            .navbar a:hover {
-                background-color: var(--light-color);
+            nav.active a {
+                opacity: 1;
+                transform: translateX(0);
             }
 
-            .navbar a::after {
-                display: none;
+            nav.active a:nth-child(2) { transition-delay: 0.1s; }
+            nav.active a:nth-child(3) { transition-delay: 0.2s; }
+            nav.active a:nth-child(4) { transition-delay: 0.3s; }
+            nav.active a:nth-child(5) { transition-delay: 0.4s; }
+            nav.active a:nth-child(6) { transition-delay: 0.5s; }
+            nav.active a:nth-child(7) { transition-delay: 0.6s; }
+            nav.active a:nth-child(8) { transition-delay: 0.7s; }
+
+            nav a:hover {
+                background: rgba(0, 191, 255, 0.3);
+                transform: translateX(10px);
+                border-left: 3px solid var(--sky-blue-light);
+            }
+
+            nav a i {
+                font-size: 1.2rem;
+                margin-right: 12px;
+            }
+
+            .logo h1 {
+                font-size: 1.2rem;
             }
 
             .course-container {
@@ -314,20 +352,15 @@
         }
 
         @media (max-width: 480px) {
+            .logo h1 {
+                font-size: 1rem;
+            }
+
             .course-container {
                 grid-template-columns: 1fr;
             }
-
-            .top-bar {
-                padding: 10px 5%;
-            }
-
-            .logo h1 {
-                font-size: 1.2rem;
-            }
         }
 
-        /* Large screens (TVs, etc.) */
         @media (min-width: 1440px) {
             .course-container {
                 grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -341,7 +374,7 @@
                 font-size: 1.5rem;
             }
 
-            .top-bar {
+            .header-content {
                 padding: 20px 5%;
             }
         }
@@ -349,30 +382,27 @@
 </head>
 <body>
     <!-- Header -->
-    <header class="main-header">
-        <div class="top-bar">
+    <header>
+        <div class="container header-content">
             <div class="logo">
                 <img src="logo.jpg" alt="Logo">
-                <h1>Elite Computer Classes</h1>
+                <h1><span class="elite">ELITE</span> <span class="classes">COMPUTER CLASSES</span></h1>
             </div>
-            <div class="menu-toggle" id="menu-toggle">
+            <button class="menu-toggle" id="menu-toggle">
                 <i class="fas fa-bars"></i>
-            </div>
-        </div>
-        <div class="nav-bar-container" id="nav-bar-container">
-            <nav class="navbar" id="navbar">
-                 <a href="index.html"><i class="fas fa-home"></i> Home</a>
-    <a href=""><i class="fas fa-book-open"></i> Courses</a>
-    <a href="category.html"><i class="fas fa-layer-group"></i> Category</a>
-    <a href="StudentZone.html"><i class="fas fa-user-graduate"></i> Student Zone</a>
-    <a href="Admission.html"><i class="fas fa-file-signature"></i> Admission</a>
-    <a href="gallery.html"><i class="fas fa-images"></i> Gallery</a>
-    <a href="#about_us"><i class="fas fa-info-circle"></i> About Us</a>
+            </button>
+            <nav id="navbar">
+                <button class="nav-close" id="nav-close"><i class="fas fa-times"></i></button>
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href=""><i class="fas fa-book-open"></i> Courses</a>
+                <a href="category.html"><i class="fas fa-layer-group"></i> Category</a>
+                <a href="StudentZone.html"><i class="fas fa-user-graduate"></i> Student Zone</a>
+                <a href="Admission.html"><i class="fas fa-file-signature"></i> Admission</a>
+                <a href="gallery.html"><i class="fas fa-images"></i> Gallery</a>
+                <a href="#about_us"><i class="fas fa-info-circle"></i> About Us</a>
             </nav>
         </div>
     </header>
-
-    
 
     <!-- Main Content -->
     <h1 class="title">🌞 Elite Computer Classes - Course Catalog</h1>
@@ -382,162 +412,159 @@
         // Header functionality
         console.log("Welcome to Code Vora Academy!");
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const menuToggle = document.getElementById('menu-toggle');
-            const navBarContainer = document.getElementById('nav-bar-container');
-            const navbar = document.getElementById('navbar');
+        // Toggle Menu
+        const menuToggle = document.getElementById('menu-toggle');
+        const navbar = document.getElementById('navbar');
+        const navClose = document.getElementById('nav-close');
+        const body = document.body;
 
-            menuToggle.addEventListener('click', function() {
-                navBarContainer.classList.toggle('active');
+        function toggleMenu() {
+            navbar.classList.toggle('active');
+            navClose.classList.toggle('active');
+            const icon = menuToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+            body.style.overflow = navbar.classList.contains('active') ? 'hidden' : 'auto';
+        }
+
+        menuToggle.addEventListener('click', toggleMenu);
+
+        navClose.addEventListener('click', () => {
+            navbar.classList.remove('active');
+            navClose.classList.remove('active');
+            const icon = menuToggle.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+            body.style.overflow = 'auto';
+        });
+
+        const navLinks = document.querySelectorAll('#navbar a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navbar.classList.remove('active');
+                navClose.classList.remove('active');
                 const icon = menuToggle.querySelector('i');
-                if (navBarContainer.classList.contains('active')) {
-                    icon.classList.remove('fa-bars');
-                    icon.classList.add('fa-times');
-                } else {
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                }
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                body.style.overflow = 'auto';
+            });
+        });
+
+        // Course cards
+        const courses = [
+            {
+                id: "cca",
+                title: "CCA - Certificate in Computer Application",
+                duration: "3 Months",
+                totalFee: "₹2150",
+                admissionFee: "₹1150",
+                installments: ["₹500", "₹500"],
+                details: "Modules: OS, MS Office, Windows 7/8/10, Projects, Assignments"
+            },
+            {
+                id: "dca",
+                title: "DCA - Diploma in Computer Application",
+                duration: "6 Months",
+                totalFee: "₹3250",
+                admissionFee: "₹1750",
+                installments: ["₹500", "₹500", "₹500"],
+                details: "Includes: MS Office, Access, MySQL, HTML, Networking, Hardware"
+            },
+            {
+                id: "dtp",
+                title: "DTP - Diploma in Desktop Publishing",
+                duration: "3 Months",
+                totalFee: "₹2750",
+                admissionFee: "₹1250",
+                installments: ["₹500", "₹500", "₹500"],
+                details: "PageMaker, Photoshop, CorelDraw, Printing, Design Tools"
+            },
+            {
+                id: "doa",
+                title: "DOA - Diploma in Office Automation",
+                duration: "9 Months",
+                totalFee: "₹5500",
+                admissionFee: "₹1500",
+                installments: ["₹500 x 8"],
+                details: "Office Tools, DBMS, Networking, HTML, Tally, Hardware"
+            },
+            {
+                id: "adca",
+                title: "ADCA - Advance Diploma in Computer Application",
+                duration: "12 Months",
+                totalFee: "₹8500",
+                admissionFee: "₹1900",
+                installments: ["₹600 x 11"],
+                details: "Combo: DCA, CFA, DTP with Advanced Features & Projects"
+            },
+            {
+                id: "adit",
+                title: "ADIT - Advance Diploma in Information Technology",
+                duration: "12 Months",
+                totalFee: "₹8500",
+                admissionFee: "₹1900",
+                installments: ["₹600 x 11"],
+                details: "Programming in C/C++, Visual Basic, MySQL, HTML, Networking"
+            },
+            {
+                id: "adcp",
+                title: "ADCP - Advanced Diploma in Computer Programming",
+                duration: "12 Months",
+                totalFee: "₹8500",
+                admissionFee: "₹1900",
+                installments: ["₹600 x 11"],
+                details: "JavaScript, VBScript, C, Visual Basic, FrontPage, SQL"
+            },
+            {
+                id: "adhn",
+                title: "ADHN - Advanced Diploma in Hardware & Networking",
+                duration: "12 Months",
+                totalFee: "₹8500",
+                admissionFee: "₹1900",
+                installments: ["₹600 x 11"],
+                details: "PC Hardware, Windows Config, Networking, System Support"
+            },
+            {
+                id: "cfa",
+                title: "CFA - Certificate in Financial Accounting",
+                duration: "3 Months",
+                totalFee: "₹2750",
+                admissionFee: "₹1250",
+                installments: ["₹500", "₹500", "₹500"],
+                details: "Covers Tally ERP 9, GST, Ledger, Inventory, Trial Balance"
+            }
+        ];
+
+        const container = document.getElementById("courseContainer");
+
+        courses.forEach(course => {
+            const card = document.createElement("div");
+            card.className = "course-card";
+            card18:21
+            card.innerHTML = `
+                <div class="course-title">${course.title}</div>
+                <div class="duration">Duration: ${course.duration}</div>
+                <div class="price">Total Fee: ${course.totalFee}</div>
+                <div class="details">
+                    Admission Fee: ${course.admissionFee}<br>
+                    Installments: ${course.installments.join(", ")}<br>
+                    ${course.details}<br>
+                    <a href="details/${course.id}.html" class="details-btn" target="_blank">Full Course Details</a>
+                </div>
+                <button class="toggle-btn">Show Details</button>
+            `;
+
+            const btn = card.querySelector(".toggle-btn");
+            const details = card.querySelector(".details");
+            btn.addEventListener("click", () => {
+                const isShown = details.style.display === "block";
+                details.style.display = isShown ? "none" : "block";
+                btn.textContent = isShown ? "Show Details" : "Hide Details";
             });
 
-            const navLinks = document.querySelectorAll('.navbar a');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    if (window.innerWidth <= 768) {
-                        navBarContainer.classList.remove('active');
-                        const icon = menuToggle.querySelector('i');
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
-                    }
-                });
-            });
-
-            document.addEventListener('click', function(event) {
-                if (window.innerWidth <= 768 && navBarContainer.classList.contains('active')) {
-                    if (!navbar.contains(event.target) && !menuToggle.contains(event.target)) {
-                        navBarContainer.classList.remove('active');
-                        const icon = menuToggle.querySelector('i');
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
-                    }
-                }
-            });
-
-           
-
-            // Course cards
-            const courses = [
-                {
-                    id: "cca",
-                    title: "CCA - Certificate in Computer Application",
-                    duration: "3 Months",
-                    totalFee: "₹2150",
-                    admissionFee: "₹1150",
-                    installments: ["₹500", "₹500"],
-                    details: "Modules: OS, MS Office, Windows 7/8/10, Projects, Assignments"
-                },
-                {
-                    id: "dca",
-                    title: "DCA - Diploma in Computer Application",
-                    duration: "6 Months",
-                    totalFee: "₹3250",
-                    admissionFee: "₹1750",
-                    installments: ["₹500", "₹500", "₹500"],
-                    details: "Includes: MS Office, Access, MySQL, HTML, Networking, Hardware"
-                },
-                {
-                    id: "dtp",
-                    title: "DTP - Diploma in Desktop Publishing",
-                    duration: "3 Months",
-                    totalFee: "₹2750",
-                    admissionFee: "₹1250",
-                    installments: ["₹500", "₹500", "₹500"],
-                    details: "PageMaker, Photoshop, CorelDraw, Printing, Design Tools"
-                },
-                {
-                    id: "doa",
-                    title: "DOA - Diploma in Office Automation",
-                    duration: "9 Months",
-                    totalFee: "₹5500",
-                    admissionFee: "₹1500",
-                    installments: ["₹500 x 8"],
-                    details: "Office Tools, DBMS, Networking, HTML, Tally, Hardware"
-                },
-                {
-                    id: "adca",
-                    title: "ADCA - Advance Diploma in Computer Application",
-                    duration: "12 Months",
-                    totalFee: "₹8500",
-                    admissionFee: "₹1900",
-                    installments: ["₹600 x 11"],
-                    details: "Combo: DCA, CFA, DTP with Advanced Features & Projects"
-                },
-                {
-                    id: "adit",
-                    title: "ADIT - Advance Diploma in Information Technology",
-                    duration: "12 Months",
-                    totalFee: "₹8500",
-                    admissionFee: "₹1900",
-                    installments: ["₹600 x 11"],
-                    details: "Programming in C/C++, Visual Basic, MySQL, HTML, Networking"
-                },
-                {
-                    id: "adcp",
-                    title: "ADCP - Advanced Diploma in Computer Programming",
-                    duration: "12 Months",
-                    totalFee: "₹8500",
-                    admissionFee: "₹1900",
-                    installments: ["₹600 x 11"],
-                    details: "JavaScript, VBScript, C, Visual Basic, FrontPage, SQL"
-                },
-                {
-                    id: "adhn",
-                    title: "ADHN - Advanced Diploma in Hardware & Networking",
-                    duration: "12 Months",
-                    totalFee: "₹8500",
-                    admissionFee: "₹1900",
-                    installments: ["₹600 x 11"],
-                    details: "PC Hardware, Windows Config, Networking, System Support"
-                },
-                {
-                    id: "cfa",
-                    title: "CFA - Certificate in Financial Accounting",
-                    duration: "3 Months",
-                    totalFee: "₹2750",
-                    admissionFee: "₹1250",
-                    installments: ["₹500", "₹500", "₹500"],
-                    details: "Covers Tally ERP 9, GST, Ledger, Inventory, Trial Balance"
-                }
-            ];
-
-            const container = document.getElementById("courseContainer");
-
-            courses.forEach(course => {
-                const card = document.createElement("div");
-                card.className = "course-card";
-                card.innerHTML = `
-                    <div class="course-title">${course.title}</div>
-                    <div class="duration">Duration: ${course.duration}</div>
-                    <div class="price">Total Fee: ${course.totalFee}</div>
-                    <div class="details">
-                        Admission Fee: ${course.admissionFee}<br>
-                        Installments: ${course.installments.join(", ")}<br>
-                        ${course.details}<br>
-                        <a href="details/${course.id}.html" class="details-btn" target="_blank">Full Course Details</a>
-                    </div>
-                    <button class="toggle-btn">Show Details</button>
-                `;
-
-                const btn = card.querySelector(".toggle-btn");
-                const details = card.querySelector(".details");
-                btn.addEventListener("click", () => {
-                    const isShown = details.style.display === "block";
-                    details.style.display = isShown ? "none" : "block";
-                    btn.textContent = isShown ? "Show Details" : "Hide Details";
-                });
-
-                container.appendChild(card);
-            });
+            container.appendChild(card);
         });
     </script>
 </body>
 </html>
+```
