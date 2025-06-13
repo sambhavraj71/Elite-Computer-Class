@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Computer Classes - Online Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes slideIn {
+          from { transform: translateY(20px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
+        }
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        .slide-in { animation: slideIn 0.5s ease-in; }
+        .option:hover { transform: scale(1.02); transition: transform 0.2s; }
+        .progress-bar { transition: width 0.3s ease-in-out; }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+<!-- Instructions Page -->
+<div id="instructions" class="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600">
+    <div class="bg-white p-8 rounded-lg shadow-lg max-w-2xl w-full m-4 fade-in">
+        <h1 class="text-3xl font-bold text-center mb-6 text-blue-600"><i class="fas fa-laptop-code mr-2"></i>Elite Computer Classes - Online Test</h1>
+        <div class="text-gray-700 space-y-4">
+            <p><strong>Subject:</strong> Computer Test</p>
+            <p><strong>Date:</strong> 15-06-2025</p>
+            <p><strong>Venue:</strong> Elite Computer Classes</p>
+            <p><strong>Timing:</strong> To be announced</p>
+            <p><strong>Instructions:</strong></p>
+            <ul class="list-disc pl-6">
+                <li>Total Questions: 10</li>
+                <li>Each question carries 1 mark.</li>
+                <li>No negative marking for incorrect answers.</li>
+                <li>Time Limit: 15 minutes</li>
+                <li>Select one option per question and click "Next" to proceed.</li>
+                <li>Ensure you submit your answers at the end to see your results.</li>
+            </ul>
+            <p class="text-sm text-red-600">Note: Test can only be taken once per device unless reset by admin.</p>
+        </div>
+        <button id="startTest" class="mt-6 w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-300"><i class="fas fa-play mr-2"></i>Start Test</button>
+        <button id="resetTest" class="mt-2 w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition duration-300"><i class="fas fa-trash mr-2"></i>Reset Test (Admin Only)</button>
+    </div>
+</div>
+
+<!-- Reset Test Modal -->
+<div id="resetModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+        <h2 class="text-2xl font-bold text-blue-600 mb-4"><i class="fas fa-lock mr-2"></i>Admin Login</h2>
+        <div class="space-y-4">
+            <div>
+                <label class="block text-gray-700">User ID</label>
+                <input id="adminId" type="email" class="w-full p-2 border rounded-lg" placeholder="Enter admin email">
+            </div>
+            <div>
+                <label class="block text-gray-700">Password</label>
+                <input id="adminPassword" type="password" class="w-full p-2 border rounded-lg" placeholder="Enter password">
+            </div>
+            <p id="errorMessage" class="text-red-600 hidden">Invalid credentials. Please try again.</p>
+            <div class="flex justify-end space-x-2">
+                <button id="cancelReset" class="bg-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-400">Cancel</button>
+                <button id="confirmReset" class="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700">Reset Test</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Test Page -->
+<div id="test" class="hidden min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600">
+    <div class="bg-white p-8 rounded-lg shadow-lg max-w-3xl w-full m-4 slide-in">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold text-blue-600"><i class="fas fa-question-circle mr-2"></i>Question <span id="questionNumber">1</span>/10</h2>
+            <div class="text-lg font-semibold text-gray-700"><i class="fas fa-clock mr-2"></i>Time Left: <span id="timer">15:00</span></div>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-2.5 mb-6">
+            <div id="progressBar" class="bg-blue-600 h-2.5 rounded-full progress-bar" style="width: 10%"></div>
+        </div>
+        <h3 id="questionText" class="text-lg font-medium mb-4"></h3>
+        <div id="options" class="space-y-3"></div>
+        <div class="mt-6 flex justify-between">
+            <button id="prevQuestion" class="bg-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-400 transition duration-300"><i class="fas fa-arrow-left mr-2"></i>Previous</button>
+            <button id="nextQuestion" class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300"><span>Next</span><i class="fas fa-arrow-right ml-2"></i></button>
+        </div>
+    </div>
+</div>
+
+<!-- Results Page -->
+<div id="results" class="hidden min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600">
+    <div class="bg-white p-8 rounded-lg shadow-lg max-w-3xl w-full m-4 slide-in">
+        <h2 class="text-3xl font-bold text-center mb-6 text-blue-600"><i class="fas fa-trophy mr-2"></i>Test Summary</h2>
+        <div class="text-gray-700 space-y-4">
+            <p><strong>Total Questions Attempted:</strong> <span id="attempted"></span></p>
+            <p class="text-lg font-semibold">Click below to view your final results and detailed feedback.</p>
+        </div>
+        <button id="submitTest" class="mt-6 w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition duration-300"><i class="fas fa-check-circle mr-2"></i>Submit & View Final Results</button>
+    </div>
+</div>
+
+<!-- Final Results Page -->
+<div id="finalResults" class="hidden min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600">
+    <div class="bg-white p-8 rounded-lg shadow-lg max-w-3xl w-full m-4 slide-in">
+        <h2 class="text-3xl font-bold text-center mb-6 text-blue-600"><i class="fas fa-trophy mr-2"></i>Final Test Results</h2>
+        <div class="text-gray-700 space-y-4">
+            <p id="congratulations" class="text-lg font-semibold text-center text-green-600"></p>
+            <p><strong>Total Questions Attempted:</strong> <span id="finalAttempted"></span></p>
+            <p><strong>Correct Answers:</strong> <span id="correct"></span></p>
+            <p><strong>Score:</strong> <span id="score"></span>/10</p>
+            <p id="attemptInfo" class="text-sm text-gray-500"></p>
+            <p class="text-lg font-semibold">Detailed Feedback:</p>
+            <div id="feedback" class="space-y-4"></div>
+        </div>
+        <button id="restartTest" class="mt-6 w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-300"><i class="fas fa-redo mr-2"></i>Back to Start</button>
+    </div>
+</div>
+
+<script>
+    const questions = [
+      { question: "What does CPU stand for?", options: ["Central Processing Unit", "Computer Personal Unit", "Central Program Unit", "Control Processing Unit"], answer: 0 },
+      { question: "Which language is used for web development?", options: ["Python", "HTML", "C++", "Java"], answer: 1 },
+      { question: "What is the full form of RAM?", options: ["Read Access Memory", "Random Access Memory", "Run Access Memory", "Rapid Access Memory"], answer: 1 },
+      { question: "Which company developed Windows?", options: ["Apple", "Google", "Microsoft", "IBM"], answer: 2 },
+      { question: "What is the extension of a Python file?", options: [".java", ".py", ".cpp", ".html"], answer: 1 },
+      { question: "Which is a database management system?", options: ["MySQL", "HTML", "CSS", "JavaScript"], answer: 0 },
+      { question: "What does HTTP stand for?", options: ["Hyper Text Transfer Protocol", "High Text Transfer Protocol", "Hyperlink Text Protocol", "Hyper Transfer Text Protocol"], answer: 0 },
+      { question: "Which is not a programming language?", options: ["Python", "Java", "HTML", "C#"], answer: 2 },
+      { question: "What is used to style web pages?", options: ["HTML", "CSS", "JavaScript", "Python"], answer: 1 },
+      { question: "Which is a cloud computing service?", options: ["AWS", "Photoshop", "Excel", "Word"], answer: 0 }
+    ];
+
+    const adminCredentials = [
+      { id: "elitecomputerclasses@gmail.com", password: "elite@123" },
+      { id: "hariomsoni0818@gmail.com", password: "elite@123" },
+      { id: "sambhavraj83@gmail.com", password: "elite@123" }
+    ];
+
+    let currentQuestion = 0;
+    let answers = new Array(questions.length).fill(null);
+    let timeLeft = 15 * 60;
+    let timerInterval;
+    let attemptCount = localStorage.getItem('testAttemptCount') ? parseInt(localStorage.getItem('testAttemptCount')) : 0;
+    let savedAnswers = localStorage.getItem('testAnswers') ? JSON.parse(localStorage.getItem('testAnswers')) : null;
+
+    const instructions = document.getElementById('instructions');
+    const test = document.getElementById('test');
+    const results = document.getElementById('results');
+    const finalResults = document.getElementById('finalResults');
+    const resetModal = document.getElementById('resetModal');
+    const startTest = document.getElementById('startTest');
+    const resetTest = document.getElementById('resetTest');
+    const cancelReset = document.getElementById('cancelReset');
+    const confirmReset = document.getElementById('confirmReset');
+    const adminId = document.getElementById('adminId');
+    const adminPassword = document.getElementById('adminPassword');
+    const errorMessage = document.getElementById('errorMessage');
+    const prevQuestion = document.getElementById('prevQuestion');
+    const nextQuestion = document.getElementById('nextQuestion');
+    const submitTest = document.getElementById('submitTest');
+    const restartTest = document.getElementById('restartTest');
+    const questionNumber = document.getElementById('questionNumber');
+    const questionText = document.getElementById('questionText');
+    const options = document.getElementById('options');
+    const timer = document.getElementById('timer');
+    const progressBar = document.getElementById('progressBar');
+    const attempted = document.getElementById('attempted');
+    const finalAttempted = document.getElementById('finalAttempted');
+    const correct = document.getElementById('correct');
+    const score = document.getElementById('score');
+    const feedback = document.getElementById('feedback');
+    const congratulations = document.getElementById('congratulations');
+    const attemptInfo = document.getElementById('attemptInfo');
+
+    // Check if test was previously completed
+    window.addEventListener('load', () => {
+      console.log('Page loaded, checking test status');
+      try {
+        if (localStorage.getItem('testCompleted') === 'true' && savedAnswers) {
+          answers = savedAnswers;
+          instructions.classList.add('hidden');
+          test.classList.add('hidden');
+          results.classList.add('hidden');
+          finalResults.classList.remove('hidden');
+          showFinalResults();
+          console.log('Test completed previously, showing final results');
+        } else {
+          instructions.classList.remove('hidden');
+          test.classList.add('hidden');
+          results.classList.add('hidden');
+          finalResults.classList.add('hidden');
+          console.log('No previous test found, showing instructions');
+        }
+      } catch (e) {
+        console.error('Error accessing localStorage:', e);
+      }
+    });
+
+    startTest.addEventListener('click', () => {
+      console.log('Start Test clicked');
+      try {
+        if (localStorage.getItem('testCompleted') === 'true') {
+          instructions.classList.add('hidden');
+          finalResults.classList.remove('hidden');
+          showFinalResults();
+          console.log('Test already completed, showing final results');
+          return;
+        }
+        instructions.classList.add('hidden');
+        test.classList.remove('hidden');
+        startTimer();
+        loadQuestion();
+        console.log('Starting test');
+      } catch (e) {
+        console.error('Error starting test:', e);
+      }
+    });
+
+    resetTest.addEventListener('click', () => {
+      console.log('Reset Test clicked');
+      resetModal.classList.remove('hidden');
+      adminId.value = '';
+      adminPassword.value = '';
+      errorMessage.classList.add('hidden');
+      adminId.focus();
+    });
+
+    cancelReset.addEventListener('click', () => {
+      console.log('Cancel Reset clicked');
+      resetModal.classList.add('hidden');
+    });
+
+    confirmReset.addEventListener('click', () => {
+      console.log('Confirm Reset clicked');
+      try {
+        const id = adminId.value.trim();
+        const password = adminPassword.value.trim();
+        console.log('Validating credentials:', id);
+        const isValid = adminCredentials.some(cred => cred.id === id && cred.password === password);
+        if (isValid) {
+          localStorage.removeItem('testCompleted');
+          localStorage.removeItem('testAnswers');
+          localStorage.removeItem('testAttemptCount');
+          attemptCount = 0;
+          answers = new Array(questions.length).fill(null);
+          savedAnswers = null;
+          instructions.classList.remove('hidden');
+          test.classList.add('hidden');
+          results.classList.add('hidden');
+          finalResults.classList.add('hidden');
+          resetModal.classList.add('hidden');
+          alert('Test has been reset. You can now start a new attempt.');
+          console.log('Test reset successfully');
+        } else {
+          errorMessage.classList.remove('hidden');
+          console.warn('Invalid credentials');
+        }
+      } catch (e) {
+        console.error('Error resetting test:', e);
+        errorMessage.textContent = 'An error occurred. Please try again.';
+        errorMessage.classList.remove('hidden');
+      }
+    });
+
+    prevQuestion.addEventListener('click', () => {
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        loadQuestion();
+        console.log(`Navigated to question ${currentQuestion + 1}`);
+      }
+    });
+
+    nextQuestion.addEventListener('click', () => {
+      if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        loadQuestion();
+        console.log(`Navigated to question ${currentQuestion + 1}`);
+      } else {
+        showResults();
+        console.log('Showing test summary');
+      }
+    });
+
+    submitTest.addEventListener('click', () => {
+      console.log('Submit Test clicked');
+      try {
+        results.classList.add('hidden');
+        finalResults.classList.remove('hidden');
+        localStorage.setItem('testCompleted', 'true');
+        localStorage.setItem('testAnswers', JSON.stringify(answers));
+        localStorage.setItem('testAttemptCount', attemptCount + 1);
+        showFinalResults();
+        console.log('Test submitted, showing final results');
+      } catch (e) {
+        console.error('Error submitting test:', e);
+      }
+    });
+
+    restartTest.addEventListener('click', () => {
+      console.log('Restart Test clicked');
+      try {
+        finalResults.classList.add('hidden');
+        instructions.classList.remove('hidden');
+        clearInterval(timerInterval);
+        currentQuestion = 0;
+        answers = new Array(questions.length).fill(null);
+        timeLeft = 15 * 60;
+        attemptCount++;
+        localStorage.setItem('testAttemptCount', attemptCount);
+        console.log(`Restarting test, attempt ${attemptCount}`);
+      } catch (e) {
+        console.error('Error restarting test:', e);
+      }
+    });
+
+    function startTimer() {
+      console.log('Starting timer');
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        timer.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          showResults();
+          console.log('Time up, showing test summary');
+        }
+      }, 1000);
+    }
+
+    function loadQuestion() {
+      console.log(`Loading question ${currentQuestion + 1}`);
+      questionNumber.textContent = currentQuestion + 1;
+      questionText.textContent = questions[currentQuestion].question;
+      options.innerHTML = '';
+      questions[currentQuestion].options.forEach((option, index) => {
+        const div = document.createElement('div');
+        div.className = 'option p-3 bg-gray-100 rounded-lg cursor-pointer hover:bg-gray-200 transition duration-300';
+        div.innerHTML = `<input type="radio" name="option" value="${index}" ${answers[currentQuestion] === index ? 'checked' : ''} class="mr-2"> ${option}`;
+        div.addEventListener('click', () => {
+          answers[currentQuestion] = index;
+          loadQuestion();
+          console.log(`Selected option ${index} for question ${currentQuestion + 1}`);
+        });
+        options.appendChild(div);
+      });
+      progressBar.style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
+      prevQuestion.classList.toggle('hidden', currentQuestion === 0);
+      const nextButtonText = currentQuestion === questions.length - 1 ? 'Submit' : 'Next';
+      nextQuestion.innerHTML = `${nextButtonText}<i class="fas ${currentQuestion === questions.length - 1 ? 'fa-check' : 'fa-arrow-right'} ml-2"></i>`;
+    }
+
+    function showResults() {
+      console.log('Showing results page');
+      test.classList.add('hidden');
+      results.classList.remove('hidden');
+      clearInterval(timerInterval);
+      let attemptedCount = answers.filter(a => a !== null).length;
+      attempted.textContent = attemptedCount;
+    }
+
+    function showFinalResults() {
+      console.log('Showing final results');
+      let correctCount = 0;
+      let attemptedCount = answers.filter(a => a !== null).length;
+      feedback.innerHTML = '';
+      questions.forEach((q, i) => {
+        const isCorrect = answers[i] === q.answer;
+        if (isCorrect) correctCount++;
+        const div = document.createElement('div');
+        div.className = `p-4 rounded-lg ${isCorrect ? 'bg-green-100' : answers[i] !== null ? 'bg-red-100' : 'bg-gray-100'}`;
+        div.innerHTML = `
+          <p><strong>Question ${i + 1}:</strong> ${q.question}</p>
+          <p><strong>Your Answer:</strong> ${answers[i] !== null ? q.options[answers[i]] : 'Not Attempted'}</p>
+          <p><strong>Correct Answer:</strong> ${q.options[q.answer]}</p>
+          <p><strong>Status:</strong> ${isCorrect ? '<i class="fas fa-check text-green-600"></i> Correct' : answers[i] !== null ? '<i class="fas fa-times text-red-600"></i> Incorrect' : 'Not Attempted'}</p>
+        `;
+        feedback.appendChild(div);
+      });
+      finalAttempted.textContent = attemptedCount;
+      correct.textContent = correctCount;
+      score.textContent = correctCount;
+      congratulations.textContent = getCongratulatoryMessage(correctCount);
+      attemptInfo.textContent = attemptCount > 1 ? `Note: This is your ${attemptCount}${attemptCount === 2 ? 'nd' : attemptCount === 3 ? 'rd' : 'th'} attempt.` : '';
+    }
+
+    function getCongratulatoryMessage(score) {
+      if (score >= 8) {
+        return "Congratulations! Outstanding performance! Keep shining! 🌟";
+      } else if (score >= 5) {
+        return "Great job! You've done well, keep practicing to reach the top! 🎉";
+      } else if (score >= 1) {
+        return "Good effort! Review the feedback and try again to improve! 💪";
+      } else {
+        return "Don't worry! Every attempt is a step forward. Keep learning! 😊";
+      }
+    }
+</script>
+</body>
+</html>
