@@ -9,8 +9,8 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
   <style>
     /* Custom CSS */
@@ -34,7 +34,7 @@
 
     html, body {
       width: 100%;
-      overflow-x: hidden;
+      overflow-x: hidden; /* Prevent horizontal scrolling */
       font-family: 'Poppins', sans-serif;
       background-color: var(--gray-light);
       color: var(--gray-dark);
@@ -68,7 +68,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      white-space: nowrap;
+      white-space: nowrap; /* Prevent text wrapping */
     }
 
     .logo img {
@@ -79,7 +79,7 @@
     }
 
     .logo h1 {
-      font-size: 1.4rem;
+      font-size: 1.4rem; /* Reduced size for desktop */
       font-weight: 700;
       display: inline-block;
     }
@@ -103,48 +103,44 @@
     }
 
     .menu-toggle:hover {
-      transform: rotate(90deg);
+      transform: rotate(90deg); /* Rotate on hover for animation */
     }
 
     nav {
       display: flex;
       gap: 15px;
       align-items: center;
-      animation: none !important; /* Disable animations initially */
-    }
-
-    nav.loaded {
-      animation: none; /* Allow animations after page load */
     }
 
     nav a {
       color: var(--white);
       text-decoration: none;
-      font-size: 0.5rem;
+      font-size: 0.5rem; /* Smaller than logo text */
       font-weight: 500;
       padding: 8px 12px;
       border-radius: 5px;
       transition: background 0.3s, color 0.3s, transform 0.2s;
       display: flex;
-      align-items: center;
-      gap: 5px;
+      align-items: center; /* Align icon and text */
+      gap: 5px; /* Space between icon and text */
     }
 
     nav a:hover {
       background: var(--sky-blue-light);
       color: var(--navy-dark);
-      transform: scale(1.05);
+      transform: scale(1.05); /* Slight scale on hover */
     }
 
     nav a i {
-      font-size: 0.9rem;
+      font-size: 0.9rem; /* Match text size */
       transition: transform 0.3s;
     }
 
     nav a:hover i {
-      transform: rotate(360deg);
+      transform: rotate(360deg); /* Icon spin on hover */
     }
 
+    /* Toggle Menu Close Button */
     .nav-close {
       display: none;
       position: fixed;
@@ -171,7 +167,7 @@
 
     .nav-close:hover {
       background: var(--orange-dark);
-      transform: scale(1.1);
+      transform: scale(1.1); /* Slight scale on hover */
     }
 
     @keyframes fadeIn {
@@ -283,7 +279,7 @@
     }
 
     .slider-dot:hover {
-      transform: scale(1.2);
+      transform: scale(1.2); /* Scale up on hover */
     }
 
     .slider-dot.active {
@@ -331,7 +327,7 @@
     }
 
     .modal-content .close:hover {
-      transform: rotate(90deg);
+      transform: rotate(90deg); /* Rotate on hover */
     }
 
     .modal-content iframe {
@@ -620,7 +616,7 @@
     }
 
     .gallery-item:hover .gallery-overlay i {
-      transform: scale(1.2);
+      transform: scale(1.2); /* Scale up icon on hover */
     }
 
     .view-more {
@@ -683,156 +679,156 @@
       border-radius: 10px;
       border: 2px solid var(--sky-blue-light);
     }
-
-    .minfo {
+    .minfo{
       display: flex;
       flex-direction: row;
       gap: 400px;
     }
-
     .HaveAQ {
-      background-color: white;
-      border-radius: 12px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 500px;
-      padding: 10px;
-      height: 450px;
-      font-size: 15px;
-    }
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 500px;
+        padding: 10px;
+        height: 450px;
+        font-size: 15px;
+        
 
-    h2 {
-      color: var(--dark);
-      text-align: center;
-      margin-bottom: 25px;
-      font-size: 1rem;
-      position: relative;
-      padding-bottom: 10px;
-    }
+      }
 
-    h2::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80px;
-      height: 4px;
-      background: linear-gradient(to right, var(--primary), var(--accent));
-      border-radius: 2px;
-    }
+      h2 {
+        color: var(--dark);
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 1rem;
+        position: relative;
+        padding-bottom: 10px;
+      }
 
-    .form-group {
-      margin-bottom: 10px;
-      position: relative;
-    }
+      h2::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(to right, var(--primary), var(--accent));
+        border-radius: 2px;
+      }
 
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 500;
-      color: var(--dark);
-      height: 12px;
-    }
+      .form-group {
+        margin-bottom: 10px;
+        position: relative;
+      }
 
-    .required {
-      color: var(--error);
-    }
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: var(--dark);
+        height: 12px;
+      }
 
-    input, textarea {
-      width: 100%;
-      padding: 12px 15px;
-      border: 2px solid #e2e8f0;
-      border-radius: 8px;
-      font-size: 16px;
-      transition: all 0.3s;
-      height: 10px;
-    }
+      .required {
+        color: var(--error);
+      }
 
-    input:focus, textarea:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
-    }
+      input, textarea {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: all 0.3s;
+        height: 10px;
+      }
 
-    textarea {
-      min-height: 120px;
-      resize: vertical;
-    }
+      input:focus, textarea:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+      }
 
-    .btn {
-      width: 100%;
-      padding: 14px;
-      background: linear-gradient(to right, var(--primary), var(--primary-dark));
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 10px;
-    }
+      textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
 
-    .btn:hover {
-      background: linear-gradient(to right, var(--primary-dark), var(--primary));
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
-    }
+      .btn {
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(to right, var(--primary), var(--primary-dark));
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 10px;
+      }
 
-    .error-message {
-      color: var(--error);
-      font-size: 0.85rem;
-      margin-top: 5px;
-      display: none;
-    }
+      .btn:hover {
+        background: linear-gradient(to right, var(--primary-dark), var(--primary));
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+      }
 
-    .success-message {
-      display: none;
-      text-align: center;
-      background-color: rgba(16, 185, 129, 0.1);
-      padding: 15px;
-      border-radius: 8px;
-      margin-top: 20px;
-      color: var(--success);
-    }
+      .error-message {
+        color: var(--error);
+        font-size: 0.85rem;
+        margin-top: 5px;
+        display: none;
+      }
 
-    .success-message i {
-      font-size: 1.5rem;
-      margin-bottom: 10px;
-    }
+      .success-message {
+        display: none;
+        text-align: center;
+        background-color: rgba(16, 185, 129, 0.1);
+        padding: 15px;
+        border-radius: 8px;
+        margin-top: 20px;
+        color: var(--success);
+      }
 
-    .contact-options {
-      display: flex;
-      gap: 10px;
-      margin-top: 20px;
-    }
+      .success-message i {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+      }
 
-    .contact-btn {
-      flex: 1;
-      padding: 12px;
-      border-radius: 8px;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      cursor: pointer;
-      text-decoration: none;
-    }
+      .contact-options {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+      }
 
-    .whatsapp-btn {
-      background-color: #25D366;
-      color: white;
-    }
+      .contact-btn {
+        flex: 1;
+        padding: 12px;
+        border-radius: 8px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        cursor: pointer;
+        text-decoration: none;
+      }
 
-    .email-btn {
-      background-color: #EA4335;
-      color: white;
-    }
+      .whatsapp-btn {
+        background-color: #25D366;
+        color: white;
+      }
+
+      .email-btn {
+        background-color: #EA4335;
+        color: white;
+      }
 
     /* Footer */
     footer {
@@ -860,7 +856,7 @@
     }
 
     .footer-section h3:hover i {
-      transform: rotate(360deg);
+      transform: rotate(360deg); /* Spin icon on hover */
     }
 
     .course-columns {
@@ -900,7 +896,7 @@
 
     .quick-links a:hover {
       color: var(--sky-blue-light);
-      transform: translateX(5px);
+      transform: translateX(5px); /* Slide right on hover */
     }
 
     .quick-links a i {
@@ -931,7 +927,7 @@
 
     .social-section a:hover {
       color: var(--sky-blue-light);
-      transform: scale(1.2);
+      transform: scale(1.2); /* Scale up on hover */
     }
 
     .footer-bottom {
@@ -953,34 +949,23 @@
       nav {
         position: fixed;
         top: 0;
-        left: 0;
+        left: 0; /* Changed from right: 0 to cover full screen */
         height: 100vh;
-        width: 100vw;
+        width: 100vw; /* Full viewport width */
         background: linear-gradient(to bottom, var(--navy-dark), var(--navy-light));
         flex-direction: column;
-        padding: 80px 20px 20px;
+        padding: 80px 20px 20px; /* Increased top padding for close button */
         transform: translateX(100%);
-        transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-        visibility: hidden;
+        transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Smooth bounce effect */
+        box-shadow: none; /* Removed shadow for full-screen effect */
         z-index: 1000;
-        overflow-y: auto;
-        overflow-x: hidden;
-        animation: none !important;
-      }
-
-      nav.loaded {
-        animation: none;
+        overflow-y: auto; /* Allow vertical scrolling if needed */
+        overflow-x: hidden; /* Prevent horizontal scrolling */
       }
 
       nav.active {
         transform: translateX(0);
-        visibility: visible;
         animation: slideInMenu 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
-      }
-
-      nav:not(.active) {
-        animation: none;
-        visibility: hidden;
       }
 
       @keyframes slideInMenu {
@@ -988,8 +973,17 @@
         to { transform: translateX(0); opacity: 1; }
       }
 
+      nav:not(.active) {
+        animation: slideOutMenu 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+      }
+
+      @keyframes slideOutMenu {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(100%); opacity: 0.5; }
+      }
+
       nav a {
-        font-size: 1.2rem;
+        font-size: 1.2rem; /* Larger for mobile */
         padding: 15px 20px;
         margin: 8px 0;
         border-radius: 8px;
@@ -998,8 +992,8 @@
         width: 100%;
         text-align: left;
         border-left: 3px solid transparent;
-        opacity: 0;
-        transform: translateX(20px);
+        opacity: 0; /* Hidden initially for animation */
+        transform: translateX(20px); /* Start slightly off-screen */
       }
 
       nav.active a {
@@ -1027,7 +1021,7 @@
       }
 
       .logo h1 {
-        font-size: 1.2rem;
+        font-size: 1.2rem; /* Further reduced for mobile */
       }
 
       .hero-slider {
@@ -1047,11 +1041,13 @@
         font-size: 0.9rem;
       }
 
+      /* Two items per row */
       .course-grid, .category-grid, .features, .stories-container {
         grid-template-columns: repeat(2, 1fr);
         gap: 15px;
       }
 
+      /* Text size reduction */
       p {
         font-size: 0.85rem;
       }
@@ -1075,7 +1071,7 @@
 
     @media (max-width: 480px) {
       .logo h1 {
-        font-size: 1rem;
+        font-size: 1rem; /* Even smaller for very small screens */
       }
 
       .hero-slider {
@@ -1098,19 +1094,19 @@
         height: 150px;
       }
 
+      /* Maintain two items per row */
       .course-grid, .category-grid, .features, .stories-container {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
       }
-
       .HaveAQ {
         padding: 20px;
       }
-
+      
       h2 {
         font-size: 1.5rem;
       }
-
+      
       .contact-options {
         flex-direction: column;
       }
@@ -1226,6 +1222,7 @@
       <div class="category-grid">
         <a href="courses.html">
           <div class="category-card">
+            
             <div class="card-content">
               <i class="fas fa-graduation-cap"></i>
               <h3>Computer Courses</h3>
@@ -1320,7 +1317,7 @@
           <img src="./Images/Certification/Certification7.jpg" alt="Priya Patel">
           <div class="story-content">
             <h3>Sonam Kumari</h3>
-            <p>"The institute's global perspective opened doors to my bright future in Beltron."</p>
+            <p>"The institute's global perspective opened doors to my birght future in Beltron."</p>
             <div class="story-meta">
               <i class="fas fa-briefcase"></i> Beltron(D.E.O)
             </div>
@@ -1330,7 +1327,7 @@
           <img src="./Images/Certification/Certification20.jpg" alt="Priya Patel">
           <div class="story-content">
             <h3>Suraj Kumar</h3>
-            <p>"The institute's global perspective opened doors to my bright future in Beltron."</p>
+            <p>"The institute's global perspective opened doors to my birght future in Beltron."</p>
             <div class="story-meta">
               <i class="fas fa-briefcase"></i> Beltron(D.E.O)
             </div>
@@ -1441,44 +1438,52 @@
     <div class="container">
       <h2>Contact Us</h2>
       <div class="contact-container">
-        <div class="minfo">
-          <div class="info">
-            <h3>Coaching Institute Info</h3>
-            <p><i class="fas fa-map-marker-alt"></i> Elite Computer Classes, Block Road <br>->>(Infront of Vivekanad School), <br> ->>Narkatiaganj - 845455</p>
-            <p><i class="fas fa-phone"></i> +91 8292879444 & +91 9142789404</p>
-            <p><i class="fas fa-envelope"></i> elitecomputerclasses@gmail.com</p>
-          </div>
-          <div class="HaveAQ">
+       <div class="minfo"> 
+        <div class="info">
+          <h3>Coaching Institute Info</h3>
+          <p><i class="fas fa-map-marker-alt"></i> Elite Computer Classes, Block Road <br>->>(Infront of Vivekanad School), <br> ->>Narkatiaganj - 845455</p>
+          <p><i class="fas fa-phone"></i> +91 8292879444 & +91 9142789404</p>
+          <p><i class="fas fa-envelope"></i> elitecomputerclasses@gmail.com</p>
+        </div>
+        <div class="HaveAQ">
             <h2><i class="fas fa-question-circle"></i> Have a Question?</h2>
+            
             <form id="contactForm">
               <div class="form-group">
                 <label for="name">Your Name <span class="required">*</span></label>
                 <input type="text" id="name" placeholder="Enter your name" required>
                 <div class="error-message" id="nameError">Please enter your name</div>
               </div>
+              
               <div class="form-group">
                 <label for="email">Email Address <span class="required">*</span></label>
                 <input type="email" id="email" placeholder="Enter your email" required>
                 <div class="error-message" id="emailError">Please enter a valid email</div>
               </div>
+              
               <div class="form-group">
                 <label for="question">Your Question <span class="required">*</span></label>
                 <textarea id="question" placeholder="Type your question here..." required></textarea>
                 <div class="error-message" id="questionError">Please enter your question</div>
               </div>
+              
               <button type="submit" class="btn" style="color: black;">
                 <i class="fas fa-paper-plane" style="color: black;"></i> Send Question
               </button>
+
+              
               <div class="success-message" id="successMessage">
                 <i class="fas fa-check-circle"></i>
                 <p>Your question has been sent successfully!</p>
               </div>
             </form>
+            
+            
           </div>
-        </div>
+         </div> 
         <div class="map">
           <h3>Our Location</h3>
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3551.7507337211837!2d84.461868175446!3d27.101154476535413!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39949d77d23e1fbf%3A0x4b843cecdcef2869!2sElite%20Computer%20Classes!5e0!3m2!1sen!2sin!4v1749727057435!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3551.7507337211837!2d84.461868175446!3d27.101154476535413!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39949d77d23e1fbf%3A0x4b843cecdcef2869!2sElite%20Computer%20Classes!5e0!3m2!1sen!2sin!4v1749727057435!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
     </div>
@@ -1562,7 +1567,7 @@
       });
     });
 
-    setInterval(nextSlide, 5000);
+    setInterval(nextSlide, 5000); // Auto-slide every 5 seconds
 
     // Toggle Menu
     const menuToggle = document.getElementById('menu-toggle');
@@ -1572,62 +1577,36 @@
 
     function toggleMenu() {
       navbar.classList.toggle('active');
-      navClose.classList.toggle('active');
+      navClose.classList.toggle('active'); // Toggle visibility of close button
       const icon = menuToggle.querySelector('i');
       icon.classList.toggle('fa-bars');
       icon.classList.toggle('fa-times');
+      // Prevent scrolling when menu is open
       body.style.overflow = navbar.classList.contains('active') ? 'hidden' : 'auto';
-      navbar.style.visibility = navbar.classList.contains('active') ? 'visible' : 'hidden';
     }
 
     menuToggle.addEventListener('click', toggleMenu);
 
     navClose.addEventListener('click', () => {
       navbar.classList.remove('active');
-      navClose.classList.remove('active');
+      navClose.classList.remove('active'); // Hide close button
       const icon = menuToggle.querySelector('i');
       icon.classList.remove('fa-times');
       icon.classList.add('fa-bars');
-      body.style.overflow = 'auto';
-      navbar.style.transform = 'translateX(100%)';
-      navbar.style.visibility = 'hidden';
+      body.style.overflow = 'auto'; // Restore scrolling
     });
 
     // Close menu when clicking a nav link
     const navLinks = document.querySelectorAll('#navbar a');
     navLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        if (link.getAttribute('href').startsWith('#')) {
-          e.preventDefault();
-          const sectionId = link.getAttribute('href').substring(1);
-          document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-        }
+      link.addEventListener('click', () => {
         navbar.classList.remove('active');
-        navClose.classList.remove('active');
+        navClose.classList.remove('active'); // Hide close button
         const icon = menuToggle.querySelector('i');
         icon.classList.remove('fa-times');
         icon.classList.add('fa-bars');
-        body.style.overflow = 'auto';
-        navbar.style.transform = 'translateX(100%)';
-        navbar.style.visibility = 'hidden';
+        body.style.overflow = 'auto'; // Restore scrolling
       });
-    });
-
-    // Reset menu state on page show
-    window.addEventListener('pageshow', (event) => {
-      navbar.classList.remove('active');
-      navClose.classList.remove('active');
-      const icon = menuToggle.querySelector('i');
-      icon.classList.remove('fa-times');
-      icon.classList.add('fa-bars');
-      body.style.overflow = 'auto';
-      navbar.style.transform = 'translateX(100%)';
-      navbar.style.visibility = 'hidden';
-    });
-
-    // Enable animations after page load
-    document.addEventListener('DOMContentLoaded', () => {
-      navbar.classList.add('loaded');
     });
 
     // Modal
@@ -1646,12 +1625,13 @@
 
     // Toast function
     function showToast(event) {
-      event.preventDefault();
+      event.preventDefault(); // Prevent link from opening
+
       Toastify({
         text: "🚧 Coming Soon!",
         duration: 3000,
         close: true,
-        gravity: "top",
+        gravity: "top", 
         position: "center",
         backgroundColor: "#FF7F50",
       }).showToast();
@@ -1671,48 +1651,97 @@
       observer.observe(element);
     });
 
-    // Contact Form
+
+
+    // Have A Q 
+
+
     document.addEventListener('DOMContentLoaded', function() {
-      const contactForm = document.getElementById('contactForm');
-      const successMessage = document.getElementById('successMessage');
-
-      contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const name = document.getElementById('name').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const question = document.getElementById('question').value.trim();
-        let isValid = true;
-
-        if (!name) {
-          document.getElementById('nameError').style.display = 'block';
-          isValid = false;
-        } else {
-          document.getElementById('nameError').style.display = 'none';
-        }
-
-        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-          document.getElementById('emailError').style.display = 'block';
-          isValid = false;
-        } else {
-          document.getElementById('emailError').style.display = 'none';
-        }
-
-        if (!question) {
-          document.getElementById('questionError').style.display = 'block';
-          isValid = false;
-        } else {
-          document.getElementById('questionError').style.display = 'none';
-        }
-
-        if (isValid) {
-          successMessage.style.display = 'block';
-          setTimeout(() => {
-            contactForm.reset();
-            successMessage.style.display = 'none';
-          }, 3000);
-        }
-      });
-    });
+          const contactForm = document.getElementById('contactForm');
+          const whatsappBtn = document.getElementById('whatsappBtn');
+          const emailBtn = document.getElementById('emailBtn');
+          const successMessage = document.getElementById('successMessage');
+          
+          // Set your contact information here
+          const whatsappNumber = "917361065324"; // Replace with your WhatsApp number
+          const emailAddress = "sambhavraj83@gmail.com"; // Replace with your email
+          
+          // Form submission
+          contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const question = document.getElementById('question').value.trim();
+            
+            // Validate form
+            let isValid = true;
+            
+            if (!name) {
+              document.getElementById('nameError').style.display = 'block';
+              isValid = false;
+            } else {
+              document.getElementById('nameError').style.display = 'none';
+            }
+            
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+              document.getElementById('emailError').style.display = 'block';
+              isValid = false;
+            } else {
+              document.getElementById('emailError').style.display = 'none';
+            }
+            
+            if (!question) {
+              document.getElementById('questionError').style.display = 'block';
+              isValid = false;
+            } else {
+              document.getElementById('questionError').style.display = 'none';
+            }
+            
+            if (isValid) {
+              // Show success message
+              successMessage.style.display = 'block';
+              
+              // Prepare WhatsApp message
+              const whatsappMessage = `*New Question Received*\n\n` +
+                                    `👤 *Name:* ${name}\n` +
+                                    `📧 *Email:* ${email}\n` +
+                                    `❓ *Question:* ${question}`;
+              
+              // Update WhatsApp button
+              whatsappBtn.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+              
+              // Prepare email content
+              const emailSubject = `New Question from ${name}`;
+              const emailBody = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AQuestion: %0D%0A${question}`;
+              
+              // Update Email button
+              emailBtn.href = `mailto:${emailAddress}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+              
+              // Reset form after 3 seconds
+              setTimeout(() => {
+                contactForm.reset();
+                successMessage.style.display = 'none';
+              }, 3000);
+            }
+          });
+          
+          // Initialize buttons
+          whatsappBtn.addEventListener('click', function(e) {
+            if (!contactForm.checkValidity()) {
+              e.preventDefault();
+              contactForm.reportValidity();
+            }
+          });
+          
+          emailBtn.addEventListener('click', function(e) {
+            if (!contactForm.checkValidity()) {
+              e.preventDefault();
+              contactForm.reportValidity();
+            }
+          });
+        });
   </script>
 </body>
 </html>
