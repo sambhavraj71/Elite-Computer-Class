@@ -1,306 +1,348 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Image Gallery</title>
+    <title>Elite Gallery | Elite Computer Classes</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --sky-blue-light: #00BFFF;
-            --sky-blue-dark: #1E90FF;
-            --orange-light: #FF7F50;
-            --orange-dark: #FF4500;
-            --navy-light: #003366;
-            --navy-dark: #000080;
-            --white: #FFFFFF;
-            --gray-light: #F7F7F7;
-            --gray-dark: #333333;
-            --primary-color: #ecedec;
-            --secondary-color: #6c757d;
-            --dark-color: #343a40;
-            --light-color: #f8f9fa;
-            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.2);
-            --border-radius: 12px;
+            --primary: #4361ee;
+            --primary-dark: #3a0ca3;
+            --secondary: #f72585;
+            --accent: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --white: #ffffff;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            --gradient-accent: linear-gradient(135deg, var(--accent), var(--secondary));
             --header-height: 80px;
-            --max-content-width: 1440px;
-            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            --gradient: linear-gradient(135deg, #4a6bff 0%, #6b8cff 100%);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
             font-family: 'Poppins', sans-serif;
-        }
-
-        html, body {
-            width: 100%;
-            overflow-x: hidden;
-            background-color: var(--gray-light);
-            color: var(--gray-dark);
+            background-color: var(--light);
+            color: var(--dark);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* Header */
-        header {
-            background: white;
-            color: var(--white);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            white-space: nowrap;
-        }
-
-        .logo img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 2px solid var(--orange-light);
-        }
-
-        .logo h1 {
-            font-size: 1.4rem;
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
             font-weight: 700;
-            display: inline-block;
-        }
-
-        .logo h1 span.elite {
-            color: var(--sky-blue-light);
-        }
-
-        .logo h1 span.classes {
-            color: var(--orange-light);
-        }
-
-        .menu-toggle {
-            display: none;
-            font-size: 1.5rem;
-            background: none;
-            border: none;
-            color: var(--white);
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .menu-toggle:hover {
-            transform: rotate(90deg);
-        }
-
-        nav {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
-        nav a {
-            color: var(--white);
-            text-decoration: none;
-            font-size: 0.5rem;
-            font-weight: 500;
-            padding: 8px 12px;
-            border-radius: 5px;
-            transition: background 0.3s, color 0.3s, transform 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        nav a:hover {
-            background: var(--sky-blue-light);
-            color: var(--navy-dark);
-            transform: scale(1.05);
-        }
-
-        nav a i {
-            font-size: 0.9rem;
-            transition: transform 0.3s;
-        }
-
-        nav a:hover i {
-            transform: rotate(360deg);
-        }
-
-        /* Toggle Menu Close Button */
-        .nav-close {
-            display: none;
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            font-size: 1.5rem;
-            color: var(--white);
-            background: var(--orange-light);
-            border: none;
-            border-radius: 50%;
-            width: 35px;
-            height: 35px;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.3s;
-            z-index: 1001;
-        }
-
-        .nav-close.active {
-            display: flex;
-            animation: fadeIn 0.3s ease-in;
-        }
-
-        .nav-close:hover {
-            background: var(--orange-dark);
-            transform: scale(1.1);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* Admission Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.6);
-        }
-
-        .modal-content {
-            position: relative;
-            margin: 5% auto;
-            background: #fff;
-            border-radius: 12px;
-            padding: 0;
-            width: 90%;
-            max-width: 800px;
-            height: 80%;
-        }
-
-        .modal-content iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: 12px;
-        }
-
-        .close {
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            font-size: 26px;
-            font-weight: bold;
-            cursor: pointer;
-            color: #888;
-        }
-
-        .close:hover {
-            color: red;
-        }
-
-        /* Gallery Styles */
-        .container {
-            max-width: 1800px;
-            margin: 30px auto;
-            padding: 30px;
-            background: black;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .container:hover {
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-            transform: translateY(-5px);
-        }
-
-        h1 {
-            margin-bottom: 15px;
-            font-size: 22px;
-            color: #eeeaea;
         }
 
         h2 {
-            font-size: 26px;
-            margin-bottom: 25px;
-            color: #ff4b2b;
-            text-align: center;
             position: relative;
-            padding-bottom: 10px;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: var(--primary-dark);
         }
 
         h2::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: linear-gradient(90deg, #ff416c, #ff4b2b);
+            left: 0;
+            bottom: -8px;
+            width: 60px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-height);
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow-sm);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            height: 100%;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+            transition: var(--transition);
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--dark);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .logo-text span {
+            color: var(--primary);
+        }
+
+        .logo:hover .logo-img {
+            transform: rotate(15deg) scale(1.1);
+            box-shadow: 0 0 15px rgba(67, 97, 238, 0.5);
+        }
+
+        /* Navigation */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .nav-toggle:hover {
+            color: var(--secondary);
+            transform: scale(1.1);
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+        }
+
+        .nav-link i {
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link:hover i {
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            background: var(--gradient);
+            color: var(--white);
+            box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
+        }
+
+        .nav-link.active:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(67, 97, 238, 0.4);
+        }
+
+        /* Main Content */
+        main {
+            margin-top: var(--header-height);
+            padding: 2rem 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Gallery Sections */
+        .gallery-section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: var(--white);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .gallery-section:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .gallery-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .gallery-controls {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .gallery-btn {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--light);
+            color: var(--primary);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .gallery-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: scale(1.1);
+        }
+
+        .gallery-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .gallery-btn:disabled:hover {
+            background: var(--light);
+            color: var(--primary);
+            transform: none;
+        }
+
+        .gallery-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 1.25rem;
+            padding: 1rem 0;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .gallery-scroll::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .gallery-scroll::-webkit-scrollbar-track {
+            background: var(--light);
             border-radius: 3px;
         }
 
-        .imagerow {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 20px;
-            justify-items: center;
+        .gallery-scroll::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 3px;
         }
 
-        .image-container {
+        .gallery-scroll::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+
+        .gallery-item {
+            flex: 0 0 220px;
+            scroll-snap-align: start;
             position: relative;
+            border-radius: var(--radius-sm);
             overflow: hidden;
-            border-radius: 12px;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            aspect-ratio: 4/3;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            cursor: pointer;
         }
 
-        .image-container:hover {
-            transform: translateY(-8px) scale(1.03);
-            box-shadow: 0 15px 25px rgba(255, 75, 43, 0.4);
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
         }
 
-        .image-container img {
+        .gallery-img {
             width: 100%;
-            height: 100%;
+            height: 160px;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
 
-        .image-container:hover img {
-            transform: scale(1.1);
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.05);
         }
 
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+            opacity: 0;
+            transition: var(--transition);
+            display: flex;
+            align-items: flex-end;
+            padding: 1rem;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-caption {
+            color: var(--white);
+            font-size: 0.9rem;
+            transform: translateY(10px);
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
+        /* Image Popup */
         .popup {
             position: fixed;
             top: 0;
@@ -311,10 +353,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
+            z-index: 2000;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
 
         .popup.active {
@@ -329,21 +371,16 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            animation: popupAnimation 0.4s ease-out forwards;
-        }
-
-        @keyframes popupAnimation {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
         }
 
         .popup-img {
             max-width: 100%;
-            max-height: 90vh;
-            border-radius: 10px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-            transition: transform 0.3s ease;
+            max-height: 80vh;
+            border-radius: var(--radius-md);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
             cursor: zoom-in;
+            transition: transform 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
         }
 
         .popup-img.zoomed {
@@ -351,886 +388,1168 @@
             cursor: zoom-out;
         }
 
-        .glow-border {
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            border-radius: 20px;
-            background: linear-gradient(45deg, 
-                #ff0000, #ff7300, #fffb00, #48ff00, 
-                #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
-            background-size: 400% 400%;
-            z-index: -1;
-            filter: blur(15px);
-            opacity: 0.7;
-            animation: glow 8s ease infinite;
-        }
-
-        @keyframes glow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .nav-icon {
+        .popup-nav {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 2.5rem;
-            color: white;
-            cursor: pointer;
+            width: 50px;
+            height: 50px;
             background: rgba(0, 0, 0, 0.5);
-            width: 60px;
-            height: 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            color: var(--white);
+            border: none;
             border-radius: 50%;
-            transition: all 0.3s ease;
-            z-index: 1001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 10;
         }
 
-        .nav-icon:hover {
-            background: rgba(255, 75, 43, 0.8);
+        .popup-nav:hover {
+            background: var(--primary);
             transform: translateY(-50%) scale(1.1);
         }
 
-        .prev {
-            left: 30px;
+        .popup-prev {
+            left: 2rem;
         }
 
-        .next {
-            right: 30px;
+        .popup-next {
+            right: 2rem;
         }
 
-        .close-icon {
+        .popup-close {
             position: absolute;
-            top: 30px;
-            right: 30px;
-            font-size: 2rem;
-            color: white;
-            cursor: pointer;
+            top: 2rem;
+            right: 2rem;
+            width: 40px;
+            height: 40px;
             background: rgba(0, 0, 0, 0.5);
-            width: 50px;
-            height: 50px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            color: var(--white);
+            border: none;
             border-radius: 50%;
-            transition: all 0.3s ease;
-            z-index: 1001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 10;
         }
 
-        .close-icon:hover {
-            background: rgba(255, 75, 43, 0.8);
-            transform: rotate(90deg) scale(1.1);
+        .popup-close:hover {
+            background: var(--secondary);
+            transform: rotate(90deg);
         }
 
-        .image-counter {
+        .popup-counter {
             position: absolute;
-            bottom: 30px;
+            bottom: 2rem;
             left: 50%;
             transform: translateX(-50%);
             background: rgba(0, 0, 0, 0.7);
-            padding: 8px 20px;
+            color: var(--white);
+            padding: 0.5rem 1rem;
             border-radius: 20px;
-            font-size: 1rem;
-            color: white;
-            z-index: 1001;
+            font-size: 0.9rem;
+        }
+
+        /* Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 20px rgba(67, 97, 238, 0.4);
+            cursor: pointer;
+            z-index: 100;
+            transition: var(--transition);
+        }
+
+        .fab:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 25px rgba(67, 97, 238, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-col h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+            position: relative;
+            padding-bottom: 0.75rem;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--gradient);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+            transform: translateX(5px);
+        }
+
+        .footer-links a i {
+            font-size: 0.8rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 5.5rem;
+            right: 2rem;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: var(--primary);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 100;
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* Loading Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(67, 97, 238, 0.2);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
         /* Responsive Design */
-        @media (max-width: 768px) {
-            .menu-toggle {
+        @media (max-width: 992px) {
+            .nav-toggle {
                 display: block;
             }
 
-            nav {
+            .nav-menu {
                 position: fixed;
                 top: 0;
-                left: 0;
+                right: -100%;
+                width: 280px;
                 height: 100vh;
-                width: 100vw;
-                background: linear-gradient(to bottom, var(--navy-dark), var(--navy-light));
+                background: var(--white);
                 flex-direction: column;
-                padding: 80px 20px 20px;
-                transform: translateX(100%);
-                transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-                box-shadow: none;
-                z-index: 1000;
-                overflow-y: auto;
-                overflow-x: hidden;
+                align-items: flex-start;
+                padding: 6rem 2rem 2rem;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                transition: right 0.4s ease;
+                z-index: 999;
             }
 
-            nav.active {
-                transform: translateX(0);
-                animation: slideInMenu 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+            .nav-menu.active {
+                right: 0;
             }
 
-            @keyframes slideInMenu {
-                from { transform: translateX(100%); opacity: 0.5; }
-                to { transform: translateX(0); opacity: 1; }
-            }
-
-            nav:not(.active) {
-                animation: slideOutMenu 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
-            }
-
-            @keyframes slideOutMenu {
-                from { transform: translateX(0); opacity: 1; }
-                to { transform: translateX(100%); opacity: 0.5; }
-            }
-
-            nav a {
-                font-size: 1.2rem;
-                padding: 15px 20px;
-                margin: 8px 0;
-                border-radius: 8px;
-                background: rgba(255, 255, 255, 0.1);
-                transition: background 0.3s, transform 0.3s, opacity 0.3s;
-                width: 100%;
-                text-align: left;
-                border-left: 3px solid transparent;
-                opacity: 0;
-                transform: translateX(20px);
-            }
-
-            nav.active a {
-                opacity: 1;
-                transform: translateX(0);
-            }
-
-            nav.active a:nth-child(2) { transition-delay: 0.1s; }
-            nav.active a:nth-child(3) { transition-delay: 0.2s; }
-            nav.active a:nth-child(4) { transition-delay: 0.3s; }
-            nav.active a:nth-choice(5) { transition-delay: 0.4s; }
-            nav.active a:nth-child(6) { transition-delay: 0.5s; }
-            nav.active a:nth-child(7) { transition-delay: 0.6s; }
-            nav.active a:nth-child(8) { transition-delay: 0.7s; }
-
-            nav a:hover {
-                background: rgba(0, 191, 255, 0.3);
-                transform: translateX(10px);
-                border-left: 3px solid var(--sky-blue-light);
-            }
-
-            nav a i {
-                font-size: 1.2rem;
-                margin-right: 12px;
-            }
-
-            .logo h1 {
-                font-size: 1.2rem;
-            }
-
-            .imagerow {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 15px;
-            }
-
-            .nav-icon, .close-icon {
+            .nav-close {
+                position: absolute;
+                top: 1.5rem;
+                right: 1.5rem;
+                background: none;
+                border: none;
                 font-size: 1.5rem;
+                color: var(--dark);
+                cursor: pointer;
+            }
+
+            .gallery-item {
+                flex: 0 0 180px;
+            }
+
+            .gallery-img {
+                height: 140px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 1.5rem;
+            }
+
+            .logo-text {
+                font-size: 1.1rem;
+            }
+
+            .gallery-section {
+                padding: 1.5rem;
+            }
+
+            .gallery-item {
+                flex: 0 0 160px;
+            }
+
+            .gallery-img {
+                height: 120px;
+            }
+
+            .popup-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .popup-prev {
+                left: 1rem;
+            }
+
+            .popup-next {
+                right: 1rem;
+            }
+
+            .popup-close {
+                top: 1rem;
+                right: 1rem;
+                width: 35px;
+                height: 35px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .header-container {
+                padding: 0 1rem;
+            }
+
+            .logo-img {
                 width: 40px;
                 height: 40px;
             }
 
-            .prev {
-                left: 15px;
+            .gallery-section {
+                padding: 1.25rem;
             }
 
-            .next {
-                right: 15px;
+            h2 {
+                font-size: 1.5rem;
             }
 
-            .close-icon {
-                top: 15px;
-                right: 15px;
+            .gallery-item {
+                flex: 0 0 140px;
+            }
+
+            .gallery-img {
+                height: 100px;
             }
 
             .popup-img.zoomed {
                 transform: scale(1.5);
             }
-        }
 
-        @media (max-width: 480px) {
-            .logo h1 {
+            .fab {
+                width: 50px;
+                height: 50px;
+                font-size: 1.25rem;
+                bottom: 1.5rem;
+                right: 1.5rem;
+            }
+
+            .back-to-top {
+                width: 40px;
+                height: 40px;
                 font-size: 1rem;
-            }
-
-            .imagerow {
-                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-                gap: 10px;
-            }
-
-            .popup-img.zoomed {
-                transform: scale(1.2);
-            }
-        }
-
-        @media (max-width: 1200px) {
-            .imagerow {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            }
-        }
-
-        @media (min-width: 1440px) {
-            .header-content {
-                padding: 20px 5%;
+                bottom: 5rem;
+                right: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div class="loader">
+        <div class="loader-spinner"></div>
+    </div>
+
     <!-- Header -->
     <header>
-        <div class="container header-content">
-            <div class="logo">
-                <img src="logo.jpg" alt="Logo">
-                <h1><span class="elite">ELITE</span> <span class="classes">COMPUTER CLASSES</span></h1>
-            </div>
-            <button class="menu-toggle" id="menu-toggle">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="logo.jpg" alt="Elite Computer Classes Logo" class="logo-img">
+                <span class="logo-text">Elite <span>Classes</span></span>
+            </a>
+            
+            <button class="nav-toggle" id="navToggle">
                 <i class="fas fa-bars"></i>
             </button>
-            <nav id="navbar">
-                <button class="nav-close" id="nav-close"><i class="fas fa-times"></i></button>
-                <a href="index.html"><i class="fas fa-home"></i> Home</a>
-                <a href="courses.html"><i class="fas fa-book-open"></i> Courses</a>
-                <a href="category.html"><i class="fas fa-layer-group"></i> Category</a>
-                <a href="StudentZone.html"><i class="fas fa-user-graduate"></i> Student Zone</a>
-                <a href="Admission.html"><i class="fas fa-file-signature"></i> Admission</a>
-                <a href="gallery.html"><i class="fas fa-images"></i> Gallery</a>
-                <a href="#about_us"><i class="fas fa-info-circle"></i> About Us</a>
+            
+            <nav class="nav-menu" id="navMenu">
+                <button class="nav-close" id="navClose">
+                    <i class="fas fa-times"></i>
+                </button>
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <a href="courses.html" class="nav-link">
+                    <i class="fas fa-book-open"></i> Courses
+                </a>
+                <a href="category.html" class="nav-link">
+                    <i class="fas fa-layer-group"></i> Category
+                </a>
+                <a href="StudentZone.html" class="nav-link">
+                    <i class="fas fa-user-graduate"></i> Student Zone
+                </a>
+                <a href="Admission.html" class="nav-link" id="admissionBtn">
+                    <i class="fas fa-file-signature"></i> Admission
+                </a>
+                <a href="gallery.html" class="nav-link active">
+                    <i class="fas fa-images"></i> Gallery
+                </a>
+                <a href="#about" class="nav-link">
+                    <i class="fas fa-info-circle"></i> About Us
+                </a>
             </nav>
         </div>
     </header>
 
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- Director's Corner Section -->
+            <section class="gallery-section">
+                <div class="gallery-header">
+                    <h2>Director's Corner</h2>
+                    <div class="gallery-controls">
+                        <button class="gallery-btn prev-btn" data-gallery="director">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="gallery-btn next-btn" data-gallery="director">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="gallery-scroll" id="director-gallery">
+                    <div class="gallery-item">
+                        <img src="Images/Director/Director1.jpg" alt="Director photo" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Director at Event</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Director/Director2.jpg" alt="Director photo" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Award Ceremony</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Director/Director3.jpg" alt="Director photo" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Workshop Session</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Director/Director4.jpg" alt="Director photo" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Student Interaction</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Director/Director5.jpg" alt="Director photo" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Seminar Presentation</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Director/Director6.jpg" alt="Director photo" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Guest Lecture</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Director/Director7.jpg" alt="Director photo" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Industry Visit</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Director/Director8.jpg" alt="Director photo" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Conference</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Job 2025 Section -->
+            <section class="gallery-section">
+                <div class="gallery-header">
+                    <h2>Job 2025</h2>
+                    <div class="gallery-controls">
+                        <button class="gallery-btn prev-btn" data-gallery="job">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="gallery-btn next-btn" data-gallery="job">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="gallery-scroll" id="job-gallery">
+                    <div class="gallery-item">
+                        <img src="Images/Job2025/job20251.jpg" alt="Job 2025" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Placement Drive</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Job2025/job20252.jpg" alt="Job 2025" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Interview Session</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Job2025/job20253.jpg" alt="Job 2025" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Company Visit</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Job2025/job20254.jpg" alt="Job 2025" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Career Fair</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Job2025/job20255.jpg" alt="Job 2025" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">HR Interaction</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Job2025/job20256.jpg" alt="Job 2025" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Mock Interviews</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Job2025/job20257.jpg" alt="Job 2025" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Resume Workshop</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Job2025/job20258.jpg" alt="Job 2025" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Networking Event</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Award Ceremony Section -->
+            <section class="gallery-section">
+                <div class="gallery-header">
+                    <h2>Award Ceremony</h2>
+                    <div class="gallery-controls">
+                        <button class="gallery-btn prev-btn" data-gallery="award">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="gallery-btn next-btn" data-gallery="award">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="gallery-scroll" id="award-gallery">
+                    <div class="gallery-item">
+                        <img src="Images/Award_Ceremony_2025/Award_Ceremony1.jpg" alt="Award Ceremony" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Top Performer</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Award_Ceremony_2025/Award_Ceremony2.jpg" alt="Award Ceremony" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Certificate Distribution</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Award_Ceremony_2025/Award_Ceremony3.jpg" alt="Award Ceremony" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Student Recognition</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Award_Ceremony_2025/Award_Ceremony4.jpg" alt="Award Ceremony" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Achievement Awards</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Award_Ceremony_2025/Award_Ceremony5.jpg" alt="Award Ceremony" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Special Honors</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Award_Ceremony_2025/Award_Ceremony6.jpg" alt="Award Ceremony" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Guest Speaker</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Award_Ceremony_2025/Award_Ceremony7.jpg" alt="Award Ceremony" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Cultural Performance</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Award_Ceremony_2025/Award_Ceremony8.jpg" alt="Award Ceremony" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Group Photo</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Certification Section -->
+            <section class="gallery-section">
+                <div class="gallery-header">
+                    <h2>Certification 2025</h2>
+                    <div class="gallery-controls">
+                        <button class="gallery-btn prev-btn" data-gallery="certification">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="gallery-btn next-btn" data-gallery="certification">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="gallery-scroll" id="certification-gallery">
+                    <div class="gallery-item">
+                        <img src="Images/Certification/Certification1.jpg" alt="Certification" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Course Completion</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Certification/Certification2.jpg" alt="Certification" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Skill Certification</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Certification/Certification3.jpg" alt="Certification" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Workshop Certificate</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Certification/Certification4.jpg" alt="Certification" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Industry Certification</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Certification/Certification5.jpg" alt="Certification" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Specialization Badge</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Certification/Certification6.jpg" alt="Certification" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Project Showcase</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Certification/Certification7.jpg" alt="Certification" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Technical Certification</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Certification/Certification8.jpg" alt="Certification" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Graduation Day</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Social Media Section -->
+            <section class="gallery-section">
+                <div class="gallery-header">
+                    <h2>Social Media</h2>
+                    <div class="gallery-controls">
+                        <button class="gallery-btn prev-btn" data-gallery="social">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="gallery-btn next-btn" data-gallery="social">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="gallery-scroll" id="social-gallery">
+                    <div class="gallery-item">
+                        <img src="Images/social/Social1.jpg" alt="Social Media" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Instagram Post</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/social/Social2.jpg" alt="Social Media" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Facebook Update</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/social/Social3.jpg" alt="Social Media" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Twitter Moment</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/social/Social4.jpg" alt="Social Media" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">LinkedIn Post</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/social/Social5.jpg" alt="Social Media" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">YouTube Thumbnail</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/social/Social6.jpg" alt="Social Media" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Instagram Story</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/social/Social7.jpg" alt="Social Media" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Facebook Live</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/social/Social8.jpg" alt="Social Media" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Twitter Thread</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Students Corner Section -->
+            <section class="gallery-section">
+                <div class="gallery-header">
+                    <h2>Students Corner</h2>
+                    <div class="gallery-controls">
+                        <button class="gallery-btn prev-btn" data-gallery="students">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="gallery-btn next-btn" data-gallery="students">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="gallery-scroll" id="students-gallery">
+                    <div class="gallery-item">
+                        <img src="Images/Students/Students1.jpg" alt="Students Corner" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Classroom Session</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Students/Students2.jpg" alt="Students Corner" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Practical Lab</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Students/Students3.jpg" alt="Students Corner" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Group Project</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Students/Students4.jpg" alt="Students Corner" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Study Group</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Students/Students5.jpg" alt="Students Corner" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Workshop</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Students/Students6.jpg" alt="Students Corner" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Coding Competition</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Students/Students7.jpg" alt="Students Corner" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Hackathon</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Students/Students8.jpg" alt="Students Corner" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Alumni Meet</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- New Batch Section -->
+            <section class="gallery-section">
+                <div class="gallery-header">
+                    <h2>New Batch 2025</h2>
+                    <div class="gallery-controls">
+                        <button class="gallery-btn prev-btn" data-gallery="batch">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="gallery-btn next-btn" data-gallery="batch">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="gallery-scroll" id="batch-gallery">
+                    <div class="gallery-item">
+                        <img src="Images/NEWBatch/NewBatch1.jpg" alt="New Batch 2025" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Orientation Day</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/NEWBatch/NewBatch2.jpg" alt="New Batch 2025" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Welcome Session</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/NEWBatch/NewBatch3.jpg" alt="New Batch 2025" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Icebreaker Activity</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/NEWBatch/NewBatch4.jpg" alt="New Batch 2025" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Faculty Introduction</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/NEWBatch/NewBatch5.jpg" alt="New Batch 2025" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">Campus Tour</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/NEWBatch/NewBatch6.jpg" alt="New Batch 2025" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-caption">First Day Photo</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>About Us</h3>
+                <p>Elite Computer Classes is a premier institute providing quality computer education since 2010. We empower students with cutting-edge technical skills.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="courses.html"><i class="fas fa-chevron-right"></i> Courses</a></li>
+                    <li><a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+                    <li><a href="StudentZone.html"><i class="fas fa-chevron-right"></i> Student Zone</a></li>
+                    <li><a href="Admission.html"><i class="fas fa-chevron-right"></i> Admission</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Courses</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Basic Computer</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Programming</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Web Development</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Graphic Design</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Digital Marketing</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Contact Us</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-map-marker-alt"></i> 123 Education St, Learning City</a></li>
+                    <li><a href="tel:+919876543210"><i class="fas fa-phone-alt"></i> +91 98765 43210</a></li>
+                    <li><a href="mailto:info@eliteclasses.com"><i class="fas fa-envelope"></i> info@eliteclasses.com</a></li>
+                    <li><a href="#"><i class="fas fa-clock"></i> Mon-Sat: 9AM - 6PM</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Elite Computer Classes. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Floating Action Button -->
+    <button class="fab" id="enquiryFab">
+        <i class="fas fa-headset"></i>
+    </button>
+
+    <!-- Image Popup -->
+    <div class="popup" id="imagePopup">
+        <div class="popup-content">
+            <img src="" alt="Popup Image" class="popup-img" id="popupImage">
+        </div>
+        <button class="popup-nav popup-prev" id="popupPrev">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="popup-nav popup-next" id="popupNext">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <button class="popup-close" id="popupClose">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="popup-counter" id="popupCounter"></div>
+    </div>
+
     <!-- Admission Modal -->
-    <div id="admissionModal" class="modal">
+    <div class="modal" id="admissionModal">
         <div class="modal-content">
-            <span class="close">×</span>
+            <span class="close" id="modalClose">&times;</span>
             <iframe src="admission.html" id="admissionFrame"></iframe>
         </div>
     </div>
 
-    <!-- Main Content -->
-    <div class="container">
-        <h2>Director's Corner</h2>
-        <div class="imagerow">
-            <div class="image-container">
-                <img src="Images/Director/Director1.jpg" alt="Director photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Director/Director2.jpg" alt="Director photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Director/Director3.jpg" alt="Director photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Director/Director4.jpg" alt="Director photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Director/Director5.jpg" alt="Director photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Director/Director6.jpg" alt="Director photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Director/Director7.jpg" alt="Director photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Director/Director8.jpg" alt="Director photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Director/Director9.jpg" alt="Director photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Director/Director10.jpg" alt="Director photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Director/Director11.jpg" alt="Director photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Director/Director12.jpg" alt="Director photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Director/Director13.jpg" alt="Director photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Director/Director14.jpg" alt="Director photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Director/Director15.jpg" alt="Director photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Director/Director16.jpg" alt="Director photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Director/Director17.jpg" alt="Director photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Director/Director18.jpg" alt="Director photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Director/Director19.jpg" alt="Director photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Director/Director20.jpg" alt="Director photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Director/Director21.jpg" alt="Director photo">
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <h2>Job 2025</h2>
-        <div class="imagerow">
-            <div class="image-container">
-                <img src="Images/Job2025/job20251.jpg" alt="Job 2025 photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Job2025/job20252.jpg" alt="Job 2025 photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Job2025/job20253.jpg" alt="Job 2025 photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Job2025/job20254.jpg" alt="Job 2025 photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Job2025/job20255.jpg" alt="Job 2025 photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Job2025/job20256.jpg" alt="Job 2025 photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Job2025/job20257.jpg" alt="Job 2025 photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Job2025/job20258.jpg" alt="Job 2025 photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Job2025/job20259.jpg" alt="Job 2025 photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Job2025/job202510.jpg" alt="Job 2025 photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Job2025/job202511.jpg" alt="Job 2025 photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Job2025/job202512.jpg" alt="Job 2025 photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Job2025/job202513.jpg" alt="Job 2025 photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Job2025/job202514.jpg" alt="Job 2025 photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Job2025/job202515.jpg" alt="Job 2025 photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Job2025/job202516.jpg" alt="Job 2025 photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Job2025/job202517.jpg" alt="Job 2025 photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Job2025/job202518.jpg" alt="Job 2025 photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Job2025/job202519.jpg" alt="Job 2025 photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Job2025/job202520.jpg" alt="Job 2025 photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Job2025/job202521.jpg" alt="Job 2025 photo">
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <h2>Award Ceremony</h2>
-        <div class="imagerow">
-            <div class="image-container">
-                <img src="Images/Award_Ceremony_2025/Award_Ceremony1.jpg" alt="Award Ceremony photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Award_Ceremony_2025/Award_Ceremony2.jpg" alt="Award Ceremony photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Award_Ceremony_2025/Award_Ceremony3.jpg" alt="Award Ceremony photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Award_Ceremony_2025/Award_Ceremony4.jpg" alt="Award Ceremony photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Award_Ceremony_2025/Award_Ceremony5.jpg" alt="Award Ceremony photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Award_Ceremony_2025/Award_Ceremony6.jpg" alt="Award Ceremony photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Award_Ceremony_2025/Award_Ceremony7.jpg" alt="Award Ceremony photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Award_Ceremony_2025/Award_Ceremony8.jpg" alt="Award Ceremony photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Award_Ceremony_2025/Award_Ceremony9.jpg" alt="Award Ceremony photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Award_Ceremony_2025/Award_Ceremony10.jpg" alt="Award Ceremony photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Award_Ceremony_2025/Award_Ceremony11.jpg" alt="Award Ceremony photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Award_Ceremony_2025/Award_Ceremony12.jpg" alt="Award Ceremony photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Award_Ceremony_2025/Award_Ceremony13.jpg" alt="Award Ceremony photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Award_Ceremony_2025/Award_Ceremony14.jpg" alt="Award Ceremony photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Award_Ceremony_2025/Award_Ceremony15.jpg" alt="Award Ceremony photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Award_Ceremony_2025/Award_Ceremony16.jpg" alt="Award Ceremony photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Award_Ceremony_2025/Award_Ceremony17.jpg" alt="Award Ceremony photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Award_Ceremony_2025/Award_Ceremony18.jpg" alt="Award Ceremony photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Award_Ceremony_2025/Award_Ceremony19.jpg" alt="Award Ceremony photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Award_Ceremony_2025/Award_Ceremony20.jpg" alt="Award Ceremony photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Award_Ceremony_2025/Award_Ceremony21.jpg" alt="Award Ceremony photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Award_Ceremony_2025/Award_Ceremony22.jpg" alt="Award Ceremony photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Award_Ceremony_2025/Award_Ceremony23.jpg" alt="Award Ceremony photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Award_Ceremony_2025/Award_Ceremony24.jpg" alt="Award Ceremony photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Award_Ceremony_2025/Award_Ceremony25.jpg" alt="Award Ceremony photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Award_Ceremony_2025/Award_Ceremony26.jpg" alt="Award Ceremony photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Award_Ceremony_2025/Award_Ceremony27.jpg" alt="Award Ceremony photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Award_Ceremony_2025/Award_Ceremony28.jpg" alt="Award Ceremony photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Award_Ceremony_2025/Award_Ceremony29.jpg" alt="Award Ceremony photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Award_Ceremony_2025/Award_Ceremony30.jpg" alt="Award Ceremony photo">
-            </div>
-            <div class="image-container">
-                <img src="Images/Award_Ceremony_2025/Award_Ceremony31.jpg" alt="Award Ceremony photo">
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <h2>Congratulation to 2025 Job Takers</h2>
-        <div class="imagerow">
-            <div class="image-container">
-                <img src="Images/Certification/Certification1.jpg" alt="Certification Ceremony Image">
-            </div>
-            <div class="image-container">
-                <img src="Images/Certification/Certification2.jpg" alt="Certification Ceremony Image">
-            </div>
-            <div class="image-container">
-                <img src="Images/Certification/Certification3.jpg" alt="Certification Ceremony Image">
-            </div>
-            <div class="image-container">
-                <img src="Images/Certification/Certification4.jpg" alt="Certification Ceremony Image">
-            </div>
-            <div class="image-container">
-                <img src="Images/Certification/Certification5.jpg" alt="Certification Ceremony Image">
-            </div>
-            <div class="image-container">
-                <img src="Images/Certification/Certification6.jpg" alt="Certification Ceremony Image">
-            </div>
-            <div class="image-container">
-                <img src="Images/Certification/Certification7.jpg" alt="Certification Ceremony Image">
-            </div>
-            <div class="image-container">
-                <img src="Images/Certification/Certification8.jpg" alt="Certification Ceremony Image">
-            </div>
-            <div class="image-container">
-                <img src="Images/Certification/Certification9.jpg" alt="Certification Ceremony Image">
-            </div>
-            <div class="image-container">
-                <img src="Images/Certification/Certification10.jpg" alt="Certification Ceremony Image">
-            </div>
-            <div class="image-container">
-                <img src="Images/Certification/Certification11.jpg" alt="Certification Ceremony Image">
-            </div>
-            <div class="image-container">
-                <img src="Images/Certification/Certification12.jpg" alt="Certification Ceremony Image">
-            </div>
-            <div class="image-container">
-                <img src="Images/Certification/Certification13.jpg" alt="Certification Ceremony Image">
-            </div>
-            <div class="image-container">
-                <img src="Images/Certification/Certification14.jpg" alt="Certification Ceremony Image">
-            </div>
-            <div class="image-container">
-                <img src="Images/Certification/Certification15.jpg" alt="Certification Ceremony Image">
-            </div>
-            <div class="image-container">
-                <img src="Images/Certification/Certification16.jpg" alt="Certification Ceremony Image">
-            </div>
-            <div class="image-container">
-                <img src="Images/Certification/Certification17.jpg" alt="Certification Ceremony Image">
-            </div>
-            <div class="image-container">
-                <img src="Images/Certification/Certification18.jpg" alt="Certification Ceremony Image">
-            </div>
-            <div class="image-container">
-                <img src="Images/Certification/Certification19.jpg" alt="Certification Ceremony Image">
-            </div>
-            <div class="image-container">
-                <img src="Images/Certification/Certification20.jpg" alt="Certification Ceremony Image">
-            </div>
-            <div class="image-container">
-                <img src="Images/Certification/Certification21.jpg" alt="Certification Ceremony Image">
-            </div>
-            <div class="image-container">
-                <img src="Images/Certification/Certification22.jpg" alt="Certification Ceremony Image">
-            </div>
-            <div class="image-container">
-                <img src="Images/Certification/Certification23.jpg" alt="Certification Ceremony Image">
-            </div>
-            <div class="image-container">
-                <img src="Images/Certification/Certification24.jpg" alt="Certification Ceremony Image">
-            </div>
-            <div class="image-container">
-                <img src="Images/Certification/Certification25.jpg" alt="Certification Ceremony Image">
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <h2>Social Media</h2>
-        <div class="imagerow">
-            <div class="image-container">
-                <img src="Images/social/Social1.jpg" alt="Social Media">
-            </div>
-            <div class="image-container">
-                <img src="Images/social/Social2.jpg" alt="Social Media">
-            </div>
-            <div class="image-container">
-                <img src="Images/social/Social3.jpg" alt="Social Media">
-            </div>
-            <div class="image-container">
-                <img src="Images/social/Social4.jpg" alt="Social Media">
-            </div>
-            <div class="image-container">
-                <img src="Images/social/Social5.jpg" alt="Social Media">
-            </div>
-            <div class="image-container">
-                <img src="Images/social/Social6.jpg" alt="Social Media">
-            </div>
-            <div class="image-container">
-                <img src="Images/social/Social7.jpg" alt="Social Media">
-            </div>
-            <div class="image-container">
-                <img src="Images/social/Social8.jpg" alt="Social Media">
-            </div>
-            <div class="image-container">
-                <img src="Images/social/Social9.jpg" alt="Social Media">
-            </div>
-            <div class="image-container">
-                <img src="Images/social/Social10.jpg" alt="Social Media">
-            </div>
-            <div class="image-container">
-                <img src="Images/social/Social11.jpg" alt="Social Media">
-            </div>
-            <div class="image-container">
-                <img src="Images/social/Social12.jpg" alt="Social Media">
-            </div>
-            <div class="image-container">
-                <img src="Images/social/Social13.jpg" alt="Social Media">
-            </div>
-            <div class="image-container">
-                <img src="Images/social/Social14.jpg" alt="Social Media">
-            </div>
-            <div class="image-container">
-                <img src="Images/social/Social15.jpg" alt="Social Media">
-            </div>
-            <div class="image-container">
-                <img src="Images/social/Social16.jpg" alt="Social Media">
-            </div>
-            <div class="image-container">
-                <img src="Images/social/Social17.jpg" alt="Social Media">
-            </div>
-            <div class="image-container">
-                <img src="Images/social/Social18.jpg" alt="Social Media">
-            </div>
-            <div class="image-container">
-                <img src="Images/social/Social19.jpg" alt="Social Media">
-            </div>
-            <div class="image-container">
-                <img src="Images/social/Social20.jpg" alt="Social Media">
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <h2>Students Corner</h2>
-        <div class="imagerow">
-            <div class="image-container">
-                <img src="Images/Students/Students1.jpg" alt="Student's Corner">
-            </div>
-            <div class="image-container">
-                <img src="Images/Students/Students2.jpg" alt="Student's Corner">
-            </div>
-            <div class="image-container">
-                <img src="Images/Students/Students3.jpg" alt="Student's Corner">
-            </div>
-            <div class="image-container">
-                <img src="Images/Students/Students4.jpg" alt="Student's Corner">
-            </div>
-            <div class="image-container">
-                <img src="Images/Students/Students5.jpg" alt="Student's Corner">
-            </div>
-            <div class="image-container">
-                <img src="Images/Students/Students6.jpg" alt="Student's Corner">
-            </div>
-            <div class="image-container">
-                <img src="Images/Students/Students7.jpg" alt="Student's Corner">
-            </div>
-            <div class="image-container">
-                <img src="Images/Students/Students8.jpg" alt="Student's Corner">
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <h2>New Batch 2025</h2>
-        <div class="imagerow">
-            <div class="image-container">
-                <img src="Images/NEWBatch/NewBatch1.jpg" alt="New Batch 2025">
-            </div>
-            <div class="image-container">
-                <img src="Images/NEWBatch/NewBatch2.jpg" alt="New Batch 2025">
-            </div>
-            <div class="image-container">
-                <img src="Images/NEWBatch/NewBatch3.jpg" alt="New Batch 2025">
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <h2>Test Series</h2>
-        <div class="imagerow">
-            <div class="image-container">
-                <img src="Images/social/Social1.jpg" alt="Test Series">
-            </div>
-            <div class="image-container">
-                <img src="Images/social/Social2.jpg" alt="Test Series">
-            </div>
-            <div class="image-container">
-                <img src="Images/social/Social3.jpg" alt="Test Series">
-            </div>
-            <div class="image-container">
-                <img src="Images/social/Social4.jpg" alt="Test Series">
-            </div>
-        </div>
-    </div>
-
-    <div class="popup">
-        <div class="popup-content">
-            <div class="glow-border"></div>
-            <img class="popup-img" src="" alt="Popup Image">
-        </div>
-        <span class="nav-icon prev"><i class="fas fa-chevron-left"></i></span>
-        <span class="nav-icon next"><i class="fas fa-chevron-right"></i></span>
-        <span class="close-icon"><i class="fas fa-times"></i></span>
-        <div class="image-counter"></div>
-    </div>
-
     <script>
-        console.log("Welcome to Code Vora Academy!");
-
         document.addEventListener('DOMContentLoaded', function() {
-            // Toggle Menu
-            const menuToggle = document.getElementById('menu-toggle');
-            const navbar = document.getElementById('navbar');
-            const navClose = document.getElementById('nav-close');
-            const body = document.body;
+            // Loader
+            const loader = document.querySelector('.loader');
+            setTimeout(() => {
+                loader.classList.add('hidden');
+            }, 1000);
 
-            function toggleMenu() {
-                navbar.classList.toggle('active');
-                navClose.classList.toggle('active');
-                const icon = menuToggle.querySelector('i');
-                icon.classList.toggle('fa-bars');
-                icon.classList.toggle('fa-times');
-                body.style.overflow = navbar.classList.contains('active') ? 'hidden' : 'auto';
-            }
+            // Mobile Navigation
+            const navToggle = document.getElementById('navToggle');
+            const navMenu = document.getElementById('navMenu');
+            const navClose = document.getElementById('navClose');
 
-            menuToggle.addEventListener('click', toggleMenu);
-
-            navClose.addEventListener('click', () => {
-                navbar.classList.remove('active');
-                navClose.classList.remove('active');
-                const icon = menuToggle.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-                body.style.overflow = 'auto';
+            navToggle.addEventListener('click', () => {
+                navMenu.classList.add('active');
+                document.body.style.overflow = 'hidden';
             });
 
-            const navLinks = document.querySelectorAll('#navbar a');
-            navLinks.forEach(link => {
+            navClose.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+
+            // Close mobile menu when clicking on links
+            document.querySelectorAll('.nav-link').forEach(link => {
                 link.addEventListener('click', () => {
-                    navbar.classList.remove('active');
-                    navClose.classList.remove('active');
-                    const icon = menuToggle.querySelector('i');
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                    body.style.overflow = 'auto';
+                    navMenu.classList.remove('active');
+                    document.body.style.overflow = 'auto';
                 });
             });
 
-            // Open modal on click
-            document.getElementById("openAdmissionBtn").addEventListener("click", function (e) {
-                e.preventDefault();
-                document.getElementById("admissionModal").style.display = "block";
-            });
-
-            // Close modal
-            document.querySelector(".close").addEventListener("click", function () {
-                document.getElementById("admissionModal").style.display = "none";
-            });
-
-            // Close on outside click
-            window.addEventListener("click", function (event) {
-                const modal = document.getElementById("admissionModal");
-                if (event.target === modal) {
-                    modal.style.display = "none";
+            // Back to Top Button
+            const backToTop = document.getElementById('backToTop');
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.add('active');
+                } else {
+                    backToTop.classList.remove('active');
                 }
             });
 
-            // Gallery functionality
-            const popup = document.querySelector(".popup");
-            const popupImg = document.querySelector(".popup-img");
-            const closeBtn = document.querySelector(".close-icon");
-            const prevBtn = document.querySelector(".prev");
-            const nextBtn = document.querySelector(".next");
-            const imageCounter = document.querySelector(".image-counter");
-            const images = document.querySelectorAll(".image-container img");
-            
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Gallery Navigation
+            document.querySelectorAll('.prev-btn, .next-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const galleryId = this.getAttribute('data-gallery');
+                    const gallery = document.getElementById(`${galleryId}-gallery`);
+                    const scrollAmount = gallery.offsetWidth * 0.8;
+                    
+                    if (this.classList.contains('prev-btn')) {
+                        gallery.scrollBy({
+                            left: -scrollAmount,
+                            behavior: 'smooth'
+                        });
+                    } else {
+                        gallery.scrollBy({
+                            left: scrollAmount,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Image Popup
+            const popup = document.getElementById('imagePopup');
+            const popupImg = document.getElementById('popupImage');
+            const popupPrev = document.getElementById('popupPrev');
+            const popupNext = document.getElementById('popupNext');
+            const popupClose = document.getElementById('popupClose');
+            const popupCounter = document.getElementById('popupCounter');
+
+            let currentGallery = [];
             let currentIndex = 0;
             let isZoomed = false;
-            let touchStartTime = 0;
-            
-            function initGallery() {
-                images.forEach((img, index) => {
-                    img.addEventListener("click", () => {
-                        currentIndex = index;
-                        updatePopup();
-                    });
-                });
-                
-                closeBtn.addEventListener("click", closePopup);
-                
-                document.addEventListener("keydown", (e) => {
-                    if (!popup.classList.contains("active")) return;
+
+            // Collect all gallery items
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            galleryItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const galleryId = this.closest('.gallery-scroll').id;
+                    currentGallery = Array.from(document.querySelectorAll(`#${galleryId} .gallery-img`));
+                    currentIndex = currentGallery.findIndex(img => img.src === this.querySelector('img').src);
                     
-                    if (e.key === "Escape") {
-                        closePopup();
-                    } else if (e.key === "ArrowLeft") {
-                        navigate(-1);
-                    } else if (e.key === "ArrowRight") {
-                        navigate(1);
-                    }
+                    openPopup();
                 });
-                
-                prevBtn.addEventListener("click", () => navigate(-1));
-                nextBtn.addEventListener("click", () => navigate(1));
-                
-                popupImg.addEventListener("touchstart", (e) => {
-                    touchStartTime = e.timeStamp;
-                });
-                
-                popupImg.addEventListener("touchend", (e) => {
-                    if (e.timeStamp - touchStartTime < 300) {
-                        toggleZoom();
-                    }
-                });
-                
-                popupImg.addEventListener("click", () => {
-                    if (!isMobile()) {
-                        toggleZoom();
-                    }
-                });
-            }
-            
-            function updatePopup() {
-                const imgSrc = images[currentIndex].src;
-                popupImg.src = imgSrc;
-                popup.classList.add("active");
-                document.body.style.overflow = "hidden";
+            });
+
+            function openPopup() {
+                popupImg.src = currentGallery[currentIndex].src;
+                popup.classList.add('active');
+                document.body.style.overflow = 'hidden';
                 updateCounter();
-                
-                isZoomed = false;
-                popupImg.classList.remove("zoomed");
             }
-            
+
             function closePopup() {
-                popup.classList.remove("active");
-                document.body.style.overflow = "auto";
+                popup.classList.remove('active');
+                document.body.style.overflow = 'auto';
+                if (isZoomed) toggleZoom();
             }
-            
+
             function navigate(direction) {
                 currentIndex += direction;
                 
-                if (currentIndex >= images.length) {
+                if (currentIndex >= currentGallery.length) {
                     currentIndex = 0;
                 } else if (currentIndex < 0) {
-                    currentIndex = images.length - 1;
+                    currentIndex = currentGallery.length - 1;
                 }
                 
-                updatePopup();
+                popupImg.src = currentGallery[currentIndex].src;
+                updateCounter();
+                if (isZoomed) toggleZoom();
             }
-            
+
             function toggleZoom() {
                 isZoomed = !isZoomed;
-                popupImg.classList.toggle("zoomed", isZoomed);
+                popupImg.classList.toggle('zoomed', isZoomed);
             }
-            
+
             function updateCounter() {
-                imageCounter.textContent = `${currentIndex + 1} / ${images.length}`;
+                popupCounter.textContent = `${currentIndex + 1} / ${currentGallery.length}`;
             }
-            
-            function isMobile() {
-                return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-            }
-            
-            initGallery();
+
+            popupPrev.addEventListener('click', () => navigate(-1));
+            popupNext.addEventListener('click', () => navigate(1));
+            popupClose.addEventListener('click', closePopup);
+            popupImg.addEventListener('click', toggleZoom);
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (!popup.classList.contains('active')) return;
+                
+                if (e.key === 'Escape') {
+                    closePopup();
+                } else if (e.key === 'ArrowLeft') {
+                    navigate(-1);
+                } else if (e.key === 'ArrowRight') {
+                    navigate(1);
+                }
+            });
+
+            // Admission Modal
+            const admissionBtn = document.getElementById('admissionBtn');
+            const admissionModal = document.getElementById('admissionModal');
+            const modalClose = document.getElementById('modalClose');
+
+            admissionBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                admissionModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+
+            modalClose.addEventListener('click', () => {
+                admissionModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+
+            window.addEventListener('click', (e) => {
+                if (e.target === admissionModal) {
+                    admissionModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            // Enquiry FAB
+            const enquiryFab = document.getElementById('enquiryFab');
+            enquiryFab.addEventListener('click', () => {
+                // Here you can implement the enquiry functionality
+                // For example, open a contact form or redirect to contact page
+                window.location.href = "Admission.html";
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
         });
     </script>
 </body>
