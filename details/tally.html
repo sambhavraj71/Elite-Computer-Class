@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tally ERP 9 Course | Tech Institute</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #4CAF50;
+      --secondary: #388E3C;
+      --accent: #8BC34A;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --tally: #2E7D32; /* Green accent color for Tally */
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f5f7ff;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* Header Styles */
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 3rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1511&q=80') center/cover;
+      opacity: 0.15;
+      z-index: 0;
+    }
+    
+    header .container {
+      position: relative;
+      z-index: 1;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      animation: fadeInDown 1s ease;
+    }
+    
+    .tagline {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin-bottom: 1.5rem;
+      animation: fadeIn 1.5s ease;
+    }
+    
+    .enroll-btn {
+      display: inline-block;
+      background-color: var(--tally);
+      color: white;
+      padding: 12px 30px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(46, 125, 50, 0.4);
+      animation: pulse 2s infinite;
+    }
+    
+    /* Course Highlights */
+    .highlight-card {
+      border-top: 4px solid var(--tally);
+    }
+    
+    .highlight-card i {
+      color: var(--tally);
+    }
+    
+    /* Testimonials */
+    .testimonial-card {
+      border-top: 4px solid var(--tally);
+    }
+    
+    /* FAQ */
+    .faq-question {
+      background-color: var(--tally);
+    }
+    
+    /* Rest of the CSS remains same as ADCA page, just change the color variables */
+    /* ... [Include all other CSS from ADCA page] ... */
+  </style>
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <div class="container">
+      <h1>Tally ERP 9 with GST Certification</h1>
+      <p class="tagline">Master accounting, inventory, and GST compliance with India's leading business software</p>
+      <a href="#enroll" class="enroll-btn">Enroll Now</a>
+    </div>
+  </header>
+  
+  <!-- Course Highlights -->
+  <section class="highlights">
+    <div class="container">
+      <h2>Why Learn Tally ERP 9?</h2>
+      <div class="highlight-cards">
+        <div class="highlight-card">
+          <i class="fas fa-calculator"></i>
+          <h3>Industry Standard</h3>
+          <p>Tally is used by 80% of Indian businesses for accounting and inventory management.</p>
+        </div>
+        <div class="highlight-card">
+          <i class="fas fa-rupee-sign"></i>
+          <h3>GST Compliance</h3>
+          <p>Learn GST filing, returns, and reconciliation as per latest government norms.</p>
+        </div>
+        <div class="highlight-card">
+          <i class="fas fa-briefcase"></i>
+          <h3>Job Ready Skills</h3>
+          <p>Gain practical skills that are in high demand across all industries.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Course Details -->
+  <section class="course-details" id="details">
+    <div class="container">
+      <div class="details-container">
+        <div class="details-main">
+          <h2>Comprehensive Tally ERP 9 Training</h2>
+          <p>Our Tally course covers everything from basic accounting to advanced GST compliance, inventory management, and financial reporting. You'll gain hands-on experience with real-world scenarios used in businesses today.</p>
+          
+          <div class="software-badges">
+            <div class="software-badge">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Tally_logo.png" alt="Tally">
+              <span>Tally.ERP 9</span>
+            </div>
+            <div class="software-badge">
+              <i class="fas fa-file-invoice-dollar"></i>
+              <span>GST Filing</span>
+            </div>
+            <div class="software-badge">
+              <i class="fas fa-boxes"></i>
+              <span>Inventory</span>
+            </div>
+          </div>
+          
+          <h3>Detailed Curriculum</h3>
+          <ul class="module-list">
+            <li><strong>Tally Fundamentals</strong> - Company creation, groups, ledgers, vouchers</li>
+            <li><strong>Accounting</strong> - Journal entries, balance sheet, profit & loss, trial balance</li>
+            <li><strong>Inventory</strong> - Stock items, godowns, purchase and sales orders</li>
+            <li><strong>GST Implementation</strong> - GST configurations, tax rates, invoice formats</li>
+            <li><strong>GST Returns</strong> - GSTR-1, GSTR-3B, reconciliation with books</li>
+            <li><strong>Payroll</strong> - Salary processing, PF, ESI, professional tax</li>
+            <li><strong>Advanced Features</strong> - Cost centers, budgets, scenarios, banking</li>
+          </ul>
+          
+          <h3>Career Opportunities</h3>
+          <p>Tally certified professionals can work as:</p>
+          <ul class="module-list">
+            <li>Accountant in CA firms and businesses</li>
+            <li>GST Accountant or Consultant</li>
+            <li>Accounts Executive in corporate sector</li>
+            <li>Financial Data Entry Operator</li>
+            <li>Tally Trainer or Faculty</li>
+          </ul>
+        </div>
+        
+        <div class="details-sidebar">
+          <h3>Course Details</h3>
+          <div class="fee-structure">
+            <div class="fee-item">
+              <span>Duration:</span>
+              <span>3 Months</span>
+            </div>
+            <div class="fee-item">
+              <span>Total Fee:</span>
+              <span>₹5000</span>
+            </div>
+            <div class="fee-item">
+              <span>Admission Fee:</span>
+              <span>₹1000</span>
+            </div>
+            <div class="fee-item">
+              <span>Installments:</span>
+              <span>₹2000 × 2</span>
+            </div>
+          </div>
+          
+          <h3>Key Features</h3>
+          <ul class="module-list">
+            <li>Latest Tally.ERP 9 with GST updates</li>
+            <li>Practical training on live projects</li>
+            <li>GST return filing simulations</li>
+            <li>Placement assistance</li>
+            <li>Certificate upon completion</li>
+          </ul>
+          
+          <a href="#enroll" class="enroll-btn" style="display: block; text-align: center; margin-top: 2rem;">Apply Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <div class="container">
+      <h2>Tally Student Success Stories</h2>
+      
+      <div class="testimonial-cards">
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            "After completing this course, I got a job as accounts assistant in a manufacturing company with 25% higher salary than my previous job."
+          </div>
+          <div class="testimonial-author">
+            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Student" class="author-img">
+            <div>
+              <h4>Neha Sharma</h4>
+              <p>Accounts Assistant</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            "The GST training helped me start my own consultancy helping small businesses with their tax filings. I now have 15 regular clients."
+          </div>
+          <div class="testimonial-author">
+            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Student" class="author-img">
+            <div>
+              <h4>Rahul Verma</h4>
+              <p>GST Consultant</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- FAQ Section -->
+  <section class="faq">
+    <div class="container">
+      <h2>Frequently Asked Questions</h2>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Do I need accounting knowledge to learn Tally?</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <p>No, we teach basic accounting concepts along with Tally operations. The course is designed for beginners.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Will I get practice on GST filing?</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <p>Yes, we provide simulated GST portal environment for practicing return filings with sample data.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Is the certificate recognized?</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <p>Our certificate is widely accepted by employers. You can also optionally take Tally's official certification exam.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p class="copyright">© 2023 Tech Institute. All Rights Reserved.</p>
+    </div>
+  </footer>
+  
+  <script>
+     // FAQ toggle functionality
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', () => {
+        const answer = question.nextElementSibling;
+        const icon = question.querySelector('i');
+        
+        // Toggle this answer
+        answer.classList.toggle('show');
+        
+        // Rotate icon
+        if (answer.classList.contains('show')) {
+          icon.style.transform = 'rotate(180deg)';
+        } else {
+          icon.style.transform = 'rotate(0deg)';
+        }
+      });
+    });
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+    
+    // Animation on scroll
+    const animateOnScroll = () => {
+      const elements = document.querySelectorAll('.highlight-card, .testimonial-card');
+      
+      elements.forEach(element => {
+        const elementPosition = element.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight / 1.3;
+        
+        if (elementPosition < screenPosition) {
+          element.style.opacity = '1';
+          element.style.transform = 'translateY(0)';
+        }
+      });
+    };
+    
+    // Set initial state for animation
+    document.querySelectorAll('.highlight-card, .testimonial-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    });
+    
+    window.addEventListener('load', animateOnScroll);
+    window.addEventListener('scroll', animateOnScroll);
+  </script>
+  </script>
+</body>
+</html>
