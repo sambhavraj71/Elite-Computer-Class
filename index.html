@@ -188,7 +188,7 @@
       padding: 1rem;
       max-width: 1200px;
       margin: 0 auto;
-      min-height: 60px;
+      min-height: 60px; /* Ensure header has sufficient height */
     }
 
     .logo {
@@ -231,7 +231,6 @@
       cursor: pointer;
       transition: var(--transition);
       padding: 0.5rem;
-      z-index: 1002;
     }
 
     .nav-toggle:hover {
@@ -247,10 +246,6 @@
       color: var(--dark);
       cursor: pointer;
       transition: var(--transition);
-      z-index: 1003; /* Higher than nav-toggle */
-      background: white;
-      padding: 0.5rem;
-      border-radius: 50%;
     }
 
     .nav-close:hover {
@@ -266,11 +261,11 @@
 
     .nav-link {
       position: relative;
-      font-weight: 600;
+      font-weight: 500;
       color: var(--dark);
       transition: var(--transition);
-      padding: 0.6rem;
-      font-size: clamp(0.75rem, 2.5vw, 0.8rem);
+      padding: 0.5rem;
+      font-size: clamp(0.75rem, 2.0vw, 0.9rem);
       display: flex;
       align-items: center;
     }
@@ -376,7 +371,7 @@
       position: relative;
     }
 
-    .course-card:hover, .course-card:focus {
+    .course-card:hover | .course-card:focus {
       transform: translateY(-8px);
       box-shadow: var(--shadow-lg);
     }
@@ -426,12 +421,11 @@
     .category-card {
       background: white;
       border-radius: 0.8rem;
-      padding: 1rem;
+      padding: 1.5rem;
       text-align: center;
       box-shadow: var(--shadow);
       transition: var(--transition);
       cursor: pointer;
-      box-sizing: border-box;
     }
 
     .category-card:hover {
@@ -442,7 +436,7 @@
     .category-icon {
       width: 60px;
       height: 60px;
-      margin: 0 auto 0.8rem;
+      margin: 0 auto 1rem;
       background: linear-gradient(to bottom right, var(--primary-light), var(--primary));
       border-radius: 50%;
       display: flex;
@@ -609,11 +603,10 @@
     .feature-card {
       background: white;
       border-radius: 0.8rem;
-      padding: 1rem;
+      padding: 1.5rem;
       text-align: center;
       box-shadow: var(--shadow);
       transition: var(--transition);
-      box-sizing: border-box;
     }
 
     .feature-card:hover {
@@ -624,7 +617,7 @@
     .feature-icon {
       width: 60px;
       height: 60px;
-      margin: 0 auto 0.8rem;
+      margin: 0 auto 1rem;
       background: linear-gradient(to bottom right, var(--primary-light), var(--primary));
       border-radius: 50%;
       display: flex;
@@ -989,17 +982,16 @@
     @media (max-width: 768px) {
       .header-container {
         padding: 1rem 0.8rem;
-        min-height: 70px;
+        min-height: 70px; /* Increased height for mobile */
       }
       
       .nav-toggle {
         display: block;
-        z-index: 1002;
+        z-index: 1001;
       }
       
       .nav-close {
         display: block;
-        z-index: 1003;
       }
       
       .nav-menu {
@@ -1016,7 +1008,7 @@
         box-shadow: -3px 0 10px rgba(0, 0, 0, 0.1);
         transition: right 0.3s ease-in-out;
         overflow-y: auto;
-        z-index: 1001;
+        z-index: 1000;
       }
       
       .nav-menu.active {
@@ -1133,7 +1125,7 @@
       }
       
       .nav-menu {
-        display: none;
+        display: none; /* Hide by default in desktop mode on mobile */
       }
       
       .nav-menu.active {
@@ -1149,62 +1141,28 @@
         padding: 4rem 1.5rem;
         background: white;
         box-shadow: -3px 0 10px rgba(0, 0, 0, 0.1);
-        z-index: 1001;
+        z-index: 1000;
         overflow-y: auto;
       }
       
       .nav-toggle {
         display: block;
-        z-index: 1002;
       }
       
       .nav-close {
         display: block;
-        z-index: 1003;
       }
       
       .hero-content h1 {
         font-size: clamp(1.6rem, 4vw, 2rem);
       }
       
-      .courses-grid {
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      }
-      
-      .categories-grid {
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-        gap: 1rem;
-      }
-      
-      .features-grid {
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-        gap: 1rem;
-      }
-      
-      .testimonials-grid {
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      }
-      
+      .courses-grid,
+      .categories-grid,
+      .features-grid,
+      .testimonials-grid,
       .gallery-grid {
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      }
-      
-      .category-card, .feature-card {
-        padding: 0.8rem;
-      }
-      
-      .category-icon, .feature-icon {
-        width: 50px;
-        height: 50px;
-        font-size: 1.2rem;
-      }
-      
-      .category-card h3, .feature-card h3 {
-        font-size: clamp(0.9rem, 2vw, 1rem);
-      }
-      
-      .category-card p, .feature-card p {
-        font-size: clamp(0.75rem, 1.8vw, 0.8rem);
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
       }
       
       .about-container {
@@ -1225,7 +1183,7 @@
       }
       
       .course-img {
-        height: 140px;
+        height: 160px;
       }
       
       .gallery-img {
