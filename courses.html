@@ -1,359 +1,390 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Computer Classes - Course Catalog</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <title>Elite Computer Classes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --sky-blue-light: #00BFFF;
-            --sky-blue-dark: #1E90FF;
-            --orange-light: #FF7F50;
-            --orange-dark: #FF4500;
-            --navy-light: #003366;
-            --navy-dark: #000080;
-            --white: #FFFFFF;
-            --gray-light: #F7F7F7;
-            --gray-dark: #333333;
-            --primary-color: #4a6bff;
-            --secondary-color: #6c757d;
-            --dark-color: #343a40;
-            --light-color: #f8f9fa;
-            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.2);
-            --border-radius: 12px;
-            --header-height: 80px;
-            --max-content-width: 1440px;
-            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            --gradient: linear-gradient(135deg, #4a6bff 0%, #6b8cff 100%);
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #ec4899;
+            --accent: #22d3ee;
+            --light: #f9fafb;
+            --dark: #1f2937;
+            --gray: #6b7280;
+            --white: #ffffff;
+            --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+            --radius-md: 12px;
+            --transition: all 0.3s ease;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            --header-height: 70px;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
         }
 
-        html, body {
-            width: 100%;
-            overflow-x: hidden;
-            background-color: var(--gray-light);
-            color: var(--gray-dark);
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--light);
+            color: var(--dark);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         /* Header */
         header {
-            background: linear-gradient(to right, var(--navy-light), var(--navy-dark));
-            color: var(--white);
-            position: sticky;
+            position: fixed;
             top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-height);
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: var(--shadow-sm);
             z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .header-content {
+        .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
+            max-width: 1200px;
+            height: 100%;
+            margin: 0 auto;
+            padding: 0 1.5rem;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
-            white-space: nowrap;
-        }
-
-        .logo img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 2px solid var(--orange-light);
-        }
-
-        .logo h1 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            display: inline-block;
-        }
-
-        .logo h1 span.elite {
-            color: var(--sky-blue-light);
-        }
-
-        .logo h1 span.classes {
-            color: var(--orange-light);
-        }
-
-        .menu-toggle {
-            display: none;
-            font-size: 1.5rem;
-            background: none;
-            border: none;
-            color: var(--white);
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .menu-toggle:hover {
-            transform: rotate(90deg);
-        }
-
-        nav {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
-        nav a {
-            color: var(--white);
+            gap: 0.5rem;
             text-decoration: none;
-            font-size: 0.5rem;
-            font-weight: 500;
-            padding: 8px 12px;
-            border-radius: 5px;
-            transition: background 0.3s, color 0.3s, transform 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 5px;
         }
 
-        nav a:hover {
-            background: var(--sky-blue-light);
-            color: var(--navy-dark);
-            transform: scale(1.05);
-        }
-
-        nav a i {
-            font-size: 0.9rem;
-            transition: transform 0.3s;
-        }
-
-        nav a:hover i {
-            transform: rotate(360deg);
-        }
-
-        /* Toggle Menu Close Button */
-        .nav-close {
-            display: none;
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            font-size: 1.5rem;
-            color: var(--white);
-            background: var(--orange-light);
-            border: none;
+        .logo-img {
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            width: 35px;
-            height: 35px;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.3s;
-            z-index: 1001;
-        }
-
-        .nav-close.active {
-            display: flex;
-            animation: fadeIn 0.3s ease-in;
-        }
-
-        .nav-close:hover {
-            background: var(--orange-dark);
-            transform: scale(1.1);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* Course styles */
-        .title {
-            text-align: center;
-            padding: 20px;
-            color: #1e3a8a;
-            font-size: clamp(1.5rem, 4vw, 2rem);
-            background-color: #e0f2fe;
-            margin: 0;
-        }
-
-        .course-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 20px;
-            padding: 20px 5%;
-            max-width: var(--max-content-width);
-            margin: 0 auto;
-        }
-
-        .course-card {
-            background: #ffffff;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            padding: 20px;
+            object-fit: cover;
+            border: 2px solid var(--primary);
             transition: var(--transition);
         }
 
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--dark);
+        }
+
+        .logo-text span {
+            color: var(--primary);
+        }
+
+        .logo:hover .logo-img {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(37, 99, 235, 0.3);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .nav-toggle:hover {
+            color: var(--secondary);
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-link {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.4rem 1rem;
+            border-radius: var(--radius-md);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .nav-link i {
+            font-size: 0.7rem;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+            background: rgba(37, 99, 235, 0.1);
+        }
+
+        .nav-link.active {
+            background: var(--gradient);
+            color: var(--white);
+        }
+
+        /* Main Content */
+        main {
+            margin-top: var(--header-height);
+            padding: 2rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .title {
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 2rem;
+            color: var(--primary-dark);
+            background: var(--white);
+            border-radius: var(--radius-md);
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Search and Filter */
+        .search-filter {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--gray);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 8px rgba(37, 99, 235, 0.2);
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            background: var(--light);
+            color: var(--dark);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* Course Container */
+        .course-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            padding: 1rem 0;
+        }
+
+        .course-card {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            padding: 1.5rem;
+            transition: var(--transition);
+            animation: slideUp 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
         .course-card:hover {
-            transform: scale(1.03);
-            box-shadow: var(--shadow-hover);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .course-title {
-            font-size: clamp(1.2rem, 2.5vw, 1.4rem);
+            font-size: 1.4rem;
             font-weight: 600;
-            color: var(--dark-color);
-            margin-bottom: 10px;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
         }
 
-        .duration {
-            font-size: 0.9rem;
-            color: var(--secondary-color);
-            margin: 10px 0;
+        .duration, .price {
+            font-size: 0.95rem;
+            color: var(--gray);
+            margin: 0.5rem 0;
         }
 
-        .price {
-            margin: 10px 0;
-            font-weight: bold;
-            color: #10b981;
-            font-size: 1rem;
+        .price span {
+            color: #16a34a;
+            font-weight: 600;
         }
 
         .details {
             font-size: 0.9rem;
-            line-height: 1.6;
+            color: var(--dark);
+            margin-top: 0.5rem;
             display: none;
-            color: var(--dark-color);
+            transition: var(--transition);
+        }
+
+        .details.show {
+            display: block;
         }
 
         .toggle-btn, .details-btn {
-            background-color: var(--primary-color);
-            color: white;
+            background: var(--primary);
+            color: var(--white);
             border: none;
-            border-radius: 5px;
-            margin-top: 10px;
-            padding: 8px 12px;
+            border-radius: var(--radius-md);
+            padding: 0.6rem 1rem;
             cursor: pointer;
-            display: inline-block;
             font-size: 0.9rem;
+            margin-top: 0.5rem;
             transition: var(--transition);
         }
 
         .toggle-btn:hover, .details-btn:hover {
-            background-color: #1d4ed8;
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .details-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        /* CTA Button */
+        .cta-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--gradient);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            z-index: 100;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
         }
 
         /* Responsive Design */
-        @media (max-width: 768px) {
-            .menu-toggle {
+        @media (max-width: 992px) {
+            .nav-toggle {
                 display: block;
             }
 
-            nav {
+            .nav-menu {
                 position: fixed;
                 top: 0;
-                left: 0;
+                right: -100%;
+                width: 250px;
                 height: 100vh;
-                width: 100vw;
-                background: linear-gradient(to bottom, var(--navy-dark), var(--navy-light));
+                background: var(--white);
                 flex-direction: column;
-                padding: 80px 20px 20px;
-                transform: translateX(100%);
-                transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-                box-shadow: none;
-                z-index: 1000;
-                overflow-y: auto;
-                overflow-x: hidden;
+                padding: 5rem 1.5rem;
+                box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
+                transition: right 0.3s ease;
             }
 
-            nav.active {
-                transform: translateX(0);
-                animation: slideInMenu 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+            .nav-menu.active {
+                right: 0;
             }
 
-            @keyframes slideInMenu {
-                from { transform: translateX(100%); opacity: 0.5; }
-                to { transform: translateX(0); opacity: 1; }
-            }
-
-            nav:not(.active) {
-                animation: slideOutMenu 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
-            }
-
-            @keyframes slideOutMenu {
-                from { transform: translateX(0); opacity: 1; }
-                to { transform: translateX(100%); opacity: 0.5; }
-            }
-
-            nav a {
-                font-size: 1.2rem;
-                padding: 15px 20px;
-                margin: 8px 0;
-                border-radius: 8px;
-                background: rgba(255, 255, 255, 0.1);
-                transition: background 0.3s, transform 0.3s, opacity 0.3s;
-                width: 100%;
-                text-align: left;
-                border-left: 3px solid transparent;
-                opacity: 0;
-                transform: translateX(20px);
-            }
-
-            nav.active a {
-                opacity: 1;
-                transform: translateX(0);
-            }
-
-            nav.active a:nth-child(2) { transition-delay: 0.1s; }
-            nav.active a:nth-child(3) { transition-delay: 0.2s; }
-            nav.active a:nth-child(4) { transition-delay: 0.3s; }
-            nav.active a:nth-child(5) { transition-delay: 0.4s; }
-            nav.active a:nth-child(6) { transition-delay: 0.5s; }
-            nav.active a:nth-child(7) { transition-delay: 0.6s; }
-            nav.active a:nth-child(8) { transition-delay: 0.7s; }
-
-            nav a:hover {
-                background: rgba(0, 191, 255, 0.3);
-                transform: translateX(10px);
-                border-left: 3px solid var(--sky-blue-light);
-            }
-
-            nav a i {
-                font-size: 1.2rem;
-                margin-right: 12px;
-            }
-
-            .logo h1 {
-                font-size: 1.2rem;
+            .nav-close {
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                color: var(--dark);
+                cursor: pointer;
             }
 
             .course-container {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
-                padding: 15px;
-            }
-
-            .course-card {
-                padding: 15px;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             }
         }
 
-        @media (max-width: 480px) {
-            .logo h1 {
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 1rem;
+            }
+
+            .logo-text {
                 font-size: 1rem;
+            }
+
+            .title {
+                font-size: 1.5rem;
+            }
+
+            .search-filter {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-bar {
+                max-width: 100%;
             }
 
             .course-container {
@@ -361,21 +392,23 @@
             }
         }
 
-        @media (min-width: 1440px) {
-            .course-container {
-                grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        @media (max-width: 576px) {
+            .logo-img {
+                width: 35px;
+                height: 35px;
             }
 
             .course-card {
-                padding: 25px;
+                padding: 1rem;
             }
 
             .course-title {
-                font-size: 1.5rem;
+                font-size: 1.2rem;
             }
 
-            .header-content {
-                padding: 20px 5%;
+            .cta-btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -383,74 +416,53 @@
 <body>
     <!-- Header -->
     <header>
-        <div class="container header-content">
-            <div class="logo">
-                <img src="logo.jpg" alt="Logo">
-                <h1><span class="elite">ELITE</span> <span class="classes">COMPUTER CLASSES</span></h1>
-            </div>
-            <button class="menu-toggle" id="menu-toggle">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="logo.jpg" alt="Elite Computer Classes Logo" class="logo-img">
+                <span class="logo-text">Elite <span>Classes</span></span>
+            </a>
+            <button class="nav-toggle" id="navToggle">
                 <i class="fas fa-bars"></i>
             </button>
-            <nav id="navbar">
-                <button class="nav-close" id="nav-close"><i class="fas fa-times"></i></button>
-                <a href="index.html"><i class="fas fa-home"></i> Home</a>
-                <a href=""><i class="fas fa-book-open"></i> Courses</a>
-                <a href="category.html"><i class="fas fa-layer-group"></i> Category</a>
-                <a href="StudentZone.html"><i class="fas fa-user-graduate"></i> Student Zone</a>
-                <a href="Admission.html"><i class="fas fa-file-signature"></i> Admission</a>
-                <a href="gallery.html"><i class="fas fa-images"></i> Gallery</a>
-                <a href="#about_us"><i class="fas fa-info-circle"></i> About Us</a>
+            <nav class="nav-menu" id="navMenu">
+                <button class="nav-close" id="navClose">
+                    <i class="fas fa-times"></i>
+                </button>
+                <a href="index.html" class="nav-link active"><i class="fas fa-home"></i> Home</a>
+                <a href="courses.html" class="nav-link"><i class="fas fa-book-open"></i> Courses</a>
+                <a href="category.html" class="nav-link"><i class="fas fa-layer-group"></i> Category</a>
+                <a href="StudentZone.html" class="nav-link"><i class="fas fa-user-graduate"></i> Student Zone</a>
+                <a href="Admission.html" class="nav-link"><i class="fas fa-file-signature"></i> Admission</a>
+                <a href="gallery.html" class="nav-link"><i class="fas fa-images"></i> Gallery</a>
+                <a href="#about" class="nav-link"><i class="fas fa-info-circle"></i> About Us</a>
             </nav>
         </div>
     </header>
 
     <!-- Main Content -->
-    <h1 class="title">🌞 Elite Computer Classes - Course Catalog</h1>
-    <div class="course-container" id="courseContainer"></div>
+    <main>
+        <div class="container">
+            <h1 class="title">🌟 Elite Computer Classes - Course Catalog</h1>
+            <div class="search-filter">
+                <div class="search-bar">
+                    <input type="text" id="courseSearch" placeholder="Search courses...">
+                </div>
+                <div class="filter-bar">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="certificate">Certificate</button>
+                    <button class="filter-btn" data-filter="diploma">Diploma</button>
+                    <button class="filter-btn" data-filter="advanced">Advanced Diploma</button>
+                    <button class="filter-btn" data-filter="typing">Typing</button>
+                </div>
+            </div>
+            <div class="course-container" id="courseContainer"></div>
+        </div>
+    </main>
+
+    <!-- CTA Button -->
+    <button class="cta-btn" onclick="window.location.href='Admission.html'">Enroll Now</button>
 
     <script>
-        // Header functionality
-        console.log("Welcome to Code Vora Academy!");
-
-        // Toggle Menu
-        const menuToggle = document.getElementById('menu-toggle');
-        const navbar = document.getElementById('navbar');
-        const navClose = document.getElementById('nav-close');
-        const body = document.body;
-
-        function toggleMenu() {
-            navbar.classList.toggle('active');
-            navClose.classList.toggle('active');
-            const icon = menuToggle.querySelector('i');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
-            body.style.overflow = navbar.classList.contains('active') ? 'hidden' : 'auto';
-        }
-
-        menuToggle.addEventListener('click', toggleMenu);
-
-        navClose.addEventListener('click', () => {
-            navbar.classList.remove('active');
-            navClose.classList.remove('active');
-            const icon = menuToggle.querySelector('i');
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
-            body.style.overflow = 'auto';
-        });
-
-        const navLinks = document.querySelectorAll('#navbar a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                navbar.classList.remove('active');
-                navClose.classList.remove('active');
-                const icon = menuToggle.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-                body.style.overflow = 'auto';
-            });
-        });
-
-        // Course cards
         const courses = [
             {
                 id: "cca",
@@ -459,7 +471,8 @@
                 totalFee: "₹2150",
                 admissionFee: "₹1150",
                 installments: ["₹500", "₹500"],
-                details: "Modules: OS, MS Office, Windows 7/8/10, Projects, Assignments"
+                details: "Modules: OS, MS Office, Windows 7/8/10, Projects, Assignments",
+                category: "certificate"
             },
             {
                 id: "dca",
@@ -468,7 +481,8 @@
                 totalFee: "₹3250",
                 admissionFee: "₹1750",
                 installments: ["₹500", "₹500", "₹500"],
-                details: "Includes: MS Office, Access, MySQL, HTML, Networking, Hardware"
+                details: "Includes: MS Office, Access, MySQL, HTML, Networking, Hardware",
+                category: "diploma"
             },
             {
                 id: "dtp",
@@ -477,7 +491,8 @@
                 totalFee: "₹2750",
                 admissionFee: "₹1250",
                 installments: ["₹500", "₹500", "₹500"],
-                details: "PageMaker, Photoshop, CorelDraw, Printing, Design Tools"
+                details: "PageMaker, Photoshop, CorelDraw, Printing, Design Tools",
+                category: "diploma"
             },
             {
                 id: "doa",
@@ -486,7 +501,8 @@
                 totalFee: "₹5500",
                 admissionFee: "₹1500",
                 installments: ["₹500 x 8"],
-                details: "Office Tools, DBMS, Networking, HTML, Tally, Hardware"
+                details: "Office Tools, DBMS, Networking, HTML, Tally, Hardware",
+                category: "diploma"
             },
             {
                 id: "adca",
@@ -495,7 +511,8 @@
                 totalFee: "₹8500",
                 admissionFee: "₹1900",
                 installments: ["₹600 x 11"],
-                details: "Combo: DCA, CFA, DTP with Advanced Features & Projects"
+                details: "Combo: DCA, CFA, DTP with Advanced Features & Projects",
+                category: "advanced"
             },
             {
                 id: "adit",
@@ -504,7 +521,8 @@
                 totalFee: "₹8500",
                 admissionFee: "₹1900",
                 installments: ["₹600 x 11"],
-                details: "Programming in C/C++, Visual Basic, MySQL, HTML, Networking"
+                details: "Programming in C/C++, Visual Basic, MySQL, HTML, Networking",
+                category: "advanced"
             },
             {
                 id: "adcp",
@@ -513,7 +531,8 @@
                 totalFee: "₹8500",
                 admissionFee: "₹1900",
                 installments: ["₹600 x 11"],
-                details: "JavaScript, VBScript, C, Visual Basic, FrontPage, SQL"
+                details: "JavaScript, VBScript, C, Visual Basic, FrontPage, SQL",
+                category: "advanced"
             },
             {
                 id: "adhn",
@@ -522,7 +541,8 @@
                 totalFee: "₹8500",
                 admissionFee: "₹1900",
                 installments: ["₹600 x 11"],
-                details: "PC Hardware, Windows Config, Networking, System Support"
+                details: "PC Hardware, Windows Config, Networking, System Support",
+                category: "advanced"
             },
             {
                 id: "cfa",
@@ -531,47 +551,100 @@
                 totalFee: "₹2750",
                 admissionFee: "₹1250",
                 installments: ["₹500", "₹500", "₹500"],
-                details: "Covers Tally ERP 9, GST, Ledger, Inventory, Trial Balance"
+                details: "Covers Tally ERP 9, GST, Ledger, Inventory, Trial Balance",
+                category: "certificate"
             },
-             {
+            {
                 id: "typing",
                 title: "Typing in Hindi + English",
                 duration: "3 Months",
                 totalFee: "₹2000",
                 admissionFee: "₹500",
                 installments: ["₹500", "₹500", "₹500"],
-                details: "Covers Hindi Typing + English Typing"
+                details: "Covers Hindi Typing + English Typing",
+                category: "typing"
             }
         ];
 
-        const container = document.getElementById("courseContainer");
+        const courseContainer = document.getElementById("courseContainer");
+        const searchInput = document.getElementById("courseSearch");
+        const filterButtons = document.querySelectorAll(".filter-btn");
 
-        courses.forEach(course => {
-            const card = document.createElement("div");
-            card.className = "course-card";
-            card18:21
-            card.innerHTML = `
-                <div class="course-title">${course.title}</div>
-                <div class="duration">Duration: ${course.duration}</div>
-                <div class="price">Total Fee: ${course.totalFee}</div>
-                <div class="details">
-                    Admission Fee: ${course.admissionFee}<br>
-                    Installments: ${course.installments.join(", ")}<br>
-                    ${course.details}<br>
-                    <a href="details/${course.id}.html" class="details-btn" target="_blank">Full Course Details</a>
-                </div>
-                <button class="toggle-btn">Show Details</button>
-            `;
+        function renderCourses(filteredCourses) {
+            courseContainer.innerHTML = "";
+            filteredCourses.forEach(course => {
+                const card = document.createElement("div");
+                card.className = "course-card";
+                card.innerHTML = `
+                    <div class="course-title">${course.title}</div>
+                    <div class="duration">Duration: ${course.duration}</div>
+                    <div class="price">Total Fee: <span>${course.totalFee}</span></div>
+                    <div class="details">
+                        Admission Fee: ${course.admissionFee}<br>
+                        Installments: ${course.installments.join(", ")}<br>
+                        ${course.details}<br>
+                        <a href="details/${course.id}.html" class="details-btn" target="_blank">
+                            <i class="fas fa-info-circle"></i> Full Course Details
+                        </a>
+                    </div>
+                    <button class="toggle-btn">Show Details</button>
+                `;
+                courseContainer.appendChild(card);
 
-            const btn = card.querySelector(".toggle-btn");
-            const details = card.querySelector(".details");
-            btn.addEventListener("click", () => {
-                const isShown = details.style.display === "block";
-                details.style.display = isShown ? "none" : "block";
-                btn.textContent = isShown ? "Show Details" : "Hide Details";
+                const toggleBtn = card.querySelector(".toggle-btn");
+                const details = card.querySelector(".details");
+                toggleBtn.addEventListener("click", () => {
+                    const isShown = details.classList.contains("show");
+                    details.classList.toggle("show");
+                    toggleBtn.textContent = isShown ? "Show Details" : "Hide Details";
+                });
             });
+        }
 
-            container.appendChild(card);
+        // Initial render
+        renderCourses(courses);
+
+        // Search functionality
+        searchInput.addEventListener("input", () => {
+            const query = searchInput.value.toLowerCase();
+            const filteredCourses = courses.filter(course =>
+                course.title.toLowerCase().includes(query) ||
+                course.details.toLowerCase().includes(query)
+            );
+            renderCourses(filteredCourses);
+        });
+
+        // Filter functionality
+        filterButtons.forEach(btn => {
+            btn.addEventListener("click", () => {
+                filterButtons.forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+                const filter = btn.getAttribute("data-filter");
+                const filteredCourses = filter === "all" ? courses : courses.filter(course => course.category === filter);
+                renderCourses(filteredCourses);
+            });
+        });
+
+        // Mobile Navigation
+        const navToggle = document.getElementById("navToggle");
+        const navMenu = document.getElementById("navMenu");
+        const navClose = document.getElementById("navClose");
+
+        navToggle.addEventListener("click", () => {
+            navMenu.classList.add("active");
+            document.body.style.overflow = "hidden";
+        });
+
+        navClose.addEventListener("click", () => {
+            navMenu.classList.remove("active");
+            document.body.style.overflow = "auto";
+        });
+
+        document.querySelectorAll(".nav-link").forEach(link => {
+            link.addEventListener("click", () => {
+                navMenu.classList.remove("active");
+                document.body.style.overflow = "auto";
+            });
         });
     </script>
 </body>
