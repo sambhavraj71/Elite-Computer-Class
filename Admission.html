@@ -5,85 +5,204 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Student Admission Form</title>
   <style>
-    body {
+    * {
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #6b7280, #1e3a8a);
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
+      padding: 20px;
     }
 
     .container {
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(10px);
-      border-radius: 16px;
-      padding: 30px;
-      width: 90%;
-      max-width: 600px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-      color: #333;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      padding: 40px;
+      width: 100%;
+      max-width: 700px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+      animation: slideIn 0.8s ease-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
 
     h2 {
       text-align: center;
-      color: #0a3d62;
+      color: #1e3a8a;
+      font-size: 32px;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    h2::after {
+      content: '';
+      width: 60px;
+      height: 4px;
+      background: #10b981;
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    .form-group {
       margin-bottom: 20px;
-      font-size: 28px;
+      position: relative;
     }
 
     label {
       font-weight: 600;
-      margin-top: 15px;
+      color: #1f2937;
       display: block;
-      color: #1e272e;
+      margin-bottom: 8px;
+      font-size: 14px;
+      transition: color 0.3s ease;
     }
 
     input, select, textarea {
       width: 100%;
-      padding: 10px 12px;
-      margin-top: 5px;
-      border: none;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.8);
+      padding: 12px 15px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      background: #f9fafb;
       font-size: 15px;
-      box-shadow: inset 1px 1px 5px rgba(0,0,0,0.1);
-      transition: 0.3s;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
     }
 
     input:focus, select:focus, textarea:focus {
       outline: none;
-      background: rgba(255, 255, 255, 1);
-      box-shadow: 0 0 5px #5f27cd;
+      border-color: #10b981;
+      box-shadow: 0 0 8px rgba(16, 185, 129, 0.3);
+      background: #ffffff;
+    }
+
+    input.error, select.error, textarea.error {
+      border-color: #ef4444;
+      animation: shake 0.3s ease;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+
+    .error-message {
+      color: #ef4444;
+      font-size: 12px;
+      margin-top: 5px;
+      display: none;
+    }
+
+    .required {
+      color: #ef4444;
     }
 
     .btn {
       width: 100%;
-      padding: 14px;
-      background: linear-gradient(to right, #5f27cd, #341f97);
+      padding: 15px;
+      background: linear-gradient(to right, #10b981, #059669);
       color: white;
       font-size: 16px;
-      font-weight: bold;
+      font-weight: 600;
       border: none;
-      border-radius: 12px;
-      margin-top: 25px;
+      border-radius: 8px;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
 
     .btn:hover {
-      background: linear-gradient(to right, #341f97, #5f27cd);
+      background: linear-gradient(to right, #059669, #10b981);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
     }
 
-    .required {
-      color: red;
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.6s ease, height 0.6s ease;
+    }
+
+    .btn:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .success-message {
+      display: none;
+      text-align: center;
+      color: #10b981;
+      font-size: 16px;
+      margin-top: 20px;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .input-icon {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #6b7280;
+      font-size: 18px;
+      z-index: 2;
+    }
+
+    .course-selection {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .course-selection select {
+      flex: 1;
     }
 
     @media (max-width: 600px) {
+      .container {
+        padding: 20px;
+      }
+
       h2 {
         font-size: 24px;
+      }
+
+      .btn {
+        font-size: 14px;
       }
     }
   </style>
@@ -93,40 +212,66 @@
 <div class="container">
   <h2>🎓 Student Admission Form</h2>
   <form id="admissionForm">
-    <label>Full Name <span class="required">*</span></label>
-    <input type="text" id="name" required>
+    <div class="form-group">
+      <label>Full Name <span class="required">*</span></label>
+      <input type="text" id="name" required placeholder="Enter your full name">
+      <span class="error-message" id="nameError">Please enter a valid name (minimum 3 characters).</span>
+    </div>
 
-    <label>Father's Name <span class="required">*</span></label>
-    <input type="text" id="fatherName" required>
+    <div class="form-group">
+      <label>Father's Name <span class="required">*</span></label>
+      <input type="text" id="fatherName" required placeholder="Enter father's name">
+      <span class="error-message" id="fatherNameError">Please enter a valid father's name.</span>
+    </div>
 
-    <label>Email <span class="required">*</span></label>
-    <input type="email" id="email" required>
+    <div class="form-group">
+      <label>Email <span class="required">*</span></label>
+      <input type="email" id="email" required placeholder="Enter your email">
+      <span class="input-icon">📧</span>
+      <span class="error-message" id="emailError">Please enter a valid email address.</span>
+    </div>
 
-    <label>Mobile Number <span class="required">*</span></label>
-    <input type="tel" id="mobile" required>
+    <div class="form-group">
+      <label>Mobile Number <span class="required">*</span></label>
+      <input type="tel" id="mobile" required placeholder="Enter your mobile number">
+      <span class="input-icon">📱</span>
+      <span class="error-message" id="mobileError">Please enter a valid mobile number (10 digits).</span>
+    </div>
 
-    <label>Address <span class="required">*</span></label>
-    <textarea id="address" rows="3" required></textarea>
+    <div class="form-group">
+      <label>Address <span class="required">*</span></label>
+      <textarea id="address" rows="4" required placeholder="Enter your address"></textarea>
+      <span class="error-message" id="addressError">Please enter a valid address.</span>
+    </div>
 
-    <label>Select Course <span class="required">*</span></label>
-    <select id="course" required>
-      <option value="">-- Select --</option>
-      <option value="Basic Computer">Basic Computer</option>
-      <option value="MS Office">MS Office</option>
-      <option value="Tally Prime">Tally Prime</option>
-      <option value="C/C++ Programming">C/C++ Programming</option>
-      <option value="Web Development">Web Development</option>
-      <option value="Other">Other</option>
-    </select>
+    <div class="form-group course-selection">
+      <div>
+        <label>Select Course <span class="required">*</span></label>
+        <select id="course" required>
+          <option value="">-- Select Course --</option>
+          <option value="Basic Computer">Basic Computer</option>
+          <option value="MS Office">MS Office</option>
+          <option value="Tally Prime">Tally Prime</option>
+          <option value="C/C++ Programming">C/C++ Programming</option>
+          <option value="Web Development">Web Development</option>
+          <option value="Python Programming">Python Programming</option>
+          <option value="Other">Other</option>
+        </select>
+        <span class="error-message" id="courseError">Please select a course.</span>
+      </div>
+      <div>
+        <label>Batch Time</label>
+        <select id="batch">
+          <option value="Morning">Morning (8am - 10am)</option>
+          <option value="Afternoon">Afternoon (12pm - 2pm)</option>
+          <option value="Evening">Evening (4pm - 6pm)</option>
+          <option value="Night">Night (6pm - 8pm)</option>
+        </select>
+      </div>
+    </div>
 
-    <label>Batch Time</label>
-    <select id="batch">
-      <option value="Morning">Morning (8am - 10am)</option>
-      <option value="Afternoon">Afternoon (12pm - 2pm)</option>
-      <option value="Evening">Evening (4pm - 6pm)</option>
-    </select>
-
-    <button type="submit" class="btn">📩 Submit</button>
+    <button type="submit" class="btn">📩 Submit Application</button>
+    <div class="success-message" id="successMessage">Form submitted successfully! Redirecting to WhatsApp...</div>
   </form>
 </div>
 
@@ -134,16 +279,68 @@
   document.getElementById('admissionForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
-    const name = document.getElementById('name').value;
-    const fatherName = document.getElementById('fatherName').value;
-    const email = document.getElementById('email').value;
-    const mobile = document.getElementById('mobile').value;
-    const address = document.getElementById('address').value;
+    // Reset error states
+    document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
+    document.querySelectorAll('input, select, textarea').forEach(el => el.classList.remove('error'));
+
+    // Get form values
+    const name = document.getElementById('name').value.trim();
+    const fatherName = document.getElementById('fatherName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const mobile = document.getElementById('mobile').value.trim();
+    const address = document.getElementById('address').value.trim();
     const course = document.getElementById('course').value;
     const batch = document.getElementById('batch').value;
 
-    const phoneNumber = "917361065324"; // 👈 Replace with your number (e.g. 91XXXXXXXXXX)
+    // Validation
+    let isValid = true;
 
+    if (name.length < 3) {
+      document.getElementById('nameError').style.display = 'block';
+      document.getElementById('name').classList.add('error');
+      isValid = false;
+    }
+
+    if (fatherName.length < 3) {
+      document.getElementById('fatherNameError').style.display = 'block';
+      document.getElementById('fatherName').classList.add('error');
+      isValid = false;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      document.getElementById('emailError').style.display = 'block';
+      document.getElementById('email').classList.add('error');
+      isValid = false;
+    }
+
+    const mobileRegex = /^\d{10}$/;
+    if (!mobileRegex.test(mobile)) {
+      document.getElementById('mobileError').style.display = 'block';
+      document.getElementById('mobile').classList.add('error');
+      isValid = false;
+    }
+
+    if (address.length < 10) {
+      document.getElementById('addressError').style.display = 'block';
+      document.getElementById('address').classList.add('error');
+      isValid = false;
+    }
+
+    if (!course) {
+      document.getElementById('courseError').style.display = 'block';
+      document.getElementById('course').classList.add('error');
+      isValid = false;
+    }
+
+    if (!isValid) return;
+
+    // Success state
+    const successMessage = document.getElementById('successMessage');
+    successMessage.style.display = 'block';
+
+    // Prepare WhatsApp message
+    const phoneNumber = "917361065324"; // Replace with your number
     const message = `*🎓 New Admission Form*\n\n` +
       `👤 *Name:* ${name}\n` +
       `👨‍👧 *Father's Name:* ${fatherName}\n` +
@@ -151,10 +348,16 @@
       `📱 *Mobile:* ${mobile}\n` +
       `🏠 *Address:* ${address}\n` +
       `📚 *Course:* ${course}\n` +
-      `🕒 *Batch:* ${batch}`;
+      `🕒 *Batch:* ${batch || 'Not specified'}`;
 
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-    window.open(url, '_blank');
+
+    // Redirect to WhatsApp after 2 seconds
+    setTimeout(() => {
+      window.open(url, '_blank');
+      successMessage.style.display = 'none';
+      document.getElementById('admissionForm').reset();
+    }, 2000);
   });
 </script>
 
