@@ -143,6 +143,22 @@
             color: var(--white);
         }
 
+        .nav-close {
+            display: none !important;
+        }
+
+        .nav-menu.active .nav-close {
+            display: block !important;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+        }
+
         /* Main Content */
         main {
             margin-top: var(--header-height);
@@ -611,17 +627,6 @@
 
             .nav-menu.active {
                 right: 0;
-            }
-
-            .nav-close {
-                position: absolute;
-                top: 1rem;
-                right: 1rem;
-                background: none;
-                border: none;
-                font-size: 1.5rem;
-                color: var(--dark);
-                cursor: pointer;
             }
 
             .gallery-grid {
