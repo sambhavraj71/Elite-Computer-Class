@@ -185,27 +185,28 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0.8rem 1rem;
+      padding: 1rem;
       max-width: 1200px;
       margin: 0 auto;
+      min-height: 60px; /* Ensure header has sufficient height */
     }
 
     .logo {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.6rem;
     }
 
     .logo-img {
-      width: 40px;
-      height: 40px;
+      width: 45px;
+      height: 45px;
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid var(--accent);
     }
 
     .logo-text {
-      font-size: clamp(1rem, 3vw, 1.1rem);
+      font-size: clamp(1.1rem, 3.5vw, 1.2rem);
       font-weight: 700;
     }
 
@@ -226,19 +227,36 @@
       background: none;
       border: none;
       color: var(--dark);
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       cursor: pointer;
       transition: var(--transition);
+      padding: 0.5rem;
     }
 
     .nav-toggle:hover {
       color: var(--primary);
     }
 
+    .nav-close {
+      display: none;
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 1.8rem;
+      color: var(--dark);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .nav-close:hover {
+      color: var(--primary);
+    }
+
     .nav-menu {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 1.2rem;
+      flex-wrap: wrap;
     }
 
     .nav-link {
@@ -246,8 +264,10 @@
       font-weight: 500;
       color: var(--dark);
       transition: var(--transition);
-      padding: 0.5rem;
-      font-size: clamp(0.9rem, 2.5vw, 1rem);
+      padding: 0.6rem;
+      font-size: clamp(0.95rem, 2.5vw, 1rem);
+      display: flex;
+      align-items: center;
     }
 
     .nav-link:hover {
@@ -270,8 +290,8 @@
     }
 
     .nav-link i {
-      margin-right: 0.3rem;
-      font-size: 0.8rem;
+      margin-right: 0.4rem;
+      font-size: 0.85rem;
     }
 
     /* Hero Section */
@@ -351,7 +371,7 @@
       position: relative;
     }
 
-    .course-card:hover {
+    .course-card:hover | .course-card:focus {
       transform: translateY(-8px);
       box-shadow: var(--shadow-lg);
     }
@@ -953,12 +973,16 @@
         max-width: 500px;
         margin: 0 auto;
       }
+
+      .nav-menu {
+        flex-wrap: nowrap;
+      }
     }
 
     @media (max-width: 768px) {
       .header-container {
-        padding: 0.8rem;
-        position: relative;
+        padding: 1rem 0.8rem;
+        min-height: 70px; /* Increased height for mobile */
       }
       
       .nav-toggle {
@@ -966,11 +990,15 @@
         z-index: 1001;
       }
       
+      .nav-close {
+        display: block;
+      }
+      
       .nav-menu {
         position: fixed;
         top: 0;
         right: -100%;
-        width: 70%;
+        width: 80%;
         max-width: 300px;
         height: 100vh;
         background: white;
@@ -980,6 +1008,7 @@
         box-shadow: -3px 0 10px rgba(0, 0, 0, 0.1);
         transition: right 0.3s ease-in-out;
         overflow-y: auto;
+        z-index: 1000;
       }
       
       .nav-menu.active {
@@ -1040,13 +1069,21 @@
     }
 
     @media (max-width: 480px) {
+      .header-container {
+        min-height: 65px;
+      }
+      
       .logo-text {
         font-size: clamp(0.9rem, 3vw, 1rem);
       }
       
       .logo-img {
-        width: 35px;
-        height: 35px;
+        width: 40px;
+        height: 40px;
+      }
+      
+      .nav-toggle {
+        font-size: 1.6rem;
       }
       
       .hero-content h1 {
@@ -1082,9 +1119,38 @@
         padding: 0 0.8rem;
       }
       
+      .header-container {
+        min-height: 65px;
+        padding: 0.8rem;
+      }
+      
       .nav-menu {
+        display: none; /* Hide by default in desktop mode on mobile */
+      }
+      
+      .nav-menu.active {
+        display: flex;
+        position: fixed;
+        top: 0;
+        right: 0;
         width: 80%;
-        max-width: 280px;
+        max-width: 300px;
+        height: 100vh;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 4rem 1.5rem;
+        background: white;
+        box-shadow: -3px 0 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        overflow-y: auto;
+      }
+      
+      .nav-toggle {
+        display: block;
+      }
+      
+      .nav-close {
+        display: block;
       }
       
       .hero-content h1 {
@@ -1111,6 +1177,22 @@
         padding: 0.5rem 1.2rem;
         font-size: clamp(0.85rem, 2vw, 0.9rem);
       }
+      
+      .section-title h2 {
+        font-size: clamp(1.4rem, 4vw, 1.6rem);
+      }
+      
+      .course-img {
+        height: 160px;
+      }
+      
+      .gallery-img {
+        height: 100%;
+      }
+      
+      .map-container iframe {
+        height: 200px;
+      }
     }
   </style>
 </head>
@@ -1130,7 +1212,7 @@
       </button>
       
       <nav class="nav-menu" id="nav-menu">
-        <button class="nav-toggle nav-close" id="nav-close">
+        <button class="nav-close" id="nav-close">
           <i class="fas fa-times"></i>
         </button>
         <a href="#" class="nav-link active"><i class="fas fa-home"></i> Home</a>
