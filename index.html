@@ -1702,114 +1702,128 @@
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
   
-  <script>
-    // Initialize AOS animation
-    AOS.init({
-      duration: 800,
-      easing: 'ease-in-out',
-      once: true,
-      offset: 80
-    });
-    
-    // Mobile Navigation Toggle
-    const navToggle = document.getElementById('nav-toggle');
-    const navClose = document.getElementById('nav-close');
-    const navMenu = document.getElementById('nav-menu');
-    
-    navToggle.addEventListener('click', () => {
-      navMenu.classList.add('active');
-    });
-    
-    navClose.addEventListener('click', () => {
+ <script>
+  // Initialize AOS animation
+  AOS.init({
+    duration: 800,
+    easing: 'ease-in-out',
+    once: true,
+    offset: 80
+  });
+  
+  // Mobile Navigation Toggle
+  const navToggle = document.getElementById('nav-toggle');
+  const navClose = document.getElementById('nav-close');
+  const navMenu = document.getElementById('nav-menu');
+  
+  navToggle.addEventListener('click', () => {
+    navMenu.classList.add('active');
+  });
+  
+  navClose.addEventListener('click', () => {
+    navMenu.classList.remove('active');
+  });
+  
+  // Close mobile menu when clicking a nav link
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
       navMenu.classList.remove('active');
     });
+  });
+  
+  // Header scroll effect
+  window.addEventListener('scroll', () => {
+    const header = document.getElementById('header');
+    const backToTop = document.getElementById('back-to-top');
     
-    // Close mobile menu when clicking a nav link
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-      });
-    });
+    if (window.scrollY > 80) {
+      header.classList.add('scrolled');
+      backToTop.classList.add('active');
+    } else {
+      header.classList.remove('scrolled');
+      backToTop.classList.remove('active');
+    }
+  });
+  
+  // Toast notification for coming soon features
+  function showToast(event) {
+    event.preventDefault();
     
-    // Header scroll effect
-    window.addEventListener('scroll', () => {
-      const header = document.getElementById('header');
-      const backToTop = document.getElementById('back-to-top');
+    Toastify({
+      text: "🚧 This feature is coming soon!",
+      duration: 3000,
+      close: true,
+      gravity: "top",
+      position: "center",
+      backgroundColor: "linear-gradient(to right, #f59e0b, #d97706)",
+      stopOnFocus: true
+    }).showToast();
+  }
+  
+  // Contact form submission
+  function submitForm() {
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const message = document.getElementById('message').value.trim();
+    
+    if (name && email && message) {
+      // Format the message for WhatsApp
+      const whatsappMessage = `Name: ${name}\nEmail: ${email}\nPhone: ${phone || 'Not provided'}\nMessage: ${message}`;
+      const encodedMessage = encodeURIComponent(whatsappMessage);
+      const whatsappUrl = `https://wa.me/+918292879444?text=${encodedMessage}`;
       
-      if (window.scrollY > 80) {
-        header.classList.add('scrolled');
-        backToTop.classList.add('active');
-      } else {
-        header.classList.remove('scrolled');
-        backToTop.classList.remove('active');
-      }
-    });
-    
-    // Toast notification for coming soon features
-    function showToast(event) {
-      event.preventDefault();
-      
+      // Show success toast
       Toastify({
-        text: "🚧 This feature is coming soon!",
+        text: "✓ Redirecting to WhatsApp with your message!",
         duration: 3000,
         close: true,
         gravity: "top",
         position: "center",
-        backgroundColor: "linear-gradient(to right, #f59e0b, #d97706)",
+        backgroundColor: "linear-gradient(to right, #10b981, #059669)",
+        stopOnFocus: true
+      }).showToast();
+      
+      // Reset the form
+      document.getElementById('contactForm').reset();
+      
+      // Redirect to WhatsApp after a short delay to allow toast to display
+      setTimeout(() => {
+        window.open(whatsappUrl, '_blank');
+      }, 1000);
+    } else {
+      // Show error toast if required fields are missing
+      Toastify({
+        text: "⚠ Please fill all required fields!",
+        duration: 3000,
+        close: true,
+        gravity: "top",
+        position: "center",
+        backgroundColor: "linear-gradient(to right, #ef4444, #dc2626)",
         stopOnFocus: true
       }).showToast();
     }
-    
-    // Contact form submission
-    function submitForm() {
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const phone = document.getElementById('phone').value;
-      const message = document.getElementById('message').value;
+  }
+  
+  // Smooth scrolling for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
       
-      if (name && email && message) {
-        Toastify({
-          text: "✓ Your message has been sent! We'll contact you soon.",
-          duration: 5000,
-          close: true,
-          gravity: "top",
-          position: "center",
-          backgroundColor: "linear-gradient(to right, #10b981, #059669)",
-          stopOnFocus: true
-        }).showToast();
-        
-        document.getElementById('contactForm').reset();
-      } else {
-        Toastify({
-          text: "⚠ Please fill all required fields!",
-          duration: 3000,
-          close: true,
-          gravity: "top",
-          position: "center",
-          backgroundColor: "linear-gradient(to right, #ef4444, #dc2626)",
-          stopOnFocus: true
-        }).showToast();
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+      
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        window.scrollTo({
+          top: targetElement.offsetTop - 60,
+          behavior: 'smooth'
+        });
       }
-    }
-    
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        const targetId = this.getAttribute('href');
-        if (targetId === '#') return;
-        
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          window.scrollTo({
-            top: targetElement.offsetTop - 60,
-            behavior: 'smooth'
-          });
-        }
-      });
     });
-  </script>
+  });
+</script>
 </body>
 </html>
