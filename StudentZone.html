@@ -1,226 +1,238 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="StudentZone.css" />
+    <title>Student Zone | Elite Computer Classes</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <title>Elite Computer Classes - Student Zone</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --sky-blue-light: #00BFFF;
-            --sky-blue-dark: #1E90FF;
-            --orange-light: #FF7F50;
-            --orange-dark: #FF4500;
-            --navy-light: #003366;
-            --navy-dark: #000080;
-            --white: #FFFFFF;
-            --gray-light: #F7F7F7;
-            --gray-dark: #333333;
-            --primary-color: #4a6bff;
-            --secondary-color: #6c757d;
-            --dark-color: #343a40;
-            --light-color: #f8f9fa;
-            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.2);
-            --border-radius: 12px;
-            --header-height: 80px;
-            --max-content-width: 1440px;
-            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            --gradient: linear-gradient(135deg, #4a6bff 0%, #6b8cff 100%);
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #ec4899;
+            --accent: #22d3ee;
+            --light: #f9fafb;
+            --dark: #1f2937;
+            --gray: #6b7280;
+            --white: #ffffff;
+            --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+            --radius-md: 12px;
+            --transition: all 0.3s ease;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            --header-height: 70px;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
         }
 
-        html, body {
-            width: 100%;
-            overflow-x: hidden;
-            background-color: var(--gray-light);
-            color: var(--gray-dark);
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--light);
+            color: var(--dark);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         /* Header */
         header {
-            background: linear-gradient(to right, var(--navy-light), var(--navy-dark));
-            color: var(--white);
-            position: sticky;
+            position: fixed;
             top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-height);
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: var(--shadow-sm);
             z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .header-content {
+        .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
+            max-width: 1200px;
+            height: 100%;
+            margin: 0 auto;
+            padding: 0 1.5rem;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
-            white-space: nowrap;
+            gap: 0.5rem;
+            text-decoration: none;
         }
 
-        .logo img {
+        .logo-img {
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            border: 2px solid var(--orange-light);
+            object-fit: cover;
+            border: 2px solid var(--primary);
+            transition: var(--transition);
         }
 
-        .logo h1 {
-            font-size: 1.4rem;
+        .logo-text {
             font-weight: 700;
-            display: inline-block;
+            font-size: 1.0rem;
+            color: var(--dark);
+            letter-spacing: 0.5px;
         }
 
-        .logo h1 span.elite {
-            color: var(--sky-blue-light);
+        .logo-text span {
+            color: var(--primary);
         }
 
-        .logo h1 span.classes {
-            color: var(--orange-light);
+        .logo:hover .logo-img {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(37, 99, 235, 0.3);
         }
 
-        .menu-toggle {
+        .nav-toggle {
             display: none;
-            font-size: 1.5rem;
             background: none;
             border: none;
-            color: var(--white);
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .menu-toggle:hover {
-            transform: rotate(90deg);
-        }
-
-        nav {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
-        nav a {
-            color: var(--white);
-            text-decoration: none;
-            font-size: 0.5rem;
-            font-weight: 500;
-            padding: 8px 12px;
-            border-radius: 5px;
-            transition: background 0.3s, color 0.3s, transform 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        nav a:hover {
-            background: var(--sky-blue-light);
-            color: var(--navy-dark);
-            transform: scale(1.05);
-        }
-
-        nav a i {
-            font-size: 0.9rem;
-            transition: transform 0.3s;
-        }
-
-        nav a:hover i {
-            transform: rotate(360deg);
-        }
-
-        /* Toggle Menu Close Button */
-        .nav-close {
-            display: none;
-            position: fixed;
-            top: 20px;
-            right: 20px;
+            color: var(--primary);
             font-size: 1.5rem;
-            color: var(--white);
-            background: var(--orange-light);
-            border: none;
-            border-radius: 50%;
-            width: 35px;
-            height: 35px;
-            align-items: center;
-            justify-content: center;
             cursor: pointer;
-            transition: background 0.3s, transform 0.3s;
-            z-index: 1001;
+            transition: var(--transition);
         }
 
-        .nav-close.active {
+        .nav-toggle:hover {
+            color: var(--secondary);
+        }
+
+        .nav-menu {
             display: flex;
-            animation: fadeIn 0.3s ease-in;
+            align-items: center;
+            gap: 1rem;
         }
 
-        .nav-close:hover {
-            background: var(--orange-dark);
-            transform: scale(1.1);
+        .nav-link {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.4rem 0.5rem;
+            border-radius: var(--radius-md);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .nav-link i {
+            font-size: 0.9rem;
         }
 
-        /* Popular Courses Section */
+        .nav-link:hover {
+            color: var(--primary);
+            background: rgba(37, 99, 235, 0.1);
+        }
+
+        .nav-link.active {
+            background: var(--gradient);
+            color: var(--white);
+        }
+
+        .nav-close {
+            display: none !important;
+        }
+
+        .nav-menu.active .nav-close {
+            display: block !important;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        main {
+            margin-top: var(--header-height);
+            padding: 2rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Search Bar */
+        .search-bar {
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-bar input {
+            width: 100%;
+            max-width: 400px;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--gray);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 8px rgba(37, 99, 235, 0.2);
+        }
+
+        /* Section Styles */
         .popular-categories {
-            padding: 60px 0;
+            padding: 3rem 0;
         }
 
         .popular-heading {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--navy-dark);
+            font-size: 2.5rem;
+            color: var(--primary-dark);
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 2rem;
             position: relative;
         }
 
         .popular-heading::after {
             content: '';
-            width: 80px;
-            height: 4px;
-            background: var(--orange-light);
             position: absolute;
-            bottom: -10px;
             left: 50%;
             transform: translateX(-50%);
+            bottom: -5px;
+            width: 50px;
+            height: 3px;
+            background: var(--gradient);
             border-radius: 2px;
         }
 
         .categories-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            max-width: var(--max-content-width);
-            margin: 0 auto;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .category-card {
             background: var(--white);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
             overflow: hidden;
             transition: var(--transition);
+            position: relative;
             animation: cardPop 0.5s ease-out forwards;
         }
 
@@ -236,204 +248,465 @@
 
         .category-card:hover {
             transform: translateY(-10px);
-            box-shadow: var(--shadow-hover);
+            box-shadow: var(--shadow-md);
         }
 
         .category-card img {
             width: 100%;
-            aspect-ratio: 16/9;
+            height: 150px;
             object-fit: cover;
-            border-bottom: 3px solid var(--orange-light);
+            border-bottom: 3px solid var(--primary);
         }
 
         .category-icon {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 15px 0;
+            margin: 1rem 0;
         }
 
         .category-icon i {
             font-size: 2.5rem;
-            color: var(--sky-blue-light);
-            border: 2px solid var(--orange-light);
+            color: var(--primary);
+            border: 2px solid var(--primary);
             border-radius: 50%;
-            padding: 10px;
-            transition: transform 0.3s;
+            padding: 0.5rem;
+            transition: transform 0.3s ease;
         }
 
         .category-card:hover .category-icon i {
             transform: rotate(360deg);
+            color: var(--white);
+            border-color: var(--white);
+            background: var(--primary);
         }
 
         .category-name {
             font-size: 1.2rem;
             font-weight: 600;
-            color: var(--navy-dark);
+            color: var(--dark);
             text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 0.5rem;
         }
 
         .category-count {
             font-size: 0.9rem;
-            color: var(--gray-dark);
+            color: var(--gray);
             text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 0.5rem;
         }
 
         .category-desc {
             font-size: 0.85rem;
-            color: var(--secondary-color);
+            color: var(--gray);
             text-align: center;
-            padding: 0 15px;
-            margin-bottom: 15px;
+            padding: 0 1rem;
+            margin-bottom: 1rem;
         }
 
         .category-card a {
             display: inline-block;
-            background: var(--sky-blue-light);
+            padding: 0.5rem 1rem;
+            background: var(--primary);
             color: var(--white);
-            padding: 8px 16px;
-            border-radius: 25px;
             text-decoration: none;
-            font-weight: 600;
-            border: 2px solid var(--orange-light);
-            transition: background 0.3s, transform 0.3s;
-            margin: 0 auto 15px;
-            text-align: center;
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition);
+            margin: 0 auto 1rem;
+            opacity: 0;
+            transform: translateY(10px);
         }
 
-        .category-card a:hover {
-            background: var(--sky-blue-dark);
+        .category-card:hover a {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .category-card:hover {
+            background: var(--gradient);
+            color: var(--white);
+        }
+
+        .category-card:hover .category-name,
+        .category-card:hover .category-count,
+        .category-card:hover .category-desc {
+            color: var(--white);
+        }
+
+        .explore-btn {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .explore-btn a {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .explore-btn a:hover {
+            background: var(--primary-dark);
             transform: scale(1.05);
         }
 
-        .Explore {
-            text-align: center;
-            margin-top: 20px;
+        /* Gallery Section */
+        .gallery-section {
+            margin-bottom: 3rem;
+            padding: 1.5rem;
+            background: var(--white);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
         }
 
-        .Explore a {
-            background: var(--sky-blue-light);
-            color: var(--white);
-            padding: 12px 24px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            border: 2px solid var(--orange-light);
-            transition: background 0.3s, transform 0.3s;
+        .gallery-section h2 {
+            font-size: 2rem;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            position: relative;
         }
 
-        .Explore a:hover {
-            background: var(--sky-blue-dark);
+        .gallery-section h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 50px;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover .gallery-img {
             transform: scale(1.05);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+            opacity: 0;
+            transition: var(--transition);
+            display: flex;
+            align-items: flex-end;
+            padding: 0.75rem;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-caption {
+            color: var(--white);
+            font-size: 0.9rem;
+            transform: translateY(10px);
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
+        .gallery-controls {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .gallery-btn {
+            width: 32px;
+            height: 32px;
+            background: var(--light);
+            color: var(--primary);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .gallery-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .gallery-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 2rem 0;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .footer-col h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 30px;
+            height: 2px;
+            background: var(--gradient);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            margin-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        /* Back to Top */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 100;
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--primary-dark);
+            transform: scale(1.1);
+        }
+
+        /* Loader */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(37, 99, 235, 0.2);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
         /* Responsive Design */
-        @media (max-width: 768px) {
-            .menu-toggle {
+        @media (max-width: 992px) {
+            .nav-toggle {
                 display: block;
             }
 
-            nav {
+            .nav-menu {
                 position: fixed;
                 top: 0;
-                left: 0;
+                right: -100%;
+                width: 250px;
                 height: 100vh;
-                width: 100vw;
-                background: linear-gradient(to bottom, var(--navy-dark), var(--navy-light));
+                background: var(--white);
                 flex-direction: column;
-                padding: 80px 20px 20px;
-                transform: translateX(100%);
-                transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-                box-shadow: none;
-                z-index: 1000;
-                overflow-y: auto;
-                overflow-x: hidden;
+                padding: 5rem 1.5rem;
+                box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
+                transition: right 0.3s ease;
             }
 
-            nav.active {
-                transform: translateX(0);
-                animation: slideInMenu 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
-            }
-
-            @keyframes slideInMenu {
-                from { transform: translateX(100%); opacity: 0.5; }
-                to { transform: translateX(0); opacity: 1; }
-            }
-
-            nav:not(.active) {
-                animation: slideOutMenu 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
-            }
-
-            @keyframes slideOutMenu {
-                from { transform: translateX(0); opacity: 1; }
-                to { transform: translateX(100%); opacity: 0.5; }
-            }
-
-            nav a {
-                font-size: 1.2rem;
-                padding: 15px 20px;
-                margin: 8px 0;
-                border-radius: 8px;
-                background: rgba(255, 255, 255, 0.1);
-                transition: background 0.3s, transform 0.3s, opacity 0.3s;
-                width: 100%;
-                text-align: left;
-                border-left: 3px solid transparent;
-                opacity: 0;
-                transform: translateX(20px);
-            }
-
-            nav.active a {
-                opacity: 1;
-                transform: translateX(0);
-            }
-
-            nav.active a:nth-child(2) { transition-delay: 0.1s; }
-            nav.active a:nth-child(3) { transition-delay: 0.2s; }
-            nav.active a:nth-child(4) { transition-delay: 0.3s; }
-            nav.active a:nth-child(5) { transition-delay: 0.4s; }
-            nav.active a:nth-child(6) { transition-delay: 0.5s; }
-            nav.active a:nth-child(7) { transition-delay: 0.6s; }
-            nav.active a:nth-child(8) { transition-delay: 0.7s; }
-
-            nav a:hover {
-                background: rgba(0, 191, 255, 0.3);
-                transform: translateX(10px);
-                border-left: 3px solid var(--sky-blue-light);
-            }
-
-            nav a i {
-                font-size: 1.2rem;
-                margin-right: 12px;
-            }
-
-            .logo h1 {
-                font-size: 1.2rem;
+            .nav-menu.active {
+                right: 0;
             }
 
             .categories-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            }
+
+            .gallery-img {
+                height: 120px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 1rem;
+            }
+
+            .logo-text {
+                font-size: 1rem;
+            }
+
+            .popular-heading {
+                font-size: 2rem;
             }
 
             .category-name {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
 
             .category-desc {
                 font-size: 0.8rem;
             }
+
+            .gallery-img {
+                height: 100px;
+            }
         }
 
-        @media (max-width: 480px) {
-            .logo h1 {
-                font-size: 1rem;
+        @media (max-width: 576px) {
+            .logo-img {
+                width: 40px;
+                height: 40px;
             }
 
             .categories-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            }
+
+            .gallery-img {
+                height: 90px;
+            }
+
+            .back-to-top {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
             }
         }
 
@@ -445,234 +718,358 @@
             .category-name {
                 font-size: 1.3rem;
             }
-
-            .header-content {
-                padding: 20px 5%;
-            }
         }
     </style>
 </head>
 <body>
+    <!-- Loader -->
+    <div class="loader">
+        <div class="loader-spinner"></div>
+    </div>
+
     <!-- Header -->
     <header>
-        <div class="container header-content">
-            <div class="logo">
-                <img src="logo.jpg" alt="Logo">
-                <h1><span class="elite">ELITE</span> <span class="classes">COMPUTER CLASSES</span></h1>
-            </div>
-            <button class="menu-toggle" id="menu-toggle">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="logo.jpg" alt="Elite Computer Classes Logo" class="logo-img">
+                <span class="logo-text">Elite <span>Computer</span><span>Classes</span></span>
+            </a>
+            <button class="nav-toggle" id="navToggle">
                 <i class="fas fa-bars"></i>
             </button>
-            <nav id="navbar">
-                <button class="nav-close" id="nav-close"><i class="fas fa-times"></i></button>
-                <a href="index.html"><i class="fas fa-home"></i> Home</a>
-                <a href="courses.html"><i class="fas fa-book-open"></i> Courses</a>
-                <a href="category.html"><i class="fas fa-layer-group"></i> Category</a>
-                <a href=""><i class="fas fa-user-graduate"></i> Student Zone</a>
-                <a href="Admission.html"><i class="fas fa-file-signature"></i> Admission</a>
-                <a href="gallery.html"><i class="fas fa-images"></i> Gallery</a>
-                <a href="#about_us"><i class="fas fa-info-circle"></i> About Us</a>
+            <nav class="nav-menu" id="navMenu">
+                <button class="nav-close" id="navClose">
+                    <i class="fas fa-times"></i>
+                </button>
+                <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+                <a href="courses.html" class="nav-link"><i class="fas fa-book-open"></i> Courses</a>
+                <a href="category.html" class="nav-link"><i class="fas fa-layer-group"></i> Category</a>
+                <a href="StudentZone.html" class="nav-link active"><i class="fas fa-user-graduate"></i> Student Zone</a>
+                <a href="Admission.html" class="nav-link"><i class="fas fa-file-signature"></i> Admission</a>
+                <a href="gallery.html" class="nav-link"><i class="fas fa-images"></i> Gallery</a>
+                <a href="#about" class="nav-link"><i class="fas fa-info-circle"></i> About Us</a>
             </nav>
         </div>
     </header>
 
-    <!-- Main Content of Student Zone -->
-    <div class="container">
-        <!-- Popular Courses Section -->
-        <section class="popular-categories">
-            <h4 class="popular-heading"><i class="fas fa-graduation-cap"></i> Popular Courses</h4>
-            <div class="categories-grid">
-                <div class="category-card">
-                    <img src="./Images/Courses/ADCA.jpg" alt="ADCA Course">
-                    <div class="category-icon">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                    <h3 class="category-name">ADCA</h3>
-                    <p class="category-count">12 Months | $8500</p>
-                    <p class="category-desc">Advanced Diploma in Computer Applications with comprehensive training in software and programming.</p>
-                    <a href="details/adca.html">Learn More</a>
-                </div>
-                <div class="category-card">
-                    <img src="./Images/Courses/ADCA+.jpg" alt="ADCA+ Course">
-                    <div class="category-icon">
-                        <i class="fas fa-paint-brush"></i>
-                    </div>
-                    <h3 class="category-name">ADCA+</h3>
-                    <p class="category-count">12 Months | $8500</p>
-                    <p class="category-desc">Enhanced ADCA with additional modules in advanced software and project management.</p>
-                    <a href="details/adca+.html">Learn More</a>
-                </div>
-                <div class="category-card">
-                    <img src="./Images/Courses/PGDCA.jpg" alt="PGDCA Course">
-                    <div class="category-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3 class="category-name">PGDCA</h3>
-                    <p class="category-count">12 Months | $5500</p>
-                    <p class="category-desc">Post Graduate Diploma in Computer Applications for in-depth IT skills and career growth.</p>
-                    <a href="details/pgdca.html">Learn More</a>
-                </div>
-                <div class="category-card">
-                    <img src="./Images/Courses/DCA.jpg" alt="DCA Course">
-                    <div class="category-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3 class="category-name">DCA</h3>
-                    <p class="category-count">3 Months | $2200</p>
-                    <p class="category-desc">Diploma in Computer Applications covering essential software and office tools.</p>
-                    <a href="details/dca.html">Learn More</a>
-                </div>
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <input type="text" id="categorySearch" placeholder="Search courses or categories...">
             </div>
-            <div class="Explore">
-                <a href="Category.html">
-                    Explore
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-        </section>
-        <!-- Popular Categories Section -->
-        <section class="popular-categories">
-            <h4><i class="fas fa-tags"></i> Popular Categories</h4>
-            <div class="categories-grid">
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                    <h3 class="category-name">Computer Courses</h3>
-                    <p class="category-count">8 Courses</p>
-                </div>
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-paint-brush"></i>
-                    </div>
-                    <h3 class="category-name">PDF Notes</h3>
-                    <p class="category-count">50+ Notes</p>
-                </div>
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3 class="category-name">Computer Projects</h3>
-                    <p class="category-count">35+ Projects</p>
-                </div>
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-camera"></i>
-                    </div>
-                    <h3 class="category-name">Beltron DEO Preparation</h3>
-                    <p class="category-count">10+ Subject</p>
-                </div>
-            </div>
-            <div class="Explore">
-                <a href="Category.html">
-                    Explore
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-        </section>
 
-        <!-- Gallery Section -->
-        <section class="gallery-section">
-            <h2><i class="fas fa-images"></i> Gallery</h2>
-            <div class="gallery-container" id="galleryContainer">
-                <div class="gallery-grid">
-                    <div class="gallery-item">
-                        <img src="Images/Award_Ceremony_2025/Award_Ceremony1.jpg" alt="Gallery Image">
+            <!-- Popular Courses Section -->
+            <section class="popular-categories">
+                <h4 class="popular-heading"><i class="fas fa-graduation-cap"></i> Popular Courses</h4>
+                <div class="categories-grid">
+                    <div class="category-card" data-category="adca">
+                        <img src="./Images/Courses/ADCA.jpg" alt="ADCA Course">
+                        <div class="category-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3 class="category-name">ADCA</h3>
+                        <p class="category-count">12 Months | $8500</p>
+                        <p class="category-desc">Advanced Diploma in Computer Applications with comprehensive training in software and programming.</p>
+                        <a href="details/adca.html">Learn More</a>
                     </div>
-                    <div class="gallery-item">
-                        <img src="Images/Certification/Certification1.jpg" alt="Gallery Image">
+                    <div class="category-card" data-category="adca+">
+                        <img src="./Images/Courses/ADCA+.jpg" alt="ADCA+ Course">
+                        <div class="category-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h3 class="category-name">ADCA+</h3>
+                        <p class="category-count">12 Months | $8500</p>
+                        <p class="category-desc">Enhanced ADCA with additional modules in advanced software and project management.</p>
+                        <a href="details/adca+.html">Learn More</a>
                     </div>
-                    <div class="gallery-item">
-                        <img src="Images/Director/Director1.jpg" alt="Gallery Image">
+                    <div class="category-card" data-category="pgdca">
+                        <img src="./Images/Courses/PGDCA.jpg" alt="PGDCA Course">
+                        <div class="category-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="category-name">PGDCA</h3>
+                        <p class="category-count">12 Months | $5500</p>
+                        <p class="category-desc">Post Graduate Diploma in Computer Applications for in-depth IT skills and career growth.</p>
+                        <a href="details/pgdca.html">Learn More</a>
                     </div>
-                    <div class="gallery-item">
-                        <img src="Images/Job2025/job20251.jpg" alt="Gallery Image">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="Images/NEWBatch/NewBatch1.jpg" alt="Gallery Image">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="Images/social/Social1.jpg" alt="Gallery Image">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="Images/Award_Ceremony_2025/Award_Ceremony10.jpg" alt="Gallery Image">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="Images/Certification/Certification10.jpg" alt="Gallery Image">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="Images/Director/Director10.jpg" alt="Gallery Image">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="Images/Director/Director14.jpg" alt="Gallery Image">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="Images/Certification/Certification7.jpg" alt="Gallery Image">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="Images/Award_Ceremony_2025/Award_Ceremony15.jpg" alt="Gallery Image">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="Images/Award_Ceremony_2025/Award_Ceremony5.jpg" alt="Gallery Image">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="Images/Award_Ceremony_2025/Award_Ceremony3.jpg" alt="Gallery Image">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="Images/Director/Director19.jpg" alt="Gallery Image">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="Images/TestSeries/TestSeries3.jpg" alt="Gallery Image">
+                    <div class="category-card" data-category="dca">
+                        <img src="./Images/Courses/DCA.jpg" alt="DCA Course">
+                        <div class="category-icon">
+                            <i class="fas fa-desktop"></i>
+                        </div>
+                        <h3 class="category-name">DCA</h3>
+                        <p class="category-count">3 Months | $2200</p>
+                        <p class="category-desc">Diploma in Computer Applications covering essential software and office tools.</p>
+                        <a href="details/dca.html">Learn More</a>
                     </div>
                 </div>
-                <div class="gallery-overlay">
-                    <div class="gallery-text">
-                        <p>Click anywhere to view full gallery</p>
-                        <i class="fas fa-expand" style="font-size: 2rem; margin-top: 1rem;"></i>
+                <div class="explore-btn">
+                    <a href="courses.html">Explore More Courses <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </section>
+
+            <!-- Popular Categories Section -->
+            <section class="popular-categories">
+                <h4 class="popular-heading"><i class="fas fa-tags"></i> Popular Categories</h4>
+                <div class="categories-grid">
+                    <div class="category-card" data-category="computer-courses">
+                        <div class="category-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3 class="category-name">Computer Courses</h3>
+                        <p class="category-count">8 Courses</p>
+                        <p class="category-desc">Comprehensive training in programming, web development, and IT skills.</p>
+                        <a href="category.html#computer-courses">Learn More</a>
                     </div>
+                    <div class="category-card" data-category="pdf-notes">
+                        <div class="category-icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <h3 class="category-name">PDF Notes</h3>
+                        <p class="category-count">50+ Notes</p>
+                        <p class="category-desc">Downloadable study materials for all courses and subjects.</p>
+                        <a href="category.html#pdf-notes">Learn More</a>
+                    </div>
+                    <div class="category-card" data-category="computer-projects">
+                        <div class="category-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <h3 class="category-name">Computer Projects</h3>
+                        <p class="category-count">35+ Projects</p>
+                        <p class="category-desc">Hands-on projects to build real-world applications.</p>
+                        <a href="category.html#computer-projects">Learn More</a>
+                    </div>
+                    <div class="category-card" data-category="beltron-deo">
+                        <div class="category-icon">
+                            <i class="fas fa-book-reader"></i>
+                        </div>
+                        <h3 class="category-name">Beltron DEO Preparation</h3>
+                        <p class="category-count">10+ Subjects</p>
+                        <p class="category-desc">Specialized training for Beltron DEO exams.</p>
+                        <a href="category.html#beltron-deo">Learn More</a>
+                    </div>
+                </div>
+                <div class="explore-btn">
+                    <a href="category.html">Explore More Categories <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </section>
+
+            <!-- Gallery Section -->
+            <section class="gallery-section">
+                <h2><i class="fas fa-images"></i> Gallery</h2>
+                <div class="gallery-grid" id="galleryGrid">
+                    <div class="gallery-item" data-caption="Award Ceremony">
+                        <img src="Images/Award_Ceremony_2025/Award_Ceremony1.jpg" alt="Award Ceremony" class="gallery-img">
+                        <div class="gallery-overlay"><span class="gallery-caption">Award Ceremony</span></div>
+                    </div>
+                    <div class="gallery-item" data-caption="Course Completion">
+                        <img src="Images/Certification/Certification1.jpg" alt="Certification" class="gallery-img">
+                        <div class="gallery-overlay"><span class="gallery-caption">Course Completion</span></div>
+                    </div>
+                    <div class="gallery-item" data-caption="Director at Event">
+                        <img src="Images/Director/Director1.jpg" alt="Director Event" class="gallery-img">
+                        <div class="gallery-overlay"><span class="gallery-caption">Director at Event</span></div>
+                    </div>
+                    <div class="gallery-item" data-caption="Placement Drive">
+                        <img src="Images/Job2025/job20251.jpg" alt="Job 2025" class="gallery-img">
+                        <div class="gallery-overlay"><span class="gallery-caption">Placement Drive</span></div>
+                    </div>
+                    <div class="gallery-item" data-caption="Orientation Day">
+                        <img src="Images/NEWBatch/NewBatch1.jpg" alt="New Batch 2025" class="gallery-img">
+                        <div class="gallery-overlay"><span class="gallery-caption">Orientation Day</span></div>
+                    </div>
+                    <div class="gallery-item" data-caption="Social Media Post">
+                        <img src="Images/social/Social1.jpg" alt="Social Media" class="gallery-img">
+                        <div class="gallery-overlay"><span class="gallery-caption">Social Media Post</span></div>
+                    </div>
+                    <div class="gallery-item" data-caption="Top Performer Award">
+                        <img src="Images/Award_Ceremony_2025/Award_Ceremony10.jpg" alt="Award Ceremony" class="gallery-img">
+                        <div class="gallery-overlay"><span class="gallery-caption">Top Performer Award</span></div>
+                    </div>
+                    <div class="gallery-item" data-caption="Technical Certification">
+                        <img src="Images/Certification/Certification10.jpg" alt="Certification" class="gallery-img">
+                        <div class="gallery-overlay"><span class="gallery-caption">Technical Certification</span></div>
+                    </div>
+                    <div class="gallery-item" data-caption="Seminar">
+                        <img src="Images/Director/Director10.jpg" alt="Director Event" class="gallery-img">
+                        <div class="gallery-overlay"><span class="gallery-caption">Seminar</span></div>
+                    </div>
+                    <div class="gallery-item" data-caption="Guest Lecture">
+                        <img src="Images/Director/Director14.jpg" alt="Director Event" class="gallery-img">
+                        <div class="gallery-overlay"><span class="gallery-caption">Guest Lecture</span></div>
+                    </div>
+                    <div class="gallery-item" data-caption="Certification Event">
+                        <img src="Images/Certification/Certification7.jpg" alt="Certification" class="gallery-img">
+                        <div class="gallery-overlay"><span class="gallery-caption">Certification Event</span></div>
+                    </div>
+                    <div class="gallery-item" data-caption="Student Recognition">
+                        <img src="Images/Award_Ceremony_2025/Award_Ceremony15.jpg" alt="Award Ceremony" class="gallery-img">
+                        <div class="gallery-overlay"><span class="gallery-caption">Student Recognition</span></div>
+                    </div>
+                    <div class="gallery-item" data-caption="Achievement Awards">
+                        <img src="Images/Award_Ceremony_2025/Award_Ceremony5.jpg" alt="Award Ceremony" class="gallery-img">
+                        <div class="gallery-overlay"><span class="gallery-caption">Achievement Awards</span></div>
+                    </div>
+                    <div class="gallery-item" data-caption="Cultural Performance">
+                        <img src="Images/Award_Ceremony_2025/Award_Ceremony3.jpg" alt="Award Ceremony" class="gallery-img">
+                        <div class="gallery-overlay"><span class="gallery-caption">Cultural Performance</span></div>
+                    </div>
+                    <div class="gallery-item" data-caption="Industry Visit">
+                        <img src="Images/Director/Director19.jpg" alt="Director Event" class="gallery-img">
+                        <div class="gallery-overlay"><span class="gallery-caption">Industry Visit</span></div>
+                    </div>
+                    <div class="gallery-item" data-caption="Test Series">
+                        <img src="Images/TestSeries/TestSeries3.jpg" alt="Test Series" class="gallery-img">
+                        <div class="gallery-overlay"><span class="gallery-caption">Test Series</span></div>
+                    </div>
+                </div>
+                <div class="gallery-controls">
+                    <button class="gallery-btn prev-btn" data-gallery="student-zone"><i class="fas fa-chevron-left"></i></button>
+                    <button class="gallery-btn next-btn" data-gallery="student-zone"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="explore-btn">
+                    <a href="gallery.html">Explore More Photos <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>About Us</h3>
+                <p>Elite Computer Classes offers top-tier computer education since 2010, empowering students with modern technical skills.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
-        </section>
-    </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="courses.html"><i class="fas fa-chevron-right"></i> Courses</a></li>
+                    <li><a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+                    <li><a href="StudentZone.html"><i class="fas fa-chevron-right"></i> Student Zone</a></li>
+                    <li><a href="Admission.html"><i class="fas fa-chevron-right"></i> Admission</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Contact Us</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-map-marker-alt"></i> 123 Education St, Learning City</a></li>
+                    <li><a href="tel:+919876543210"><i class="fas fa-phone-alt"></i> +91 98765 43210</a></li>
+                    <li><a href="mailto:info@eliteclasses.com"><i class="fas fa-envelope"></i> info@eliteclasses.com</a></li>
+                    <li><a href="#"><i class="fas fa-clock"></i> Mon-Sat: 9AM - 6PM</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Elite Computer Classes. All Rights Reserved.</p>
+        </div>
+    </footer>
 
-    <script defer src="StudentZone.js"></script>
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     <script>
-        // Toggle Menu
-        const menuToggle = document.getElementById('menu-toggle');
-        const navbar = document.getElementById('navbar');
-        const navClose = document.getElementById('nav-close');
-        const body = document.body;
-
-        function toggleMenu() {
-            navbar.classList.toggle('active');
-            navClose.classList.toggle('active');
-            const icon = menuToggle.querySelector('i');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
-            body.style.overflow = navbar.classList.contains('active') ? 'hidden' : 'auto';
-        }
-
-        menuToggle.addEventListener('click', toggleMenu);
-
-        navClose.addEventListener('click', () => {
-            navbar.classList.remove('active');
-            navClose.classList.remove('active');
-            const icon = menuToggle.querySelector('i');
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
-            body.style.overflow = 'auto';
-        });
-
-        const navLinks = document.querySelectorAll('#navbar a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                navbar.classList.remove('active');
-                navClose.classList.remove('active');
-                const icon = menuToggle.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-                body.style.overflow = 'auto';
+        document.addEventListener('DOMContentLoaded', () => {
+            // Loader
+            const loader = document.querySelector('.loader');
+            window.addEventListener('load', () => {
+                setTimeout(() => loader.classList.add('hidden'), 500);
             });
+
+            // Mobile Navigation
+            const navToggle = document.getElementById('navToggle');
+            const navMenu = document.getElementById('navMenu');
+            const navClose = document.getElementById('navClose');
+
+            navToggle.addEventListener('click', () => {
+                navMenu.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+
+            navClose.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+            });
+
+            // Back to Top
+            const backToTop = document.getElementById('backToTop');
+            window.addEventListener('scroll', () => {
+                backToTop.classList.toggle('active', window.pageYOffset > 200);
+            });
+
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Card Animation
+            const categoryCards = document.querySelectorAll('.category-card');
+            categoryCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+
+            // Search Functionality
+            const searchInput = document.getElementById('categorySearch');
+            searchInput.addEventListener('input', () => {
+                const query = searchInput.value.toLowerCase();
+                categoryCards.forEach(card => {
+                    const category = card.getAttribute('data-category').toLowerCase();
+                    const name = card.querySelector('.category-name').textContent.toLowerCase();
+                    const isMatch = category.includes(query) || name.includes(query);
+                    card.style.display = isMatch ? 'block' : 'none';
+                });
+            });
+
+            // Gallery Navigation
+            const galleryGrid = document.getElementById('galleryGrid');
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
+            let scrollAmount = 0;
+            const scrollStep = 300;
+
+            nextBtn.addEventListener('click', () => {
+                scrollAmount += scrollStep;
+                galleryGrid.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+                updateButtons();
+            });
+
+            prevBtn.addEventListener('click', () => {
+                scrollAmount -= scrollStep;
+                galleryGrid.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+                updateButtons();
+            });
+
+            function updateButtons() {
+                prevBtn.disabled = scrollAmount <= 0;
+                nextBtn.disabled = scrollAmount >= galleryGrid.scrollWidth - galleryGrid.clientWidth;
+            }
+
+            galleryGrid.addEventListener('scroll', updateButtons);
+            updateButtons();
         });
     </script>
 </body>
