@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>About Us - Elite Computer Classes</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Toastify -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <!-- AOS Animation -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-light: #3b82f6;
+      --accent: #f59e0b;
+      --accent-dark: #d97706;
+      --dark: #1e293b;
+      --darker: #0f172a;
+      --light: #f8fafc;
+      --gray: #94a3b8;
+      --success: #10b981;
+      --error: #ef4444;
+      
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .section {
+      padding: 4rem 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .section-title h2 {
+      font-size: clamp(1.8rem, 5vw, 2.2rem);
+      color: var(--darker);
+      margin-bottom: 1rem;
+    }
+
+    .section-title p {
+      max-width: 600px;
+      margin: 0 auto;
+      color: var(--gray);
+      font-size: clamp(0.9rem, 3vw, 1rem);
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -0.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      border-radius: 2px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
+    }
+
+    .btn-primary {
+      background: linear-gradient(to right, var(--primary), var(--primary-dark));
+      color: white;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(to right, var(--primary-dark), var(--primary));
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn-accent {
+      background: linear-gradient(to right, var(--accent), var(--accent-dark));
+      color: white;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-accent:hover {
+      background: linear-gradient(to right, var(--accent-dark), var(--accent));
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+
+    header.scrolled {
+      box-shadow: var(--shadow);
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      min-height: 60px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .logo-img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--accent);
+    }
+
+    .logo-text {
+      font-size: clamp(1.1rem, 3.5vw, 1.2rem);
+      font-weight: 700;
+    }
+
+    .logo-text span {
+      display: inline-block;
+    }
+
+    .logo-text .elite {
+      color: var(--primary);
+    }
+
+    .logo-text .classes {
+      color: var(--accent);
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--dark);
+      font-size: 1.8rem;
+      cursor: pointer;
+      transition: var(--transition);
+      padding: 0.5rem;
+      z-index: 1002;
+    }
+
+    .nav-toggle:hover {
+      color: var(--primary);
+    }
+
+    .nav-close {
+      display: none;
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 1.8rem;
+      color: var(--dark);
+      cursor: pointer;
+      transition: var(--transition);
+      z-index: 1003;
+      background: white;
+      padding: 0.5rem;
+      border-radius: 50%;
+    }
+
+    .nav-close:hover {
+      color: var(--primary);
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      position: relative;
+      font-weight: 500;
+      color: var(--dark);
+      transition: var(--transition);
+      padding: 0.6rem;
+      font-size: clamp(0.95rem, 2.5vw, 1rem);
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-link:hover {
+      color: var(--primary);
+    }
+
+    .nav-link.active {
+      color: var(--primary);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      transition: var(--transition);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link i {
+      margin-right: 0.4rem;
+      font-size: 0.85rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 60vh;
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('banner1.jpg') no-repeat center center/cover;
+      display: flex;
+      align-items: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.8) 0%, rgba(245, 158, 11, 0.6) 100%);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 0 1rem;
+    }
+
+    .hero-content h1 {
+      font-size: clamp(2rem, 6vw, 3rem);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .hero-content h1 span {
+      background: linear-gradient(to right, var(--primary-light), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-content p {
+      font-size: clamp(1rem, 3vw, 1.2rem);
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+    }
+
+    /* About Content */
+    .about-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .about-img {
+      border-radius: 0.8rem;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+    }
+
+    .about-img img {
+      width: 100%;
+      height: auto;
+      transition: var(--transition-slow);
+    }
+
+    .about-img:hover img {
+      transform: scale(1.05);
+    }
+
+    .about-content h3 {
+      font-size: clamp(1.8rem, 4vw, 2rem);
+      margin-bottom: 1rem;
+      color: var(--darker);
+    }
+
+    .about-content p {
+      margin-bottom: 1rem;
+      color: var(--gray);
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
+    }
+
+    /* Mission & Vision Section */
+    .mission-vision-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .mission-vision-card {
+      background: white;
+      border-radius: 0.8rem;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .mission-vision-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .mission-vision-icon {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 1rem;
+      background: linear-gradient(to bottom right, var(--primary-light), var(--primary));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+    }
+
+    .mission-vision-card h3 {
+      font-size: clamp(1.2rem, 3vw, 1.3rem);
+      margin-bottom: 0.8rem;
+      color: var(--darker);
+    }
+
+    .mission-vision-card p {
+      color: var(--gray);
+      font-size: clamp(0.85rem, 2.5vw, 0.9rem);
+    }
+
+    /* Team Section */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .team-card {
+      background: white;
+      border-radius: 0.8rem;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      text-align: center;
+    }
+
+    .team-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .team-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-bottom: 3px solid var(--accent);
+    }
+
+    .team-content {
+      padding: 1.2rem;
+    }
+
+    .team-content h4 {
+      font-size: clamp(1.1rem, 3vw, 1.2rem);
+      margin-bottom: 0.3rem;
+      color: var(--darker);
+    }
+
+    .team-content p {
+      color: var(--gray);
+      font-size: clamp(0.85rem, 2.5vw, 0.9rem);
+      margin-bottom: 0.8rem;
+    }
+
+    .team-content .btn {
+      font-size: clamp(0.8rem, 2vw, 0.85rem);
+      padding: 0.5rem 1rem;
+    }
+
+    /* Achievements Section */
+    .achievements-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+
+    .achievement-card {
+      background: white;
+      border-radius: 0.8rem;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .achievement-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .achievement-icon {
+      width: 50px;
+      height: 50px;
+      margin: 0 auto 0.8rem;
+      background: linear-gradient(to bottom right, var(--primary-light), var(--primary));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+    }
+
+    .achievement-card h4 {
+      font-size: clamp(1rem, 2.5vw, 1.1rem);
+      color: var(--primary);
+      margin-bottom: 0.3rem;
+    }
+
+    .achievement-card p {
+      color: var(--gray);
+      font-size: clamp(0.8rem, 2vw, 0.85rem);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--darker);
+      color: white;
+      padding: 3rem 0 1.5rem;
+    }
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-col h3 {
+      font-size: clamp(1.1rem, 3vw, 1.2rem);
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .footer-col h3::after {
+      content: '';
+      position: absolute;
+      bottom: -0.3rem;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      border-radius: 2px;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-links a {
+      color: #cbd5e1;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: clamp(0.85rem, 2.5vw, 0.9rem);
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+      transform: translateX(3px);
+    }
+
+    .footer-links a i {
+      color: var(--accent);
+      font-size: 0.7rem;
+    }
+
+    .footer-contact li {
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      color: #cbd5e1;
+      font-size: clamp(0.85rem, 2.5vw, 0.9rem);
+    }
+
+    .footer-contact i {
+      color: var(--accent);
+      margin-top: 0.2rem;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-bottom p {
+      color: #94a3b8;
+      font-size: clamp(0.8rem, 2vw, 0.9rem);
+    }
+
+    .footer-bottom p a {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      width: 40px;
+      height: 40px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      z-index: 999;
+    }
+
+    .back-to-top.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      background: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 1024px) {
+      .hero-content h1 {
+        font-size: clamp(1.8rem, 5vw, 2.5rem);
+      }
+      
+      .about-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .about-img {
+        max-width: 500px;
+        margin: 0 auto;
+      }
+
+      .nav-menu {
+        flex-wrap: nowrap;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-container {
+        padding: 1rem 0.8rem;
+        min-height: 70px;
+      }
+      
+      .nav-toggle {
+        display: block;
+        z-index: 1002;
+      }
+      
+      .nav-close {
+        display: block;
+        z-index: 1003;
+      }
+      
+      .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: white;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 4rem 1.5rem;
+        box-shadow: -3px 0 10px rgba(0, 0, 0, 0.1);
+        transition: right 0.3s ease-in-out;
+        overflow-y: auto;
+        z-index: 1001;
+      }
+      
+      .nav-menu.active {
+        right: 0;
+      }
+      
+      .nav-link {
+        font-size: clamp(1rem, 3vw, 1.1rem);
+        padding: 0.6rem 0;
+        width: 100%;
+      }
+      
+      .hero {
+        min-height: 50vh;
+      }
+      
+      .hero-content h1 {
+        font-size: clamp(1.6rem, 5vw, 2rem);
+      }
+      
+      .hero-content p {
+        font-size: clamp(0.9rem, 3vw, 1rem);
+      }
+      
+      .section {
+        padding: 2.5rem 0;
+      }
+      
+      .section-title h2 {
+        font-size: clamp(1.6rem, 4vw, 1.8rem);
+      }
+      
+      .mission-vision-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .achievements-grid {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header-container {
+        min-height: 65px;
+      }
+      
+      .logo-text {
+        font-size: clamp(0.9rem, 3vw, 1rem);
+      }
+      
+      .logo-img {
+        width: 40px;
+        height: 40px;
+      }
+      
+      .nav-toggle {
+        font-size: 1.6rem;
+      }
+      
+      .hero-content h1 {
+        font-size: clamp(1.4rem, 5vw, 1.8rem);
+      }
+      
+      .hero-content p {
+        font-size: clamp(0.85rem, 3vw, 0.95rem);
+      }
+      
+      .section-title h2 {
+        font-size: clamp(1.4rem, 4vw, 1.6rem);
+      }
+      
+      .team-img {
+        height: 180px;
+      }
+      
+      .achievements-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Desktop Mode on Mobile */
+    @media (max-width: 1024px) and (min-resolution: 192dpi), 
+           (max-width: 1024px) and (-webkit-device-pixel-ratio: 2) {
+      .container {
+        max-width: 100%;
+        padding: 0 0.8rem;
+      }
+      
+      .header-container {
+        min-height: 65px;
+        padding: 0.8rem;
+      }
+      
+      .nav-menu {
+        display: none;
+      }
+      
+      .nav-menu.active {
+        display: flex;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 4rem 1.5rem;
+        background: white;
+        box-shadow: -3px 0 10px rgba(0, 0, 0, 0.1);
+        z-index: 1001;
+        overflow-y: auto;
+      }
+      
+      .nav-toggle {
+        display: block;
+        z-index: 1002;
+      }
+      
+      .nav-close {
+        display: block;
+        z-index: 1003;
+      }
+      
+      .hero-content h1 {
+        font-size: clamp(1.6rem, 4vw, 2rem);
+      }
+      
+      .mission-vision-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 1rem;
+      }
+      
+      .team-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 1rem;
+      }
+      
+      .achievements-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 1rem;
+      }
+      
+      .mission-vision-card, .team-card, .achievement-card {
+        padding: 0.8rem;
+      }
+      
+      .mission-vision-icon, .achievement-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+      }
+      
+      .team-img {
+        height: 160px;
+      }
+      
+      .mission-vision-card h3, .team-content h4, .achievement-card h4 {
+        font-size: clamp(0.9rem, 2vw, 1rem);
+      }
+      
+      .mission-vision-card p, .team-content p, .achievement-card p {
+        font-size: clamp(0.75rem, 1.8vw, 0.8rem);
+      }
+      
+      .about-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .btn {
+        padding: 0.5rem 1.2rem;
+        font-size: clamp(0.85rem, 2vw, 0.9rem);
+      }
+      
+      .section-title h2 {
+        font-size: clamp(1.4rem, 4vw, 1.6rem);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header id="header">
+    <div class="container header-container">
+      <a href="index.html" class="logo">
+        <img src="logo.jpg" alt="Elite Computer Classes Logo" class="logo-img">
+        <div class="logo-text">
+          <span class="elite">ELITE</span> <span class="classes">COMPUTER CLASSES</span>
+        </div>
+      </a>
+      
+      <button class="nav-toggle" id="nav-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <nav class="nav-menu" id="nav-menu">
+        <button class="nav-close" id="nav-close">
+          <i class="fas fa-times"></i>
+        </button>
+        <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+        <a href="courses.html" class="nav-link"><i class="fas fa-book-open"></i> Courses</a>
+        <a href="category.html" class="nav-link"><i class="fas fa-layer-group"></i> Category</a>
+        <a href="StudentZone.html" class="nav-link"><i class="fas fa-user-graduate"></i> Student Zone</a>
+        <a href="Admission.html" class="nav-link"><i class="fas fa-file-signature"></i> Admission</a>
+        <a href="gallery.html" class="nav-link"><i class="fas fa-images"></i> Gallery</a>
+        <a href="#about" class="nav-link active"><i class="fas fa-info-circle"></i> About Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <h1 data-aos="fade-up">
+        <span>About</span> <span class="highlight">Elite Computer Classes</span>
+      </h1>
+      <p data-aos="fade-up" data-aos-delay="100">
+        Empowering the future with world-class IT education since 2013.
+      </p>
+    </div>
+  </section>
+
+  <!-- About Us Section -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-title" data-aos="fade-up">
+        <h2>Our Story</h2>
+        <p>Learn about our journey, mission, and commitment to transforming lives through education.</p>
+      </div>
+      
+      <div class="about-container">
+        <div class="about-img" data-aos="fade-right">
+          <img src="./Images/social/Social1.jpg" alt="Elite Computer Classes Institute">
+        </div>
+        
+        <div class="about-content" data-aos="fade-left">
+          <h3>Empowering Education Since 2013</h3>
+          <p>Founded in 2013 in Narkatiaganj, Elite Computer Classes has been a beacon of IT education, equipping thousands of students with the skills needed to excel in the digital era. Our institute blends traditional teaching methods with cutting-edge technology to deliver practical, industry-relevant training.</p>
+          <p>From humble beginnings, we’ve grown into a trusted name, known for our expert faculty, modern curriculum, and dedication to student success. Whether you're a beginner or a professional, our courses are designed to unlock your potential and pave the way for a rewarding career.</p>
+          <a href="#contact" class="btn btn-primary" data-aos="fade-up" data-aos-delay="100">Get in Touch</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission & Vision Section -->
+  <section class="section" id="mission-vision" style="background-color: #f8fafc;">
+    <div class="container">
+      <div class="section-title" data-aos="fade-up">
+        <h2>Our Mission & Vision</h2>
+        <p>Guiding principles that drive our commitment to excellence in education.</p>
+      </div>
+      
+      <div class="mission-vision-grid">
+        <div class="mission-vision-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="mission-vision-icon">
+            <i class="fas fa-bullseye"></i>
+          </div>
+          <h3>Our Mission</h3>
+          <p>To provide accessible, high-quality IT education that empowers students to achieve their career goals and thrive in a technology-driven world.</p>
+        </div>
+        
+        <div class="mission-vision-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="mission-vision-icon">
+            <i class="fas fa-eye"></i>
+          </div>
+          <h3>Our Vision</h3>
+          <p>To be a global leader in IT education, fostering innovation and creating opportunities for students to excel in the digital age.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="section" id="team">
+    <div class="container">
+      <div class="section-title" data-aos="fade-up">
+        <h2>Our Expert Team</h2>
+        <p>Meet the dedicated professionals who guide our students to success.</p>
+      </div>
+      
+      <div class="team-grid">
+        <div class="team-card" data-aos="fade-up" data-aos-delay="100">
+          <img src="./Images/team/teacher1.jpg" alt="Dr. Anil Sharma" class="team-img">
+          <div class="team-content">
+            <h4>Dr. Anil Sharma</h4>
+            <p>Founder & Lead Instructor</p>
+            <a href="#" class="btn btn-accent" onclick="showToast(event)">Contact</a>
+          </div>
+        </div>
+        
+        <div class="team-card" data-aos="fade-up" data-aos-delay="200">
+          <img src="./Images/team/teacher2.jpg" alt="Priya Singh" class="team-img">
+          <div class="team-content">
+            <h4>Priya Singh</h4>
+            <p>Senior Faculty - Programming</p>
+            <a href="#" class="btn btn-accent" onclick="showToast(event)">Contact</a>
+          </div>
+        </div>
+        
+        <div class="team-card" data-aos="fade-up" data-aos-delay="300">
+          <img src="./Images/team/teacher3.jpg" alt="Ravi Kumar" class="team-img">
+          <div class="team-content">
+            <h4>Ravi Kumar</h4>
+            <p>Graphic Design Instructor</p>
+            <a href="#" class="btn btn-accent" onclick="showToast(event)">Contact</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Achievements Section -->
+  <section class="section" id="achievements" style="background-color: #f1f5f9;">
+    <div class="container">
+      <div class="section-title" data-aos="fade-up">
+        <h2>Our Achievements</h2>
+        <p>Celebrating milestones that reflect our commitment to excellence.</p>
+      </div>
+      
+      <div class="achievements-grid">
+        <div class="achievement-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="achievement-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h4>3,000+</h4>
+          <p>Students Trained</p>
+        </div>
+        
+        <div class="achievement-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="achievement-icon">
+            <i class="fas fa-trophy"></i>
+          </div>
+          <h4>70%+</h4>
+          <p>Placement Success</p>
+        </div>
+        
+        <div class="achievement-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="achievement-icon">
+            <i class="fas fa-certificate"></i>
+          </div>
+          <h4>10+</h4>
+          <p>Awards Won</p>
+        </div>
+        
+        <div class="achievement-card" data-aos="fade-up" data-aos-delay="400">
+          <div class="achievement-icon">
+            <i class="fas fa-star"></i>
+          </div>
+          <h4>12+</h4>
+          <p>Years of Excellence</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-col">
+          <h3>Our Courses</h3>
+          <ul class="footer-links">
+            <li><a href="details/adca.html"><i class="fas fa-chevron-right"></i> ADCA</a></li>
+            <li><a href="details/adit.html"><i class="fas fa-chevron-right"></i> ADCA+</a></li>
+            <li><a href="details/dca.html"><i class="fas fa-chevron-right"></i> DCA</a></li>
+            <li><a href="details/cfa.html"><i class="fas fa-chevron-right"></i> DTP</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Tally</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Typing</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+            <li><a href="#about"><i class="fas fa-chevron-right"></i> About Us</a></li>
+            <li><a href="index.html#courses"><i class="fas fa-chevron-right"></i> Courses</a></li>
+            <li><a href="index.html#testimonials"><i class="fas fa-chevron-right"></i> Success Stories</a></li>
+            <li><a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+            <li><a href="index.html#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h3>Contact Info</h3>
+          <ul class="footer-contact">
+            <li>
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Block Road, Narkatiaganj<br>West Champaran, Bihar 845455</span>
+            </li>
+            <li>
+              <i class="fas fa-phone-alt"></i>
+              <span>+91 8292879444<br>+91 9142789404</span>
+            </li>
+            <li>
+              <i class="fas fa-envelope"></i>
+              <span>elitecomputerclasses@gmail.com</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>© 2025 Elite Computer Classes. All Rights Reserved.</p>
+        <p>Designed & Developed with <i class="fas fa-heart" style="color: var(--error);"></i> by <a href="#">CodeVoraOfficial</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <a href="#" class="back-to-top" id="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </a>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  
+  <script>
+    // Initialize AOS animation
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true,
+      offset: 80
+    });
+    
+    // Mobile Navigation Toggle
+    const navToggle = document.getElementById('nav-toggle');
+    const navClose = document.getElementById('nav-close');
+    const navMenu = document.getElementById('nav-menu');
+    
+    navToggle.addEventListener('click', () => {
+      navMenu.classList.add('active');
+    });
+    
+    navClose.addEventListener('click', () => {
+      navMenu.classList.remove('active');
+    });
+    
+    // Close mobile menu when clicking a nav link
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+      });
+    });
+    
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      const backToTop = document.getElementById('back-to-top');
+      
+      if (window.scrollY > 80) {
+        header.classList.add('scrolled');
+        backToTop.classList.add('active');
+      } else {
+        header.classList.remove('scrolled');
+        backToTop.classList.remove('active');
+      }
+    });
+    
+    // Toast notification for coming soon features
+    function showToast(event) {
+      event.preventDefault();
+      
+      Toastify({
+        text: "🚧 This feature is coming soon!",
+        duration: 3000,
+        close: true,
+        gravity: "top",
+        position: "center",
+        backgroundColor: "linear-gradient(to right, #f59e0b, #d97706)",
+        stopOnFocus: true
+      }).showToast();
+    }
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 60,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
