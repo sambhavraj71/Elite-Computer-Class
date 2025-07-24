@@ -6,34 +6,6 @@
     <title>Elite Gallery | Elite Computer Classes</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-  <!-- Toastify -->
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-  <!-- AOS Animation -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="description" content="Elite Computer Classes in Narkatiaganj, Bihar, offers top IT courses like ADCA, DCA, Tally, and more since 2013. Join us to boost your career!">
-  <meta name="keywords" content="Elite Computer Classes, computer classes, IT education, ADCA course, DCA course, Tally training, Narkatiaganj, Bihar, programming courses">
-  <meta name="robots" content="index, follow">
-  <meta name="author" content="CodeVoraOfficial">
-  <!-- Open Graph Tags for Social Media -->
-  <meta property="og:title" content="About Elite Computer Classes">
-  <meta property="og:description" content="Discover Elite Computer Classes in Narkatiaganj, offering IT courses like ADCA, DCA, and Tally since 2013. Start your IT journey today!">
-  <meta property="og:image" content="https://elitecomputerclasses.com/logo.jpg">
-  <meta property="og:url" content="https://elitecomputerclasses.com/about.html">
-  <meta property="og:type" content="website">
-  <!-- Twitter Card Tags -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="About Elite Computer Classes">
-  <meta name="twitter:description" content="Join Elite Computer Classes in Narkatiaganj for expert-led IT courses like ADCA, DCA, and Tally.">
-  <meta name="twitter:image" content="https://elitecomputerclasses.com/logo.jpg">
-  <!-- Favicon -->
-  <link rel="icon" type="image/jpeg" href="favicon.jpg">
-  <link rel="apple-touch-icon" sizes="180x180" href="favicon.jpg">
     <style>
         :root {
             --primary: #2563eb;
@@ -325,6 +297,11 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem;
+            overflow: hidden;
+        }
+
+        .gallery-grid.collapsed .gallery-item:nth-child(n+5) {
+            display: none;
         }
 
         .gallery-item {
@@ -381,6 +358,24 @@
 
         .gallery-item:hover .gallery-caption {
             transform: translateY(0);
+        }
+
+        .see-more {
+            display: block;
+            margin: 1rem auto;
+            padding: 0.5rem 1rem;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .see-more:hover {
+            background: var(--primary-dark);
         }
 
         /* Image Popup */
@@ -770,16 +765,17 @@
                         <button class="gallery-btn next-btn" data-gallery="director"><i class="fas fa-chevron-right"></i></button>
                     </div>
                 </div>
-                <div class="gallery-grid" id="director-gallery">
-                    <div class="gallery-item"><img src="Images/Director/Director1.jpg" alt="Director photo" class="gallery-img" data-caption="Director at Event"></div>
-                    <div class="gallery-item"><img src="Images/Director/Director2.jpg" alt="Director photo" class="gallery-img" data-caption="Award Ceremony"></div>
-                    <div class="gallery-item"><img src="Images/Director/Director3.jpg" alt="Director photo" class="gallery-img" data-caption="Workshop Session"></div>
-                    <div class="gallery-item"><img src="Images/Director/Director4.jpg" alt="Director photo" class="gallery-img" data-caption="Student Interaction"></div>
-                    <div class="gallery-item"><img src="Images/Director/Director5.jpg" alt="Director photo" class="gallery-img" data-caption="Seminar Presentation"></div>
-                    <div class="gallery-item"><img src="Images/Director/Director6.jpg" alt="Director photo" class="gallery-img" data-caption="Guest Lecture"></div>
-                    <div class="gallery-item"><img src="Images/Director/Director7.jpg" alt="Director photo" class="gallery-img" data-caption="Industry Visit"></div>
-                    <div class="gallery-item"><img src="Images/Director/Director8.jpg" alt="Director photo" class="gallery-img" data-caption="Conference"></div>
+                <div class="gallery-grid collapsed" id="director-gallery">
+                    <div class="gallery-item"><img src="Images/Director/Director1.jpg" alt="Director photo" class="gallery-img" data-caption="Director at Event"><div class="gallery-overlay"><span class="gallery-caption">Director at Event</span></div></div>
+                    <div class="gallery-item"><img src="Images/Director/Director2.jpg" alt="Director photo" class="gallery-img" data-caption="Award Ceremony"><div class="gallery-overlay"><span class="gallery-caption">Award Ceremony</span></div></div>
+                    <div class="gallery-item"><img src="Images/Director/Director3.jpg" alt="Director photo" class="gallery-img" data-caption="Workshop Session"><div class="gallery-overlay"><span class="gallery-caption">Workshop Session</span></div></div>
+                    <div class="gallery-item"><img src="Images/Director/Director4.jpg" alt="Director photo" class="gallery-img" data-caption="Student Interaction"><div class="gallery-overlay"><span class="gallery-caption">Student Interaction</span></div></div>
+                    <div class="gallery-item"><img src="Images/Director/Director5.jpg" alt="Director photo" class="gallery-img" data-caption="Seminar Presentation"><div class="gallery-overlay"><span class="gallery-caption">Seminar Presentation</span></div></div>
+                    <div class="gallery-item"><img src="Images/Director/Director6.jpg" alt="Director photo" alt="Director photo" class="gallery-img" data-caption="Guest Lecture"><div class="gallery-overlay"><span class="gallery-caption">Guest Lecture</span></div></div>
+                    <div class="gallery-item"><img src="Images/Director/Director7.jpg" alt="Director photo" class="gallery-img" data-caption="Industry Visit"><div class="gallery-overlay"><span class="gallery-caption">Industry Visit</span></div></div>
+                    <div class="gallery-item"><img src="Images/Director/Director8.jpg" alt="Director photo" class="gallery-img" data-caption="Conference"><div class="gallery-overlay"><span class="gallery-caption">Conference</span></div></div>
                 </div>
+                <button class="see-more" data-gallery="director">See More</button>
             </section>
 
             <section class="gallery-section" data-category="job">
@@ -790,16 +786,30 @@
                         <button class="gallery-btn next-btn" data-gallery="job"><i class="fas fa-chevron-right"></i></button>
                     </div>
                 </div>
-                <div class="gallery-grid" id="job-gallery">
-                    <div class="gallery-item"><img src="Images/Job2025/job20251.jpg" alt="Job 2025" class="gallery-img" data-caption="Placement Drive"></div>
-                    <div class="gallery-item"><img src="Images/Job2025/job20252.jpg" alt="Job 2025" class="gallery-img" data-caption="Interview Session"></div>
-                    <div class="gallery-item"><img src="Images/Job2025/job20253.jpg" alt="Job 2025" class="gallery-img" data-caption="Company Visit"></div>
-                    <div class="gallery-item"><img src="Images/Job2025/job20254.jpg" alt="Job 2025" class="gallery-img" data-caption="Career Fair"></div>
-                    <div class="gallery-item"><img src="Images/Job2025/job20255.jpg" alt="Job 2025" class="gallery-img" data-caption="HR Interaction"></div>
-                    <div class="gallery-item"><img src="Images/Job2025/job20256.jpg" alt="Job 2025" class="gallery-img" data-caption="Mock Interviews"></div>
-                    <div class="gallery-item"><img src="Images/Job2025/job20257.jpg" alt="Job 2025" class="gallery-img" data-caption="Resume Workshop"></div>
-                    <div class="gallery-item"><img src="Images/Job2025/job20258.jpg" alt="Job 2025" class="gallery-img" data-caption="Networking Event"></div>
+                <div class="gallery-grid collapsed" id="job-gallery">
+                    <div class="gallery-item"><img src="Images/Job2025/job20251.jpg" alt="Job 2025" class="gallery-img" data-caption="Placement Drive"><div class="gallery-overlay"><span class="gallery-caption">Placement Drive</span></div></div>
+                    <div class="gallery-item"><img src="Images/Job2025/job20252.jpg" alt="Job 2025" class="gallery-img" data-caption="Interview Session"><div class="gallery-overlay"><span class="gallery-caption">Interview Session</span></div></div>
+                    <div class="gallery-item"><img src="Images/Job2025/job20253.jpg" alt="Job 2025" class="gallery-img" data-caption="Company Visit"><div class="gallery-overlay"><span class="gallery-caption">Company Visit</span></div></div>
+                    <div class="gallery-item"><img src="Images/Job2025/job20254.jpg" alt="Job 2025" class="gallery-img" data-caption="Career Fair"><div class="gallery-overlay"><span class="gallery-caption">Career Fair</span></div></div>
+                    <div class="gallery-item"><img src="Images/Job2025/job20255.jpg" alt="Job 2025" class="gallery-img" data-caption="HR Interaction"><div class="gallery-overlay"><span class="gallery-caption">HR Interaction</span></div></div>
+                    <div class="gallery-item"><img src="Images/Job2025/job20256.jpg" alt="Job 2025" class="gallery-img" data-caption="Mock Interviews"><div class="gallery-overlay"><span class="gallery-caption">Mock Interviews</span></div></div>
+                    <div class="gallery-item"><img src="Images/Job2025/job20257.jpg" alt="Job 2025" class="gallery-img" data-caption="Resume Workshop"><div class="gallery-overlay"><span class="gallery-caption">Resume Workshop</span></div></div>
+                    <div class="gallery-item"><img src="Images/Job2025/job20258.jpg" alt="Job 2025" class="gallery-img" data-caption="Networking Event"><div class="gallery-overlay"><span class="gallery-caption">Networking Event</span></div></div>
+                    <div class="gallery-item"><img src="Images/Job2025/job20259.jpg" alt="Job 2025" class="gallery-img" data-caption="Placement Drive"><div class="gallery-overlay"><span class="gallery-caption">Placement Drive</span></div></div>
+                    <div class="gallery-item"><img src="Images/Job2025/job202510.jpg" alt="Job 2025" class="gallery-img" data-caption="Interview Session"><div class="gallery-overlay"><span class="gallery-caption">Interview Session</span></div></div>
+                    <div class="gallery-item"><img src="Images/Job2025/job202511.jpg" alt="Job 2025" class="gallery-img" data-caption="Company Visit"><div class="gallery-overlay"><span class="gallery-caption">Company Visit</span></div></div>
+                    <div class="gallery-item"><img src="Images/Job2025/job202512.jpg" alt="Job 2025" class="gallery-img" data-caption="Career Fair"><div class="gallery-overlay"><span class="gallery-caption">Career Fair</span></div></div>
+                    <div class="gallery-item"><img src="Images/Job2025/job202513.jpg" alt="Job 2025" class="gallery-img" data-caption="HR Interaction"><div class="gallery-overlay"><span class="gallery-caption">HR Interaction</span></div></div>
+                    <div class="gallery-item"><img src="Images/Job2025/job202514.jpg" alt="Job 2025" class="gallery-img" data-caption="Mock Interviews"><div class="gallery-overlay"><span class="gallery-caption">Mock Interviews</span></div></div>
+                    <div class="gallery-item"><img src="Images/Job2025/job202515.jpg" alt="Job 2025" class="gallery-img" data-caption="Resume Workshop"><div class="gallery-overlay"><span class="gallery-caption">Resume Workshop</span></div></div>
+                    <div class="gallery-item"><img src="Images/Job2025/job202516.jpg" alt="Job 2025" class="gallery-img" data-caption="Networking Event"><div class="gallery-overlay"><span class="gallery-caption">Networking Event</span></div></div>
+                    <div class="gallery-item"><img src="Images/Job2025/job202517.jpg" alt="Job 2025" class="gallery-img" data-caption="Networking Event"><div class="gallery-overlay"><span class="gallery-caption">Networking Event</span></div></div>
+                    <div class="gallery-item"><img src="Images/Job2025/job202518.jpg" alt="Job 2025" class="gallery-img" data-caption="Networking Event"><div class="gallery-overlay"><span class="gallery-caption">Networking Event</span></div></div>
+                    <div class="gallery-item"><img src="Images/Job2025/job202519.jpg" alt="Job 2025" class="gallery-img" data-caption="Networking Event"><div class="gallery-overlay"><span class="gallery-caption">Networking Event</span></div></div>
+                    <div class="gallery-item"><img src="Images/Job2025/job202520.jpg" alt="Job 2025" class="gallery-img" data-caption="Networking Event"><div class="gallery-overlay"><span class="gallery-caption">Networking Event</span></div></div>
+                    <div class="gallery-item"><img src="Images/Job2025/job202521.jpg" alt="Job 2025" class="gallery-img" data-caption="Networking Event"><div class="gallery-overlay"><span class="gallery-caption">Networking Event</span></div></div>
                 </div>
+                <button class="see-more" data-gallery="job">See More</button>
             </section>
 
             <section class="gallery-section" data-category="award">
@@ -810,16 +820,17 @@
                         <button class="gallery-btn next-btn" data-gallery="award"><i class="fas fa-chevron-right"></i></button>
                     </div>
                 </div>
-                <div class="gallery-grid" id="award-gallery">
-                    <div class="gallery-item"><img src="Images/Award_Ceremony_2025/Award_Ceremony1.jpg" alt="Award Ceremony" class="gallery-img" data-caption="Top Performer"></div>
-                    <div class="gallery-item"><img src="Images/Award_Ceremony_2025/Award_Ceremony2.jpg" alt="Award Ceremony" class="gallery-img" data-caption="Certificate Distribution"></div>
-                    <div class="gallery-item"><img src="Images/Award_Ceremony_2025/Award_Ceremony3.jpg" alt="Award Ceremony" class="gallery-img" data-caption="Student Recognition"></div>
-                    <div class="gallery-item"><img src="Images/Award_Ceremony_2025/Award_Ceremony4.jpg" alt="Award Ceremony" class="gallery-img" data-caption="Achievement Awards"></div>
-                    <div class="gallery-item"><img src="Images/Award_Ceremony_2025/Award_Ceremony5.jpg" alt="Award Ceremony" class="gallery-img" data-caption="Special Honors"></div>
-                    <div class="gallery-item"><img src="Images/Award_Ceremony_2025/Award_Ceremony6.jpg" alt="Award Ceremony" class="gallery-img" data-caption="Guest Speaker"></div>
-                    <div class="gallery-item"><img src="Images/Award_Ceremony_2025/Award_Ceremony7.jpg" alt="Award Ceremony" class="gallery-img" data-caption="Cultural Performance"></div>
-                    <div class="gallery-item"><img src="Images/Award_Ceremony_2025/Award_Ceremony8.jpg" alt="Award Ceremony" class="gallery-img" data-caption="Group Photo"></div>
+                <div class="gallery-grid collapsed" id="award-gallery">
+                    <div class="gallery-item"><img src="Images/Award_Ceremony_2025/Award_Ceremony1.jpg" alt="Award Ceremony" class="gallery-img" data-caption="Top Performer"><div class="gallery-overlay"><span class="gallery-caption">Top Performer</span></div></div>
+                    <div class="gallery-item"><img src="Images/Award_Ceremony_2025/Award_Ceremony2.jpg" alt="Award Ceremony" class="gallery-img" data-caption="Certificate Distribution"><div class="gallery-overlay"><span class="gallery-caption">Certificate Distribution</span></div></div>
+                    <div class="gallery-item"><img src="Images/Award_Ceremony_2025/Award_Ceremony3.jpg" alt="Award Ceremony" class="gallery-img" data-caption="Student Recognition"><div class="gallery-overlay"><span class="gallery-caption">Student Recognition</span></div></div>
+                    <div class="gallery-item"><img src="Images/Award_Ceremony_2025/Award_Ceremony4.jpg" alt="Award Ceremony" class="gallery-img" data-caption="Achievement Awards"><div class="gallery-overlay"><span class="gallery-caption">Achievement Awards</span></div></div>
+                    <div class="gallery-item"><img src="Images/Award_Ceremony_2025/Award_Ceremony5.jpg" alt="Award Ceremony" class="gallery-img" data-caption="Special Honors"><div class="gallery-overlay"><span class="gallery-caption">Special Honors</span></div></div>
+                    <div class="gallery-item"><img src="Images/Award_Ceremony_2025/Award_Ceremony6.jpg" alt="Award Ceremony" class="gallery-img" data-caption="Guest Speaker"><div class="gallery-overlay"><span class="gallery-caption">Guest Speaker</span></div></div>
+                    <div class="gallery-item"><img src="Images/Award_Ceremony_2025/Award_Ceremony7.jpg" alt="Award Ceremony" class="gallery-img" data-caption="Cultural Performance"><div class="gallery-overlay"><span class="gallery-caption">Cultural Performance</span></div></div>
+                    <div class="gallery-item"><img src="Images/Award_Ceremony_2025/Award_Ceremony8.jpg" alt="Award Ceremony" class="gallery-img" data-caption="Group Photo"><div class="gallery-overlay"><span class="gallery-caption">Group Photo</span></div></div>
                 </div>
+                <button class="see-more" data-gallery="award">See More</button>
             </section>
 
             <section class="gallery-section" data-category="certification">
@@ -830,16 +841,17 @@
                         <button class="gallery-btn next-btn" data-gallery="certification"><i class="fas fa-chevron-right"></i></button>
                     </div>
                 </div>
-                <div class="gallery-grid" id="certification-gallery">
-                    <div class="gallery-item"><img src="Images/Certification/Certification1.jpg" alt="Certification" class="gallery-img" data-caption="Course Completion"></div>
-                    <div class="gallery-item"><img src="Images/Certification/Certification2.jpg" alt="Certification" class="gallery-img" data-caption="Skill Certification"></div>
-                    <div class="gallery-item"><img src="Images/Certification/Certification3.jpg" alt="Certification" class="gallery-img" data-caption="Workshop Certificate"></div>
-                    <div class="gallery-item"><img src="Images/Certification/Certification4.jpg" alt="Certification" class="gallery-img" data-caption="Industry Certification"></div>
-                    <div class="gallery-item"><img src="Images/Certification/Certification5.jpg" alt="Certification" class="gallery-img" data-caption="Specialization Badge"></div>
-                    <div class="gallery-item"><img src="Images/Certification/Certification6.jpg" alt="Certification" class="gallery-img" data-caption="Project Showcase"></div>
-                    <div class="gallery-item"><img src="Images/Certification/Certification7.jpg" alt="Certification" class="gallery-img" data-caption="Technical Certification"></div>
-                    <div class="gallery-item"><img src="Images/Certification/Certification8.jpg" alt="Certification" class="gallery-img" data-caption="Graduation Day"></div>
+                <div class="gallery-grid collapsed" id="certification-gallery">
+                    <div class="gallery-item"><img src="Images/Certification/Certification1.jpg" alt="Certification" class="gallery-img" data-caption="Course Completion"><div class="gallery-overlay"><span class="gallery-caption">Course Completion</span></div></div>
+                    <div class="gallery-item"><img src="Images/Certification/Certification2.jpg" alt="Certification" class="gallery-img" data-caption="Skill Certification"><div class="gallery-overlay"><span class="gallery-caption">Skill Certification</span></div></div>
+                    <div class="gallery-item"><img src="Images/Certification/Certification3.jpg" alt="Certification" class="gallery-img" data-caption="Workshop Certificate"><div class="gallery-overlay"><span class="gallery-caption">Workshop Certificate</span></div></div>
+                    <div class="gallery-item"><img src="Images/Certification/Certification4.jpg" alt="Certification" class="gallery-img" data-caption="Industry Certification"><div class="gallery-overlay"><span class="gallery-caption">Industry Certification</span></div></div>
+                    <div class="gallery-item"><img src="Images/Certification/Certification5.jpg" alt="Certification" class="gallery-img" data-caption="Specialization Badge"><div class="gallery-overlay"><span class="gallery-caption">Specialization Badge</span></div></div>
+                    <div class="gallery-item"><img src="Images/Certification/Certification6.jpg" alt="Certification" class="gallery-img" data-caption="Project Showcase"><div class="gallery-overlay"><span class="gallery-caption">Project Showcase</span></div></div>
+                    <div class="gallery-item"><img src="Images/Certification/Certification7.jpg" alt="Certification" class="gallery-img" data-caption="Technical Certification"><div class="gallery-overlay"><span class="gallery-caption">Technical Certification</span></div></div>
+                    <div class="gallery-item"><img src="Images/Certification/Certification8.jpg" alt="Certification" class="gallery-img" data-caption="Graduation Day"><div class="gallery-overlay"><span class="gallery-caption">Graduation Day</span></div></div>
                 </div>
+                <button class="see-more" data-gallery="certification">See More</button>
             </section>
 
             <section class="gallery-section" data-category="social">
@@ -850,16 +862,17 @@
                         <button class="gallery-btn next-btn" data-gallery="social"><i class="fas fa-chevron-right"></i></button>
                     </div>
                 </div>
-                <div class="gallery-grid" id="social-gallery">
-                    <div class="gallery-item"><img src="Images/social/Social1.jpg" alt="Social Media" class="gallery-img" data-caption="Instagram Post"></div>
-                    <div class="gallery-item"><img src="Images/social/Social2.jpg" alt="Social Media" class="gallery-img" data-caption="Facebook Update"></div>
-                    <div class="gallery-item"><img src="Images/social/Social3.jpg" alt="Social Media" class="gallery-img" data-caption="Twitter Moment"></div>
-                    <div class="gallery-item"><img src="Images/social/Social4.jpg" alt="Social Media" class="gallery-img" data-caption="LinkedIn Post"></div>
-                    <div class="gallery-item"><img src="Images/social/Social5.jpg" alt="Social Media" class="gallery-img" data-caption="YouTube Thumbnail"></div>
-                    <div class="gallery-item"><img src="Images/social/Social6.jpg" alt="Social Media" class="gallery-img" data-caption="Instagram Story"></div>
-                    <div class="gallery-item"><img src="Images/social/Social7.jpg" alt="Social Media" class="gallery-img" data-caption="Facebook Live"></div>
-                    <div class="gallery-item"><img src="Images/social/Social8.jpg" alt="Social Media" class="gallery-img" data-caption="Twitter Thread"></div>
+                <div class="gallery-grid collapsed" id="social-gallery">
+                    <div class="gallery-item"><img src="Images/social/Social1.jpg" alt="Social Media" class="gallery-img" data-caption="Instagram Post"><div class="gallery-overlay"><span class="gallery-caption">Instagram Post</span></div></div>
+                    <div class="gallery-item"><img src="Images/social/Social2.jpg" alt="Social Media" class="gallery-img" data-caption="Facebook Update"><div class="gallery-overlay"><span class="gallery-caption">Facebook Update</span></div></div>
+                    <div class="gallery-item"><img src="Images/social/Social3.jpg" alt="Social Media" class="gallery-img" data-caption="Twitter Moment"><div class="gallery-overlay"><span class="gallery-caption">Twitter Moment</span></div></div>
+                    <div class="gallery-item"><img src="Images/social/Social4.jpg" alt="Social Media" class="gallery-img" data-caption="LinkedIn Post"><div class="gallery-overlay"><span class="gallery-caption">LinkedIn Post</span></div></div>
+                    <div class="gallery-item"><img src="Images/social/Social5.jpg" alt="Social Media" class="gallery-img" data-caption="YouTube Thumbnail"><div class="gallery-overlay"><span class="gallery-caption">YouTube Thumbnail</span></div></div>
+                    <div class="gallery-item"><img src="Images/social/Social6.jpg" alt="Social Media" class="gallery-img" data-caption="Instagram Story"><div class="gallery-overlay"><span class="gallery-caption">Instagram Story</span></div></div>
+                    <div class="gallery-item"><img src="Images/social/Social7.jpg" alt="Social Media" class="gallery-img" data-caption="Facebook Live"><div class="gallery-overlay"><span class="gallery-caption">Facebook Live</span></div></div>
+                    <div class="gallery-item"><img src="Images/social/Social8.jpg" alt="Social Media" class="gallery-img" data-caption="Twitter Thread"><div class="gallery-overlay"><span class="gallery-caption">Twitter Thread</span></div></div>
                 </div>
+                <button class="see-more" data-gallery="social">See More</button>
             </section>
 
             <section class="gallery-section" data-category="students">
@@ -870,16 +883,17 @@
                         <button class="gallery-btn next-btn" data-gallery="students"><i class="fas fa-chevron-right"></i></button>
                     </div>
                 </div>
-                <div class="gallery-grid" id="students-gallery">
-                    <div class="gallery-item"><img src="Images/Students/Students1.jpg" alt="Students Corner" class="gallery-img" data-caption="Classroom Session"></div>
-                    <div class="gallery-item"><img src="Images/Students/Students2.jpg" alt="Students Corner" class="gallery-img" data-caption="Practical Lab"></div>
-                    <div class="gallery-item"><img src="Images/Students/Students3.jpg" alt="Students Corner" class="gallery-img" data-caption="Group Project"></div>
-                    <div class="gallery-item"><img src="Images/Students/Students4.jpg" alt="Students Corner" class="gallery-img" data-caption="Study Group"></div>
-                    <div class="gallery-item"><img src="Images/Students/Students5.jpg" alt="Students Corner" class="gallery-img" data-caption="Workshop"></div>
-                    <div class="gallery-item"><img src="Images/Students/Students6.jpg" alt="Students Corner" class="gallery-img" data-caption="Coding Competition"></div>
-                    <div class="gallery-item"><img src="Images/Students/Students7.jpg" alt="Students Corner" class="gallery-img" data-caption="Hackathon"></div>
-                    <div class="gallery-item"><img src="Images/Students/Students8.jpg" alt="Students Corner" class="gallery-img" data-caption="Alumni Meet"></div>
+                <div class="gallery-grid collapsed" id="students-gallery">
+                    <div class="gallery-item"><img src="Images/Students/Students1.jpg" alt="Students Corner" class="gallery-img" data-caption="Classroom Session"><div class="gallery-overlay"><span class="gallery-caption">Classroom Session</span></div></div>
+                    <div class="gallery-item"><img src="Images/Students/Students2.jpg" alt="Students Corner" class="gallery-img" data-caption="Practical Lab"><div class="gallery-overlay"><span class="gallery-caption">Practical Lab</span></div></div>
+                    <div class="gallery-item"><img src="Images/Students/Students3.jpg" alt="Students Corner" class="gallery-img" data-caption="Group Project"><div class="gallery-overlay"><span class="gallery-caption">Group Project</span></div></div>
+                    <div class="gallery-item"><img src="Images/Students/Students4.jpg" alt="Students Corner" class="gallery-img" data-caption="Study Group"><div class="gallery-overlay"><span class="gallery-caption">Study Group</span></div></div>
+                    <div class="gallery-item"><img src="Images/Students/Students5.jpg" alt="Students Corner" class="gallery-img" data-caption="Workshop"><div class="gallery-overlay"><span class="gallery-caption">Workshop</span></div></div>
+                    <div class="gallery-item"><img src="Images/Students/Students6.jpg" alt="Students Corner" class="gallery-img" data-caption="Coding Competition"><div class="gallery-overlay"><span class="gallery-caption">Coding Competition</span></div></div>
+                    <div class="gallery-item"><img src="Images/Students/Students7.jpg" alt="Students Corner" class="gallery-img" data-caption="Hackathon"><div class="gallery-overlay"><span class="gallery-caption">Hackathon</span></div></div>
+                    <div class="gallery-item"><img src="Images/Students/Students8.jpg" alt="Students Corner" class="gallery-img" data-caption="Alumni Meet"><div class="gallery-overlay"><span class="gallery-caption">Alumni Meet</span></div></div>
                 </div>
+                <button class="see-more" data-gallery="students">See More</button>
             </section>
 
             <section class="gallery-section" data-category="batch">
@@ -890,14 +904,15 @@
                         <button class="gallery-btn next-btn" data-gallery="batch"><i class="fas fa-chevron-right"></i></button>
                     </div>
                 </div>
-                <div class="gallery-grid" id="batch-gallery">
-                    <div class="gallery-item"><img src="Images/NEWBatch/NewBatch1.jpg" alt="New Batch 2025" class="gallery-img" data-caption="Orientation Day"></div>
-                    <div class="gallery-item"><img src="Images/NEWBatch/NewBatch2.jpg" alt="New Batch 2025" class="gallery-img" data-caption="Welcome Session"></div>
-                    <div class="gallery-item"><img src="Images/NEWBatch/NewBatch3.jpg" alt="New Batch 2025" class="gallery-img" data-caption="Icebreaker Activity"></div>
-                    <div class="gallery-item"><img src="Images/NEWBatch/NewBatch4.jpg" alt="New Batch 2025" class="gallery-img" data-caption="Faculty Introduction"></div>
-                    <div class="gallery-item"><img src="Images/NEWBatch/NewBatch5.jpg" alt="New Batch 2025" class="gallery-img" data-caption="Campus Tour"></div>
-                    <div class="gallery-item"><img src="Images/NEWBatch/NewBatch6.jpg" alt="New Batch 2025" class="gallery-img" data-caption="First Day Photo"></div>
+                <div class="gallery-grid collapsed" id="batch-gallery">
+                    <div class="gallery-item"><img src="Images/NEWBatch/NewBatch1.jpg" alt="New Batch 2025" class="gallery-img" data-caption="Orientation Day"><div class="gallery-overlay"><span class="gallery-caption">Orientation Day</span></div></div>
+                    <div class="gallery-item"><img src="Images/NEWBatch/NewBatch2.jpg" alt="New Batch 2025" class="gallery-img" data-caption="Welcome Session"><div class="gallery-overlay"><span class="gallery-caption">Welcome Session</span></div></div>
+                    <div class="gallery-item"><img src="Images/NEWBatch/NewBatch3.jpg" alt="New Batch 2025" class="gallery-img" data-caption="Icebreaker Activity"><div class="gallery-overlay"><span class="gallery-caption">Icebreaker Activity</span></div></div>
+                    <div class="gallery-item"><img src="Images/NEWBatch/NewBatch4.jpg" alt="New Batch 2025" class="gallery-img" data-caption="Faculty Introduction"><div class="gallery-overlay"><span class="gallery-caption">Faculty Introduction</span></div></div>
+                    <div class="gallery-item"><img src="Images/NEWBatch/NewBatch5.jpg" alt="New Batch 2025" class="gallery-img" data-caption="Campus Tour"><div class="gallery-overlay"><span class="gallery-caption">Campus Tour</span></div></div>
+                    <div class="gallery-item"><img src="Images/NEWBatch/NewBatch6.jpg" alt="New Batch 2025" class="gallery-img" data-caption="First Day Photo"><div class="gallery-overlay"><span class="gallery-caption">First Day Photo</span></div></div>
                 </div>
+                <button class="see-more" data-gallery="batch">See More</button>
             </section>
         </div>
     </main>
@@ -917,23 +932,22 @@
                 </div>
             </div>
             <div class="footer-col">
-          <h3>Quick Links</h3>
-          <ul class="footer-links">
-            <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
-            <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
-            <li><a href="courses.html"><i class="fas fa-chevron-right"></i> Courses</a></li>
-            <li><a href="#testimonials"><i class="fas fa-chevron-right"></i> Success Stories</a></li>
-            <li><a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a></li>
-            <li><a href="admission.html"><i class="fas fa-chevron-right"></i> Admission</a></li>
-            <li><a href="studentzone.html"><i class="fas fa-chevron-right"></i> StudentZone</a></li>
-            <li><a href="about.html"><i class="fas fa-chevron-right"></i> About & Contact</a></li>
-          </ul>
-        </div>
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="courses.html"><i class="fas fa-chevron-right"></i> Courses</a></li>
+                    <li><a href="#testimonials"><i class="fas fa-chevron-right"></i> Success Stories</a></li>
+                    <li><a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+                    <li><a href="admission.html"><i class="fas fa-chevron-right"></i> Admission</a></li>
+                    <li><a href="studentzone.html"><i class="fas fa-chevron-right"></i> StudentZone</a></li>
+                    <li><a href="about.html"><i class="fas fa-chevron-right"></i> About & Contact</a></li>
+                </ul>
+            </div>
             <div class="footer-col">
                 <h3>Contact Us</h3>
                 <ul class="footer-links">
-                    <li><a href="https://www.google.com/maps/place/Elite+Computer+Classes/@27.1011545,84.4618682,17z/data=!4m14!1m7!3m6!1s0x39949d77d23e1fbf:0x4b843cecdcef2869!2sElite+Computer+Classes!8m2!3d27.1011545!4d84.4644431!16s%2Fg%2F11h6m7vc2k!3m5!1s0x39949d77d23e1fbf:0x4b843cecdcef2869!8m2!3d27.1011545!4d84.4644431!16s%2Fg%2F11h6m7vc2k?entry=ttu&g_ep=EgoyMDI1MDcyMC4wIKXMDSoASAFQAw%3D%3D"><i class="fas fa-map-marker-alt"></i> Block Road, Narkatiaganj
-West Champaran, Bihar - 845455</a></li>
+                    <li><a href="https://www.google.com/maps/place/Elite+Computer+Classes/@27.1011545,84.4618682,17z/data=!4m14!1m7!3m6!1s0x39949d77d23e1fbf:0x4b843cecdcef2869!2sElite+Computer+Classes!8m2!3d27.1011545!4d84.4644431!16s%2Fg%2F11h6m7vc2k!3m5!1s0x39949d77d23e1fbf:0x4b843cecdcef2869!8m2!3d27.1011545!4d84.4644431!16s%2Fg%2F11h6m7vc2k?entry=ttu&g_ep=EgoyMDI1MDcyMC4wIKXMDSoASAFQAw%3D%3D"><i class="fas fa-map-marker-alt"></i> Block Road, Narkatiaganj West Champaran, Bihar - 845455</a></li>
                     <li><a href="tel:+918292879444"><i class="fas fa-phone-alt"></i> +91 8292879444</a></li>
                     <li><a href="mailto:elitecomputerclasses@gmail.com"><i class="fas fa-envelope"></i> elitecomputerclasses@gmail.com</a></li>
                     <li><i class="fas fa-clock"></i> Mon-Sat: 9AM - 6PM</li>
@@ -1088,6 +1102,10 @@ West Champaran, Bihar - 845455</a></li>
                     btn.classList.add('active');
 
                     gallerySections.forEach(section => {
+                        const gallery = section.querySelector('.gallery-grid');
+                        gallery.classList.add('collapsed');
+                        const seeMoreBtn = section.querySelector('.see-more');
+                        if (seeMoreBtn) seeMoreBtn.textContent = 'See More';
                         section.classList.toggle('hidden', filter !== 'all' && section.getAttribute('data-category') !== filter);
                     });
                 });
@@ -1100,6 +1118,7 @@ West Champaran, Bihar - 845455</a></li>
                 gallerySections.forEach(section => {
                     const sectionTitle = section.querySelector('h2').textContent.toLowerCase();
                     const items = section.querySelectorAll('.gallery-item');
+                    const gallery = section.querySelector('.gallery-grid');
                     let hasMatch = false;
 
                     items.forEach(item => {
@@ -1110,6 +1129,20 @@ West Champaran, Bihar - 845455</a></li>
                     });
 
                     section.classList.toggle('hidden', !hasMatch && !sectionTitle.includes(query));
+                    gallery.classList.add('collapsed');
+                    const seeMoreBtn = section.querySelector('.see-more');
+                    if (seeMoreBtn) seeMoreBtn.textContent = 'See More';
+                });
+            });
+
+            // See More Functionality
+            document.querySelectorAll('.see-more').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const galleryId = btn.getAttribute('data-gallery');
+                    const gallery = document.getElementById(`${galleryId}-gallery`);
+                    const isCollapsed = gallery.classList.contains('collapsed');
+                    gallery.classList.toggle('collapsed', !isCollapsed);
+                    btn.textContent = isCollapsed ? 'See Less' : 'See More';
                 });
             });
         });
