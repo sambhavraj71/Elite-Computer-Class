@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Amit Sharma",
+        "regNo": "STU001",
+        "mobNo": "9876543210",
+        "course": "Computer Science",
+        "totalFee": "50000",
+        "pendingFee": "10000",
+        "duration": "4 years"
+    },
+    {
+        "name": "Priya Singh",
+        "regNo": "STU002",
+        "mobNo": "8765432109",
+        "course": "Mechanical Engineering",
+        "totalFee": "60000",
+        "pendingFee": "15000",
+        "duration": "4 years"
+    }
+]
