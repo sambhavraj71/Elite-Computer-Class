@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="dashboard">
+            <h2>Faculty Dashboard</h2>
+            <h3>Edit Student Data</h3>
+            <div id="student-list"></div>
+            <button onclick="logout()">Logout</button>
+        </div>
+    </div>
+    <script>
+        async function loadStudentDataForEdit() {
+            try {
+                // Check if there’s updated data in localStorage
+                const updatedStudents = JSON.parse(localStorage.getItem('updatedStudents')) || [];
+                let students;
+
+                if (updatedStudents.length > 0) {
+                    students = updatedStudents;
+                } else {
+                    const response = await fetch('student.json');
+                    students = await response.json();
+                    localStorage.setItem('updatedStudents', JSON.stringify(students));
+                }
+
+                const studentList = document.getElementById('student-list');
+                studentList.innerHTML = '';
+
+                students.forEach((student, index) => {
+                    const studentDiv = document.createElement('div');
+                    studentDiv.innerHTML = `
+                        <p><strong>Name:</strong> <input type="text" id="name-${index}" value="${student.name}"></p>
+                        <p><strong>Reg No:</strong> <input type="text" id="regNo-${index}" value="${student.regNo}"></p>
+                        <p><strong>Mob No:</strong> <input type="text" id="mobNo-${index}" value="${student.mobNo}"></p>
+                        <p><strong>Course:</strong> <input type="text" id="course-${index}" value="${student.course}"></p>
+                        <p><strong>Total Fee:</strong> <input type="text" id="totalFee-${index}" value="${student.totalFee}"></p>
+                        <p><strong>Pending Fee:</strong> <input type="text" id="pendingFee-${index}" value="${student.pendingFee}"></p>
+                        <p><strong>Duration:</strong> <input type="text" id="duration-${index}" value="${student.duration}"></p>
+                        <button onclick="updateStudent(${index})">Update</button>
+                    `;
+                    studentList.appendChild(studentDiv);
+                });
+            } catch (error) {
+                console.error('Error loading student data:', error);
+                alert('Error loading student data');
+            }
+        }
+
+        async function updateStudent(index) {
+            try {
+                // Get current students from localStorage
+                const students = JSON.parse(localStorage.getItem('updatedStudents')) || [];
+
+                // Update the specific student
+                students[index] = {
+                    name: document.getElementById(`name-${index}`).value,
+                    regNo: document.getElementById(`regNo-${index}`).value,
+                    mobNo: document.getElementById(`mobNo-${index}`).value,
+                    course: document.getElementById(`course-${index}`).value,
+                    totalFee: document.getElementById(`totalFee-${index}`).value,
+                    pendingFee: document.getElementById(`pendingFee-${index}`).value,
+                    duration: document.getElementById(`duration-${index}`).value
+                };
+
+                // Save updated students to localStorage
+                localStorage.setItem('updatedStudents', JSON.stringify(students));
+
+                // Attempt to persist changes to server (Netlify Function)
+                try {
+                    const response = await fetch('/.netlify/functions/update-student', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ students })
+                    });
+                    const result = await response.json();
+                    if (response.ok) {
+                        alert('Student data updated successfully!');
+                    } else {
+                        alert('Updated locally, but server update failed: ' + result.message);
+                    }
+                } catch (serverError) {
+                    console.error('Server update failed:', serverError);
+                    alert('Updated locally in browser, but server update requires backend setup.');
+                }
+
+                // Reload the student list to reflect changes
+                await loadStudentDataForEdit();
+            } catch (error) {
+                console.error('Error updating student data:', error);
+                alert('Error updating student data');
+            }
+        }
+
+        function logout() {
+            window.location.href = 'index.html';
+        }
+
+        // Load student data when the page loads
+        window.onload = loadStudentDataForEdit;
+    </script>
+</body>
+</html>
