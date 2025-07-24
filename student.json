@@ -16,5 +16,14 @@
         "totalFee": "60000",
         "pendingFee": "15000",
         "duration": "4 years"
+    },
+     {
+        "name": "Rahul Singh",
+        "regNo": "STU003",
+        "mobNo": "123456789",
+        "course": "Mechanical Engineering",
+        "totalFee": "60000",
+        "pendingFee": "15000",
+        "duration": "4 years"
     }
 ]
