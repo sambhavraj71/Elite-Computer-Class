@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login System</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 400px;
+    text-align: center;
+}
+
+.login-choice button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+
+.login-choice button:hover {
+    background-color: #0056b3;
+}
+
+.login-form, .profile, .dashboard {
+    margin-top: 20px;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.login-form button, .profile button, .dashboard button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.login-form button:hover, .profile button:hover, .dashboard button:hover {
+    background-color: #218838;
+}
+
+#student-list {
+    margin-top: 20px;
+    text-align: left;
+}
+
+#student-list div {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+#student-list input {
+    margin: 5px 0;
+    width: calc(100% - 16px);
+}
+
+#student-list button {
+    margin: 5px;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-choice">
+            <h2>Select Login Type</h2>
+            <button onclick="showStudentLogin()">Student Login</button>
+            <button onclick="showFacultyLogin()">Faculty Login</button>
+        </div>
+
+        <div id="student-login" class="login-form" style="display: none;">
+            <h2>Student Login</h2>
+            <form id="student-form">
+                <label for="regNo">Registration Number:</label>
+                <input type="text" id="regNo" required>
+                <label for="mobNo">Mobile Number:</label>
+                <input type="text" id="mobNo" required>
+                <button type="submit" onclick="studentLogin()">Login</button>
+            </form>
+        </div>
+
+        <div id="faculty-login" class="login-form" style="display: none;">
+            <h2>Faculty Login</h2>
+            <form id="faculty-form">
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" required>
+                <button type="submit" onclick="facultyLogin()">Login</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        function showStudentLogin() {
+    document.getElementById('student-login').style.display = 'block';
+    document.getElementById('faculty-login').style.display = 'none';
+    document.getElementById('login-choice').style.display = 'none';
+}
+
+function showFacultyLogin() {
+    document.getElementById('faculty-login').style.display = 'block';
+    document.getElementById('student-login').style.display = 'none';
+    document.getElementById('login-choice').style.display = 'none';
+}
+
+async function studentLogin() {
+    event.preventDefault(); // Prevent form submission
+    const regNo = document.getElementById('regNo').value;
+    const mobNo = document.getElementById('mobNo').value;
+
+    try {
+        const response = await fetch('student.json');
+        const students = await response.json();
+        const student = students.find(s => s.regNo === regNo && s.mobNo === mobNo);
+
+        if (student) {
+            // Store student data in localStorage to pass to profile page
+            localStorage.setItem('loggedInStudent', JSON.stringify(student));
+            window.location.href = 'student-profile.html';
+        } else {
+            alert('Invalid Registration Number or Mobile Number');
+        }
+    } catch (error) {
+        console.error('Error fetching student data:', error);
+        alert('Error fetching student data');
+    }
+}
+
+async function facultyLogin() {
+    event.preventDefault(); // Prevent form submission
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    try {
+        const response = await fetch('faculty.json');
+        const faculty = await response.json();
+        const validFaculty = faculty.find(f => f.email === email && f.password === password);
+
+        if (validFaculty) {
+            window.location.href = 'faculty-dashboard.html';
+        } else {
+            alert('Invalid Email or Password');
+        }
+    } catch (error) {
+        console.error('Error fetching faculty data:', error);
+        alert('Error fetching faculty data');
+    }
+}
+    </script>
+</body>
+</html>
