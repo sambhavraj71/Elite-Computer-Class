@@ -274,6 +274,7 @@
         .detail-item:nth-child(5) { animation-delay: 0.5s; }
         .detail-item:nth-child(6) { animation-delay: 0.6s; }
         .detail-item:nth-child(7) { animation-delay: 0.7s; }
+        .detail-item:nth-child(8) { animation-delay: 0.8s; }
 
         /* Special styling for fee items */
         .detail-item.fee-item .detail-icon {
@@ -298,7 +299,7 @@
             <div class="profile-header">
                 <div class="profile-avatar" id="student-avatar">JD</div>
                 <h2 id="student-name">John Doe</h2>
-                <p>Computer Science Student</p>
+                <p id="student-course">Computer Science Student</p>
             </div>
             
             <div class="profile-details" id="profile-details">
@@ -323,8 +324,9 @@
                 const initials = nameParts[0].charAt(0) + (nameParts.length > 1 ? nameParts[1].charAt(0) : '');
                 document.getElementById('student-avatar').textContent = initials;
                 
-                // Set student name
+                // Set student name and course
                 document.getElementById('student-name').textContent = student.name;
+                document.getElementById('student-course').textContent = `${student.course} Student`;
                 
                 // Create profile details
                 const profileDetails = document.getElementById('profile-details');
@@ -336,6 +338,16 @@
                         <div class="detail-content">
                             <span class="detail-label">Registration Number</span>
                             <span class="detail-value">${student.regNo}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <div class="detail-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="detail-content">
+                            <span class="detail-label">Email Address</span>
+                            <span class="detail-value">${student.email || 'Not provided'}</span>
                         </div>
                     </div>
                     
@@ -374,7 +386,7 @@
                             <i class="fas fa-rupee-sign"></i>
                         </div>
                         <div class="detail-content">
-                            <span class="detail-label">Total Fee</span>
+                            <span class="detail-label">Total Course Fee</span>
                             <span class="detail-value">₹${student.totalFee}</span>
                         </div>
                     </div>
@@ -388,16 +400,26 @@
                             <span class="detail-value">₹${student.pendingFee} <span class="fee-status ${student.pendingFee === '0' ? 'fee-paid' : 'fee-pending'}">${student.pendingFee === '0' ? 'Paid' : 'Pending'}</span></span>
                         </div>
                     </div>
+                    
+                    <div class="detail-item">
+                        <div class="detail-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="detail-content">
+                            <span class="detail-label">Last Updated</span>
+                            <span class="detail-value">${new Date().toLocaleDateString()}</span>
+                        </div>
+                    </div>
                 `;
             } else {
                 alert('No student data found. Please log in again.');
-                window.location.href = 'login.html';
+                window.location.href = 'index.html';
             }
         });
 
         function logout() {
             localStorage.removeItem('loggedInStudent');
-            window.location.href = 'https://elitecomputerclasses.com/';
+            window.location.href = 'index.html';
         }
     </script>
 </body>

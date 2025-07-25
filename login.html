@@ -3,175 +3,264 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login System</title>
+    <title>Login - Elite Computer Classes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #4361ee;
+            --primary-light: #4895ef;
+            --secondary: #3f37c9;
+            --dark: #212529;
+            --light: #f8f9fa;
+            --danger: #ef233c;
+            --border-radius: 12px;
+            --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
         body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f0f0f0;
-}
+            background-color: #f5f7ff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-.container {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    width: 400px;
-    text-align: center;
-}
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            padding: 2rem;
+        }
 
-.login-choice button {
-    margin: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-}
+        .login-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            padding: 2rem;
+            text-align: center;
+        }
 
-.login-choice button:hover {
-    background-color: #0056b3;
-}
+        .logo {
+            margin-bottom: 1.5rem;
+        }
 
-.login-form, .profile, .dashboard {
-    margin-top: 20px;
-}
+        .logo h1 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
 
-.login-form input {
-    width: 100%;
-    padding: 8px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
+        .logo p {
+            color: var(--dark);
+            opacity: 0.7;
+        }
 
-.login-form button, .profile button, .dashboard button {
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
+        .tabs {
+            display: flex;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
 
-.login-form button:hover, .profile button:hover, .dashboard button:hover {
-    background-color: #218838;
-}
+        .tab {
+            flex: 1;
+            padding: 0.75rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
 
-#student-list {
-    margin-top: 20px;
-    text-align: left;
-}
+        .tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
 
-#student-list div {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 4px;
-}
+        .form-group {
+            margin-bottom: 1.25rem;
+            text-align: left;
+        }
 
-#student-list input {
-    margin: 5px 0;
-    width: calc(100% - 16px);
-}
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--dark);
+        }
 
-#student-list button {
-    margin: 5px;
-}
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .error-message {
+            color: var(--danger);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .login-type {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--dark);
+        }
+
+        .login-type a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="login-choice">
-            <h2>Select Login Type</h2>
-            <button onclick="showStudentLogin()">Student Login</button>
-            <button onclick="showFacultyLogin()">Faculty Login</button>
-        </div>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="logo">
+                <h1>Elite Computer Classes</h1>
+                <p>Login to your account</p>
+            </div>
 
-        <div id="student-login" class="login-form" style="display: none;">
-            <h2>Student Login</h2>
-            <form id="student-form">
-                <label for="regNo">Registration Number:</label>
-                <input type="text" id="regNo" required>
-                <label for="mobNo">Mobile Number:</label>
-                <input type="text" id="mobNo" required>
-                <button type="submit" onclick="studentLogin()">Login</button>
-            </form>
-        </div>
+            <div class="tabs">
+                <div class="tab active" id="studentTab">Student</div>
+                <div class="tab" id="facultyTab">Faculty</div>
+            </div>
 
-        <div id="faculty-login" class="login-form" style="display: none;">
-            <h2>Faculty Login</h2>
-            <form id="faculty-form">
-                <label for="email">Email:</label>
-                <input type="email" id="email" required>
-                <label for="password">Password:</label>
-                <input type="password" id="password" required>
-                <button type="submit" onclick="facultyLogin()">Login</button>
+            < id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email/Registration No</label>
+                    <input type="text" class="form-control" id="email" placeholder="Enter email or registration no">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Enter password">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Login</button><br> <br>
+                <a href="student-verification.html" style="color: blue; text-decoration: underline;">Student Verification</a>
+
+
+                <div class="error-message" id="errorMessage"></div>
             </form>
         </div>
     </div>
+
     <script>
-        function showStudentLogin() {
-    document.getElementById('student-login').style.display = 'block';
-    document.getElementById('faculty-login').style.display = 'none';
-    document.getElementById('login-choice').style.display = 'none';
-}
+        document.addEventListener('DOMContentLoaded', function() {
+            let isFacultyLogin = false;
+            const studentTab = document.getElementById('studentTab');
+            const facultyTab = document.getElementById('facultyTab');
+            const loginForm = document.getElementById('loginForm');
+            const errorMessage = document.getElementById('errorMessage');
 
-function showFacultyLogin() {
-    document.getElementById('faculty-login').style.display = 'block';
-    document.getElementById('student-login').style.display = 'none';
-    document.getElementById('login-choice').style.display = 'none';
-}
+            // Tab switching
+            studentTab.addEventListener('click', function() {
+                studentTab.classList.add('active');
+                facultyTab.classList.remove('active');
+                isFacultyLogin = false;
+            });
 
-async function studentLogin() {
-    event.preventDefault(); // Prevent form submission
-    const regNo = document.getElementById('regNo').value;
-    const mobNo = document.getElementById('mobNo').value;
+            facultyTab.addEventListener('click', function() {
+                facultyTab.classList.add('active');
+                studentTab.classList.remove('active');
+                isFacultyLogin = true;
+            });
 
-    try {
-        const response = await fetch('student.json');
-        const students = await response.json();
-        const student = students.find(s => s.regNo === regNo && s.mobNo === mobNo);
+            // Login form submission
+            loginForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                errorMessage.style.display = 'none';
 
-        if (student) {
-            // Store student data in localStorage to pass to profile page
-            localStorage.setItem('loggedInStudent', JSON.stringify(student));
-            window.location.href = 'student-profile.html';
-        } else {
-            alert('Invalid Registration Number or Mobile Number');
-        }
-    } catch (error) {
-        console.error('Error fetching student data:', error);
-        alert('Error fetching student data');
-    }
-}
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
 
-async function facultyLogin() {
-    event.preventDefault(); // Prevent form submission
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+                if (!email || !password) {
+                    showError('Please fill in all fields');
+                    return;
+                }
 
-    try {
-        const response = await fetch('faculty.json');
-        const faculty = await response.json();
-        const validFaculty = faculty.find(f => f.email === email && f.password === password);
+                if (isFacultyLogin) {
+                    // Faculty login logic
+                    try {
+                        const response = await fetch('faculty.json');
+                        const faculties = await response.json();
+                        const faculty = faculties.find(f => f.email === email && f.password === password);
 
-        if (validFaculty) {
-            window.location.href = 'faculty-dashboard.html';
-        } else {
-            alert('Invalid Email or Password');
-        }
-    } catch (error) {
-        console.error('Error fetching faculty data:', error);
-        alert('Error fetching faculty data');
-    }
-}
+                        if (faculty) {
+                            window.location.href = 'faculty-dashboard.html';
+                        } else {
+                            showError('Invalid faculty credentials');
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                        showError('Error loading faculty data');
+                    }
+                } else {
+                    // Student login logic
+                    try {
+                        const response = await fetch('student.json');
+                        const students = await response.json();
+                        const student = students.find(s => (s.email === email || s.regNo === email) && s.password === password);
+
+                        if (student) {
+                            localStorage.setItem('loggedInStudent', JSON.stringify(student));
+                            window.location.href = 'student-profile.html';
+                        } else {
+                            showError('Invalid student credentials');
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                        showError('Error loading student data');
+                    }
+                }
+            });
+
+            function showError(message) {
+                errorMessage.textContent = message;
+                errorMessage.style.display = 'block';
+            }
+        });
     </script>
 </body>
 </html>

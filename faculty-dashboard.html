@@ -42,7 +42,7 @@
         .header {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            padding: 1.5rem;
+            padding: 1rem;
             text-align: center;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             position: relative;
@@ -61,21 +61,21 @@
         }
 
         .header h1 {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
             position: relative;
         }
 
         .header p {
-            font-size: 1rem;
+            font-size: 0.9rem;
             opacity: 0.9;
             font-weight: 400;
         }
 
         .container {
             flex: 1;
-            padding: 2rem 1rem;
+            padding: 1rem;
             max-width: 1200px;
             margin: 0 auto;
             width: 100%;
@@ -83,17 +83,26 @@
 
         .dashboard-header {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
+            flex-direction: column;
             gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .dashboard-header {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
         }
 
         .dashboard-header h2 {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: var(--dark);
             font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .dashboard-card {
@@ -103,30 +112,79 @@
             overflow: hidden;
             transition: var(--transition);
             margin-bottom: 2rem;
-            padding: 1.5rem;
+            padding: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .dashboard-card {
+                padding: 1.5rem;
+            }
         }
 
         .dashboard-card h3 {
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             color: var(--primary);
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.75rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
             border-bottom: 2px solid rgba(67, 97, 238, 0.1);
         }
 
-        .student-card {
+        @media (min-width: 768px) {
+            .dashboard-card h3 {
+                font-size: 1.25rem;
+                margin-bottom: 1.5rem;
+                padding-bottom: 0.75rem;
+            }
+        }
+
+        .students-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+        }
+
+        @media (min-width: 480px) {
+            .students-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 768px) {
+            .students-list {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .students-list {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .student-item {
             background: white;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            padding: 1rem;
             transition: var(--transition);
             border-left: 4px solid var(--primary);
+            cursor: pointer;
         }
 
-        .student-card:hover {
+        .student-item:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .student-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--dark);
+        }
+
+        .student-regno {
+            font-size: 0.85rem;
+            color: var(--gray);
         }
 
         .form-group {
@@ -205,35 +263,6 @@
             box-shadow: 0 6px 20px rgba(239, 35, 60, 0.4);
         }
 
-        /* Responsive Grid Layout */
-        @media (min-width: 768px) {
-            .student-card {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1.5rem;
-            }
-            
-            .form-group {
-                margin-bottom: 0;
-            }
-        }
-
-        @media (min-width: 992px) {
-            .student-card {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        /* Animation */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .student-card {
-            animation: fadeIn 0.6s ease-out;
-        }
-
         /* Status indicators */
         .fee-status {
             display: inline-block;
@@ -256,7 +285,15 @@
 
         /* Search bar */
         .search-container {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .search-container {
+                width: 300px;
+                margin-bottom: 0;
+            }
         }
 
         .search-input {
@@ -275,6 +312,125 @@
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
         }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: var(--border-radius);
+            width: 100%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            color: var(--primary);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .modal-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+
+        .student-details-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        @media (min-width: 600px) {
+            .student-details-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Notification styles */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: var(--border-radius);
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            box-shadow: var(--box-shadow);
+            transform: translateX(120%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            max-width: 350px;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.success {
+            background: linear-gradient(135deg, var(--success), #00a884);
+        }
+        
+        .notification.error {
+            background: linear-gradient(135deg, var(--danger), #d00000);
+        }
+        
+        .notification.warning {
+            background: linear-gradient(135deg, var(--warning), #e85d04);
+        }
+        
+        .notification.info {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        /* Add student button */
+        .add-student-btn {
+            margin-bottom: 1.5rem;
+        }
     </style>
 </head>
 <body>
@@ -292,10 +448,16 @@
                 </div>
             </div>
             
-            <h3><i class="fas fa-user-edit"></i> Edit Student Data</h3>
+            <div class="add-student-btn">
+                <button class="btn btn-primary" onclick="showAddStudentForm()">
+                    <i class="fas fa-plus"></i> Add New Student
+                </button>
+            </div>
             
-            <div id="student-list">
-                <!-- Student cards will be inserted here by JavaScript -->
+            <h3><i class="fas fa-user-edit"></i> Manage Students</h3>
+            
+            <div class="students-list" id="students-list">
+                <!-- Student items will be inserted here by JavaScript -->
             </div>
         </div>
         
@@ -306,142 +468,275 @@
         </div>
     </main>
 
+    <!-- Student Details Modal -->
+    <div class="modal" id="studentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Student Details</h3>
+                <button class="modal-close" onclick="hideStudentModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="studentModalBody">
+                <!-- Student details will be inserted here -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn" onclick="hideStudentModal()">Close</button>
+                <button class="btn btn-primary" id="editStudentBtn">Edit</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Student Modal -->
+    <div class="modal" id="addStudentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-user-plus"></i> Add New Student</h3>
+                <button class="modal-close" onclick="hideAddStudentForm()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="addStudentForm">
+                    <div class="student-details-grid">
+                        <div class="form-group">
+                            <label for="newName">Name</label>
+                            <input type="text" class="form-control" id="newName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newRegNo">Registration No</label>
+                            <input type="text" class="form-control" id="newRegNo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newMobNo">Mobile No</label>
+                            <input type="text" class="form-control" id="newMobNo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newEmail">Email</label>
+                            <input type="email" class="form-control" id="newEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword">Password</label>
+                            <input type="password" class="form-control" id="newPassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newCourse">Course</label>
+                            <input type="text" class="form-control" id="newCourse" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newTotalFee">Total Fee</label>
+                            <input type="text" class="form-control" id="newTotalFee" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPendingFee">Pending Fee</label>
+                            <input type="text" class="form-control" id="newPendingFee" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newDuration">Duration</label>
+                            <input type="text" class="form-control" id="newDuration" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn" onclick="hideAddStudentForm()">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Add Student</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // Global students array
+        let students = [];
+        let currentStudentIndex = -1;
+
         async function loadStudentDataForEdit() {
             try {
-                // Check if there's updated data in localStorage
-                const updatedStudents = JSON.parse(localStorage.getItem('updatedStudents')) || [];
-                let students;
+                // Try to fetch from student.json
+                const response = await fetch('student.json');
+                if (!response.ok) throw new Error('Failed to fetch student data');
+                students = await response.json();
+                
+                // Save to localStorage for editing
+                localStorage.setItem('updatedStudents', JSON.stringify(students));
+                
+                renderStudentList(students);
+                
+                // Add search functionality
+                document.getElementById('searchInput').addEventListener('input', function(e) {
+                    const searchTerm = e.target.value.toLowerCase();
+                    const filteredStudents = students.filter(student => 
+                        student.name.toLowerCase().includes(searchTerm) || 
+                        student.regNo.toLowerCase().includes(searchTerm) || 
+                        student.course.toLowerCase().includes(searchTerm)
+                    );
+                    renderStudentList(filteredStudents);
+                });
+            } catch (error) {
+                console.error('Error loading student data:', error);
+                showNotification('Error loading student data', 'error');
+            }
+        }
 
-                if (updatedStudents.length > 0) {
-                    students = updatedStudents;
-                } else {
-                    const response = await fetch('student.json');
-                    students = await response.json();
-                    localStorage.setItem('updatedStudents', JSON.stringify(students));
-                }
+        function renderStudentList(studentsToRender) {
+            const studentsList = document.getElementById('students-list');
+            studentsList.innerHTML = '';
 
-                const studentList = document.getElementById('student-list');
-                studentList.innerHTML = '';
+            if (studentsToRender.length === 0) {
+                studentsList.innerHTML = '<p style="text-align: center; color: var(--gray); grid-column: 1 / -1;">No students found</p>';
+                return;
+            }
 
-                students.forEach((student, index) => {
-                    const studentCard = document.createElement('div');
-                    studentCard.className = 'student-card';
-                    studentCard.innerHTML = `
-                        <div class="form-group">
-                            <label for="name-${index}">Name</label>
-                            <input type="text" class="form-control" id="name-${index}" value="${student.name}">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="regNo-${index}">Registration No</label>
-                            <input type="text" class="form-control" id="regNo-${index}" value="${student.regNo}">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="mobNo-${index}">Mobile No</label>
-                            <input type="text" class="form-control" id="mobNo-${index}" value="${student.mobNo}">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="course-${index}">Course</label>
-                            <input type="text" class="form-control" id="course-${index}" value="${student.course}">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="totalFee-${index}">Total Fee</label>
-                            <input type="text" class="form-control" id="totalFee-${index}" value="${student.totalFee}">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="pendingFee-${index}">Pending Fee</label>
-                            <input type="text" class="form-control" id="pendingFee-${index}" value="${student.pendingFee}">
+            studentsToRender.forEach((student, index) => {
+                const studentItem = document.createElement('div');
+                studentItem.className = 'student-item';
+                studentItem.innerHTML = `
+                    <div class="student-name">${student.name}</div>
+                    <div class="student-regno">${student.regNo}</div>
+                `;
+                studentItem.addEventListener('click', () => showStudentDetails(index));
+                studentsList.appendChild(studentItem);
+            });
+        }
+
+        function showStudentDetails(index) {
+            currentStudentIndex = index;
+            const student = students[index];
+            
+            document.getElementById('studentModalBody').innerHTML = `
+                <div class="student-details-grid">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <div class="form-control" style="background: #f8f9fa;">${student.name}</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Registration No</label>
+                        <div class="form-control" style="background: #f8f9fa;">${student.regNo}</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Mobile No</label>
+                        <div class="form-control" style="background: #f8f9fa;">${student.mobNo}</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Email</label>
+                        <div class="form-control" style="background: #f8f9fa;">${student.email || 'Not provided'}</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Course</label>
+                        <div class="form-control" style="background: #f8f9fa;">${student.course}</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Total Fee</label>
+                        <div class="form-control" style="background: #f8f9fa;">₹${student.totalFee}</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Pending Fee</label>
+                        <div class="form-control" style="background: #f8f9fa; display: flex; align-items: center;">
+                            ₹${student.pendingFee}
                             <span class="fee-status ${student.pendingFee === '0' ? 'fee-paid' : 'fee-pending'}">
                                 ${student.pendingFee === '0' ? 'Paid' : 'Pending'}
                             </span>
                         </div>
-                        
-                        <div class="form-group">
-                            <label for="duration-${index}">Duration</label>
-                            <input type="text" class="form-control" id="duration-${index}" value="${student.duration}">
-                        </div>
-                        
-                        <div class="form-group" style="grid-column: 1 / -1;">
-                            <button class="btn btn-primary" onclick="updateStudent(${index})">
-                                <i class="fas fa-save"></i> Update Student
-                            </button>
-                        </div>
-                    `;
-                    studentList.appendChild(studentCard);
-                });
-
-                // Add search functionality
-                document.getElementById('searchInput').addEventListener('input', function(e) {
-                    const searchTerm = e.target.value.toLowerCase();
-                    const cards = document.querySelectorAll('.student-card');
+                    </div>
                     
-                    cards.forEach(card => {
-                        const name = card.querySelector('input[id^="name-"]').value.toLowerCase();
-                        const regNo = card.querySelector('input[id^="regNo-"]').value.toLowerCase();
-                        const course = card.querySelector('input[id^="course-"]').value.toLowerCase();
-                        
-                        if (name.includes(searchTerm) || regNo.includes(searchTerm) || course.includes(searchTerm)) {
-                            card.style.display = 'grid';
-                        } else {
-                            card.style.display = 'none';
-                        }
-                    });
-                });
-            } catch (error) {
-                console.error('Error loading student data:', error);
-                alert('Error loading student data');
-            }
+                    <div class="form-group">
+                        <label>Duration</label>
+                        <div class="form-control" style="background: #f8f9fa;">${student.duration}</div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('editStudentBtn').onclick = () => editStudent(index);
+            document.getElementById('studentModal').style.display = 'flex';
         }
 
-        async function updateStudent(index) {
-            try {
-                // Get current students from localStorage
-                const students = JSON.parse(localStorage.getItem('updatedStudents')) || [];
-
-                // Update the specific student
-                students[index] = {
-                    name: document.getElementById(`name-${index}`).value,
-                    regNo: document.getElementById(`regNo-${index}`).value,
-                    mobNo: document.getElementById(`mobNo-${index}`).value,
-                    course: document.getElementById(`course-${index}`).value,
-                    totalFee: document.getElementById(`totalFee-${index}`).value,
-                    pendingFee: document.getElementById(`pendingFee-${index}`).value,
-                    duration: document.getElementById(`duration-${index}`).value
-                };
-
-                // Save updated students to localStorage
-                localStorage.setItem('updatedStudents', JSON.stringify(students));
-
-                // Attempt to persist changes to server (Netlify Function)
-                try {
-                    const response = await fetch('/.netlify/functions/update-student', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ students })
-                    });
-                    const result = await response.json();
-                    if (response.ok) {
-                        showNotification('Student data updated successfully!', 'success');
-                    } else {
-                        showNotification('Updated locally, but server update failed: ' + result.message, 'warning');
-                    }
-                } catch (serverError) {
-                    console.error('Server update failed:', serverError);
-                    showNotification('Updated locally in browser, but server update requires backend setup.', 'info');
-                }
-
-                // Reload the student list to reflect changes
-                await loadStudentDataForEdit();
-            } catch (error) {
-                console.error('Error updating student data:', error);
-                showNotification('Error updating student data', 'error');
-            }
+        function hideStudentModal() {
+            document.getElementById('studentModal').style.display = 'none';
         }
+
+        function editStudent(index) {
+            const student = students[index];
+            hideStudentModal();
+            
+            // Populate the add student form with existing data
+            document.getElementById('newName').value = student.name;
+            document.getElementById('newRegNo').value = student.regNo;
+            document.getElementById('newMobNo').value = student.mobNo;
+            document.getElementById('newEmail').value = student.email || '';
+            document.getElementById('newPassword').value = student.password || '';
+            document.getElementById('newCourse').value = student.course;
+            document.getElementById('newTotalFee').value = student.totalFee;
+            document.getElementById('newPendingFee').value = student.pendingFee;
+            document.getElementById('newDuration').value = student.duration;
+            
+            // Change the form to edit mode
+            const form = document.getElementById('addStudentForm');
+            form.dataset.mode = 'edit';
+            form.dataset.index = index;
+            
+            // Update the modal title
+            document.querySelector('#addStudentModal .modal-header h3').innerHTML = '<i class="fas fa-user-edit"></i> Edit Student';
+            
+            // Update the submit button text
+            form.querySelector('.modal-footer .btn-primary').textContent = 'Update Student';
+            
+            showAddStudentForm();
+        }
+
+        function showAddStudentForm() {
+            document.getElementById('addStudentModal').style.display = 'flex';
+        }
+
+        function hideAddStudentForm() {
+            document.getElementById('addStudentModal').style.display = 'none';
+            const form = document.getElementById('addStudentForm');
+            form.reset();
+            delete form.dataset.mode;
+            delete form.dataset.index;
+            
+            // Reset the modal title
+            document.querySelector('#addStudentModal .modal-header h3').innerHTML = '<i class="fas fa-user-plus"></i> Add New Student';
+            
+            // Reset the submit button text
+            form.querySelector('.modal-footer .btn-primary').textContent = 'Add Student';
+        }
+
+        document.getElementById('addStudentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const newStudent = {
+                name: document.getElementById('newName').value,
+                regNo: document.getElementById('newRegNo').value,
+                mobNo: document.getElementById('newMobNo').value,
+                email: document.getElementById('newEmail').value,
+                password: document.getElementById('newPassword').value,
+                course: document.getElementById('newCourse').value,
+                totalFee: document.getElementById('newTotalFee').value,
+                pendingFee: document.getElementById('newPendingFee').value,
+                duration: document.getElementById('newDuration').value
+            };
+            
+            const updatedStudents = JSON.parse(localStorage.getItem('updatedStudents')) || [];
+            
+            if (this.dataset.mode === 'edit') {
+                // Update existing student
+                const index = parseInt(this.dataset.index);
+                updatedStudents[index] = newStudent;
+                showNotification('Student updated successfully', 'success');
+            } else {
+                // Add new student
+                updatedStudents.push(newStudent);
+                showNotification('Student added successfully', 'success');
+            }
+            
+            localStorage.setItem('updatedStudents', JSON.stringify(updatedStudents));
+            students = updatedStudents;
+            renderStudentList(students);
+            
+            hideAddStudentForm();
+        });
 
         function showNotification(message, type) {
             const notification = document.createElement('div');
@@ -471,48 +766,6 @@
 
         // Load student data when the page loads
         document.addEventListener('DOMContentLoaded', loadStudentDataForEdit);
-
-        // Add notification styles
-        const style = document.createElement('style');
-        style.textContent = `
-            .notification {
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                padding: 1rem 1.5rem;
-                border-radius: var(--border-radius);
-                color: white;
-                display: flex;
-                align-items: center;
-                gap: 0.75rem;
-                box-shadow: var(--box-shadow);
-                transform: translateX(120%);
-                transition: transform 0.3s ease;
-                z-index: 1000;
-                max-width: 350px;
-            }
-            
-            .notification.show {
-                transform: translateX(0);
-            }
-            
-            .notification.success {
-                background: linear-gradient(135deg, var(--success), #00a884);
-            }
-            
-            .notification.error {
-                background: linear-gradient(135deg, var(--danger), #d00000);
-            }
-            
-            .notification.warning {
-                background: linear-gradient(135deg, var(--warning), #e85d04);
-            }
-            
-            .notification.info {
-                background: linear-gradient(135deg, var(--primary), var(--secondary));
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 </body>
 </html>

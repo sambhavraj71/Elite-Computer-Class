@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Verification - Elite Computer Classes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-light: #4895ef;
+            --secondary: #3f37c9;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light: #f8f9fa;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #ef233c;
+            --border-radius: 12px;
+            --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #f5f7ff;
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h30v30H0V0zm30 30h30v30H30V30z' fill='%234361ee' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .header p {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        .container {
+            flex: 1;
+            padding: 2rem 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .verification-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .verification-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .verification-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .verification-card p {
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        /* Verification Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: var(--border-radius);
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+            animation: modalFadeIn 0.3s ease-out;
+            overflow: hidden;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .modal-header h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .student-details {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 480px) {
+            .student-details {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .detail-item {
+            margin-bottom: 1rem;
+        }
+
+        .detail-label {
+            font-size: 0.85rem;
+            color: var(--gray);
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .detail-value {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .verification-badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(76, 201, 240, 0.1);
+            color: var(--success);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        .verification-badge i {
+            margin-right: 0.5rem;
+        }
+
+        .fee-status {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .fee-paid {
+            background: rgba(76, 201, 240, 0.1);
+            color: var(--success);
+        }
+
+        .fee-pending {
+            background: rgba(248, 150, 30, 0.1);
+            color: var(--warning);
+        }
+
+        .error-message {
+            color: var(--danger);
+            margin-top: 1rem;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Elite Computer Classes</h1>
+        <p>Student Verification Portal</p>
+    </header>
+
+    <main class="container">
+        <div class="verification-card">
+            <div class="verification-icon">
+                <i class="fas fa-user-graduate"></i>
+            </div>
+            <h2>Verify Your Student Status</h2>
+            <p>Enter your registration number and mobile number to verify your student account</p>
+            
+            <form id="verificationForm">
+                <div class="form-group">
+                    <label for="regNo">Registration Number</label>
+                    <input type="text" class="form-control" id="regNo" placeholder="Enter your registration number" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="mobile">Mobile Number</label>
+                    <input type="text" class="form-control" id="mobile" placeholder="Enter your mobile number" required>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Verify Now</button>
+                
+                <div class="error-message" id="errorMessage">
+                    Invalid registration number or mobile number. Please try again.
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Verification Success Modal -->
+    <div class="modal" id="verificationModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close" onclick="hideVerificationModal()">&times;</button>
+                <h2>Verification Successful</h2>
+                <div class="verification-badge">
+                    <i class="fas fa-check-circle"></i> Verified Student
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="student-details" id="studentDetails">
+                    <!-- Student details will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let students = [];
+
+        async function loadStudentData() {
+            try {
+                const response = await fetch('student.json');
+                if (!response.ok) throw new Error('Failed to load student data');
+                students = await response.json();
+            } catch (error) {
+                console.error('Error loading student data:', error);
+            }
+        }
+
+        function verifyStudent(regNo, mobile) {
+            return students.find(student => 
+                student.regNo === regNo && student.mobNo === mobile
+            );
+        }
+
+        function showStudentDetails(student) {
+            const studentDetails = document.getElementById('studentDetails');
+            studentDetails.innerHTML = `
+                <div class="detail-item">
+                    <div class="detail-label">Name</div>
+                    <div class="detail-value">${student.name}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Registration No</div>
+                    <div class="detail-value">${student.regNo}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Course</div>
+                    <div class="detail-value">${student.course}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Duration</div>
+                    <div class="detail-value">${student.duration}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Total Fee</div>
+                    <div class="detail-value">₹${student.totalFee}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Pending Fee</div>
+                    <div class="detail-value">
+                        ₹${student.pendingFee}
+                        <span class="fee-status ${student.pendingFee === '0' ? 'fee-paid' : 'fee-pending'}">
+                            ${student.pendingFee === '0' ? 'Paid' : 'Pending'}
+                        </span>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Mobile No</div>
+                    <div class="detail-value">${student.mobNo}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Email</div>
+                    <div class="detail-value">${student.email || 'Not provided'}</div>
+                </div>
+            `;
+            
+            document.getElementById('verificationModal').style.display = 'flex';
+        }
+
+        function hideVerificationModal() {
+            document.getElementById('verificationModal').style.display = 'none';
+            document.getElementById('verificationForm').reset();
+        }
+
+        function showError() {
+            document.getElementById('errorMessage').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('errorMessage').style.display = 'none';
+            }, 3000);
+        }
+
+        document.getElementById('verificationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const regNo = document.getElementById('regNo').value.trim();
+            const mobile = document.getElementById('mobile').value.trim();
+            
+            const student = verifyStudent(regNo, mobile);
+            
+            if (student) {
+                showStudentDetails(student);
+            } else {
+                showError();
+            }
+        });
+
+        // Load student data when the page loads
+        document.addEventListener('DOMContentLoaded', loadStudentData);
+    </script>
+</body>
+</html>s
