@@ -263,7 +263,7 @@
       color: var(--dark);
       transition: var(--transition);
       padding: 0.5rem;
-      font-size: clamp(0.8rem, 2.0vw, 0.9rem);
+      font-size: clamp(0.70rem, 2.0vw, 0.7rem);
       display: flex;
       align-items: center;
     }
@@ -797,6 +797,13 @@
       display: flex;
       align-items: center;
       gap: 1rem;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .author-info {
+      flex: 1;
+      min-width: 0;
     }
 
 Comprehensive One-Year Computer Application Program
@@ -815,12 +822,17 @@ MySQL Database    height: 60px;
       font-size: clamp(1rem, 2.5vw, 1.1rem);
       margin-bottom: 0.2rem;
       color: var(--darker);
+      word-wrap: break-word;
+      overflow-wrap: break-word;
     }
 
     .author-info p {
       color: var(--primary);
       font-size: clamp(0.8rem, 2vw, 0.9rem);
       font-weight: 500;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      max-width: 100%;
     }
 
     /* FAQ Section */
@@ -1000,6 +1012,49 @@ MySQL Database    height: 60px;
       
       .software-badges {
         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      }
+    }
+
+    /* Desktop Mode on Mobile */
+    @media (max-width: 1024px) and (min-resolution: 192dpi), 
+           (max-width: 1024px) and (-webkit-device-pixel-ratio: 2) {
+      .container {
+        max-width: 100%;
+        padding: 0 0.8rem;
+      }
+      
+      .header-container {
+        min-height: 65px;
+        padding: 0.8rem;
+      }
+      
+      .nav-menu {
+        display: none;
+      }
+      
+      .nav-menu.active {
+        display: flex;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 4rem 1.5rem;
+        background: white;
+        box-shadow: -3px 0 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        overflow-y: auto;
+      }
+      
+      .nav-toggle {
+        display: block;
+      }
+      
+      .nav-close {
+        display: block;
       }
     }
 
