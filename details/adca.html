@@ -14,7 +14,7 @@
   <link rel="icon" type="image/jpeg" href="../favicon.jpg">
   
   <style>
-     :root {
+    :root {
       --primary: #2563eb;
       --primary-dark: #1d4ed8;
       --primary-light: #3b82f6;
@@ -263,7 +263,7 @@
       color: var(--dark);
       transition: var(--transition);
       padding: 0.5rem;
-      font-size: clamp(0.70rem, 2.0vw, 0.7rem);
+      font-size: clamp(0.8rem, 2.0vw, 0.9rem);
       display: flex;
       align-items: center;
     }
@@ -806,13 +806,9 @@
       min-width: 0;
     }
 
-Comprehensive One-Year Computer Application Program
-The Advanced Diploma in Computer Application (ADCA) is our flagship program that combines essential computer knowledge from three major courses—DCA, CFA, and DTP—into a single powerful curriculum. This comprehensive program is designed for students who want to gain versatile and in-demand IT skills that open multiple career pathways.
-
-Microsoft Office Suite
-Tally.ERP 9 with GST
-Adobe Photoshop
-MySQL Database    height: 60px;
+    .author-img {
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       object-fit: cover;
       border: 3px solid var(--accent);
@@ -936,46 +932,88 @@ MySQL Database    height: 60px;
       background: var(--darker);
       color: white;
       padding: 3rem 0 1.5rem;
-      text-align: center;
+    }
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-col h3 {
+      font-size: clamp(1.1rem, 3vw, 1.2rem);
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .footer-col h3::after {
+      content: '';
+      position: absolute;
+      bottom: -0.3rem;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      border-radius: 2px;
     }
 
     .footer-links {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 2rem;
-      margin-bottom: 2rem;
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.5rem;
     }
 
     .footer-links a {
       color: #cbd5e1;
       transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
       font-size: clamp(0.85rem, 2.5vw, 0.9rem);
     }
 
     .footer-links a:hover {
+      color: var(--primary);
+      transform: translateX(3px);
+    }
+
+    .footer-links a i {
       color: var(--accent);
+      font-size: 0.7rem;
     }
 
-    .social-icons {
-      margin-bottom: 2rem;
-    }
-
-    .social-icons a {
+    .footer-contact li {
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
       color: #cbd5e1;
-      font-size: 1.5rem;
-      margin: 0 0.8rem;
-      transition: var(--transition);
+      font-size: clamp(0.85rem, 2.5vw, 0.9rem);
     }
 
-    .social-icons a:hover {
+    .footer-contact i {
       color: var(--accent);
-      transform: translateY(-3px);
+      margin-top: 0.2rem;
     }
 
-    .copyright {
+    .footer-bottom {
+      text-align: center;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-bottom p {
       color: #94a3b8;
       font-size: clamp(0.8rem, 2vw, 0.9rem);
+    }
+
+    .footer-bottom p a {
+      color: var(--accent);
+      font-weight: 600;
     }
 
     /* Animations */
@@ -999,62 +1037,31 @@ MySQL Database    height: 60px;
       animation: pulse 2s infinite;
     }
 
-    /* Responsive Design */
+    /* Mobile First - Sidebar comes first */
     @media (max-width: 1024px) {
       .details-container {
         grid-template-columns: 1fr;
         gap: 2rem;
+        display: flex;
+        flex-direction: column;
       }
       
       .details-sidebar {
         position: static;
+        order: -1;
       }
       
       .software-badges {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      }
-    }
-
-    /* Desktop Mode on Mobile */
-    @media (max-width: 1024px) and (min-resolution: 192dpi), 
-           (max-width: 1024px) and (-webkit-device-pixel-ratio: 2) {
-      .container {
-        max-width: 100%;
-        padding: 0 0.8rem;
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
       }
       
-      .header-container {
-        min-height: 65px;
+      .software-badge {
         padding: 0.8rem;
       }
       
-      .nav-menu {
-        display: none;
-      }
-      
-      .nav-menu.active {
-        display: flex;
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 80%;
-        max-width: 300px;
-        height: 100vh;
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 4rem 1.5rem;
-        background: white;
-        box-shadow: -3px 0 10px rgba(0, 0, 0, 0.1);
-        z-index: 1000;
-        overflow-y: auto;
-      }
-      
-      .nav-toggle {
-        display: block;
-      }
-      
-      .nav-close {
-        display: block;
+      .software-badge span {
+        font-size: 0.85rem;
       }
     }
 
@@ -1148,7 +1155,8 @@ MySQL Database    height: 60px;
       .fee-structure {
         padding: 1rem;
       }
-    }  </style>
+    }
+  </style>
 </head>
 <body>
   <!-- Header -->
@@ -1191,51 +1199,20 @@ MySQL Database    height: 60px;
           Master comprehensive computer skills with our industry-leading ADCA program combining DCA, CFA, and DTP certifications
         </p>
         <div class="banner-btns" data-aos="fade-up" data-aos-delay="400">
-          <a href="#enroll" class="btn btn-accent pulse">Enroll Now</a>
+          <a href="../Admission.html" class="btn btn-accent pulse">Enroll Now</a>
           <a href="#details" class="btn btn-outline">Course Details</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Course Highlights -->
-  <section class="section highlights" id="highlights">
+  <!-- Download Brochure -->
+  <section class="section" style="padding: 2rem 0; background: white;">
     <div class="container">
-      <div class="section-title" data-aos="fade-up">
-        <h2>Why Choose Our ADCA Program?</h2>
-        <p>Discover the unique advantages that make our ADCA course the perfect choice for your career growth</p>
-      </div>
-      
-      <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+      <div style="text-align: center;" data-aos="fade-up">
         <a href="https://drive.google.com/uc?export=download&id=14ZN9Xv5M3l_aR1clH1KC6EQjXOXzsl1y" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
           <i class="fas fa-download"></i> Download Course Brochure
         </a>
-      </div>
-      
-      <div class="highlight-cards">
-        <div class="highlight-card" data-aos="fade-up" data-aos-delay="100">
-          <div class="icon">
-            <i class="fas fa-certificate"></i>
-          </div>
-          <h3>Triple Certification</h3>
-          <p>Get certified in DCA, CFA, and DTP all in one comprehensive program with industry-recognized credentials.</p>
-        </div>
-        
-        <div class="highlight-card" data-aos="fade-up" data-aos-delay="200">
-          <div class="icon">
-            <i class="fas fa-laptop-code"></i>
-          </div>
-          <h3>Practical Training</h3>
-          <p>Hands-on experience with real-world projects using the latest software and industry-standard tools.</p>
-        </div>
-        
-        <div class="highlight-card" data-aos="fade-up" data-aos-delay="300">
-          <div class="icon">
-            <i class="fas fa-briefcase"></i>
-          </div>
-          <h3>Career Opportunities</h3>
-          <p>Open doors to diverse career paths in IT, accounting, design, and administrative roles across industries.</p>
-        </div>
       </div>
     </div>
   </section>
@@ -1245,8 +1222,8 @@ MySQL Database    height: 60px;
     <div class="container">
       <div class="details-container">
         <div class="details-main">
-          <h2 data-aos="fade-right">Comprehensive One-Year Computer Application Program</h2>
-          <p data-aos="fade-right" data-aos-delay="100">
+          <h2 data-aos="fade-right" style="font-size: clamp(1.5rem, 4vw, 2.2rem);">Comprehensive One-Year Computer Application Program</h2>
+          <p data-aos="fade-right" data-aos-delay="100" style="font-size: clamp(0.85rem, 2.5vw, 1rem); line-height: 1.6;">
             The Advanced Diploma in Computer Application (ADCA) is our flagship program that combines essential computer knowledge from three major courses—DCA, CFA, and DTP—into a single powerful curriculum. This comprehensive program is designed for students who want to gain versatile and in-demand IT skills that open multiple career pathways.
           </p>
           
@@ -1450,11 +1427,47 @@ MySQL Database    height: 60px;
           </div>
           
           <div class="sidebar-section">
-            <a href="#enroll" class="btn btn-primary" style="width: 100%; text-align: center; margin-bottom: 1rem;">Apply Now</a>
+            <a href="../Admission.html" class="btn btn-primary" style="width: 100%; text-align: center; margin-bottom: 1rem;">Apply Now</a>
             <a href="../index.html" class="back-btn">
               <i class="fas fa-arrow-left"></i> Back to Home
             </a>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Course Highlights -->
+  <section class="section highlights" id="highlights">
+    <div class="container">
+      <div class="section-title" data-aos="fade-up">
+        <h2>Why Choose Our ADCA Program?</h2>
+        <p>Discover the unique advantages that make our ADCA course the perfect choice for your career growth</p>
+      </div>
+      
+      <div class="highlight-cards">
+        <div class="highlight-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="icon">
+            <i class="fas fa-certificate"></i>
+          </div>
+          <h3>Triple Certification</h3>
+          <p>Get certified in DCA, CFA, and DTP all in one comprehensive program with industry-recognized credentials.</p>
+        </div>
+        
+        <div class="highlight-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="icon">
+            <i class="fas fa-laptop-code"></i>
+          </div>
+          <h3>Practical Training</h3>
+          <p>Hands-on experience with real-world projects using the latest software and industry-standard tools.</p>
+        </div>
+        
+        <div class="highlight-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="icon">
+            <i class="fas fa-briefcase"></i>
+          </div>
+          <h3>Career Opportunities</h3>
+          <p>Open doors to diverse career paths in IT, accounting, design, and administrative roles across industries.</p>
         </div>
       </div>
     </div>
@@ -1579,7 +1592,7 @@ MySQL Database    height: 60px;
       <div data-aos="fade-up">
         <h2>Start Your Comprehensive Computer Training Today</h2>
         <p>Next batch starting soon. Limited seats available for this triple-certification program!</p>
-        <a href="../Admission.html" class="btn btn-accent pulse">Enroll Now</a>
+        <a href="../Admission.html" class="btn btn-accent pulse">Apply Now</a>
       </div>
     </div>
   </section>
@@ -1587,20 +1600,64 @@ MySQL Database    height: 60px;
   <!-- Footer -->
   <footer>
     <div class="container">
-      <div class="footer-links">
-        <a href="#details">Course Details</a>
-        <a href="../about.html">About Institute</a>
-        <a href="../index.html#contact">Contact Us</a>
-        <a href="../privacy-policy.html">Privacy Policy</a>
+      <div class="footer-container">
+        <div class="footer-col">
+          <h3>Our Courses</h3>
+          <ul class="footer-links">
+            <li><a href="../details/adca.html"><i class="fas fa-chevron-right"></i> ADCA</a></li>
+            <li><a href="../details/adit.html"><i class="fas fa-chevron-right"></i> ADCA+</a></li>
+            <li><a href="../details/dca.html"><i class="fas fa-chevron-right"></i> DCA</a></li>
+            <li><a href="../details/cfa.html"><i class="fas fa-chevron-right"></i> DTP</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Tally</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Typing</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="../index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+            <li><a href="../about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+            <li><a href="../courses.html"><i class="fas fa-chevron-right"></i> Courses</a></li>
+            <li><a href="../index.html#testimonials"><i class="fas fa-chevron-right"></i> Success Stories</a></li>
+            <li><a href="../gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+            <li><a href="../admission.html"><i class="fas fa-chevron-right"></i> Admission</a></li>
+            <li><a href="../studentzone.html"><i class="fas fa-chevron-right"></i> StudentZone</a></li>
+            <li><a href="../about.html"><i class="fas fa-chevron-right"></i> About & Contact</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h3>Contact Info</h3>
+          <ul class="footer-contact">
+            <li>
+      <i class="fas fa-map-marker-alt"></i>
+      <a href="https://www.google.com/maps/place/Elite+Computer+Classes/@27.1011545,84.4618682,17z/data=!4m14!1m7!3m6!1s0x39949d77d23e1fbf:0x4b843cecdcef2869!2sElite+Computer+Classes!8m2!3d27.1011545!4d84.4644431!16s%2Fg%2F11h6m7vc2k!3m5!1s0x39949d77d23e1fbf:0x4b843cecdcef2869!8m2!3d27.1011545!4d84.4644431!16s%2Fg%2F11h6m7vc2k?entry=ttu&g_ep=EgoyMDI1MDcyMC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">
+        <span>Block Road, Narkatiaganj<br>West Champaran, Bihar 845455</span>
+      </a>
+    </li>
+    <li>
+    <li>
+      <i class="fas fa-phone-alt"></i>
+      <span>
+        <a href="tel:+918292879444">+91 8292879444</a><br>
+        <a href="tel:+919142789404">+91 9142789404</a>
+      </span>
+    </li>
+            <li>
+      <i class="fas fa-envelope"></i>
+      <a href="mailto:elitecomputerclasses@gmail.com" target="_blank" rel="noopener noreferrer">
+        <span>elitecomputerclasses@gmail.com</span>
+      </a>
+    </li>
+          </ul>
+        </div>
       </div>
       
-      <div class="social-icons">
-        <a href="https://www.facebook.com/ecc.nke?mibextid=ZbWKwL" target="_blank"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://www.instagram.com/elite_computer_classes/?hl=en" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://g.co/kgs/FGY21n" target="_blank"><i class="fab fa-google"></i></a>
+      <div class="footer-bottom">
+        <p>© 2025 Elite Computer Classes. All Rights Reserved.</p>
+        <p>Designed & Developed with <i class="fas fa-heart" style="color: var(--error);"></i> by <a href="#">CodeVoraOfficial</a></p>
       </div>
-      
-      <p class="copyright">© 2025 Elite Computer Classes. All Rights Reserved.</p>
     </div>
   </footer>
 

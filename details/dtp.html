@@ -2,722 +2,1741 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DTP - Diploma in Desktop Publishing | Tech Institute</title>
-  <!-- Font Awesome for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>DTP - Diploma in Desktop Publishing | Elite Computer Classes</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- AOS Animation -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="../favicon.jpg">
+  
   <style>
     :root {
-      --primary: #4361ee;
-      --secondary: #3f37c9;
-      --accent: #4895ef;
-      --light: #f8f9fa;
-      --dark: #212529;
-      --success: #4cc9f0;
-      --warning: #f72585;
-      --design: #f72585; /* Changed accent color to pink for design course */
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-light: #3b82f6;
+      --accent: #f59e0b;
+      --accent-dark: #d97706;
+      --dark: #1e293b;
+      --darker: #0f172a;
+      --light: #f8fafc;
+      --gray: #94a3b8;
+      --success: #10b981;
+      --error: #ef4444;
+      
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    
+
+    html, body {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
     body {
       font-family: 'Poppins', sans-serif;
-      background-color: #f5f7ff;
+      background-color: var(--light);
       color: var(--dark);
       line-height: 1.6;
     }
-    
+
+    h1, h2, h3, h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
     .container {
+      width: 100%;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 20px;
+      padding: 0 1rem;
     }
-    
-    /* Header Styles */
-    header {
-      background: linear-gradient(135deg, #7209b7, #f72585);
-      color: white;
-      padding: 3rem 0;
+
+    .section {
+      padding: 4rem 0;
+    }
+
+    .section-title {
       text-align: center;
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .section-title h2 {
+      font-size: clamp(1.8rem, 5vw, 2.2rem);
+      color: var(--darker);
+      margin-bottom: 1rem;
+    }
+
+    .section-title p {
+      max-width: 600px;
+      margin: 0 auto;
+      color: var(--gray);
+      font-size: clamp(0.9rem, 3vw, 1rem);
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -0.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      border-radius: 2px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn-accent {
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      color: white;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-accent:hover {
+      background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+
+    .btn-outline:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+
+    header.scrolled {
+      box-shadow: var(--shadow);
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      min-height: 70px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .logo-img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--accent);
+    }
+
+    .logo-text {
+      font-size: clamp(1.1rem, 3.5vw, 1.2rem);
+      font-weight: 700;
+    }
+
+    .logo-text .elite {
+      color: var(--primary);
+    }
+
+    .logo-text .classes {
+      color: var(--accent);
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--dark);
+      font-size: 1.8rem;
+      cursor: pointer;
+      transition: var(--transition);
+      padding: 0.5rem;
+    }
+
+    .nav-toggle:hover {
+      color: var(--primary);
+    }
+
+    .nav-close {
+      display: none;
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 1.8rem;
+      color: var(--dark);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .nav-close:hover {
+      color: var(--primary);
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      position: relative;
+      font-weight: 500;
+      color: var(--dark);
+      transition: var(--transition);
+      padding: 0.5rem;
+      font-size: clamp(0.70rem, 2.0vw, 0.7rem);
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-link:hover {
+      color: var(--primary);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      transition: var(--transition);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link i {
+      margin-right: 0.4rem;
+      font-size: 0.85rem;
+    }
+
+    /* Banner Section */
+    .banner {
+      min-height: 60vh;
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.9), rgba(245, 158, 11, 0.8)), url('../banner4.jpg') no-repeat center center/cover;
+      display: flex;
+      align-items: center;
+      color: white;
       position: relative;
       overflow: hidden;
+      margin-top: 70px;
     }
-    
-    header::before {
+
+    .banner::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: url('https://images.unsplash.com/photo-1555099962-4199c345e5dd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') center/cover;
-      opacity: 0.15;
+      background: linear-gradient(45deg, rgba(37, 99, 235, 0.1) 0%, rgba(245, 158, 11, 0.1) 100%);
+      z-index: 1;
+    }
+
+    .banner-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .banner-content h1 {
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      animation: fadeInUp 1s ease;
+    }
+
+    .banner-content .highlight {
+      background: linear-gradient(45deg, var(--accent), #fbbf24);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: none;
+    }
+
+    .banner-content p {
+      font-size: clamp(1rem, 3vw, 1.3rem);
+      margin-bottom: 2rem;
+      opacity: 0.95;
+      animation: fadeInUp 1s ease 0.2s both;
+    }
+
+    .banner-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeInUp 1s ease 0.4s both;
+    }
+
+    /* Course Highlights */
+    .highlights {
+      background: white;
+    }
+
+    .highlight-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .highlight-card {
+      background: white;
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border-top: 4px solid var(--primary);
+    }
+
+    .highlight-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.02), rgba(245, 158, 11, 0.02));
       z-index: 0;
     }
-    
-    header .container {
+
+    .highlight-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-lg);
+      border-top-color: var(--accent);
+    }
+
+    .highlight-card > * {
       position: relative;
       z-index: 1;
     }
-    
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      animation: fadeInDown 1s ease;
-    }
-    
-    .tagline {
-      font-size: 1.2rem;
-      opacity: 0.9;
-      margin-bottom: 1.5rem;
-      animation: fadeIn 1.5s ease;
-    }
-    
-    .enroll-btn {
-      display: inline-block;
-      background-color: var(--design);
-      color: white;
-      padding: 12px 30px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(247, 37, 133, 0.4);
-      animation: pulse 2s infinite;
-    }
-    
-    .enroll-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(247, 37, 133, 0.6);
-      background-color: #e01a6f;
-    }
-    
-    /* Course Highlights */
-    .highlights {
-      padding: 4rem 0;
-      background-color: white;
-    }
-    
-    .highlight-cards {
+
+    .highlight-card .icon {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 1.5rem;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border-radius: 50%;
       display: flex;
-      flex-wrap: wrap;
+      align-items: center;
       justify-content: center;
-      gap: 2rem;
-      margin-top: 2rem;
+      color: white;
+      font-size: 1.8rem;
+      transition: var(--transition);
     }
-    
-    .highlight-card {
-      flex: 1 1 300px;
-      background: white;
-      border-radius: 10px;
-      padding: 2rem;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      text-align: center;
-      border-top: 4px solid var(--design);
+
+    .highlight-card:hover .icon {
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      transform: scale(1.1);
     }
-    
-    .highlight-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-    }
-    
-    .highlight-card i {
-      font-size: 2.5rem;
-      color: var(--design);
-      margin-bottom: 1rem;
-    }
-    
+
     .highlight-card h3 {
+      font-size: clamp(1.1rem, 3vw, 1.3rem);
       margin-bottom: 1rem;
-      color: var(--secondary);
+      color: var(--darker);
     }
-    
+
+    .highlight-card p {
+      color: var(--gray);
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
+    }
+
     /* Course Details */
     .course-details {
-      padding: 4rem 0;
-      background-color: #f5f7ff;
+      background: #f1f5f9;
     }
-    
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .details-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .details-sidebar {
+        position: static;
+        order: -1;
+      }
+      
+      .software-badges {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+      }
+      
+      .software-badge {
+        padding: 0.8rem;
+      }
+      
+      .software-badge span {
+        font-size: 0.85rem;
+      }
+    }
+
     .details-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      align-items: flex-start;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 3rem;
+      align-items: start;
     }
-    
-    .details-main {
-      flex: 2 1 600px;
+
+    .details-main h2 {
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      margin-bottom: 1.5rem;
+      color: var(--darker);
     }
-    
-    .details-sidebar {
-      flex: 1 1 300px;
+
+    .details-main p {
+      margin-bottom: 1.5rem;
+      color: var(--gray);
+      font-size: clamp(0.85rem, 2.5vw, 1rem);
+      line-height: 1.7;
+    }
+
+    .software-badges {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .software-badge {
       background: white;
-      border-radius: 10px;
-      padding: 2rem;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      position: sticky;
-      top: 20px;
-      border-top: 4px solid var(--design);
+      padding: 1rem;
+      border-radius: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      border-left: 4px solid var(--primary);
     }
-    
-    .module-list {
-      margin-top: 1.5rem;
+
+    .software-badge:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+      border-left-color: var(--accent);
     }
-    
-    .module-list li {
-      margin-bottom: 1rem;
-      padding-left: 1.5rem;
+
+    .software-badge .badge-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--primary-light), var(--primary));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+    }
+
+    .software-badge span {
+      font-weight: 500;
+      color: var(--dark);
+      font-size: clamp(0.85rem, 2.5vw, 0.9rem);
+    }
+
+    .curriculum-section h3 {
+      font-size: clamp(1.3rem, 3vw, 1.5rem);
+      margin: 2rem 0 1rem;
+      color: var(--darker);
       position: relative;
-      transition: all 0.3s ease;
+      padding-left: 1rem;
     }
-    
+
+    .curriculum-section h3::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--primary), var(--accent));
+      border-radius: 2px;
+    }
+
+    .module-list {
+      list-style: none;
+      margin: 1.5rem 0;
+    }
+
+    .module-list li {
+      margin-bottom: 0.8rem;
+      padding: 0.8rem 1rem;
+      background: white;
+      border-radius: 0.5rem;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      position: relative;
+      padding-left: 3rem;
+      border-left: 3px solid transparent;
+    }
+
     .module-list li:hover {
-      color: var(--design);
       transform: translateX(5px);
+      box-shadow: var(--shadow);
+      border-left-color: var(--primary);
     }
-    
+
     .module-list li::before {
       content: '\f054';
       font-family: 'Font Awesome 6 Free';
       font-weight: 900;
       position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--primary);
+      font-size: 0.8rem;
+    }
+
+    .module-list li strong {
+      color: var(--darker);
+      font-weight: 600;
+    }
+
+    /* Sidebar */
+    .details-sidebar {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: var(--shadow-lg);
+      position: sticky;
+      top: 100px;
+      border: 1px solid rgba(37, 99, 235, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .details-sidebar::before {
+      content: '';
+      position: absolute;
+      top: 0;
       left: 0;
-      color: var(--design);
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary));
+      background-size: 200% 100%;
+      animation: shimmer 3s ease-in-out infinite;
     }
-    
+
+    @keyframes shimmer {
+      0%, 100% { background-position: 200% 0; }
+      50% { background-position: -200% 0; }
+    }
+
+    .sidebar-section {
+      margin-bottom: 2rem;
+    }
+
+    .sidebar-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .sidebar-section h3 {
+      font-size: clamp(1.1rem, 3vw, 1.2rem);
+      margin-bottom: 1rem;
+      color: var(--darker);
+      position: relative;
+      padding: 0.8rem 0 0.8rem 3rem;
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(245, 158, 11, 0.05));
+      border-radius: 0.5rem;
+      border-left: 4px solid var(--primary);
+    }
+
+    .sidebar-section h3::before {
+      content: '';
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 12px;
+      height: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(37, 99, 235, 0.3);
+    }
+
+    .sidebar-section:nth-child(1) h3::before { content: '💰'; font-size: 1rem; width: auto; height: auto; background: none; box-shadow: none; }
+    .sidebar-section:nth-child(2) h3::before { content: '🎁'; font-size: 1rem; width: auto; height: auto; background: none; box-shadow: none; }
+    .sidebar-section:nth-child(3) h3::before { content: '📋'; font-size: 1rem; width: auto; height: auto; background: none; box-shadow: none; }
+    .sidebar-section:nth-child(4) h3::before { content: '⏰'; font-size: 1rem; width: auto; height: auto; background: none; box-shadow: none; }
+
     .fee-structure {
-      margin-top: 2rem;
+      background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+      border-radius: 0.8rem;
+      padding: 1.5rem;
+      margin-top: 1rem;
+      border: 1px solid rgba(37, 99, 235, 0.1);
+      position: relative;
+      overflow: hidden;
     }
-    
+
+    .fee-structure::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    }
+
     .fee-item {
       display: flex;
       justify-content: space-between;
-      padding: 0.8rem 0;
-      border-bottom: 1px solid #eee;
-    }
-    
-    .fee-item:last-child {
-      border-bottom: none;
-      font-weight: bold;
-      color: var(--secondary);
-    }
-    
-    /* Testimonials */
-    .testimonials {
-      padding: 4rem 0;
-      background-color: white;
-      text-align: center;
-    }
-    
-    .testimonial-cards {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 2rem;
-      margin-top: 3rem;
-    }
-    
-    .testimonial-card {
-      flex: 1 1 300px;
+      align-items: center;
+      padding: 1rem;
+      margin-bottom: 0.5rem;
       background: white;
-      border-radius: 10px;
-      padding: 2rem;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      position: relative;
-      max-width: 350px;
-      border-top: 4px solid var(--design);
+      border-radius: 0.5rem;
+      border-left: 3px solid transparent;
+      transition: var(--transition);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     }
-    
-    .testimonial-card::before {
-      content: '\f10d';
+
+    .fee-item:hover {
+      border-left-color: var(--primary);
+      transform: translateX(3px);
+      box-shadow: var(--shadow);
+    }
+
+    .fee-item:last-child {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      font-weight: 600;
+      font-size: 1.1rem;
+      border-left-color: var(--accent);
+    }
+
+    .fee-item:last-child:hover {
+      transform: translateX(5px);
+    }
+
+    .fee-item span:first-child {
+      color: var(--gray);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .fee-item:last-child span:first-child {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .fee-item span:last-child {
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .fee-item:last-child span:last-child {
+      color: white;
+    }
+
+    .sidebar-list {
+      list-style: none;
+    }
+
+    .sidebar-list li {
+      margin-bottom: 0.6rem;
+      padding-left: 1.5rem;
+      position: relative;
+      color: var(--gray);
+      font-size: clamp(0.85rem, 2.5vw, 0.9rem);
+      transition: var(--transition);
+    }
+
+    .sidebar-list li:hover {
+      color: var(--primary);
+      transform: translateX(3px);
+    }
+
+    .sidebar-list li::before {
+      content: '\f00c';
       font-family: 'Font Awesome 6 Free';
       font-weight: 900;
       position: absolute;
-      top: 20px;
-      left: 20px;
-      color: rgba(247, 37, 133, 0.1);
-      font-size: 3rem;
-      z-index: 0;
+      left: 0;
+      color: var(--success);
+      font-size: 0.7rem;
     }
-    
+
+    /* Testimonials */
+    .testimonials {
+      background: white;
+    }
+
+    .testimonial-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .testimonial-card {
+      background: white;
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      position: relative;
+      transition: var(--transition);
+      border-top: 4px solid var(--accent);
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .testimonial-card::before {
+      content: '\201C';
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      font-size: 4rem;
+      color: rgba(37, 99, 235, 0.1);
+      font-family: serif;
+      line-height: 1;
+    }
+
     .testimonial-content {
+      margin-bottom: 1.5rem;
       position: relative;
       z-index: 1;
-      margin-bottom: 1.5rem;
     }
-    
+
+    .testimonial-content p {
+      font-style: italic;
+      color: var(--gray);
+      margin-bottom: 0;
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
+      line-height: 1.6;
+    }
+
     .testimonial-author {
       display: flex;
       align-items: center;
-      justify-content: center;
+      gap: 1rem;
+      width: 100%;
+      overflow: hidden;
     }
-    
+
+    .author-info {
+      flex: 1;
+      min-width: 0;
+    }
+
     .author-img {
-      width: 50px;
-      height: 50px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       object-fit: cover;
-      margin-right: 1rem;
+      border: 3px solid var(--accent);
     }
-    
+
+    .author-info h4 {
+      font-size: clamp(1rem, 2.5vw, 1.1rem);
+      margin-bottom: 0.2rem;
+      color: var(--darker);
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    .author-info p {
+      color: var(--primary);
+      font-size: clamp(0.8rem, 2vw, 0.9rem);
+      font-weight: 500;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      max-width: 100%;
+    }
+
     /* FAQ Section */
     .faq {
-      padding: 4rem 0;
-      background-color: #f5f7ff;
+      background: #f1f5f9;
     }
-    
+
     .faq-item {
       margin-bottom: 1rem;
       background: white;
-      border-radius: 8px;
+      border-radius: 0.8rem;
       overflow: hidden;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-      border-left: 4px solid var(--design);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
     }
-    
+
+    .faq-item:hover {
+      box-shadow: var(--shadow);
+    }
+
     .faq-question {
       padding: 1.5rem;
-      background-color: var(--design);
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
       color: white;
       cursor: pointer;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      transition: background-color 0.3s ease;
+      transition: var(--transition);
     }
-    
+
     .faq-question:hover {
-      background-color: #e01a6f;
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
     }
-    
+
+    .faq-question h4 {
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
+      font-weight: 500;
+    }
+
+    .faq-question i {
+      transition: var(--transition);
+    }
+
     .faq-answer {
-      padding: 1.5rem;
-      display: none;
+      padding: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.3s ease;
     }
-    
+
     .faq-answer.show {
-      display: block;
-      animation: fadeIn 0.5s ease;
+      padding: 1.5rem;
+      max-height: 200px;
     }
-    
-    /* Software Badges */
-    .software-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin: 1.5rem 0;
+
+    .faq-answer p {
+      color: var(--gray);
+      font-size: clamp(0.85rem, 2.5vw, 0.9rem);
+      line-height: 1.6;
     }
-    
-    .software-badge {
-      background-color: #f8f9fa;
-      padding: 0.8rem 1.2rem;
-      border-radius: 8px;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+
+    /* CTA Section */
+    .cta {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      text-align: center;
     }
-    
-    .software-badge img {
-      height: 30px;
+
+    .cta h2 {
+      font-size: clamp(1.8rem, 4vw, 2.2rem);
+      margin-bottom: 1rem;
     }
-    
+
+    .cta p {
+      font-size: clamp(1rem, 3vw, 1.2rem);
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+
     /* Back Button */
     .back-btn {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      color: var(--design);
-      text-decoration: none;
+      gap: 0.5rem;
+      color: var(--primary);
       font-weight: 600;
-      margin-top: 3rem;
-      transition: all 0.3s ease;
+      margin-top: 2rem;
+      transition: var(--transition);
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
     }
-    
+
     .back-btn:hover {
-      color: #e01a6f;
+      background: rgba(37, 99, 235, 0.1);
       transform: translateX(-5px);
     }
-    
+
     /* Footer */
     footer {
-      background-color: var(--dark);
+      background: var(--darker);
       color: white;
       padding: 3rem 0 1.5rem;
-      text-align: center;
     }
-    
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-col h3 {
+      font-size: clamp(1.1rem, 3vw, 1.2rem);
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .footer-col h3::after {
+      content: '';
+      position: absolute;
+      bottom: -0.3rem;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      border-radius: 2px;
+    }
+
     .footer-links {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 2rem;
-      margin-bottom: 2rem;
+      list-style: none;
     }
-    
+
+    .footer-links li {
+      margin-bottom: 0.5rem;
+    }
+
     .footer-links a {
-      color: white;
-      text-decoration: none;
-      transition: color 0.3s ease;
+      color: #cbd5e1;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: clamp(0.85rem, 2.5vw, 0.9rem);
     }
-    
+
     .footer-links a:hover {
-      color: var(--design);
+      color: var(--primary);
+      transform: translateX(3px);
     }
-    
-    .social-icons {
-      margin-bottom: 2rem;
+
+    .footer-links a i {
+      color: var(--accent);
+      font-size: 0.7rem;
     }
-    
-    .social-icons a {
-      color: white;
-      font-size: 1.5rem;
-      margin: 0 10px;
-      transition: color 0.3s ease;
+
+    .footer-contact li {
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      color: #cbd5e1;
+      font-size: clamp(0.85rem, 2.5vw, 0.9rem);
     }
-    
-    .social-icons a:hover {
-      color: var(--design);
+
+    .footer-contact i {
+      color: var(--accent);
+      margin-top: 0.2rem;
     }
-    
-    .copyright {
-      opacity: 0.7;
-      font-size: 0.9rem;
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
-    
+
+    .footer-bottom p {
+      color: #94a3b8;
+      font-size: clamp(0.8rem, 2vw, 0.9rem);
+    }
+
+    .footer-bottom p a {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
     /* Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    
-    @keyframes fadeInDown {
+    @keyframes fadeInUp {
       from {
         opacity: 0;
-        transform: translateY(-20px);
+        transform: translateY(30px);
       }
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
-    
+
     @keyframes pulse {
-      0% { transform: scale(1); }
+      0%, 100% { transform: scale(1); }
       50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
     }
-    
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 2rem;
+
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+
+    /* Desktop Mode on Mobile */
+    @media (max-width: 1024px) and (min-resolution: 192dpi), 
+           (max-width: 1024px) and (-webkit-device-pixel-ratio: 2) {
+      .container {
+        max-width: 100%;
+        padding: 0 0.8rem;
       }
       
-      .highlight-cards, .testimonial-cards {
+      .header-container {
+        min-height: 65px;
+        padding: 0.8rem;
+      }
+      
+      .nav-menu {
+        display: none;
+      }
+      
+      .nav-menu.active {
+        display: flex;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 4rem 1.5rem;
+        background: white;
+        box-shadow: -3px 0 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        overflow-y: auto;
+      }
+      
+      .nav-toggle {
+        display: block;
+      }
+      
+      .nav-close {
+        display: block;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-container {
+        padding: 1rem 0.8rem;
+      }
+      
+      .nav-toggle {
+        display: block;
+        z-index: 1001;
+      }
+      
+      .nav-close {
+        display: block;
+      }
+      
+      .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: white;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 4rem 1.5rem;
+        box-shadow: -3px 0 10px rgba(0, 0, 0, 0.1);
+        transition: right 0.3s ease-in-out;
+        overflow-y: auto;
+        z-index: 1000;
+      }
+      
+      .nav-menu.active {
+        right: 0;
+      }
+      
+      .nav-link {
+        font-size: 1rem;
+        padding: 0.8rem 0;
+        width: 100%;
+      }
+      
+      .banner {
+        min-height: 50vh;
+        margin-top: 70px;
+      }
+      
+      .banner-content h1 {
+        font-size: clamp(1.6rem, 5vw, 2rem);
+      }
+      
+      .banner-btns {
         flex-direction: column;
         align-items: center;
       }
       
-      .details-container {
-        flex-direction: column;
+      .section {
+        padding: 2.5rem 0;
       }
       
+      .highlight-cards {
+        grid-template-columns: 1fr;
+      }
+      
+      .testimonial-cards {
+        grid-template-columns: 1fr;
+      }
+      
+      .software-badges {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 0.8rem;
+      }
+      
+      .banner-content h1 {
+        font-size: clamp(1.4rem, 5vw, 1.8rem);
+      }
+      
+      .highlight-card,
+      .testimonial-card,
       .details-sidebar {
-        position: static;
+        padding: 1.5rem;
+      }
+      
+      .fee-structure {
+        padding: 1rem;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Header Section -->
-  <header>
-    <div class="container">
-      <h1>Diploma in Desktop Publishing (DTP)</h1>
-      <p class="tagline">Master Photoshop, CorelDraw, and PageMaker in just 3 months to launch your design career</p>
-      <a href="#enroll" class="enroll-btn">Enroll Now</a>
+  <!-- Header -->
+  <header id="header">
+    <div class="container header-container">
+      <a href="../index.html" class="logo">
+        <img src="../logo.jpg" alt="Elite Computer Classes Logo" class="logo-img">
+        <div class="logo-text">
+          <span class="elite">ELITE</span> <span class="classes">COMPUTER CLASSES</span>
+        </div>
+      </a>
+      
+      <button class="nav-toggle" id="nav-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <nav class="nav-menu" id="nav-menu">
+        <button class="nav-close" id="nav-close">
+          <i class="fas fa-times"></i>
+        </button>
+        <a href="../index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+        <a href="../courses.html" class="nav-link"><i class="fas fa-book-open"></i> Courses</a>
+        <a href="../StudentZone.html" class="nav-link"><i class="fas fa-user-graduate"></i> Student Zone</a>
+        <a href="../Admission.html" class="nav-link"><i class="fas fa-file-signature"></i> Admission</a>
+        <a href="../category.html" class="nav-link"><i class="fas fa-layer-group"></i> Category</a>
+        <a href="../gallery.html" class="nav-link"><i class="fas fa-images"></i> Gallery</a>
+        <a href="../about.html" class="nav-link"><i class="fas fa-info-circle"></i> About Us</a>
+      </nav>
     </div>
   </header>
-  
-  <!-- Course Highlights -->
-  <section class="highlights">
+
+  <!-- Banner Section -->
+  <section class="banner">
     <div class="container">
-      <h2>Why Choose Our DTP Program?</h2>
-      <div class="highlight-cards">
-        <div class="highlight-card">
-          <i class="fas fa-paint-brush"></i>
-          <h3>Industry-Standard Tools</h3>
-          <p>Master Photoshop, CorelDraw and PageMaker - the essential tools for professional designers.</p>
-        </div>
-        <div class="highlight-card">
-          <i class="fas fa-laptop"></i>
-          <h3>Practical Projects</h3>
-          <p>Create real-world designs like brochures, banners, and digital ads during the course.</p>
-        </div>
-        <div class="highlight-card">
-          <i class="fas fa-briefcase"></i>
-          <h3>Career-Focused</h3>
-          <p>Develop a professional portfolio to showcase to potential employers or clients.</p>
+      <div class="banner-content">
+        <h1 data-aos="fade-up">
+          Diploma in <span class="highlight">Desktop Publishing</span>
+        </h1>
+        <p data-aos="fade-up" data-aos-delay="200">
+          Master professional desktop publishing with our comprehensive DTP diploma program covering industry-standard design tools and creative techniques
+        </p>
+        <div class="banner-btns" data-aos="fade-up" data-aos-delay="400">
+          <a href="../Admission.html" class="btn btn-accent pulse">Enroll Now</a>
+          <a href="#details" class="btn btn-outline">Course Details</a>
         </div>
       </div>
     </div>
   </section>
-  
+
+  <!-- Download Brochure -->
+  <section class="section" style="padding: 2rem 0; background: white;">
+    <div class="container">
+      <div style="text-align: center;" data-aos="fade-up">
+        <a href="https://drive.google.com/uc?export=download&id=1XWRfWmDFK_vXZJBzTJSD42ow8YZ1lL3W" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+          <i class="fas fa-download"></i> Download Course Brochure
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- Course Details -->
-  <section class="course-details" id="details">
+  <section class="section course-details" id="details">
     <div class="container">
       <div class="details-container">
         <div class="details-main">
-          <h2>Comprehensive 3-Month Design Program</h2>
-          <p>The Diploma in Desktop Publishing (DTP) provides hands-on training in professional design software, covering everything from basic image editing to complex layout design for print and digital media.</p>
+          <h2 data-aos="fade-right" style="font-size: clamp(1.5rem, 4vw, 2.2rem);">Diploma in Desktop Publishing Program</h2>
+          <p data-aos="fade-right" data-aos-delay="100" style="font-size: clamp(0.85rem, 2.5vw, 1rem); line-height: 1.6;">
+            The Diploma in Desktop Publishing (DTP) is designed for creative individuals who want to master professional graphic design and digital artwork creation. This comprehensive diploma program covers industry-standard design software and creative techniques used in advertising, branding, and digital media industries.
+          </p>
           
-          <div class="software-badges">
+          <div class="software-badges" data-aos="fade-up" data-aos-delay="200">
             <div class="software-badge">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg" alt="Photoshop">
+              <div class="badge-icon">
+                <i class="fas fa-paint-brush"></i>
+              </div>
               <span>Adobe Photoshop</span>
             </div>
             <div class="software-badge">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Adobe_CorelDraw_2021_Logo.svg" alt="CorelDraw">
+              <div class="badge-icon">
+                <i class="fas fa-vector-square"></i>
+              </div>
               <span>CorelDraw</span>
             </div>
             <div class="software-badge">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/7/7f/Adobe_PageMaker.svg" alt="PageMaker">
+              <div class="badge-icon">
+                <i class="fas fa-file-alt"></i>
+              </div>
               <span>Adobe PageMaker</span>
             </div>
+            <div class="software-badge">
+              <div class="badge-icon">
+                <i class="fas fa-palette"></i>
+              </div>
+              <span>Adobe Illustrator</span>
+            </div>
           </div>
           
-          <h3>Detailed Curriculum</h3>
-          <ul class="module-list">
-            <li><strong>Module 1: Computer Fundamentals</strong> - Windows OS, file management, internet basics, typing practice</li>
-            <li><strong>Module 2: Adobe PageMaker</strong> - Document setup, text formatting, master pages, layout design</li>
-            <li><strong>Module 3: Adobe Photoshop</strong> - Layers, selections, photo retouching, filters, effects</li>
-            <li><strong>Module 4: CorelDraw</strong> - Vector graphics, logo design, text effects, patterns</li>
-            <li><strong>Practical Projects</strong> - Business cards, brochures, banners, social media graphics</li>
-          </ul>
+          <div class="curriculum-section">
+            <h3 data-aos="fade-right">Module 1: Computer Operating</h3>
+            <ul class="module-list" data-aos="fade-up">
+              <li><strong>Fundamentals:</strong> Basic computer operations and system understanding</li>
+              <li><strong>MS-Windows 7/8/10:</strong> Advanced Windows operations and file management</li>
+              <li><strong>Internet:</strong> Web browsing, online resources, and digital communication</li>
+            </ul>
+          </div>
           
-          <h3>Career Pathways</h3>
-          <p>DTP graduates qualify for various creative positions including:</p>
-          <ul class="module-list">
-            <li>Graphic Designer in advertising agencies</li>
-            <li>Desktop Publisher in printing firms</li>
-            <li>Layout Artist for newspapers/magazines</li>
-            <li>Freelance designer for digital content</li>
-            <li>Pre-press operator</li>
-          </ul>
+          <div class="curriculum-section">
+            <h3 data-aos="fade-right">Module 2: Adobe PageMaker</h3>
+            <ul class="module-list" data-aos="fade-up">
+              <li><strong>Getting Started with PageMaker:</strong> Interface and basic operations</li>
+              <li><strong>Understanding PageMaker Tools:</strong> Complete toolbox mastery</li>
+              <li><strong>Working with Text:</strong> Typography and text formatting techniques</li>
+              <li><strong>Working with Graphics and Layers:</strong> Image integration and layer management</li>
+              <li><strong>Publishing and Printing:</strong> Professional output and print preparation</li>
+              <li><strong>Project Work 1 & 2:</strong> Hands-on practical assignments</li>
+            </ul>
+          </div>
           
-          <h3>Learning Outcomes</h3>
-          <p>By completing this program, you will be able to:</p>
-          <ul class="module-list">
-            <li>Create professional print-ready designs</li>
-            <li>Edit and enhance digital images</li>
-            <li>Design marketing materials from concept to completion</li>
-            <li>Work with typography and layout principles</li>
-            <li>Prepare files for both print and digital output</li>
-          </ul>
+          <div class="curriculum-section">
+            <h3 data-aos="fade-right">Module 3: Adobe Photoshop</h3>
+            <ul class="module-list" data-aos="fade-up">
+              <li><strong>Getting Started with Photoshop:</strong> Interface and workspace setup</li>
+              <li><strong>Basic Image Editing:</strong> Fundamental editing techniques and tools</li>
+              <li><strong>Photo Editing:</strong> Advanced photo manipulation and retouching</li>
+              <li><strong>Text Effects:</strong> Creative typography and text styling</li>
+              <li><strong>Frame & Border Effects:</strong> Decorative elements and borders</li>
+              <li><strong>Button & Texture Effects:</strong> Web elements and texture creation</li>
+              <li><strong>Digital Studio Works:</strong> Professional photo studio techniques</li>
+              <li><strong>More Advanced Techniques:</strong> Expert-level Photoshop skills</li>
+            </ul>
+          </div>
+          
+          <div class="curriculum-section">
+            <h3 data-aos="fade-right">Module 4: CorelDRAW</h3>
+            <ul class="module-list" data-aos="fade-up">
+              <li><strong>Getting Started with CorelDraw:</strong> Interface and basic navigation</li>
+              <li><strong>Vectors and Bitmaps:</strong> Understanding different graphic types and view modes</li>
+              <li><strong>CorelDraw Basic Toolbox:</strong> Complete tool mastery and applications</li>
+              <li><strong>CorelDraw Total Text Control:</strong> Typography, spacing, and column creation</li>
+              <li><strong>All About CorelDraw Outlines:</strong> Line styles and outline effects</li>
+              <li><strong>All About CorelDraw Fills:</strong> Color fills and gradient techniques</li>
+              <li><strong>All About CorelDraw Pattern Fills:</strong> Pattern creation and application</li>
+              <li><strong>CorelDraw Objects & Basics:</strong> Object manipulation and basic operations</li>
+              <li><strong>CorelDraw Learning Tools:</strong> Advanced features and shortcuts</li>
+              <li><strong>CorelDraw Basic & Artistic Effects:</strong> Creative effects and filters</li>
+              <li><strong>CorelDraw Text Effects:</strong> Advanced typography and text styling</li>
+              <li><strong>More Advanced Features:</strong> Expert-level CorelDraw techniques</li>
+            </ul>
+          </div>
+          
+          <div class="curriculum-section">
+            <h3 data-aos="fade-right">Career Opportunities</h3>
+            <p data-aos="fade-up">DTP graduates can pursue creative positions in:</p>
+            <ul class="module-list" data-aos="fade-up">
+              <li>Graphic Designer in advertising agencies and design studios</li>
+              <li>Desktop Publisher in publishing houses and media companies</li>
+              <li>Logo Designer and Brand Identity Specialist</li>
+              <li>Print Production Artist in printing companies</li>
+              <li>Freelance Designer for various creative projects</li>
+              <li>Social Media Graphics Designer</li>
+            </ul>
+          </div>
+          
+          <div class="curriculum-section">
+            <h3 data-aos="fade-right">Learning Outcomes</h3>
+            <p data-aos="fade-up">After completing this course, you will be able to:</p>
+            <ul class="module-list" data-aos="fade-up">
+              <li>Create professional logos, brochures, and marketing materials</li>
+              <li>Edit and manipulate photos using advanced Photoshop techniques</li>
+              <li>Design vector graphics and scalable illustrations</li>
+              <li>Layout multi-page documents for print and digital media</li>
+              <li>Understand color theory and typography principles</li>
+              <li>Prepare files for professional printing and publishing</li>
+            </ul>
+          </div>
         </div>
         
-        <div class="details-sidebar">
-          <h3>Program Details</h3>
-          <div class="fee-structure">
-            <div class="fee-item">
-              <span>Duration:</span>
-              <span>3 Months</span>
-            </div>
-            <div class="fee-item">
-              <span>Total Fee:</span>
-              <span>₹2750</span>
-            </div>
-            <div class="fee-item">
-              <span>Admission Fee:</span>
-              <span>₹1250</span>
-            </div>
-            <div class="fee-item">
-              <span>Installments:</span>
-              <span>₹500 × 3</span>
+        <div class="details-sidebar" data-aos="fade-left">
+          <div class="sidebar-section">
+            <h3>💰 Fee Structure</h3>
+            <div class="fee-structure">
+              <div class="fee-item">
+                <span>One Time Payment:</span>
+                <span>₹3,500</span>
+              </div>
+              <div class="fee-item">
+                <span>Two Time Payment:</span>
+                <span>₹1,900 + ₹1,900 (₹3,800)</span>
+              </div>
+              <div class="fee-item">
+                <span>Three Installments:</span>
+                <span>₹4,000 (₹1,500+ ₹1,500+ ₹1,000)</span>
+              </div>
+              <div class="fee-item">
+                <span>Registration Fee:</span>
+                <span>₹399</span>
+              </div>
             </div>
           </div>
           
-          <h3>Key Features</h3>
-          <ul class="module-list">
-            <li>Hands-on training on all software</li>
-            <li>Industry-relevant projects</li>
-            <li>Flexible batch timings</li>
-            <li>Portfolio development</li>
-            <li>Placement assistance</li>
-          </ul>
+          <div class="sidebar-section">
+            <h3>🎁 Free Kit Worth ₹3,000</h3>
+            <div class="fee-structure">
+              <div class="fee-item">
+                <span><i class="fas fa-book" style="color: var(--primary);"></i> Course Books:</span>
+                <span>₹300</span>
+              </div>
+              <div class="fee-item">
+                <span><i class="fas fa-shopping-bag" style="color: var(--accent);"></i> Design Bag:</span>
+                <span>₹400</span>
+              </div>
+              <div class="fee-item">
+                <span><i class="fas fa-pen" style="color: var(--success);"></i> Design Kit:</span>
+                <span>₹100</span>
+              </div>
+              <div class="fee-item">
+                <span><i class="fas fa-id-card" style="color: var(--primary);"></i> Smart Identity Card:</span>
+                <span>₹100</span>
+              </div>
+              <div class="fee-item">
+                <span><i class="fas fa-file-alt" style="color: var(--accent);"></i> Prospectus:</span>
+                <span>₹100</span>
+              </div>
+              <div class="fee-item">
+                <span><i class="fas fa-certificate" style="color: var(--success);"></i> Certificate:</span>
+                <span>₹700</span>
+              </div>
+              <div class="fee-item">
+                <span><i class="fas fa-palette" style="color: var(--primary);"></i> Design Software Guide:</span>
+                <span>₹1,000</span>
+              </div>
+              <div class="fee-item">
+                <span><i class="fas fa-play-circle" style="color: var(--accent);"></i> Online Tutorial:</span>
+                <span>₹300</span>
+              </div>
+            </div>
+          </div>
           
-          <h3>Materials Provided</h3>
-          <ul class="module-list">
-            <li>DTP study guide</li>
-            <li>Design handbook</li>
-            <li>Practical assignment book</li>
-            <li>Student ID card</li>
-            <li>Official certificate upon completion</li>
-          </ul>
+          <div class="sidebar-section">
+            <h3>📋 Documents Required</h3>
+            <ul class="sidebar-list">
+              <li>2 Passport size photos</li>
+              <li>Aadhar Card (Original + Photocopy)</li>
+              <li>10th Marksheet (Original + Photocopy)</li>
+              <li>Mobile Number for verification</li>
+            </ul>
+          </div>
           
-          <a href="#enroll" class="enroll-btn" style="display: block; text-align: center; margin-top: 2rem;">Apply Now</a>
+          <div class="sidebar-section">
+            <h3>⏰ Course Duration</h3>
+            <div class="fee-structure">
+              <div class="fee-item">
+                <span>Total Duration:</span>
+                <span>8 Months</span>
+              </div>
+              <div class="fee-item">
+                <span>Class Timing:</span>
+                <span>3 Hours/Day</span>
+              </div>
+              <div class="fee-item">
+                <span>Weekly Classes:</span>
+                <span>5 Days</span>
+              </div>
+            </div>
+          </div>
           
-          <a href="../index.html" class="back-btn">
-            <i class="fas fa-arrow-left"></i> Back to Courses
-          </a>
+          <div class="sidebar-section">
+            <a href="../Admission.html" class="btn btn-primary" style="width: 100%; text-align: center; margin-bottom: 1rem;">Apply Now</a>
+            <a href="../index.html" class="back-btn">
+              <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </section>
-  
-  <!-- Testimonials -->
-  <section class="testimonials">
+
+  <!-- Course Highlights -->
+  <section class="section highlights" id="highlights">
     <div class="container">
-      <h2>DTP Graduate Success Stories</h2>
-      <p>Hear from our alumni who launched their design careers with our DTP program</p>
+      <div class="section-title" data-aos="fade-up">
+        <h2>Why Choose Our DTP Diploma?</h2>
+        <p>Discover the advantages that make our DTP diploma perfect for aspiring designers</p>
+      </div>
+      
+      <div class="highlight-cards">
+        <div class="highlight-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="icon">
+            <i class="fas fa-palette"></i>
+          </div>
+          <h3>Creative Excellence</h3>
+          <p>Learn from industry professionals and develop your creative skills with hands-on projects and real-world applications.</p>
+        </div>
+        
+        <div class="highlight-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="icon">
+            <i class="fas fa-tools"></i>
+          </div>
+          <h3>Industry Software</h3>
+          <p>Master professional design tools including Photoshop, CorelDraw, and PageMaker used by top design agencies.</p>
+        </div>
+        
+        <div class="highlight-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="icon">
+            <i class="fas fa-briefcase"></i>
+          </div>
+          <h3>Portfolio Development</h3>
+          <p>Build an impressive portfolio of design work that showcases your skills to potential employers and clients.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section testimonials" id="testimonials">
+    <div class="container">
+      <div class="section-title" data-aos="fade-up">
+        <h2>DTP Diploma Graduate Success Stories</h2>
+        <p>Hear from our students who launched successful designing careers with our DTP diploma program</p>
+      </div>
       
       <div class="testimonial-cards">
-        <div class="testimonial-card">
+        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
           <div class="testimonial-content">
-            "The practical projects helped me build a portfolio that got me my first job at an ad agency just 2 months after completing the course!"
+            <p>"The DTP course at Elite transformed my creative passion into a professional career. I now work as a graphic designer at a leading advertising agency. The practical training was exceptional!"</p>
           </div>
           <div class="testimonial-author">
-            <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Student" class="author-img">
-            <div>
-              <h4>Neha Patel</h4>
-              <p>Junior Graphic Designer</p>
+            <img src="../Images/Certification/Certification15.jpg" alt="Anjali Singh" class="author-img">
+            <div class="author-info">
+              <h4>Anjali Singh</h4>
+              <p>Graphic Designer</p>
             </div>
           </div>
         </div>
         
-        <div class="testimonial-card">
+        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
           <div class="testimonial-content">
-            "I started freelancing right after the course. Now I handle design work for 5 local businesses regularly."
+            <p>"After completing DTP, I started my own design studio. The course taught me everything from basic design principles to advanced software techniques. Highly recommended for creative minds!"</p>
           </div>
           <div class="testimonial-author">
-            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Student" class="author-img">
-            <div>
-              <h4>Rahul Verma</h4>
+            <img src="../Images/Certification/Certification20.jpg" alt="Rohit Kumar" class="author-img">
+            <div class="author-info">
+              <h4>Rohit Kumar</h4>
+              <p>Design Studio Owner</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="testimonial-content">
+            <p>"The DTP program gave me the skills to work as a freelance designer. I create logos, brochures, and marketing materials for various clients. The portfolio I built during the course was invaluable."</p>
+          </div>
+          <div class="testimonial-author">
+            <img src="../Images/Certification/Certification9.jpg" alt="Priya Sharma" class="author-img">
+            <div class="author-info">
+              <h4>Priya Sharma</h4>
               <p>Freelance Designer</p>
             </div>
           </div>
         </div>
-        
-        <div class="testimonial-card">
-          <div class="testimonial-content">
-            "The instructors' industry experience made all the difference. I learned real workflows, not just software tools."
-          </div>
-          <div class="testimonial-author">
-            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Student" class="author-img">
-            <div>
-              <h4>Priya Sharma</h4>
-              <p>Layout Artist</p>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </section>
-  
+
   <!-- FAQ Section -->
-  <section class="faq">
+  <section class="section faq" id="faq">
     <div class="container">
-      <h2>Frequently Asked Questions</h2>
-      
-      <div class="faq-item">
-        <div class="faq-question">
-          <span>Do I need design experience before joining?</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          <p>No prior design experience is required. The course starts with computer fundamentals before moving to design software. However, creative aptitude and basic computer skills will help you progress faster.</p>
-        </div>
+      <div class="section-title" data-aos="fade-up">
+        <h2>Frequently Asked Questions</h2>
+        <p>Get answers to common questions about our DTP diploma program</p>
       </div>
       
-      <div class="faq-item">
-        <div class="faq-question">
-          <span>Which software versions will we learn?</span>
-          <i class="fas fa-chevron-down"></i>
+      <div class="faq-container" data-aos="fade-up" data-aos-delay="200">
+        <div class="faq-item">
+          <div class="faq-question">
+            <h4>Do I need prior design experience for DTP?</h4>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>No prior design experience is required. We start with basic design principles and gradually build up to advanced techniques. However, creativity and interest in visual design are helpful.</p>
+          </div>
         </div>
-        <div class="faq-answer">
-          <p>We train on the latest versions of Photoshop, CorelDraw and PageMaker available in our lab. The core concepts remain the same across versions, making your skills transferable.</p>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <h4>Which software will I learn in the DTP course?</h4>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>You will learn Adobe Photoshop for image editing, CorelDraw for vector graphics, Adobe PageMaker for page layout, and Adobe Illustrator for professional illustrations.</p>
+          </div>
         </div>
-      </div>
-      
-      <div class="faq-item">
-        <div class="faq-question">
-          <span>Will I get a certificate?</span>
-          <i class="fas fa-chevron-down"></i>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <h4>Can I start freelancing after completing DTP?</h4>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Yes, many of our graduates start successful freelance careers. The course includes portfolio development and business skills to help you start your own design practice.</p>
+          </div>
         </div>
-        <div class="faq-answer">
-          <p>Yes, you'll receive a Diploma in Desktop Publishing upon successful completion, with online verification. While not an Adobe/Corel certification, it demonstrates your DTP proficiency to employers.</p>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <h4>What kind of projects will I work on during the course?</h4>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>You'll work on real-world projects including logo design, brochure creation, poster design, photo editing, and complete brand identity packages to build your portfolio.</p>
+          </div>
         </div>
-      </div>
-      
-      <div class="faq-item">
-        <div class="faq-question">
-          <span>What computer specs do I need for practice at home?</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          <p>We recommend at least 4GB RAM, 500GB HDD, and a dedicated graphics card for smooth performance. However, our lab computers are available for practice during institute hours.</p>
-        </div>
-      </div>
-      
-      <div class="faq-item">
-        <div class="faq-question">
-          <span>What are the job prospects after DTP?</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          <p>DTP graduates find opportunities in advertising agencies, printing presses, publishing houses, and corporate design departments. Many also pursue freelance opportunities.</p>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <h4>Is there job placement assistance after DTP?</h4>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Yes, we provide job placement assistance and help you connect with design agencies, printing companies, and media houses looking for skilled DTP professionals.</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
-  
-  <!-- Enrollment CTA -->
-  <section class="highlights" id="enroll" style="background-color: #7209b7; color: white; text-align: center;">
+
+  <!-- CTA Section -->
+  <section class="section cta" id="enroll">
     <div class="container">
-      <h2>Start Your Design Career Today</h2>
-      <p style="margin-bottom: 2rem; font-size: 1.2rem;">Next batch starting soon. Limited seats available for hands-on training!</p>
-      <a href="#" class="enroll-btn" style="background-color: var(--design);">Enroll Now</a>
+      <div data-aos="fade-up">
+        <h2>Start Your Desktop Designing Diploma Today</h2>
+        <p>Transform your creativity into a professional diploma. Next batch starting soon!</p>
+        <a href="../Admission.html" class="btn btn-accent pulse">Apply Now</a>
+      </div>
     </div>
   </section>
-  
+
   <!-- Footer -->
   <footer>
     <div class="container">
-      <div class="footer-links">
-        <a href="#details">Course Details</a>
-        <a href="#">About Institute</a>
-        <a href="#">Contact Us</a>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms & Conditions</a>
+      <div class="footer-container">
+        <div class="footer-col">
+          <h3>Our Courses</h3>
+          <ul class="footer-links">
+            <li><a href="../details/adca.html"><i class="fas fa-chevron-right"></i> ADCA</a></li>
+            <li><a href="../details/adit.html"><i class="fas fa-chevron-right"></i> ADCA+</a></li>
+            <li><a href="../details/dca.html"><i class="fas fa-chevron-right"></i> DCA</a></li>
+            <li><a href="../details/cfa.html"><i class="fas fa-chevron-right"></i> DTP</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Tally</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Typing</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="../index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+            <li><a href="../about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+            <li><a href="../courses.html"><i class="fas fa-chevron-right"></i> Courses</a></li>
+            <li><a href="../index.html#testimonials"><i class="fas fa-chevron-right"></i> Success Stories</a></li>
+            <li><a href="../gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+            <li><a href="../admission.html"><i class="fas fa-chevron-right"></i> Admission</a></li>
+            <li><a href="../studentzone.html"><i class="fas fa-chevron-right"></i> StudentZone</a></li>
+            <li><a href="../about.html"><i class="fas fa-chevron-right"></i> About & Contact</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h3>Contact Info</h3>
+          <ul class="footer-contact">
+            <li>
+      <i class="fas fa-map-marker-alt"></i>
+      <a href="https://www.google.com/maps/place/Elite+Computer+Classes/@27.1011545,84.4618682,17z/data=!4m14!1m7!3m6!1s0x39949d77d23e1fbf:0x4b843cecdcef2869!2sElite+Computer+Classes!8m2!3d27.1011545!4d84.4644431!16s%2Fg%2F11h6m7vc2k!3m5!1s0x39949d77d23e1fbf:0x4b843cecdcef2869!8m2!3d27.1011545!4d84.4644431!16s%2Fg%2F11h6m7vc2k?entry=ttu&g_ep=EgoyMDI1MDcyMC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">
+        <span>Block Road, Narkatiaganj<br>West Champaran, Bihar 845455</span>
+      </a>
+    </li>
+    <li>
+    <li>
+      <i class="fas fa-phone-alt"></i>
+      <span>
+        <a href="tel:+918292879444">+91 8292879444</a><br>
+        <a href="tel:+919142789404">+91 9142789404</a>
+      </span>
+    </li>
+            <li>
+      <i class="fas fa-envelope"></i>
+      <a href="mailto:elitecomputerclasses@gmail.com" target="_blank" rel="noopener noreferrer">
+        <span>elitecomputerclasses@gmail.com</span>
+      </a>
+    </li>
+          </ul>
+        </div>
       </div>
       
-      <div class="social-icons">
-        <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-        <a href="#"><i class="fab fa-youtube"></i></a>
+      <div class="footer-bottom">
+        <p>© 2025 Elite Computer Classes. All Rights Reserved.</p>
+        <p>Designed & Developed with <i class="fas fa-heart" style="color: var(--error);"></i> by <a href="#">CodeVoraOfficial</a></p>
       </div>
-      
-      <p class="copyright">© 2023 Tech Institute. All Rights Reserved.</p>
     </div>
   </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   
   <script>
+    // Initialize AOS animation
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true,
+      offset: 80
+    });
+    
+    // Mobile Navigation Toggle
+    const navToggle = document.getElementById('nav-toggle');
+    const navClose = document.getElementById('nav-close');
+    const navMenu = document.getElementById('nav-menu');
+    
+    navToggle.addEventListener('click', () => {
+      navMenu.classList.add('active');
+    });
+    
+    navClose.addEventListener('click', () => {
+      navMenu.classList.remove('active');
+    });
+    
+    // Close mobile menu when clicking a nav link
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+      });
+    });
+    
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      
+      if (window.scrollY > 80) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+    
     // FAQ toggle functionality
     document.querySelectorAll('.faq-question').forEach(question => {
       question.addEventListener('click', () => {
         const answer = question.nextElementSibling;
         const icon = question.querySelector('i');
+        
+        // Close all other answers
+        document.querySelectorAll('.faq-answer').forEach(otherAnswer => {
+          if (otherAnswer !== answer) {
+            otherAnswer.classList.remove('show');
+            otherAnswer.previousElementSibling.querySelector('i').style.transform = 'rotate(0deg)';
+          }
+        });
         
         // Toggle this answer
         answer.classList.toggle('show');
@@ -749,9 +1768,9 @@
       });
     });
     
-    // Animation on scroll
+    // Animation on scroll for cards
     const animateOnScroll = () => {
-      const elements = document.querySelectorAll('.highlight-card, .testimonial-card');
+      const elements = document.querySelectorAll('.highlight-card, .testimonial-card, .software-badge');
       
       elements.forEach(element => {
         const elementPosition = element.getBoundingClientRect().top;
@@ -765,7 +1784,7 @@
     };
     
     // Set initial state for animation
-    document.querySelectorAll('.highlight-card, .testimonial-card').forEach(el => {
+    document.querySelectorAll('.highlight-card, .testimonial-card, .software-badge').forEach(el => {
       el.style.opacity = '0';
       el.style.transform = 'translateY(20px)';
       el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
