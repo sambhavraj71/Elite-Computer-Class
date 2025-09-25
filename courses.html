@@ -67,19 +67,20 @@
         }
 
         /* Header */
-        header {
+        #header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: var(--header-height);
             background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
             box-shadow: var(--shadow-sm);
             z-index: 1000;
             transition: var(--transition);
         }
 
-        header.scrolled {
+        #header.scrolled {
             background: var(--white);
             box-shadow: var(--shadow-md);
         }
@@ -97,13 +98,14 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
             text-decoration: none;
+            transition: var(--transition);
         }
 
         .logo-img {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid var(--primary);
@@ -111,18 +113,27 @@
         }
 
         .logo-text {
+            font-family: 'Montserrat', sans-serif;
             font-weight: 700;
-            font-size: 1.2rem;
-            color: var(--dark);
+            font-size: 1.1rem;
+            line-height: 1.2;
         }
 
-        .logo-text span {
+        .logo-text .elite {
             color: var(--primary);
+            display: block;
+        }
+
+        .logo-text .classes {
+            color: var(--secondary);
+            display: block;
+            font-size: 0.85rem;
+            margin-top: -2px;
         }
 
         .logo:hover .logo-img {
-            transform: scale(1.1);
-            box-shadow: 0 0 10px rgba(37, 99, 235, 0.3);
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 15px rgba(37, 99, 235, 0.4);
         }
 
         .nav-toggle {
@@ -133,42 +144,65 @@
             font-size: 1.5rem;
             cursor: pointer;
             transition: var(--transition);
+            padding: 0.5rem;
+            border-radius: 8px;
         }
 
         .nav-toggle:hover {
             color: var(--secondary);
+            background: rgba(37, 99, 235, 0.1);
         }
 
         .nav-menu {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.5rem;
         }
 
-         .nav-link {
+        .nav-link {
             color: var(--dark);
             text-decoration: none;
             font-weight: 500;
-            padding: 0.4rem 0.5rem;
+            font-size: clamp(0.6rem, 1.5vw, 0.75rem);
+            padding: 0.4rem 0.6rem;
             border-radius: var(--radius-md);
             transition: var(--transition);
             display: flex;
             align-items: center;
             gap: 0.4rem;
+            position: relative;
+            overflow: hidden;
         }
 
-        .nav-link i {
-            font-size: 0.9rem;
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .nav-link:hover::before {
+            left: 0;
         }
 
         .nav-link:hover {
-            color: var(--primary);
-            background: rgba(37, 99, 235, 0.1);
+            color: var(--white);
+            transform: translateY(-2px);
         }
 
         .nav-link.active {
             background: var(--gradient);
             color: var(--white);
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .nav-link i {
+            font-size: 0.85rem;
         }
 
         .nav-close {
@@ -181,6 +215,14 @@
             font-size: 1.5rem;
             color: var(--dark);
             cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .nav-close:hover {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
         }
 
         /* Main Content */
@@ -485,17 +527,39 @@
                 position: fixed;
                 top: 0;
                 right: -100%;
-                width: 250px;
+                width: 280px;
                 height: 100vh;
-                background: var(--white);
+                background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(249, 250, 251, 0.95));
+                backdrop-filter: blur(20px);
                 flex-direction: column;
-                padding: 5rem 1.5rem;
-                box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
-                transition: right 0.3s ease;
+                justify-content: flex-start;
+                align-items: stretch;
+                padding: 5rem 2rem 2rem;
+                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+                transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                z-index: 1001;
             }
 
             .nav-menu.active {
                 right: 0;
+            }
+
+            .nav-menu .nav-link {
+                width: 100%;
+                padding: 0.8rem 1.2rem;
+                margin-bottom: 0.4rem;
+                border-radius: 12px;
+                font-size: clamp(0.75rem, 2.5vw, 0.85rem);
+                justify-content: flex-start;
+                background: rgba(255, 255, 255, 0.7);
+                border: 1px solid rgba(37, 99, 235, 0.1);
+            }
+
+            .nav-menu .nav-link:hover {
+                background: var(--gradient);
+                color: var(--white);
+                transform: translateX(5px);
+                box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
             }
 
             .nav-close {
@@ -503,7 +567,7 @@
             }
 
             .course-container {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             }
         }
 
@@ -513,24 +577,40 @@
             }
 
             .logo-text {
-                font-size: 1rem;
+                font-size: 0.95rem;
+            }
+
+            .logo-text .classes {
+                font-size: 0.75rem;
             }
 
             .title {
                 font-size: 1.5rem;
+                padding: 1rem;
             }
 
             .search-filter {
                 flex-direction: column;
                 align-items: stretch;
+                gap: 1rem;
             }
 
             .search-bar {
                 max-width: 100%;
             }
 
+            .filter-bar {
+                justify-content: center;
+            }
+
             .course-container {
                 grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .nav-menu {
+                width: 100%;
+                padding: 4rem 1.5rem 2rem;
             }
         }
 
@@ -540,43 +620,63 @@
                 height: 35px;
             }
 
+            .logo-text {
+                font-size: 0.85rem;
+            }
+
+            .logo-text .classes {
+                font-size: 0.7rem;
+            }
+
             .course-card {
                 padding: 1rem;
             }
 
             .course-title {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
             }
 
             .cta-btn {
                 padding: 0.6rem 1.2rem;
                 font-size: 0.9rem;
+                bottom: 1rem;
+                right: 1rem;
+            }
+
+            .filter-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.85rem;
             }
         }
     </style>
 </head>
 <body>
     <!-- Header -->
-    <header>
+    <header id="header">
         <div class="header-container">
             <a href="index.html" class="logo">
                 <img src="logo.jpg" alt="Elite Computer Classes Logo" class="logo-img">
-                <span class="logo-text">Elite <span>Computer</span><span>Classes</span></span>
+                <div class="logo-text">
+                    <span class="elite">ELITE</span> <span class="classes">COMPUTER CLASSES</span>
+                </div>
             </a>
-            <button class="nav-toggle" id="navToggle">
+            
+            <button class="nav-toggle" id="nav-toggle">
                 <i class="fas fa-bars"></i>
             </button>
-            <nav class="nav-menu" id="navMenu">
-                <button class="nav-close" id="navClose">
+            
+            <nav class="nav-menu" id="nav-menu">
+                <button class="nav-close" id="nav-close">
                     <i class="fas fa-times"></i>
                 </button>
                 <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
-                <a href="courses.html" class="nav-link"><i class="fas fa-book-open"></i> Courses</a>
-                <a href="category.html" class="nav-link"><i class="fas fa-layer-group"></i> Category</a>
+                <a href="courses.html" class="nav-link active"><i class="fas fa-book-open"></i> Courses</a>
                 <a href="StudentZone.html" class="nav-link"><i class="fas fa-user-graduate"></i> Student Zone</a>
                 <a href="Admission.html" class="nav-link"><i class="fas fa-file-signature"></i> Admission</a>
+    
                 <a href="gallery.html" class="nav-link"><i class="fas fa-images"></i> Gallery</a>
                 <a href="about.html" class="nav-link"><i class="fas fa-info-circle"></i> About Us</a>
+                <a href="https://ecc-login-portal.onrender.com/" class="nav-link"><i class="fa fa-sign-in"></i> Login</a>
             </nav>
         </div>
     </header>
@@ -624,7 +724,6 @@
             <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
             <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
             <li><a href="courses.html"><i class="fas fa-chevron-right"></i> Courses</a></li>
-            <li><a href="#testimonials"><i class="fas fa-chevron-right"></i> Success Stories</a></li>
             <li><a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a></li>
             <li><a href="admission.html"><i class="fas fa-chevron-right"></i> Admission</a></li>
             <li><a href="studentzone.html"><i class="fas fa-chevron-right"></i> StudentZone</a></li>
@@ -649,114 +748,59 @@
     <script>
         const courses = [
             {
-                id: "cca",
-                title: "CCA - Certificate in Computer Application",
-                duration: "3 Months",
-                totalFee: "₹2150",
-                admissionFee: "₹1150",
-                installments: ["₹500", "₹500"],
-                details: "Modules: OS, MS Office, Windows 7/8/10, Projects, Assignments",
-                category: "certificate",
-                icon: "fas fa-laptop"
+                id: "adca",
+                title: "ADCA - Advanced Diploma in Computer Applications",
+                duration: "12 Months",
+                totalFee: "₹6,500",
+                admissionFee: "₹500",
+                installments: ["One Time: ₹6,500", "Two Times: ₹3,500 + ₹3,500", "Three Times: ₹2,500 + ₹2,500 + ₹2,000"],
+                details: "Complete computer training with OS/IT Fundamentals, Office Applications, Accounting Software, Desktop Publishing. Free Kit Worth ₹5,000 included.",
+                category: "advanced",
+                icon: "fas fa-graduation-cap"
             },
             {
                 id: "dca",
-                title: "DCA - Diploma in Computer Application",
+                title: "DCA - Diploma in Computer Applications",
                 duration: "6 Months",
-                totalFee: "₹3250",
-                admissionFee: "₹1750",
-                installments: ["₹500", "₹500", "₹500"],
-                details: "Includes: MS Office, Access, MySQL, HTML, Networking, Hardware",
+                totalFee: "₹3,000",
+                admissionFee: "₹300",
+                installments: ["One Time: ₹3,000", "Two Times: ₹1,700 + ₹1,700", "Three Times: ₹1,500 + ₹1,500 + ₹700"],
+                details: "Foundation course covering Computer Fundamentals, Office Applications, Internet & Communication. Free Kit Worth ₹3,000 included.",
                 category: "diploma",
                 icon: "fas fa-desktop"
             },
             {
                 id: "dtp",
                 title: "DTP - Diploma in Desktop Publishing",
-                duration: "3 Months",
-                totalFee: "₹2750",
-                admissionFee: "₹1250",
-                installments: ["₹500", "₹500", "₹500"],
-                details: "PageMaker, Photoshop, CorelDraw, Printing, Design Tools",
+                duration: "8 Months",
+                totalFee: "₹3,500",
+                admissionFee: "₹400",
+                installments: ["One Time: ₹3,500", "Two Times: ₹1,900 + ₹1,900", "Three Times: ₹1,500 + ₹1,500 + ₹1,000"],
+                details: "Master graphic design with Computer Operating, Adobe PageMaker, Adobe Photoshop, CorelDRAW. Free Kit Worth ₹4,000 included.",
                 category: "diploma",
                 icon: "fas fa-paint-brush"
             },
             {
-                id: "doa",
-                title: "DOA - Diploma in Office Automation",
-                duration: "9 Months",
-                totalFee: "₹5500",
-                admissionFee: "₹1500",
-                installments: ["₹500 x 8"],
-                details: "Office Tools, DBMS, Networking, HTML, Tally, Hardware",
-                category: "diploma",
-                icon: "fas fa-briefcase"
-            },
-            {
-                id: "adca",
-                title: "ADCA - Advance Diploma in Computer Application",
-                duration: "12 Months",
-                totalFee: "₹8500",
-                admissionFee: "₹1900",
-                installments: ["₹600 x 11"],
-                details: "Combo: DCA, CFA, DTP with Advanced Features & Projects",
-                category: "advanced",
-                icon: "fas fa-graduation-cap"
-            },
-            {
-                id: "adit",
-                title: "ADIT - Advance Diploma in Information Technology",
-                duration: "12 Months",
-                totalFee: "₹8500",
-                admissionFee: "₹1900",
-                installments: ["₹600 x 11"],
-                details: "Programming in C/C++, Visual Basic, MySQL, HTML, Networking",
-                category: "advanced",
-                icon: "fas fa-code"
-            },
-            {
-                id: "adcp",
-                title: "ADCP - Advanced Diploma in Computer Programming",
-                duration: "12 Months",
-                totalFee: "₹8500",
-                admissionFee: "₹1900",
-                installments: ["₹600 x 11"],
-                details: "JavaScript, VBScript, C, Visual Basic, FrontPage, SQL",
-                category: "advanced",
-                icon: "fas fa-laptop-code"
-            },
-            {
-                id: "adhn",
-                title: "ADHN - Advanced Diploma in Hardware & Networking",
-                duration: "12 Months",
-                totalFee: "₹8500",
-                admissionFee: "₹1900",
-                installments: ["₹600 x 11"],
-                details: "PC Hardware, Windows Config, Networking, System Support",
-                category: "advanced",
-                icon: "fas fa-network-wired"
+                id: "cca",
+                title: "CCA - Certificate in Computer Applications",
+                duration: "3 Months",
+                totalFee: "₹3,000",
+                admissionFee: "₹500",
+                installments: ["One Time: ₹3,000", "Two Times: ₹1,700 + ₹1,800", "Three Times: ₹1,200 + ₹1,200 + ₹1,100"],
+                details: "Basic computer course covering fundamentals, MS Office, Windows operations. Free Kit Worth ₹2,000 included.",
+                category: "certificate",
+                icon: "fas fa-laptop"
             },
             {
                 id: "cfa",
                 title: "CFA - Certificate in Financial Accounting",
-                duration: "3 Months",
-                totalFee: "₹2750",
-                admissionFee: "₹1250",
-                installments: ["₹500", "₹500", "₹500"],
-                details: "Covers Tally ERP 9, GST, Ledger, Inventory, Trial Balance",
+                duration: "4 Months",
+                totalFee: "₹4,000",
+                admissionFee: "₹500",
+                installments: ["One Time: ₹4,000", "Two Times: ₹2,200 + ₹2,300", "Three Times: ₹1,600 + ₹1,600 + ₹1,300"],
+                details: "Complete Tally ERP training with GST, Accounting, Inventory Management. Free Kit Worth ₹2,500 included.",
                 category: "certificate",
                 icon: "fas fa-calculator"
-            },
-            {
-                id: "typing",
-                title: "Typing in Hindi + English",
-                duration: "3 Months",
-                totalFee: "₹2000",
-                admissionFee: "₹500",
-                installments: ["₹500", "₹500", "₹500"],
-                details: "Covers Hindi Typing + English Typing",
-                category: "typing",
-                icon: "fas fa-keyboard"
             }
         ];
 
@@ -777,7 +821,7 @@
                         Admission Fee: ${course.admissionFee}<br>
                         Installments: ${course.installments.join(", ")}<br>
                         ${course.details}<br>
-                        <a href="details/${course.id}.html" class="details-btn" target="_blank">
+                        <a href="details/${course.id}.html" class="details-btn">
                             <i class="fas fa-info-circle"></i> Full Course Details
                         </a>
                     </div>
@@ -820,9 +864,9 @@
         });
 
         // Mobile Navigation
-        const navToggle = document.getElementById("navToggle");
-        const navMenu = document.getElementById("navMenu");
-        const navClose = document.getElementById("navClose");
+        const navToggle = document.getElementById("nav-toggle");
+        const navMenu = document.getElementById("nav-menu");
+        const navClose = document.getElementById("nav-close");
 
         navToggle.addEventListener("click", () => {
             navMenu.classList.add("active");
@@ -854,7 +898,7 @@
 
         // Sticky Header Effect
         window.addEventListener("scroll", () => {
-            const header = document.querySelector("header");
+            const header = document.getElementById("header");
             header.classList.toggle("scrolled", window.pageYOffset > 50);
         });
     </script>
