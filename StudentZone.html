@@ -133,6 +133,7 @@
             font-size: 1.5rem;
             cursor: pointer;
             transition: var(--transition);
+            z-index: 999;
         }
 
         .nav-toggle:hover {
@@ -185,6 +186,7 @@
             font-size: 1.5rem;
             color: var(--dark);
             cursor: pointer;
+            z-index: 1002;
         }
 
         /* Main Content */
@@ -651,6 +653,147 @@
             to { transform: rotate(360deg); }
         }
 
+        /* Support Modal */
+        .support-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            position: relative;
+            background: var(--white);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .modal-header h3 {
+            color: var(--primary-dark);
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--gray);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .modal-body p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e5e7eb;
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 8px rgba(37, 99, 235, 0.2);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: var(--gradient);
+            color: var(--white);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
         /* Responsive Design */
         @media (max-width: 992px) {
             .nav-toggle {
@@ -799,29 +942,39 @@
                             <i class="fas fa-laptop-code"></i>
                         </div>
                         <h3 class="category-name">ADCA</h3>
-                        <p class="category-count">12 Months | $8500</p>
+                        <p class="category-count">12 Months | ₹6,500</p>
                         <p class="category-desc">Advanced Diploma in Computer Applications with comprehensive training in software and programming.</p>
                         <a href="details/adca.html">Learn More</a>
                     </div>
-                    <div class="category-card" data-category="adca+">
-                        <img src="./Images/Courses/ADCA+.jpg" alt="ADCA+ Course">
+                    <div class="category-card" data-category="cfa">
+                        <img src="./Images/Courses/CFA.jpg" alt="CFA Course">
+                        <div class="category-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <h3 class="category-name">CFA</h3>
+                        <p class="category-count">4 Months | ₹2,000</p>
+                        <p class="category-desc">Certificate in Financial Accounting with Tally ERP 9 and GST training.</p>
+                        <a href="details/cfa.html">Learn More</a>
+                    </div>
+                    <div class="category-card" data-category="dtp">
+                        <img src="./Images/Courses/DTP.jpg" alt="DTP Course">
                         <div class="category-icon">
                             <i class="fas fa-paint-brush"></i>
                         </div>
-                        <h3 class="category-name">ADCA+</h3>
-                        <p class="category-count">12 Months | $8500</p>
-                        <p class="category-desc">Enhanced ADCA with additional modules in advanced software and project management.</p>
-                        <a href="details/adca+.html">Learn More</a>
+                        <h3 class="category-name">DTP</h3>
+                        <p class="category-count">8 Months | ₹3,500</p>
+                        <p class="category-desc">Diploma in Desktop Publishing with Photoshop, CorelDraw and PageMaker.</p>
+                        <a href="details/dtp.html">Learn More</a>
                     </div>
-                    <div class="category-card" data-category="pgdca">
-                        <img src="./Images/Courses/PGDCA.jpg" alt="PGDCA Course">
+                    <div class="category-card" data-category="cca">
+                        <img src="./Images/Courses/CCA.jpg" alt="CCA Course">
                         <div class="category-icon">
-                            <i class="fas fa-chart-line"></i>
+                            <i class="fas fa-desktop"></i>
                         </div>
-                        <h3 class="category-name">PGDCA</h3>
-                        <p class="category-count">12 Months | $5500</p>
-                        <p class="category-desc">Post Graduate Diploma in Computer Applications for in-depth IT skills and career growth.</p>
-                        <a href="details/pgdca.html">Learn More</a>
+                        <h3 class="category-name">CCA</h3>
+                        <p class="category-count">3 Months | ₹1,500</p>
+                        <p class="category-desc">Certificate in Computer Applications for basic computer literacy and office skills.</p>
+                        <a href="details/cca.html">Learn More</a>
                     </div>
                     <div class="category-card" data-category="dca">
                         <img src="./Images/Courses/DCA.jpg" alt="DCA Course">
@@ -829,7 +982,7 @@
                             <i class="fas fa-desktop"></i>
                         </div>
                         <h3 class="category-name">DCA</h3>
-                        <p class="category-count">3 Months | $2200</p>
+                        <p class="category-count">6 Months | ₹3,000</p>
                         <p class="category-desc">Diploma in Computer Applications covering essential software and office tools.</p>
                         <a href="details/dca.html">Learn More</a>
                     </div>
@@ -839,49 +992,46 @@
                 </div>
             </section>
 
-            <!-- Popular Categories Section -->
+            <!-- Quick Actions Section -->
             <section class="popular-categories">
-                <h4 class="popular-heading"><i class="fas fa-tags"></i> Popular Categories</h4>
+                <h4 class="popular-heading"><i class="fas fa-rocket"></i> Quick Actions</h4>
                 <div class="categories-grid">
-                    <div class="category-card" data-category="computer-courses">
+                    <div class="category-card" data-category="admission">
                         <div class="category-icon">
-                            <i class="fas fa-laptop-code"></i>
+                            <i class="fas fa-file-signature"></i>
                         </div>
-                        <h3 class="category-name">Computer Courses</h3>
-                        <p class="category-count">8 Courses</p>
-                        <p class="category-desc">Comprehensive training in programming, web development, and IT skills.</p>
-                        <a href="category.html#computer-courses">Learn More</a>
+                        <h3 class="category-name">Apply for Admission</h3>
+                        <p class="category-count">Online Application</p>
+                        <p class="category-desc">Start your journey with us. Apply online for any course and get instant confirmation.</p>
+                        <a href="Admission.html">Apply Now</a>
                     </div>
-                    <div class="category-card" data-category="pdf-notes">
+                    <div class="category-card" data-category="results">
                         <div class="category-icon">
-                            <i class="fas fa-file-pdf"></i>
+                            <i class="fas fa-chart-line"></i>
                         </div>
-                        <h3 class="category-name">PDF Notes</h3>
-                        <p class="category-count">50+ Notes</p>
-                        <p class="category-desc">Downloadable study materials for all courses and subjects.</p>
-                        <a href="category.html#pdf-notes">Learn More</a>
+                        <h3 class="category-name">Check Results</h3>
+                        <p class="category-count">Exam Results</p>
+                        <p class="category-desc">View your exam results, certificates, and academic progress online.</p>
+                        <a href="result.html">Check Results</a>
                     </div>
-                    <div class="category-card" data-category="computer-projects">
+                    <div class="category-card" data-category="downloads">
                         <div class="category-icon">
-                            <i class="fas fa-project-diagram"></i>
+                            <i class="fas fa-download"></i>
                         </div>
-                        <h3 class="category-name">Computer Projects</h3>
-                        <p class="category-count">35+ Projects</p>
-                        <p class="category-desc">Hands-on projects to build real-world applications.</p>
-                        <a href="category.html#computer-projects">Learn More</a>
+                        <h3 class="category-name">Downloads</h3>
+                        <p class="category-count">Study Materials</p>
+                        <p class="category-desc">Download course materials, syllabus, and important documents.</p>
+                        <a href="#downloads">Download</a>
                     </div>
-                    <div class="category-card" data-category="beltron-deo">
+                    <div class="category-card" data-category="support">
                         <div class="category-icon">
-                            <i class="fas fa-book-reader"></i>
+                            <i class="fas fa-headset"></i>
                         </div>
-                        <h3 class="category-name">Beltron DEO Preparation</h3>
-                        <p class="category-count">10+ Subjects</p>
-                        <p class="category-desc">Specialized training for Beltron DEO exams.</p>
-                        <a href="category.html#beltron-deo">Learn More</a>
+                        <h3 class="category-name">Student Support</h3>
+                        <p class="category-count">24/7 Help</p>
+                        <p class="category-desc">Get help with your queries, technical support, and academic guidance.</p>
+                        <a href="#support" onclick="showSupportForm()">Get Support</a>
                     </div>
-                </div>
-                <div class="explore-btn">
-                    <a href="category.html">Explore More Categories <i class="fas fa-arrow-right"></i></a>
                 </div>
             </section>
 
@@ -962,6 +1112,55 @@
                     <a href="gallery.html">Explore More Photos <i class="fas fa-arrow-right"></i></a>
                 </div>
             </section>
+
+            <!-- Support Form Modal -->
+            <div id="supportModal" class="support-modal" style="display: none;">
+                <div class="modal-overlay" onclick="hideSupportForm()"></div>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3><i class="fas fa-headset"></i> Student Support</h3>
+                        <button class="modal-close" onclick="hideSupportForm()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Need help? Send us your query and we'll get back to you soon!</p>
+                        <form id="supportForm">
+                            <div class="form-group">
+                                <label for="supportName">Your Name</label>
+                                <input type="text" id="supportName" class="form-control" placeholder="Enter your name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="supportEmail">Email Address</label>
+                                <input type="email" id="supportEmail" class="form-control" placeholder="Enter your email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="supportPhone">Phone Number</label>
+                                <input type="tel" id="supportPhone" class="form-control" placeholder="Enter your phone number">
+                            </div>
+                            <div class="form-group">
+                                <label for="supportSubject">Subject</label>
+                                <select id="supportSubject" class="form-control" required>
+                                    <option value="">Select a topic</option>
+                                    <option value="Course Inquiry">Course Inquiry</option>
+                                    <option value="Technical Support">Technical Support</option>
+                                    <option value="Result Query">Result Query</option>
+                                    <option value="Certificate Issue">Certificate Issue</option>
+                                    <option value="Fee Related">Fee Related</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="supportMessage">Your Message</label>
+                                <textarea id="supportMessage" class="form-control" placeholder="Describe your query in detail..." rows="4" required></textarea>
+                            </div>
+                            <button type="submit" class="btn-submit">
+                                <i class="fas fa-paper-plane"></i> Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -1028,17 +1227,23 @@ West Champaran, Bihar - 845455</a></li>
 
             navToggle.addEventListener('click', () => {
                 navMenu.classList.add('active');
+                navToggle.style.opacity = '0';
+                navToggle.style.pointerEvents = 'none';
                 document.body.style.overflow = 'hidden';
             });
 
             navClose.addEventListener('click', () => {
                 navMenu.classList.remove('active');
+                navToggle.style.opacity = '1';
+                navToggle.style.pointerEvents = 'auto';
                 document.body.style.overflow = 'auto';
             });
 
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.addEventListener('click', () => {
                     navMenu.classList.remove('active');
+                    navToggle.style.opacity = '1';
+                    navToggle.style.pointerEvents = 'auto';
                     document.body.style.overflow = 'auto';
                 });
             });
@@ -1103,6 +1308,49 @@ West Champaran, Bihar - 845455</a></li>
 
             galleryGrid.addEventListener('scroll', updateButtons);
             updateButtons();
+        });
+
+        // Support Form Functions
+        function showSupportForm() {
+            document.getElementById('supportModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function hideSupportForm() {
+            document.getElementById('supportModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Handle support form submission
+        document.getElementById('supportForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('supportName').value.trim();
+            const email = document.getElementById('supportEmail').value.trim();
+            const phone = document.getElementById('supportPhone').value.trim();
+            const subject = document.getElementById('supportSubject').value;
+            const message = document.getElementById('supportMessage').value.trim();
+            
+            if (name && email && subject && message) {
+                // Format the message for WhatsApp
+                const whatsappMessage = `*Student Support Request*\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone || 'Not provided'}\nSubject: ${subject}\nMessage: ${message}`;
+                const encodedMessage = encodeURIComponent(whatsappMessage);
+                const whatsappUrl = `https://wa.me/+918292879444?text=${encodedMessage}`;
+                
+                // Reset the form
+                document.getElementById('supportForm').reset();
+                
+                // Hide modal
+                hideSupportForm();
+                
+                // Show success message
+                alert('Redirecting to WhatsApp with your support request!');
+                
+                // Redirect to WhatsApp
+                window.open(whatsappUrl, '_blank');
+            } else {
+                alert('Please fill all required fields!');
+            }
         });
     </script>
 </body>
