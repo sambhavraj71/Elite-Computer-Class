@@ -229,6 +229,7 @@
       cursor: pointer;
       transition: var(--transition);
       padding: 0.5rem;
+      z-index: 999;
     }
 
     .nav-toggle:hover {
@@ -244,6 +245,7 @@
       color: var(--dark);
       cursor: pointer;
       transition: var(--transition);
+      z-index: 1002;
     }
 
     .nav-close:hover {
@@ -1092,7 +1094,6 @@
       
       .nav-toggle {
         display: block;
-        z-index: 1001;
       }
       
       .nav-close {
@@ -1740,16 +1741,22 @@
     
     navToggle.addEventListener('click', () => {
       navMenu.classList.add('active');
+      navToggle.style.opacity = '0';
+      navToggle.style.pointerEvents = 'none';
     });
     
     navClose.addEventListener('click', () => {
       navMenu.classList.remove('active');
+      navToggle.style.opacity = '1';
+      navToggle.style.pointerEvents = 'auto';
     });
     
     // Close mobile menu when clicking a nav link
     document.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', () => {
         navMenu.classList.remove('active');
+        navToggle.style.opacity = '1';
+        navToggle.style.pointerEvents = 'auto';
       });
     });
     
