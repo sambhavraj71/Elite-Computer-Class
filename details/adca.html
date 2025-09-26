@@ -76,7 +76,7 @@
       width: 100%;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 1rem;
+      padding: 0 0.5rem;
     }
 
     .section {
@@ -1049,25 +1049,45 @@
       .details-sidebar {
         position: static;
         order: -1;
+        margin: 0 -0.5rem;
+        border-radius: 0.5rem;
       }
       
       .software-badges {
         grid-template-columns: 1fr;
         gap: 0.8rem;
+        margin: 1.5rem -0.5rem;
       }
       
       .software-badge {
         padding: 0.8rem;
+        margin: 0 0.5rem;
       }
       
       .software-badge span {
         font-size: 0.85rem;
       }
+      
+      .highlight-cards {
+        margin: 0 -0.5rem;
+      }
+      
+      .highlight-card {
+        margin: 0 0.5rem 2rem 0.5rem;
+      }
+      
+      .testimonial-cards {
+        margin: 0 -0.5rem;
+      }
+      
+      .testimonial-card {
+        margin: 0 0.5rem 2rem 0.5rem;
+      }
     }
 
     @media (max-width: 768px) {
       .header-container {
-        padding: 1rem 0.8rem;
+        padding: 1rem 0.5rem;
       }
       
       .nav-toggle {
@@ -1121,25 +1141,41 @@
       }
       
       .section {
-        padding: 2.5rem 0;
+        padding: 2rem 0;
       }
       
       .highlight-cards {
         grid-template-columns: 1fr;
+        gap: 1rem;
       }
       
       .testimonial-cards {
         grid-template-columns: 1fr;
+        gap: 1rem;
       }
       
       .software-badges {
         grid-template-columns: 1fr;
+        margin: 1rem 0;
+      }
+      
+      .details-sidebar {
+        margin: 0;
+        padding: 1.5rem;
+      }
+      
+      .fee-structure {
+        padding: 1rem;
+      }
+      
+      .sidebar-section {
+        margin-bottom: 1.5rem;
       }
     }
 
     @media (max-width: 480px) {
       .container {
-        padding: 0 0.8rem;
+        padding: 0 0.3rem;
       }
       
       .banner-content h1 {
@@ -1147,13 +1183,42 @@
       }
       
       .highlight-card,
-      .testimonial-card,
+      .testimonial-card {
+        padding: 1.2rem;
+        margin: 0 0 1.5rem 0;
+      }
+      
       .details-sidebar {
-        padding: 1.5rem;
+        padding: 1.2rem;
+        margin: 0;
       }
       
       .fee-structure {
-        padding: 1rem;
+        padding: 0.8rem;
+      }
+      
+      .sidebar-section h3 {
+        font-size: 1rem;
+        padding: 0.6rem 0 0.6rem 2.5rem;
+      }
+      
+      .fee-item {
+        padding: 0.8rem;
+        font-size: 0.85rem;
+      }
+      
+      .software-badge {
+        padding: 0.6rem;
+      }
+      
+      .module-list li {
+        padding: 0.6rem 0.8rem;
+        padding-left: 2.5rem;
+        font-size: 0.85rem;
+      }
+      
+      .section {
+        padding: 1.5rem 0;
       }
     }
   </style>
@@ -1605,11 +1670,14 @@
           <h3>Our Courses</h3>
           <ul class="footer-links">
             <li><a href="../details/adca.html"><i class="fas fa-chevron-right"></i> ADCA</a></li>
-            <li><a href="../details/adit.html"><i class="fas fa-chevron-right"></i> ADCA+</a></li>
+        
             <li><a href="../details/dca.html"><i class="fas fa-chevron-right"></i> DCA</a></li>
-            <li><a href="../details/cfa.html"><i class="fas fa-chevron-right"></i> DTP</a></li>
+            <li><a href="../details/cfa.html"><i class="fas fa-chevron-right"></i> CFA</a></li>
+            <li><a href="../details/dtp.html"><i class="fas fa-chevron-right"></i> DTP</a></li>
+            <li><a href="../details/cca.html"><i class="fas fa-chevron-right"></i> CCA</a></li>
             <li><a href="#"><i class="fas fa-chevron-right"></i> Tally</a></li>
             <li><a href="#"><i class="fas fa-chevron-right"></i> Typing</a></li>
+          
           </ul>
         </div>
         
@@ -1631,25 +1699,24 @@
           <h3>Contact Info</h3>
           <ul class="footer-contact">
             <li>
-      <i class="fas fa-map-marker-alt"></i>
-      <a href="https://www.google.com/maps/place/Elite+Computer+Classes/@27.1011545,84.4618682,17z/data=!4m14!1m7!3m6!1s0x39949d77d23e1fbf:0x4b843cecdcef2869!2sElite+Computer+Classes!8m2!3d27.1011545!4d84.4644431!16s%2Fg%2F11h6m7vc2k!3m5!1s0x39949d77d23e1fbf:0x4b843cecdcef2869!8m2!3d27.1011545!4d84.4644431!16s%2Fg%2F11h6m7vc2k?entry=ttu&g_ep=EgoyMDI1MDcyMC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">
-        <span>Block Road, Narkatiaganj<br>West Champaran, Bihar 845455</span>
-      </a>
-    </li>
-    <li>
-    <li>
-      <i class="fas fa-phone-alt"></i>
-      <span>
-        <a href="tel:+918292879444">+91 8292879444</a><br>
-        <a href="tel:+919142789404">+91 9142789404</a>
-      </span>
-    </li>
+              <i class="fas fa-map-marker-alt"></i>
+              <a href="https://www.google.com/maps/place/Elite+Computer+Classes/@27.1011545,84.4618682,17z/data=!4m14!1m7!3m6!1s0x39949d77d23e1fbf:0x4b843cecdcef2869!2sElite+Computer+Classes!8m2!3d27.1011545!4d84.4644431!16s%2Fg%2F11h6m7vc2k!3m5!1s0x39949d77d23e1fbf:0x4b843cecdcef2869!8m2!3d27.1011545!4d84.4644431!16s%2Fg%2F11h6m7vc2k?entry=ttu&g_ep=EgoyMDI1MDcyMC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">
+                <span>Block Road, Narkatiaganj<br>West Champaran, Bihar 845455</span>
+              </a>
+            </li>
             <li>
-      <i class="fas fa-envelope"></i>
-      <a href="mailto:elitecomputerclasses@gmail.com" target="_blank" rel="noopener noreferrer">
-        <span>elitecomputerclasses@gmail.com</span>
-      </a>
-    </li>
+              <i class="fas fa-phone-alt"></i>
+              <span>
+                <a href="tel:+918292879444">+91 8292879444</a><br>
+                <a href="tel:+919142789404">+91 9142789404</a>
+              </span>
+            </li>
+            <li>
+              <i class="fas fa-envelope"></i>
+              <a href="mailto:elitecomputerclasses@gmail.com" target="_blank" rel="noopener noreferrer">
+                <span>elitecomputerclasses@gmail.com</span>
+              </a>
+            </li>
           </ul>
         </div>
       </div>
