@@ -556,6 +556,45 @@
          color: var(--accent);
          font-weight: 600;
          }
+         /* App Download Button */
+         .app-download-btn {
+         display: inline-flex;
+         align-items: center;
+         gap: 1rem;
+         background: rgba(255, 255, 255, 0.1);
+         border: 2px solid rgba(255, 255, 255, 0.3);
+         border-radius: 12px;
+         padding: 1rem 2rem;
+         color: white;
+         text-decoration: none;
+         transition: var(--transition);
+         backdrop-filter: blur(10px);
+         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+         }
+         .app-download-btn:hover {
+         background: rgba(255, 255, 255, 0.2);
+         border-color: rgba(255, 255, 255, 0.5);
+         transform: translateY(-3px);
+         box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+         }
+         .app-download-btn i {
+         font-size: 2.5rem;
+         color: var(--accent);
+         }
+         .app-btn-text {
+         display: flex;
+         flex-direction: column;
+         align-items: flex-start;
+         }
+         .app-btn-text .small-text {
+         font-size: 0.8rem;
+         opacity: 0.8;
+         margin-bottom: 0.2rem;
+         }
+         .app-btn-text .main-text {
+         font-size: 1.2rem;
+         font-weight: 600;
+         }
          /* Back to Top Button */
          .back-to-top {
          position: fixed;
@@ -666,6 +705,18 @@
          max-height: 180px;
          }
          }
+         @media (max-width: 768px) {
+         .app-download-btn {
+         padding: 0.8rem 1.5rem;
+         gap: 0.8rem;
+         }
+         .app-download-btn i {
+         font-size: 2rem;
+         }
+         .app-btn-text .main-text {
+         font-size: 1rem;
+         }
+         }
          @media (max-width: 480px) {
          .header-container {
          min-height: 65px;
@@ -695,6 +746,19 @@
          }
          .achievements-grid {
          grid-template-columns: 1fr;
+         }
+         .app-download-btn {
+         padding: 0.6rem 1rem;
+         gap: 0.6rem;
+         }
+         .app-download-btn i {
+         font-size: 1.8rem;
+         }
+         .app-btn-text .small-text {
+         font-size: 0.7rem;
+         }
+         .app-btn-text .main-text {
+         font-size: 0.9rem;
          }
          }
          /* Desktop Mode on Mobile */
@@ -955,6 +1019,25 @@
       </div>
    </div>
 </section>
+      <!-- App Download Section -->
+      <section class="section" id="app-download" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; text-align: center;">
+         <div class="container">
+            <div class="section-title" data-aos="fade-up">
+               <h2 style="color: white;">Download Our Mobile App</h2>
+               <p style="color: rgba(255,255,255,0.9);">Get instant access to courses, updates, and more on your mobile device</p>
+            </div>
+            <div data-aos="fade-up" data-aos-delay="200">
+               <a href="https://play.google.com/store/apps/details?id=codevora.eccapp.app" class="app-download-btn" target="_blank" rel="noopener noreferrer">
+                  <i class="fab fa-google-play"></i>
+                  <div class="app-btn-text">
+                     <span class="small-text">Get it on</span>
+                     <span class="main-text">Google Play</span>
+                  </div>
+               </a>
+            </div>
+         </div>
+      </section>
+
       <!-- Achievements Section -->
       <section class="section" id="achievements" style="background-color: #f1f5f9;">
          <div class="container">
