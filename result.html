@@ -109,7 +109,7 @@
         <div class="relative">
             <select id="monthSelect" class="month-select w-full p-4 rounded-lg border-0 focus:ring-2 focus:ring-indigo-500 text-lg shadow-md">
                 <option value="july">July 2025</option>
-                <option value="august">August 2025</option>
+                <option value="august" selected>August 2025</option>
             </select>
         </div>
     </div>
@@ -333,8 +333,8 @@
 
     // Initial setup and event listeners
     document.addEventListener('DOMContentLoaded', () => {
-        // Load July results by default
-        loadResults('july');
+        // Load August results by default
+        loadResults('august');
 
         // Month selection event listener
         document.getElementById('monthSelect').addEventListener('change', (e) => {
