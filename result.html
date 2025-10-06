@@ -30,12 +30,12 @@
             box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.45);
         }
 
-        .search-input {
+        .search-input, .month-select {
             transition: all 0.3s ease;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        .search-input:focus {
+        .search-input:focus, .month-select:focus {
             box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3);
         }
 
@@ -101,16 +101,26 @@
     <!-- Header Section -->
     <div class="text-center mb-8 animate__animated animate__fadeIn">
         <h1 class="text-4xl md:text-5xl font-bold text-white mb-2">Elite Computer Classes</h1>
-        <h2 class="text-2xl md:text-3xl font-semibold text-indigo-200">Test Results (July 2025)</h2>
+        <h2 id="resultTitle" class="text-2xl md:text-3xl font-semibold text-indigo-200">Test Results (July 2025)</h2>
+    </div>
+
+    <!-- Month Selection -->
+    <div class="card p-6 mb-8 animate__animated animate__fadeInUp">
+        <div class="relative">
+            <select id="monthSelect" class="month-select w-full p-4 rounded-lg border-0 focus:ring-2 focus:ring-indigo-500 text-lg shadow-md">
+                <option value="july">July 2025</option>
+                <option value="august">August 2025</option>
+            </select>
+        </div>
     </div>
 
     <!-- Image Section -->
     <div class="card p-4 mb-8 animate__animated animate__fadeInUp">
         <div class="flex flex-col md:flex-row items-center">
             <div class="w-full md:w-1/2 mb-4 md:mb-0 md:pr-4">
-                <h3 class="text-xl font-bold text-indigo-800 mb-2">OVERALL TOP-10 STUDENT'S</h3>
+                <h3 class="text-xl font-bold text-indigo-800 mb-2">OVERALL TOP-10 STUDENTS</h3>
                 <div class="overflow-x-auto">
-                    <table class="min-w-full bg-white rounded-lg overflow-hidden">
+                    <table id="overallTopTable" class="min-w-full bg-white rounded-lg overflow-hidden">
                         <thead class="bg-indigo-600 text-white">
                         <tr>
                             <th class="p-2 text-left">Rank</th>
@@ -118,66 +128,17 @@
                             <th class="p-2 text-left">Total</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr class="rank-1">
-                            <td class="p-2">1</td>
-                            <td class="p-2">Amit Kumar</td>
-                            <td class="p-2">80</td>
-                        </tr>
-                        <tr class="rank-2">
-                            <td class="p-2">2</td>
-                            <td class="p-2">Ragini Kumari</td>
-                            <td class="p-2">79</td>
-                        </tr>
-                        <tr class="rank-3">
-                            <td class="p-2">3</td>
-                            <td class="p-2">Anshu Kumari</td>
-                            <td class="p-2">74</td>
-                        </tr>
-                        <tr class="top-student">
-                            <td class="p-2">4</td>
-                            <td class="p-2">Aditya Kumar</td>
-                            <td class="p-2">73</td>
-                        </tr>
-                        <tr class="top-student">
-                            <td class="p-2">5</td>
-                            <td class="p-2">Aayush Kr. Shrivastav</td>
-                            <td class="p-2">71</td>
-                        </tr>
-                        <tr class="top-student">
-                            <td class="p-2">6</td>
-                            <td class="p-2">Lucky Kumari</td>
-                            <td class="p-2">70</td>
-                        </tr>
-                        <tr class="top-student">
-                            <td class="p-2">7</td>
-                            <td class="p-2">Priyanshi Kumari</td>
-                            <td class="p-2">70</td>
-                        </tr>
-                        <tr class="top-student">
-                            <td class="p-2">8</td>
-                            <td class="p-2">Shifa</td>
-                            <td class="p-2">68</td>
-                        </tr>
-                        <tr class="top-student">
-                            <td class="p-2">9</td>
-                            <td class="p-2">Ritik Kumar</td>
-                            <td class="p-2">67</td>
-                        </tr>
-                        <tr class="top-student">
-                            <td class="p-2">10</td>
-                            <td class="p-2">Nidhi Kumari</td>
-                            <td class="p-2">67</td>
-                        </tr>
+                        <tbody id="overallTopBody">
+                        <!-- Populated by JavaScript -->
                         </tbody>
                     </table>
                 </div>
             </div>
             <div class="w-full md:w-1/2">
                 <div class="mb-6">
-                    <h3 class="text-xl font-bold text-indigo-800 mb-2">TYPING TOP-3 STUDENT'S</h3>
+                    <h3 class="text-xl font-bold text-indigo-800 mb-2">TYPING TOP-3 STUDENTS</h3>
                     <div class="overflow-x-auto">
-                        <table class="min-w-full bg-white rounded-lg overflow-hidden">
+                        <table id="typingTopTable" class="min-w-full bg-white rounded-lg overflow-hidden">
                             <thead class="bg-indigo-600 text-white">
                             <tr>
                                 <th class="p-2 text-left">Rank</th>
@@ -185,30 +146,16 @@
                                 <th class="p-2 text-left">Speed</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <tr class="rank-1">
-                                <td class="p-2">1</td>
-                                <td class="p-2">Amit Kumar</td>
-                                <td class="p-2">49</td>
-                            </tr>
-                            <tr class="rank-2">
-                                <td class="p-2">2</td>
-                                <td class="p-2">Ragini Kumari</td>
-                                <td class="p-2">30</td>
-                            </tr>
-                            <tr class="rank-3">
-                                <td class="p-2">3</td>
-                                <td class="p-2">Lucky Kumari</td>
-                                <td class="p-2">30</td>
-                            </tr>
+                            <tbody id="typingTopBody">
+                            <!-- Populated by JavaScript -->
                             </tbody>
                         </table>
                     </div>
                 </div>
                 <div>
-                    <h3 class="text-xl font-bold text-indigo-800 mb-2">WRITTEN TOP-3 STUDENT'S</h3>
+                    <h3 class="text-xl font-bold text-indigo-800 mb-2">WRITTEN TOP-3 STUDENTS</h3>
                     <div class="overflow-x-auto">
-                        <table class="min-w-full bg-white rounded-lg overflow-hidden">
+                        <table id="writtenTopTable" class="min-w-full bg-white rounded-lg overflow-hidden">
                             <thead class="bg-indigo-600 text-white">
                             <tr>
                                 <th class="p-2 text-left">Rank</th>
@@ -216,22 +163,8 @@
                                 <th class="p-2 text-left">Marks</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <tr class="rank-1">
-                                <td class="p-2">1</td>
-                                <td class="p-2">Amit Kumar</td>
-                                <td class="p-2">50</td>
-                            </tr>
-                            <tr class="rank-1">
-                                <td class="p-2">1</td>
-                                <td class="p-2">Rajshree</td>
-                                <td class="p-2">50</td>
-                            </tr>
-                            <tr class="rank-2">
-                                <td class="p-2">2</td>
-                                <td class="p-2">Ragini Kumari</td>
-                                <td class="p-2">49</td>
-                            </tr>
+                            <tbody id="writtenTopBody">
+                            <!-- Populated by JavaScript -->
                             </tbody>
                         </table>
                     </div>
@@ -244,10 +177,10 @@
     <div class="card p-6 mb-8 animate__animated animate__fadeInUp">
         <div class="relative">
             <input
-                    type="text"
-                    id="searchInput"
-                    placeholder="Search by student name..."
-                    class="search-input w-full p-4 rounded-lg border-0 focus:ring-2 focus:ring-indigo-500 text-lg shadow-md"
+                type="text"
+                id="searchInput"
+                placeholder="Search by student name..."
+                class="search-input w-full p-4 rounded-lg border-0 focus:ring-2 focus:ring-indigo-500 text-lg shadow-md"
             >
             <div class="absolute right-3 top-3">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -283,130 +216,7 @@
 </div>
 
 <script>
-    // Student data (embedded JSON)
-    const students = [
-        {"sl_no":1,"name":"Amit Kumar","class_time":"08:00","st_tm":"S.T","typing_speed":"49","wpr_percent":"98%","typing_marks":30,"written_marks":50,"total_marks":80,"rank":1},
-        {"sl_no":2,"name":"Ragini Kumari","class_time":"09:00","st_tm":"S.T","typing_speed":"30","wpr_percent":"93%","typing_marks":30,"written_marks":49,"total_marks":79,"rank":2},
-        {"sl_no":3,"name":"Anshu Kumari","class_time":"10:00","st_tm":"S.T","typing_speed":"26","wpr_percent":"100%","typing_marks":26,"written_marks":48,"total_marks":74,"rank":3},
-        {"sl_no":4,"name":"Aditya Kumar","class_time":"08:00","st_tm":"S.T","typing_speed":"29","wpr_percent":"100%","typing_marks":29,"written_marks":44,"total_marks":73,"rank":4},
-        {"sl_no":5,"name":"Aayush Kr. Shrivastav","class_time":"11:00","st_tm":"S.T","typing_speed":"26","wpr_percent":"100%","typing_marks":26,"written_marks":45,"total_marks":71,"rank":5},
-        {"sl_no":6,"name":"Priyanshi Kumari","class_time":"09:00","st_tm":"S.T","typing_speed":"24","wpr_percent":"96%","typing_marks":24,"written_marks":46,"total_marks":70,"rank":7},
-        {"sl_no":7,"name":"Lucky Kumari","class_time":"10:00","st_tm":"S.T","typing_speed":"30","wpr_percent":"81%","typing_marks":30,"written_marks":40,"total_marks":70,"rank":6},
-        {"sl_no":8,"name":"Shifa","class_time":"01:00","st_tm":"S.T","typing_speed":"21","wpr_percent":"95%","typing_marks":21,"written_marks":47,"total_marks":68,"rank":8},
-        {"sl_no":9,"name":"Nidhi Kumari","class_time":"10:00","st_tm":"S.T","typing_speed":"18","wpr_percent":"90%","typing_marks":18,"written_marks":49,"total_marks":67,"rank":9},
-        {"sl_no":10,"name":"Ritik Kumar","class_time":"12:00","st_tm":"T.M","typing_speed":"23","wpr_percent":"82%","typing_marks":23,"written_marks":44,"total_marks":67,"rank":10},
-        {"sl_no":11,"name":"Priti Kumari","class_time":"07:00","st_tm":"S.T","typing_speed":"18","wpr_percent":"94%","typing_marks":18,"written_marks":48,"total_marks":66,"rank":11},
-        {"sl_no":12,"name":"Sanket Kumar","class_time":"11:00","st_tm":"S.T","typing_speed":"18","wpr_percent":"85%","typing_marks":18,"written_marks":48,"total_marks":66,"rank":12},
-        {"sl_no":13,"name":"Priya Kumari","class_time":"01:00","st_tm":"S.T","typing_speed":"21","wpr_percent":"95%","typing_marks":21,"written_marks":45,"total_marks":66,"rank":13},
-        {"sl_no":14,"name":"Satyam Kumar","class_time":"08:00","st_tm":"S.T","typing_speed":"22","wpr_percent":"84%","typing_marks":22,"written_marks":44,"total_marks":66,"rank":14},
-        {"sl_no":15,"name":"Uday Kumar","class_time":"07:00","st_tm":"S.T","typing_speed":"26","wpr_percent":"96%","typing_marks":26,"written_marks":40,"total_marks":66,"rank":15},
-        {"sl_no":16,"name":"Sneha Kumari","class_time":"10:00","st_tm":"S.T","typing_speed":"17","wpr_percent":"94%","typing_marks":17,"written_marks":48,"total_marks":65,"rank":16},
-        {"sl_no":17,"name":"Sajiya","class_time":"01:00","st_tm":"S.T","typing_speed":"19","wpr_percent":"95%","typing_marks":19,"written_marks":46,"total_marks":65,"rank":17},
-        {"sl_no":18,"name":"Gopi Kumar","class_time":"08:00","st_tm":"S.T","typing_speed":"20","wpr_percent":"95%","typing_marks":20,"written_marks":45,"total_marks":65,"rank":18},
-        {"sl_no":19,"name":"Farman Ansari","class_time":"10:00","st_tm":"S.T","typing_speed":"19","wpr_percent":"95%","typing_marks":19,"written_marks":45,"total_marks":64,"rank":19},
-        {"sl_no":20,"name":"Prinsh Kumar","class_time":"07:00","st_tm":"S.T","typing_speed":"23","wpr_percent":"82%","typing_marks":23,"written_marks":41,"total_marks":64,"rank":20},
-        {"sl_no":21,"name":"Manoj Kumar","class_time":"07:00","st_tm":"S.T","typing_speed":"30","wpr_percent":"93%","typing_marks":30,"written_marks":34,"total_marks":64,"rank":21},
-        {"sl_no":22,"name":"Punita Kumari","class_time":"07:00","st_tm":"S.T","typing_speed":"18","wpr_percent":"94%","typing_marks":18,"written_marks":45,"total_marks":63,"rank":22},
-        {"sl_no":23,"name":"Gracy Kumari","class_time":"08:00","st_tm":"S.T","typing_speed":"20","wpr_percent":"86%","typing_marks":20,"written_marks":43,"total_marks":63,"rank":23},
-        {"sl_no":24,"name":"Bipin Urnaw","class_time":"01:00","st_tm":"S.T","typing_speed":"20","wpr_percent":"100%","typing_marks":20,"written_marks":43,"total_marks":63,"rank":24},
-        {"sl_no":25,"name":"Anita Kumari","class_time":"01:00","st_tm":"S.T","typing_speed":"20","wpr_percent":"86%","typing_marks":20,"written_marks":43,"total_marks":63,"rank":25},
-        {"sl_no":26,"name":"Khushi Kumari","class_time":"09:00","st_tm":"S.T","typing_speed":"17","wpr_percent":"88%","typing_marks":17,"written_marks":45,"total_marks":62,"rank":26},
-        {"sl_no":27,"name":"Goldi Kumari","class_time":"09:00","st_tm":"S.T","typing_speed":"17","wpr_percent":"85%","typing_marks":17,"written_marks":44,"total_marks":61,"rank":27},
-        {"sl_no":28,"name":"Akash Kumar","class_time":"12:00","st_tm":"T.M","typing_speed":"19","wpr_percent":"95%","typing_marks":19,"written_marks":42,"total_marks":61,"rank":28},
-        {"sl_no":29,"name":"Rajshree","class_time":"08:00","st_tm":"S.T","typing_speed":"10","wpr_percent":"76%","typing_marks":10,"written_marks":50,"total_marks":60,"rank":29},
-        {"sl_no":30,"name":"Archana Kumari","class_time":"10:00","st_tm":"S.T","typing_speed":"12","wpr_percent":"85%","typing_marks":12,"written_marks":48,"total_marks":60,"rank":30},
-        {"sl_no":31,"name":"Harshita Kumari","class_time":"11:00","st_tm":"S.T","typing_speed":"15","wpr_percent":"93%","typing_marks":15,"written_marks":45,"total_marks":60,"rank":31},
-        {"sl_no":32,"name":"Kishan Kumar","class_time":"01:00","st_tm":"S.T","typing_speed":"16","wpr_percent":"100%","typing_marks":16,"written_marks":44,"total_marks":60,"rank":32},
-        {"sl_no":33,"name":"Nisha Kumari","class_time":"10:00","st_tm":"S.T","typing_speed":"10","wpr_percent":"71%","typing_marks":10,"written_marks":49,"total_marks":59,"rank":33},
-        {"sl_no":34,"name":"Manshi Kumari","class_time":"09:00","st_tm":"S.T","typing_speed":"13","wpr_percent":"92%","typing_marks":13,"written_marks":46,"total_marks":59,"rank":34},
-        {"sl_no":35,"name":"Mahil Kumar","class_time":"08:00","st_tm":"S.T","typing_speed":"15","wpr_percent":"93%","typing_marks":15,"written_marks":44,"total_marks":59,"rank":35},
-        {"sl_no":36,"name":"Mukesh Kumar","class_time":"12:00","st_tm":"T.M","typing_speed":"15","wpr_percent":"85%","typing_marks":15,"written_marks":44,"total_marks":59,"rank":36},
-        {"sl_no":37,"name":"Saloni Kumari","class_time":"11:00","st_tm":"S.T","typing_speed":"17","wpr_percent":"94%","typing_marks":17,"written_marks":42,"total_marks":59,"rank":37},
-        {"sl_no":38,"name":"Shreya Kumari","class_time":"11:00","st_tm":"S.T","typing_speed":"18","wpr_percent":"100%","typing_marks":18,"written_marks":41,"total_marks":59,"rank":38},
-        {"sl_no":39,"name":"Sumit Kr. Chaurasiya","class_time":"08:00","st_tm":"S.T","typing_speed":"19","wpr_percent":"82%","typing_marks":19,"written_marks":40,"total_marks":59,"rank":39},
-        {"sl_no":40,"name":"Shreyas","class_time":"01:00","st_tm":"S.T","typing_speed":"21","wpr_percent":"95%","typing_marks":21,"written_marks":38,"total_marks":59,"rank":40},
-        {"sl_no":41,"name":"Priya Kumari","class_time":"07:00","st_tm":"S.T","typing_speed":"10","wpr_percent":"90%","typing_marks":10,"written_marks":47,"total_marks":57,"rank":41},
-        {"sl_no":42,"name":"Sanju Kumari","class_time":"11:00","st_tm":"S.T","typing_speed":"18","wpr_percent":"94%","typing_marks":18,"written_marks":39,"total_marks":57,"rank":42},
-        {"sl_no":43,"name":"Priti Kumari","class_time":"09:00","st_tm":"S.T","typing_speed":"11","wpr_percent":"84%","typing_marks":11,"written_marks":45,"total_marks":56,"rank":43},
-        {"sl_no":44,"name":"Sma Kumari","class_time":"01:00","st_tm":"S.T","typing_speed":"16","wpr_percent":"94%","typing_marks":16,"written_marks":40,"total_marks":56,"rank":44},
-        {"sl_no":45,"name":"Nasrin","class_time":"01:00","st_tm":"S.T","typing_speed":"19","wpr_percent":"90%","typing_marks":19,"written_marks":37,"total_marks":56,"rank":45},
-        {"sl_no":46,"name":"Krishn Mohan","class_time":"08:00","st_tm":"S.T","typing_speed":"8","wpr_percent":"72%","typing_marks":8,"written_marks":47,"total_marks":55,"rank":46},
-        {"sl_no":47,"name":"Keshav Kr. Barnwal","class_time":"09:00","st_tm":"S.T","typing_speed":"13","wpr_percent":"86%","typing_marks":13,"written_marks":42,"total_marks":55,"rank":47},
-        {"sl_no":48,"name":"Niranjan Kr. Patel","class_time":"07:00","st_tm":"S.T","typing_speed":"19","wpr_percent":"86%","typing_marks":19,"written_marks":35,"total_marks":54,"rank":48},
-        {"sl_no":49,"name":"Bijendra Kumar","class_time":"12:00","st_tm":"T.M","typing_speed":"20","wpr_percent":"86%","typing_marks":20,"written_marks":34,"total_marks":54,"rank":49},
-        {"sl_no":50,"name":"Arpita Kumari","class_time":"11:00","st_tm":"S.T","typing_speed":"13","wpr_percent":"100%","typing_marks":13,"written_marks":40,"total_marks":53,"rank":50},
-        {"sl_no":51,"name":"Anushka Kumari","class_time":"09:00","st_tm":"S.T","typing_speed":"14","wpr_percent":"82%","typing_marks":14,"written_marks":39,"total_marks":53,"rank":51},
-        {"sl_no":52,"name":"Dilshad Alam","class_time":"12:00","st_tm":"T.M","typing_speed":"19","wpr_percent":"82%","typing_marks":19,"written_marks":34,"total_marks":53,"rank":52},
-        {"sl_no":53,"name":"Alok Kumar","class_time":"07:00","st_tm":"T.M","typing_speed":"20","wpr_percent":"82%","typing_marks":20,"written_marks":33,"total_marks":53,"rank":53},
-        {"sl_no":54,"name":"Rishi Kumar","class_time":"08:00","st_tm":"S.T","typing_speed":"13","wpr_percent":"100%","typing_marks":13,"written_marks":37,"total_marks":50,"rank":54},
-        {"sl_no":55,"name":"Anshu Kr. Shrivastav","class_time":"07:00","st_tm":"T.M","typing_speed":"14","wpr_percent":"76%","typing_marks":14,"written_marks":36,"total_marks":50,"rank":55},
-        {"sl_no":56,"name":"Anamika Kumari","class_time":"09:00","st_tm":"S.T","typing_speed":"19","wpr_percent":"95%","typing_marks":19,"written_marks":31,"total_marks":50,"rank":56},
-        {"sl_no":57,"name":"Sandeep Kr. Mishra","class_time":"07:00","st_tm":"S.T","typing_speed":"10","wpr_percent":"90%","typing_marks":10,"written_marks":39,"total_marks":49,"rank":57},
-        {"sl_no":58,"name":"Varun Kumar","class_time":"08:00","st_tm":"S.T","typing_speed":"16","wpr_percent":"94%","typing_marks":16,"written_marks":33,"total_marks":49,"rank":58},
-        {"sl_no":59,"name":"Aryan Kr. Tiwari","class_time":"11:00","st_tm":"S.T","typing_speed":"16","wpr_percent":"100%","typing_marks":16,"written_marks":33,"total_marks":49,"rank":59},
-        {"sl_no":60,"name":"Shanvi Kumari","class_time":"11:00","st_tm":"S.T","typing_speed":"12","wpr_percent":"100%","typing_marks":12,"written_marks":35,"total_marks":47,"rank":60},
-        {"sl_no":61,"name":"Saurabh Kumar","class_time":"01:00","st_tm":"S.T","typing_speed":"12","wpr_percent":"100%","typing_marks":12,"written_marks":35,"total_marks":47,"rank":61},
-        {"sl_no":62,"name":"Sammer Ansari","class_time":"09:00","st_tm":"S.T","typing_speed":"18","wpr_percent":"94%","typing_marks":18,"written_marks":29,"total_marks":47,"rank":62},
-        {"sl_no":63,"name":"Samim Alam","class_time":"01:00","st_tm":"S.T","typing_speed":"18","wpr_percent":"90%","typing_marks":18,"written_marks":29,"total_marks":47,"rank":63},
-        {"sl_no":64,"name":"Israr","class_time":"08:00","st_tm":"T.M","typing_speed":"8","wpr_percent":"78%","typing_marks":8,"written_marks":38,"total_marks":46,"rank":64},
-        {"sl_no":65,"name":"Aayush Kumar","class_time":"07:00","st_tm":"S.T","typing_speed":"9","wpr_percent":"90%","typing_marks":9,"written_marks":37,"total_marks":46,"rank":65},
-        {"sl_no":66,"name":"Arpita Kumari","class_time":"09:00","st_tm":"S.T","typing_speed":"12","wpr_percent":"92%","typing_marks":12,"written_marks":34,"total_marks":46,"rank":66},
-        {"sl_no":67,"name":"Priya Kumari","class_time":"11:00","st_tm":"S.T","typing_speed":"16","wpr_percent":"94%","typing_marks":16,"written_marks":30,"total_marks":46,"rank":67},
-        {"sl_no":68,"name":"Najra Khatoon","class_time":"10:00","st_tm":"S.T","typing_speed":"10","wpr_percent":"83%","typing_marks":10,"written_marks":35,"total_marks":45,"rank":68},
-        {"sl_no":69,"name":"Firoj Alam","class_time":"12:00","st_tm":"T.M","typing_speed":"19","wpr_percent":"90%","typing_marks":19,"written_marks":26,"total_marks":45,"rank":69},
-        {"sl_no":70,"name":"Deepak Kumari","class_time":"10:00","st_tm":"T.M","typing_speed":"23","wpr_percent":"94%","typing_marks":23,"written_marks":22,"total_marks":45,"rank":70},
-        {"sl_no":71,"name":"Satyam Kumar","class_time":"12:00","st_tm":"T.M","typing_speed":"15","wpr_percent":"88%","typing_marks":15,"written_marks":29,"total_marks":44,"rank":71},
-        {"sl_no":72,"name":"Imran Ansari","class_time":"12:00","st_tm":"T.M","typing_speed":"14","wpr_percent":"92%","typing_marks":14,"written_marks":29,"total_marks":43,"rank":72},
-        {"sl_no":73,"name":"Chandani Kumari","class_time":"10:00","st_tm":"S.T","typing_speed":"17","wpr_percent":"93%","typing_marks":17,"written_marks":26,"total_marks":43,"rank":73},
-        {"sl_no":74,"name":"Riya Kumari","class_time":"08:00","st_tm":"S.T","typing_speed":"9","wpr_percent":"81%","typing_marks":9,"written_marks":33,"total_marks":42,"rank":74},
-        {"sl_no":75,"name":"Rupesh Kumar","class_time":"07:00","st_tm":"S.T","typing_speed":"14","wpr_percent":"82%","typing_marks":14,"written_marks":28,"total_marks":42,"rank":75},
-        {"sl_no":76,"name":"Priti Kumari","class_time":"12:00","st_tm":"T.M","typing_speed":"16","wpr_percent":"90%","typing_marks":16,"written_marks":26,"total_marks":42,"rank":76},
-        {"sl_no":77,"name":"Satya Bhama","class_time":"01:00","st_tm":"T.M","typing_speed":"20","wpr_percent":"93%","typing_marks":20,"written_marks":22,"total_marks":42,"rank":77},
-        {"sl_no":78,"name":"Suman Kumar","class_time":"09:00","st_tm":"S.T","typing_speed":"22","wpr_percent":"91%","typing_marks":22,"written_marks":20,"total_marks":42,"rank":78},
-        {"sl_no":79,"name":"Nishant Kumar","class_time":"08:00","st_tm":"S.T","typing_speed":"13","wpr_percent":"81%","typing_marks":13,"written_marks":28,"total_marks":41,"rank":79},
-        {"sl_no":80,"name":"Muskan Khatoon","class_time":"11:00","st_tm":"S.T","typing_speed":"13","wpr_percent":"92%","typing_marks":13,"written_marks":28,"total_marks":41,"rank":80},
-        {"sl_no":81,"name":"Ziya Naaz","class_time":"10:00","st_tm":"S.T","typing_speed":"18","wpr_percent":"94%","typing_marks":18,"written_marks":22,"total_marks":40,"rank":81},
-        {"sl_no":82,"name":"Nasir Ali","class_time":"11:00","st_tm":"S.T","typing_speed":"18","wpr_percent":"94%","typing_marks":18,"written_marks":22,"total_marks":40,"rank":82},
-        {"sl_no":83,"name":"Sakshi Kumar","class_time":"09:00","st_tm":"S.T","typing_speed":"14","wpr_percent":"100%","typing_marks":14,"written_marks":25,"total_marks":39,"rank":83},
-        {"sl_no":84,"name":"Akhtri Khatoon","class_time":"10:00","st_tm":"S.T","typing_speed":"16","wpr_percent":"94%","typing_marks":16,"written_marks":23,"total_marks":39,"rank":84},
-        {"sl_no":85,"name":"Abhya Kumari","class_time":"12:00","st_tm":"S.T","typing_speed":"8","wpr_percent":"88%","typing_marks":8,"written_marks":30,"total_marks":38,"rank":85},
-        {"sl_no":86,"name":"Abhishek Kumar","class_time":"07:00","st_tm":"S.T","typing_speed":"12","wpr_percent":"92%","typing_marks":12,"written_marks":25,"total_marks":37,"rank":86},
-        {"sl_no":87,"name":"Anjani Kumari","class_time":"12:00","st_tm":"S.T","typing_speed":"10","wpr_percent":"90%","typing_marks":10,"written_marks":26,"total_marks":36,"rank":87},
-        {"sl_no":88,"name":"Anamika Kumari","class_time":"12:00","st_tm":"T.M","typing_speed":"11","wpr_percent":"92%","typing_marks":11,"written_marks":25,"total_marks":36,"rank":88},
-        {"sl_no":89,"name":"Sumit Kumar","class_time":"07:00","st_tm":"S.T","typing_speed":"8","wpr_percent":"80%","typing_marks":8,"written_marks":27,"total_marks":35,"rank":89},
-        {"sl_no":90,"name":"Aashif Khan","class_time":"07:00","st_tm":"S.T","typing_speed":"8","wpr_percent":"82%","typing_marks":8,"written_marks":27,"total_marks":35,"rank":90},
-        {"sl_no":91,"name":"Nishi Kumari","class_time":"11:00","st_tm":"S.T","typing_speed":"9","wpr_percent":"100%","typing_marks":9,"written_marks":26,"total_marks":35,"rank":91},
-        {"sl_no":92,"name":"Shahid Ali","class_time":"11:00","st_tm":"S.T","typing_speed":"8","wpr_percent":"66%","typing_marks":8,"written_marks":26,"total_marks":34,"rank":92},
-        {"sl_no":93,"name":"Akash Kumar Sharma","class_time":"09:00","st_tm":"S.T","typing_speed":"10","wpr_percent":"62%","typing_marks":10,"written_marks":24,"total_marks":34,"rank":93},
-        {"sl_no":94,"name":"Aditya Kumar","class_time":"01:00","st_tm":"S.T","typing_speed":"17","wpr_percent":"94%","typing_marks":17,"written_marks":16,"total_marks":33,"rank":94},
-        {"sl_no":95,"name":"Husna Khatoon","class_time":"08:00","st_tm":"S.T","typing_speed":"12","wpr_percent":"86%","typing_marks":12,"written_marks":20,"total_marks":32,"rank":95},
-        {"sl_no":96,"name":"Anmol Kumar","class_time":"01:00","st_tm":"S.T","typing_speed":"9","wpr_percent":"100%","typing_marks":9,"written_marks":22,"total_marks":31,"rank":96},
-        {"sl_no":97,"name":"Kavita Kumari","class_time":"12:00","st_tm":"T.M","typing_speed":"5","wpr_percent":"50%","typing_marks":5,"written_marks":25,"total_marks":30,"rank":97},
-        {"sl_no":98,"name":"Rajkumar","class_time":"01:00","st_tm":"S.T","typing_speed":"9","wpr_percent":"90%","typing_marks":9,"written_marks":21,"total_marks":30,"rank":98},
-        {"sl_no":99,"name":"Jawed","class_time":"10:00","st_tm":"S.T","typing_speed":"0","wpr_percent":"0%","typing_marks":0,"written_marks":29,"total_marks":29,"rank":99},
-        {"sl_no":100,"name":"Shilpi Kumari","class_time":"10:00","st_tm":"S.T","typing_speed":"10","wpr_percent":"100%","typing_marks":10,"written_marks":19,"total_marks":29,"rank":100},
-        {"sl_no":101,"name":"Shristi Kumari","class_time":"11:00","st_tm":"S.T","typing_speed":"8","wpr_percent":"88%","typing_marks":8,"written_marks":18,"total_marks":26,"rank":101},
-        {"sl_no":102,"name":"Akash","class_time":"07:00","st_tm":"S.T","typing_speed":"0","wpr_percent":"0%","typing_marks":0,"written_marks":25,"total_marks":25,"rank":102},
-        {"sl_no":103,"name":"Kuldeep Kumar","class_time":"10:00","st_tm":"S.T","typing_speed":"14","wpr_percent":"100%","typing_marks":14,"written_marks":11,"total_marks":25,"rank":103},
-        {"sl_no":104,"name":"Alisha Khatoon","class_time":"08:00","st_tm":"S.T","typing_speed":"13","wpr_percent":"80%","typing_marks":13,"written_marks":10,"total_marks":23,"rank":104},
-        {"sl_no":105,"name":"Bikesh Kumar","class_time":"10:00","st_tm":"S.T","typing_speed":"22","wpr_percent":"95%","typing_marks":22,"written_marks":0,"total_marks":22,"rank":105},
-        {"sl_no":106,"name":"Niraj","class_time":"12:00","st_tm":"S.T","typing_speed":"0","wpr_percent":"0%","typing_marks":0,"written_marks":21,"total_marks":21,"rank":106},
-        {"sl_no":107,"name":"Kajal Kumari","class_time":"11:00","st_tm":"T.M","typing_speed":"7","wpr_percent":"66%","typing_marks":7,"written_marks":12,"total_marks":19,"rank":107},
-        {"sl_no":108,"name":"Kamran","class_time":"07:00","st_tm":"S.T","typing_speed":"7","wpr_percent":"80%","typing_marks":7,"written_marks":11,"total_marks":18,"rank":108},
-        {"sl_no":109,"name":"Salim Ali","class_time":"08:00","st_tm":"T.M","typing_speed":"8","wpr_percent":"78%","typing_marks":8,"written_marks":9,"total_marks":17,"rank":109},
-        {"sl_no":110,"name":"Aakansh Kumar","class_time":"07:00","st_tm":"S.T","typing_speed":"17","wpr_percent":"89%","typing_marks":17,"written_marks":0,"total_marks":17,"rank":110},
-        {"sl_no":111,"name":"Aditi Kumari (Demo)","class_time":"09:00","st_tm":"T.M","typing_speed":"14","wpr_percent":"92%","typing_marks":14,"written_marks":0,"total_marks":14,"rank":111},
-        {"sl_no":112,"name":"Talim","class_time":"07:00","st_tm":"S.T","typing_speed":"0","wpr_percent":"0%","typing_marks":0,"written_marks":13,"total_marks":13,"rank":112},
-        {"sl_no":113,"name":"Aayush Kumar (Demo)","class_time":"01:00","st_tm":"T.M","typing_speed":"13","wpr_percent":"76%","typing_marks":13,"written_marks":0,"total_marks":13,"rank":113},
-        {"sl_no":114,"name":"Riya Kumari","class_time":"09:00","st_tm":"S.T","typing_speed":"11","wpr_percent":"91%","typing_marks":11,"written_marks":0,"total_marks":11,"rank":114},
-        {"sl_no":115,"name":"Niraj Kumar","class_time":"10:00","st_tm":"S.T","typing_speed":"9","wpr_percent":"81%","typing_marks":9,"written_marks":0,"total_marks":9,"rank":115},
-        {"sl_no":116,"name":"Rinku Devi","class_time":"01:00","st_tm":"S.T","typing_speed":"9","wpr_percent":"90%","typing_marks":9,"written_marks":0,"total_marks":9,"rank":116},
-        {"sl_no":117,"name":"Rajan Kumar","class_time":"10:00","st_tm":"S.T","typing_speed":"8","wpr_percent":"100%","typing_marks":8,"written_marks":0,"total_marks":8,"rank":117},
-        {"sl_no":118,"name":"Abdullah Khan","class_time":"12:00","st_tm":"T.M","typing_speed":"8","wpr_percent":"84%","typing_marks":8,"written_marks":0,"total_marks":8,"rank":118},
-        {"sl_no":119,"name":"Jaya Kumari (Demo)","class_time":"09:00","st_tm":"T.M","typing_speed":"4","wpr_percent":"33%","typing_marks":4,"written_marks":0,"total_marks":4,"rank":119}
-    ];
-
-    // Function to populate the table
+    // Function to populate the main results table
     function populateTable(data) {
         const tbody = document.getElementById('resultsBody');
         tbody.innerHTML = ''; // Clear existing rows
@@ -431,6 +241,54 @@
         });
     }
 
+    // Function to populate top student tables
+    function populateTopTables(data) {
+        // Overall Top-10
+        const overallTopBody = document.getElementById('overallTopBody');
+        overallTopBody.innerHTML = '';
+        const top10 = data.slice(0, 10);
+        top10.forEach(student => {
+            const row = document.createElement('tr');
+            row.className = `${student.rank <= 3 ? 'rank-' + student.rank : 'top-student'}`;
+            row.innerHTML = `
+                <td class="p-2">${student.rank}</td>
+                <td class="p-2">${student.name}</td>
+                <td class="p-2">${student.total_marks}</td>
+            `;
+            overallTopBody.appendChild(row);
+        });
+
+        // Typing Top-3
+        const typingTopBody = document.getElementById('typingTopBody');
+        typingTopBody.innerHTML = '';
+        const topTyping = data.sort((a, b) => parseInt(b.typing_speed) - parseInt(a.typing_speed)).slice(0, 3);
+        topTyping.forEach((student, index) => {
+            const row = document.createElement('tr');
+            row.className = `rank-${index + 1}`;
+            row.innerHTML = `
+                <td class="p-2">${index + 1}</td>
+                <td class="p-2">${student.name}</td>
+                <td class="p-2">${student.typing_speed}</td>
+            `;
+            typingTopBody.appendChild(row);
+        });
+
+        // Written Top-3
+        const writtenTopBody = document.getElementById('writtenTopBody');
+        writtenTopBody.innerHTML = '';
+        const topWritten = data.sort((a, b) => parseInt(b.written_marks) - parseInt(a.written_marks)).slice(0, 3);
+        topWritten.forEach((student, index) => {
+            const row = document.createElement('tr');
+            row.className = `rank-${index + 1}`;
+            row.innerHTML = `
+                <td class="p-2">${index + 1}</td>
+                <td class="p-2">${student.name}</td>
+                <td class="p-2">${student.written_marks}</td>
+            `;
+            writtenTopBody.appendChild(row);
+        });
+    }
+
     // Function to highlight search terms
     function highlightText(text, searchTerm) {
         if (!searchTerm) return text;
@@ -439,9 +297,9 @@
     }
 
     // Function to filter table based on search input
-    function filterTable() {
+    function filterTable(data) {
         const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-        const filteredData = students.filter(student =>
+        const filteredData = data.filter(student =>
             student.name.toLowerCase().includes(searchTerm) ||
             student.class_time.toLowerCase().includes(searchTerm) ||
             student.st_tm.toLowerCase().includes(searchTerm) ||
@@ -456,12 +314,32 @@
         populateTable(filteredData);
     }
 
-    // Initial table population and event listeners
-    document.addEventListener('DOMContentLoaded', () => {
-        populateTable(students);
+    // Function to load JSON data and update UI
+    async function loadResults(month) {
+        try {
+            const response = await fetch(month === 'july' ? 'result_july.json' : 'result_august.json');
+            if (!response.ok) throw new Error('Failed to fetch data');
+            const data = await response.json();
+            document.getElementById('resultTitle').textContent = `Test Results (${month === 'july' ? 'July' : 'August'} 2025)`;
+            populateTable(data);
+            populateTopTables(data);
+            document.getElementById('searchInput').value = ''; // Clear search input
+            document.getElementById('searchInput').addEventListener('input', () => filterTable(data));
+        } catch (error) {
+            console.error('Error loading results:', error);
+            document.getElementById('resultsBody').innerHTML = '<tr><td colspan="9" class="p-3 text-center text-red-500">Error loading results. Please try again later.</td></tr>';
+        }
+    }
 
-        // Add search input event listener
-        document.getElementById('searchInput').addEventListener('input', filterTable);
+    // Initial setup and event listeners
+    document.addEventListener('DOMContentLoaded', () => {
+        // Load July results by default
+        loadResults('july');
+
+        // Month selection event listener
+        document.getElementById('monthSelect').addEventListener('change', (e) => {
+            loadResults(e.target.value);
+        });
 
         // Add animation to cards on scroll
         const observer = new IntersectionObserver((entries) => {
