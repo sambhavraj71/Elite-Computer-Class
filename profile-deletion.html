@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Account & Data Deletion Request - Elite Computer Classes</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            /* Blue to Dark Blue gradient for a professional educational look */
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            margin: 0;
+            padding: 0;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            color: #1e3c72;
+            padding: 15px 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            border-bottom: 3px solid #ffcc00; /* Gold accent */
+        }
+        header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        header p {
+            margin: 5px 0 0 0;
+            opacity: 0.8;
+            font-size: 0.9rem;
+            color: #333;
+        }
+        .container {
+            max-width: 100%;
+            margin: 0;
+            background: #fff;
+            padding: 20px;
+            min-height: calc(100vh - 120px);
+        }
+        h2 {
+            margin: 0 0 15px 0;
+            color: #1e3c72;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        .note {
+            background: #f0f4f8;
+            padding: 15px;
+            border-left: 4px solid #1e3c72;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 0.95rem;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #e1e8ed;
+            border-radius: 12px;
+            font-size: 16px;
+            background: #fafbfc;
+            transition: all 0.3s ease;
+            -webkit-appearance: none;
+        }
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #1e3c72;
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(30, 60, 114, 0.1);
+        }
+        select {
+            cursor: pointer;
+            background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23666" d="M2 0L0 2h4zm0 5L0 3h4z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 12px;
+            padding-right: 40px;
+        }
+        button {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #fff;
+            border: none;
+            padding: 18px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30, 60, 114, 0.4);
+        }
+        #successMessage {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            color: #155724;
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 20px;
+            text-align: center;
+            border: 2px solid #b8dabd;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: rgba(255,255,255,0.8);
+            font-size: 0.85rem;
+            background: rgba(0,0,0,0.2);
+        }
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.2rem; }
+            .container { padding: 15px; }
+        }
+        /* Dark mode */
+        @media (prefers-color-scheme: dark) {
+            .container { background: #1a1a1a; color: #fff; }
+            input, textarea, select { background: #2d2d2d; border-color: #404040; color: #fff; }
+            label { color: #eee; }
+            .note { background: #2d2d2d; color: #ccc; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Elite Computer Classes</h1>
+    <p>Account & Data Deletion Portal</p>
+</header>
+
+<div class="container">
+    <h2>Submit a request to delete your account or data</h2>
+    <p>
+        If you would like to request deletion of your <strong>Elite Computer Classes</strong> account and/or associated data, please complete the form below. 
+        Once submitted, our team will verify your identity and process the deletion within <strong>72 hours</strong>.
+    </p>
+
+    <div class="note">
+        <strong>What data will be deleted?</strong><br>
+        • Personal Profile (name, email, phone) <br>
+        • Academic Records & Certificate History <br>
+        • Course progress and student-generated content <br><br>
+        <strong>What may be retained?</strong><br>
+        Fee receipts and enrollment records may be retained for legal and bookkeeping purposes for up to <strong>90 days</strong>.
+    </div>
+
+    <h2>Deletion Request Form</h2>
+    <form id="deletionForm" method="POST">
+        <label>Your Full Name *</label>
+        <input type="text" name="name" required placeholder="Enter your name" />
+
+        <label>Registered Mobile Number *</label>
+        <input type="tel" name="phone" required pattern="[0-9]{10}" placeholder="10-digit mobile number" />
+
+        <label>Registered Email Address *</label>
+        <input type="email" name="email" required placeholder="example@email.com" />
+
+        <label>Request Type *</label>
+        <select name="request_type" required>
+            <option value="">Select request type</option>
+            <option value="Delete Account Only">Delete Account Only</option>
+            <option value="Delete Data Only">Delete Data Only</option>
+            <option value="Delete Account & Data Both">Delete Account & Data Both</option>
+        </select>
+
+        <label>Student ID / User ID (if available)</label>
+        <input type="text" name="user_id" placeholder="Your Elite Student ID" />
+
+        <label>Reason for Deletion (optional)</label>
+        <textarea name="message" rows="4" placeholder="Please let us know why you are leaving..."></textarea>
+
+        <button type="submit">Submit Deletion Request</button>
+    </form>
+
+    <div id="successMessage" style="display: none;">
+        <h3>✅ Request Submitted!</h3>
+        <p>Your request for <strong>Elite Computer Classes</strong> data deletion has been received. We will notify you via email once processed.</p>
+        <p><strong>Processing Time:</strong> 24-72 hours</p>
+    </div>
+
+    <div class="note">
+        <strong>Help:</strong> If you face any issues with the form, please contact our support desk at: <br>
+        <strong>hariomsoni0818@gmail.com</strong>
+    </div>
+</div>
+
+<footer>
+    &copy; 2025 Elite Computer Classes. All rights reserved.
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+// EmailJS Configuration
+(function(){
+    emailjs.init("I_JxxmxMbivs-6xAO");
+})();
+
+document.getElementById('deletionForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData);
+    
+    const templateParams = {
+        name: data.name,
+        phone: data.phone,
+        email: data.email,
+        request_type: data.request_type,
+        user_id: data.user_id || 'Not provided',
+        message: data.message || 'No additional comments',
+        submission_date: new Date().toLocaleString(),
+        title: `Elite Computer Classes - ${data.request_type}`
+    };
+
+    // Send email to Admin/User
+    emailjs.send('service_5au06ul', 'template_7e2up59', templateParams)
+    .then(function(response) {
+        console.log('Success:', response.status);
+        
+        // Admin copy simulation
+        const adminNotification = {
+            ...templateParams,
+            name: 'Admin Notification',
+            email: 'hariomsoni0818@gmail.com',
+            message: `Elite Computer Classes Deletion Request:\nUser: ${data.name}\nEmail: ${data.email}\nType: ${data.request_type}`
+        };
+        
+        emailjs.send('service_5au06ul', 'template_7e2up59', adminNotification);
+        showSuccessMessage();
+    })
+    .catch(function(error) {
+        console.log('Failed:', error);
+        fallbackToMailto(data);
+    });
+});
+
+function fallbackToMailto(data) {
+    const subject = encodeURIComponent('Elite Computer Classes - Account Deletion Request');
+    const body = encodeURIComponent(`Student Details:\nName: ${data.name}\nMobile: ${data.phone}\nEmail: ${data.email}\nRequest: ${data.request_type}\nID: ${data.user_id}\n\nPlease process this request.`);
+    window.location.href = `mailto:hariomsoni0818@gmail.com?subject=${subject}&body=${body}`;
+    showSuccessMessage();
+}
+
+function showSuccessMessage() {
+    document.getElementById('deletionForm').style.display = 'none';
+    document.getElementById('successMessage').style.display = 'block';
+    window.scrollTo(0, 0);
+}
+</script>
+
+</body>
+</html>
