@@ -53,24 +53,11 @@
             font-weight: 600;
         }
 
-        .rank-1 {
-            background: linear-gradient(135deg, #fef3c7 0%, #f59e0b 100%);
-        }
-
-        .rank-2 {
-            background: linear-gradient(135deg, #e5e7eb 0%, #9ca3af 100%);
-        }
-
-        .rank-3 {
-            background: linear-gradient(135deg, #fbcfe8 0%, #ec4899 100%);
-        }
+        .rank-1 { background: linear-gradient(135deg, #fef3c7 0%, #f59e0b 100%); }
+        .rank-2 { background: linear-gradient(135deg, #e5e7eb 0%, #9ca3af 100%); }
+        .rank-3 { background: linear-gradient(135deg, #fbcfe8 0%, #ec4899 100%); }
 
         @media (max-width: 768px) {
-            .responsive-table th, .responsive-table td {
-                padding: 0.5rem;
-                font-size: 0.875rem;
-            }
-
             .responsive-table th:nth-child(4),
             .responsive-table td:nth-child(4),
             .responsive-table th:nth-child(5),
@@ -81,91 +68,78 @@
             }
         }
 
-        .fade-in {
-            animation: fadeIn 0.5s ease-in;
-        }
-
+        .fade-in { animation: fadeIn 0.5s ease-in; }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .highlight {
-            background-color: #fef08a;
-            transition: background-color 0.3s ease;
-        }
+        .highlight { background-color: #fef08a; }
     </style>
 </head>
 <body class="text-gray-800 flex flex-col items-center py-8 px-4">
 <div class="container mx-auto max-w-6xl">
-    <!-- Header Section -->
     <div class="text-center mb-8 animate__animated animate__fadeIn">
-        <h1 class="text-4xl md:text-5xl font-bold text-white mb-2">Elite Computer Classes</h1>
+        <h1 class="text-4xl md:text-5xl font-bold text-white mb-2 text-shadow-lg">Elite Computer Classes</h1>
         <h2 id="resultTitle" class="text-2xl md:text-3xl font-semibold text-indigo-200">Test Results (2025)</h2>
     </div>
 
-    <!-- Month Selection -->
-    <div class="card p-6 mb-8 animate__animated animate__fadeInUp">
+    <div class="card p-6 mb-8">
         <div class="relative">
-            <select id="monthSelect" class="month-select w-full p-4 rounded-lg border-0 focus:ring-2 focus:ring-indigo-500 text-lg shadow-md">
+            <label for="monthSelect" class="block text-sm font-medium text-indigo-900 mb-2">Select Examination Month:</label>
+            <select id="monthSelect" class="month-select w-full p-4 rounded-lg border-0 focus:ring-2 focus:ring-indigo-500 text-lg shadow-md cursor-pointer">
                 <option value="july">July 2025</option>
-                <option value="august" selected>August 2025</option>
+                <option value="august">August 2025</option>
+                <option value="december" selected>December 2025</option>
             </select>
         </div>
     </div>
 
-    <!-- Image Section -->
-    <div class="card p-4 mb-8 animate__animated animate__fadeInUp">
+    <div class="card p-4 mb-8">
         <div class="flex flex-col md:flex-row items-center">
             <div class="w-full md:w-1/2 mb-4 md:mb-0 md:pr-4">
-                <h3 class="text-xl font-bold text-indigo-800 mb-2">OVERALL TOP-10 STUDENTS</h3>
+                <h3 class="text-xl font-bold text-indigo-800 mb-2 border-b-2 border-indigo-200 pb-1">OVERALL TOP-10 STUDENTS</h3>
                 <div class="overflow-x-auto">
                     <table id="overallTopTable" class="min-w-full bg-white rounded-lg overflow-hidden">
                         <thead class="bg-indigo-600 text-white">
-                        <tr>
-                            <th class="p-2 text-left">Rank</th>
-                            <th class="p-2 text-left">Name</th>
-                            <th class="p-2 text-left">Total</th>
-                        </tr>
+                            <tr>
+                                <th class="p-2 text-left">Rank</th>
+                                <th class="p-2 text-left">Name</th>
+                                <th class="p-2 text-left">Total</th>
+                            </tr>
                         </thead>
-                        <tbody id="overallTopBody">
-                        <!-- Populated by JavaScript -->
-                        </tbody>
+                        <tbody id="overallTopBody"></tbody>
                     </table>
                 </div>
             </div>
             <div class="w-full md:w-1/2">
                 <div class="mb-6">
-                    <h3 class="text-xl font-bold text-indigo-800 mb-2">TYPING TOP-3 STUDENTS</h3>
+                    <h3 class="text-xl font-bold text-indigo-800 mb-2 border-b-2 border-indigo-200 pb-1">TYPING TOP-3 STUDENTS</h3>
                     <div class="overflow-x-auto">
                         <table id="typingTopTable" class="min-w-full bg-white rounded-lg overflow-hidden">
                             <thead class="bg-indigo-600 text-white">
-                            <tr>
-                                <th class="p-2 text-left">Rank</th>
-                                <th class="p-2 text-left">Name</th>
-                                <th class="p-2 text-left">Speed</th>
-                            </tr>
+                                <tr>
+                                    <th class="p-2 text-left">Rank</th>
+                                    <th class="p-2 text-left">Name</th>
+                                    <th class="p-2 text-left">Value</th>
+                                </tr>
                             </thead>
-                            <tbody id="typingTopBody">
-                            <!-- Populated by JavaScript -->
-                            </tbody>
+                            <tbody id="typingTopBody"></tbody>
                         </table>
                     </div>
                 </div>
                 <div>
-                    <h3 class="text-xl font-bold text-indigo-800 mb-2">WRITTEN TOP-3 STUDENTS</h3>
+                    <h3 class="text-xl font-bold text-indigo-800 mb-2 border-b-2 border-indigo-200 pb-1">WRITTEN TOP-3 STUDENTS</h3>
                     <div class="overflow-x-auto">
                         <table id="writtenTopTable" class="min-w-full bg-white rounded-lg overflow-hidden">
                             <thead class="bg-indigo-600 text-white">
-                            <tr>
-                                <th class="p-2 text-left">Rank</th>
-                                <th class="p-2 text-left">Name</th>
-                                <th class="p-2 text-left">Marks</th>
-                            </tr>
+                                <tr>
+                                    <th class="p-2 text-left">Rank</th>
+                                    <th class="p-2 text-left">Name</th>
+                                    <th class="p-2 text-left">Marks</th>
+                                </tr>
                             </thead>
-                            <tbody id="writtenTopBody">
-                            <!-- Populated by JavaScript -->
-                            </tbody>
+                            <tbody id="writtenTopBody"></tbody>
                         </table>
                     </div>
                 </div>
@@ -173,16 +147,10 @@
         </div>
     </div>
 
-    <!-- Search Section -->
-    <div class="card p-6 mb-8 animate__animated animate__fadeInUp">
+    <div class="card p-6 mb-8">
         <div class="relative">
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="Search by student name..."
-                class="search-input w-full p-4 rounded-lg border-0 focus:ring-2 focus:ring-indigo-500 text-lg shadow-md"
-            >
-            <div class="absolute right-3 top-3">
+            <input type="text" id="searchInput" placeholder="Search by student name..." class="search-input w-full p-4 rounded-lg border-0 focus:ring-2 focus:ring-indigo-500 text-lg shadow-md">
+            <div class="absolute right-4 top-1/2 transform -translate-y-1/2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
@@ -190,170 +158,130 @@
         </div>
     </div>
 
-    <!-- Results Table -->
-    <div class="card p-4 animate__animated animate__fadeInUp">
+    <div class="card p-4">
         <div class="overflow-x-auto">
             <table id="resultsTable" class="responsive-table min-w-full">
                 <thead>
-                <tr class="bg-indigo-600 text-white">
-                    <th class="p-3 text-left">Rank</th>
-                    <th class="p-3 text-left">Student's Name</th>
-                    <th class="p-3 text-left">Class Time</th>
-                    <th class="p-3 text-left hidden md:table-cell">S.T/T.M</th>
-                    <th class="p-3 text-left hidden md:table-cell">Typing Speed</th>
-                    <th class="p-3 text-left hidden md:table-cell">WPR%</th>
-                    <th class="p-3 text-left">Typing Marks</th>
-                    <th class="p-3 text-left">Written Marks</th>
-                    <th class="p-3 text-left">Total Marks</th>
-                </tr>
+                    <tr class="bg-indigo-600 text-white">
+                        <th class="p-3 text-left">Rank</th>
+                        <th class="p-3 text-left">Student's Name</th>
+                        <th class="p-3 text-left">Class Time</th>
+                        <th class="p-3 text-left hidden md:table-cell">S.T/T.M</th>
+                        <th class="p-3 text-left hidden md:table-cell">Typing Spd</th>
+                        <th class="p-3 text-left hidden md:table-cell">WPR%</th>
+                        <th class="p-3 text-left">Type Marks</th>
+                        <th class="p-3 text-left">Written</th>
+                        <th class="p-3 text-left">Total</th>
+                    </tr>
                 </thead>
-                <tbody id="resultsBody" class="divide-y divide-gray-200">
-                <!-- Table rows will be populated by JavaScript -->
-                </tbody>
+                <tbody id="resultsBody" class="divide-y divide-gray-200"></tbody>
             </table>
         </div>
     </div>
 </div>
 
 <script>
-    // Function to populate the main results table
+    let currentData = [];
+
     function populateTable(data) {
         const tbody = document.getElementById('resultsBody');
-        tbody.innerHTML = ''; // Clear existing rows
+        tbody.innerHTML = '';
 
         data.forEach(student => {
             const row = document.createElement('tr');
             row.className = `table-row fade-in ${student.rank <= 3 ? 'rank-' + student.rank : ''} ${student.rank <= 10 ? 'top-student' : ''}`;
 
             row.innerHTML = `
-                <td class="p-3 font-medium">${student.rank}</td>
+                <td class="p-3 font-medium">${student.rank || '-'}</td>
                 <td class="p-3">${student.highlightedName || student.name}</td>
                 <td class="p-3">${student.class_time}</td>
-                <td class="p-3 hidden md:table-cell">${student.st_tm}</td>
-                <td class="p-3 hidden md:table-cell">${student.typing_speed}</td>
-                <td class="p-3 hidden md:table-cell">${student.wpr_percent}</td>
+                <td class="p-3 hidden md:table-cell">${student.st_tm || 'S.T'}</td>
+                <td class="p-3 hidden md:table-cell">${student.typing_speed || '-'}</td>
+                <td class="p-3 hidden md:table-cell">${student.wpr_percent || '-'}</td>
                 <td class="p-3">${student.typing_marks}</td>
                 <td class="p-3">${student.written_marks}</td>
                 <td class="p-3 font-semibold">${student.total_marks}</td>
             `;
-
             tbody.appendChild(row);
         });
     }
 
-    // Function to populate top student tables
     function populateTopTables(data) {
         // Overall Top-10
         const overallTopBody = document.getElementById('overallTopBody');
         overallTopBody.innerHTML = '';
-        const top10 = data.slice(0, 10);
-        top10.forEach(student => {
+        data.slice(0, 10).forEach(student => {
             const row = document.createElement('tr');
             row.className = `${student.rank <= 3 ? 'rank-' + student.rank : 'top-student'}`;
-            row.innerHTML = `
-                <td class="p-2">${student.rank}</td>
-                <td class="p-2">${student.name}</td>
-                <td class="p-2">${student.total_marks}</td>
-            `;
+            row.innerHTML = `<td class="p-2">${student.rank}</td><td class="p-2 text-sm">${student.name}</td><td class="p-2">${student.total_marks}</td>`;
             overallTopBody.appendChild(row);
         });
 
-        // Typing Top-3
+        // Typing Top-3 (Safely handle null typing speeds)
         const typingTopBody = document.getElementById('typingTopBody');
         typingTopBody.innerHTML = '';
-        const topTyping = data.sort((a, b) => parseInt(b.typing_speed) - parseInt(a.typing_speed)).slice(0, 3);
+        const topTyping = [...data].sort((a, b) => (parseInt(b.typing_speed) || 0) - (parseInt(a.typing_speed) || 0)).slice(0, 3);
         topTyping.forEach((student, index) => {
             const row = document.createElement('tr');
             row.className = `rank-${index + 1}`;
-            row.innerHTML = `
-                <td class="p-2">${index + 1}</td>
-                <td class="p-2">${student.name}</td>
-                <td class="p-2">${student.typing_speed}</td>
-            `;
+            row.innerHTML = `<td class="p-2">${index + 1}</td><td class="p-2 text-sm">${student.name}</td><td class="p-2">${student.typing_speed || student.wpr_percent}</td>`;
             typingTopBody.appendChild(row);
         });
 
         // Written Top-3
         const writtenTopBody = document.getElementById('writtenTopBody');
         writtenTopBody.innerHTML = '';
-        const topWritten = data.sort((a, b) => parseInt(b.written_marks) - parseInt(a.written_marks)).slice(0, 3);
+        const topWritten = [...data].sort((a, b) => (parseInt(b.written_marks) || 0) - (parseInt(a.written_marks) || 0)).slice(0, 3);
         topWritten.forEach((student, index) => {
             const row = document.createElement('tr');
             row.className = `rank-${index + 1}`;
-            row.innerHTML = `
-                <td class="p-2">${index + 1}</td>
-                <td class="p-2">${student.name}</td>
-                <td class="p-2">${student.written_marks}</td>
-            `;
+            row.innerHTML = `<td class="p-2">${index + 1}</td><td class="p-2 text-sm">${student.name}</td><td class="p-2">${student.written_marks}</td>`;
             writtenTopBody.appendChild(row);
         });
     }
 
-    // Function to highlight search terms
-    function highlightText(text, searchTerm) {
-        if (!searchTerm) return text;
-        const regex = new RegExp(`(${searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-        return text.replace(regex, '<span class="highlight">$1</span>');
-    }
-
-    // Function to filter table based on search input
-    function filterTable(data) {
+    function filterTable() {
         const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-        const filteredData = data.filter(student =>
+        const filteredData = currentData.filter(student =>
             student.name.toLowerCase().includes(searchTerm) ||
             student.class_time.toLowerCase().includes(searchTerm) ||
-            student.st_tm.toLowerCase().includes(searchTerm) ||
             student.rank.toString().includes(searchTerm)
-        );
-
-        // Add highlightedName property dynamically
-        filteredData.forEach(student => {
-            student.highlightedName = highlightText(student.name, searchTerm);
-        });
+        ).map(student => ({
+            ...student,
+            highlightedName: searchTerm ? student.name.replace(new RegExp(`(${searchTerm})`, 'gi'), '<span class="highlight">$1</span>') : student.name
+        }));
 
         populateTable(filteredData);
     }
 
-    // Function to load JSON data and update UI
     async function loadResults(month) {
+        const fileMap = {
+            'july': 'result_july.json',
+            'august': 'result_august.json',
+            'december': 'result_december.json'
+        };
+
         try {
-            const response = await fetch(month === 'july' ? 'result_july.json' : 'result_august.json');
-            if (!response.ok) throw new Error('Failed to fetch data');
-            const data = await response.json();
-            document.getElementById('resultTitle').textContent = `Test Results (${month === 'july' ? 'July' : 'August'} 2025)`;
-            populateTable(data);
-            populateTopTables(data);
-            document.getElementById('searchInput').value = ''; // Clear search input
-            document.getElementById('searchInput').addEventListener('input', () => filterTable(data));
+            const response = await fetch(fileMap[month]);
+            if (!response.ok) throw new Error('File not found');
+            currentData = await response.json();
+            
+            const monthNames = { 'july': 'July', 'august': 'August', 'december': 'December' };
+            document.getElementById('resultTitle').textContent = `Test Results (${monthNames[month]} 2025)`;
+            
+            populateTable(currentData);
+            populateTopTables(currentData);
+            document.getElementById('searchInput').value = '';
         } catch (error) {
-            console.error('Error loading results:', error);
-            document.getElementById('resultsBody').innerHTML = '<tr><td colspan="9" class="p-3 text-center text-red-500">Error loading results. Please try again later.</td></tr>';
+            console.error('Error:', error);
+            document.getElementById('resultsBody').innerHTML = `<tr><td colspan="9" class="p-8 text-center text-red-500 font-bold">Error loading ${month} data. Ensure ${fileMap[month]} exists in the directory.</td></tr>`;
         }
     }
 
-    // Initial setup and event listeners
     document.addEventListener('DOMContentLoaded', () => {
-        // Load August results by default
-        loadResults('august');
-
-        // Month selection event listener
-        document.getElementById('monthSelect').addEventListener('change', (e) => {
-            loadResults(e.target.value);
-        });
-
-        // Add animation to cards on scroll
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate__animated', 'animate__fadeInUp');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.card').forEach(card => {
-            observer.observe(card);
-        });
+        loadResults('december'); // Default to December
+        document.getElementById('monthSelect').addEventListener('change', (e) => loadResults(e.target.value));
+        document.getElementById('searchInput').addEventListener('input', filterTable);
     });
 </script>
 </body>
