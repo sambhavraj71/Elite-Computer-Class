@@ -1,11 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
     <title>Student Result Search - Elite Computer Classes</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -385,13 +383,12 @@
         // Check if PDF exists for this month
         if (pdfMap[month]) {
             try {
-                const cacheBuster = new Date().getTime();
-                const pdfResponse = await fetch(`${pdfMap[month]}?v=${cacheBuster}`);
+                const pdfResponse = await fetch(pdfMap[month]);
                 if (pdfResponse.ok) {
                     // Show PDF
                     document.getElementById('pdfContainer').style.display = 'block';
                     document.getElementById('tableContainer').style.display = 'none';
-                    document.getElementById('pdfViewer').src = `${pdfMap[month]}?v=${cacheBuster}`;
+                    document.getElementById('pdfViewer').src = pdfMap[month];
                     
                     const monthNames = { 'july': 'July', 'august': 'August', 'december': 'December' };
                     document.getElementById('resultTitle').textContent = `Test Results (${monthNames[month]} 2025)`;
@@ -407,8 +404,7 @@
         document.getElementById('tableContainer').style.display = 'block';
 
         try {
-            const cacheBuster = new Date().getTime();
-            const response = await fetch(`${fileMap[month]}?v=${cacheBuster}`);
+            const response = await fetch(fileMap[month]);
             if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
             currentData = await response.json();
             
@@ -432,3 +428,4 @@
 </script>
 </body>
 </html>
+<script async data-explicit-opt-in="true" data-cookie-opt-in="true" data-deployment-id="dpl_GQpiXyNa4hBXRnYddUZtJ7DrsPDX" src="https://vercel.live/_next-live/feedback/feedback.js"></script>
