@@ -58,13 +58,20 @@
         .rank-3 { background: linear-gradient(135deg, #fbcfe8 0%, #ec4899 100%); }
 
         @media (max-width: 768px) {
-            .responsive-table th:nth-child(4),
-            .responsive-table td:nth-child(4),
-            .responsive-table th:nth-child(5),
-            .responsive-table td:nth-child(5),
-            .responsive-table th:nth-child(6),
-            .responsive-table td:nth-child(6) {
-                display: none;
+            .december-table {
+                font-size: 12px;
+                min-width: 400px;
+            }
+            
+            .december-table th,
+            .december-table td {
+                padding: 8px 4px !important;
+                white-space: nowrap;
+            }
+            
+            .december-table th:nth-child(n+7),
+            .december-table td:nth-child(n+7) {
+                display: none !important;
             }
         }
 
@@ -74,11 +81,35 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .highlight { background-color: #fef08a; }
+        .pdf-viewer {
+            width: 100%;
+            height: 80vh;
+            border: none;
+            border-radius: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .pdf-viewer {
+                height: 70vh;
+                width: 100%;
+            }
+            
+            .pdf-container {
+                padding: 8px !important;
+                margin: 0 !important;
+            }
+        }
+        
+        .pdf-container {
+            display: none;
+        }
+        
+        .table-container {
+            display: block;
+        }
     </style>
 </head>
 <body class="text-gray-800 flex flex-col items-center py-8 px-4">
-    <h1>Hello</h1>
 <div class="container mx-auto max-w-6xl">
     <div class="text-center mb-8 animate__animated animate__fadeIn">
         <h1 class="text-4xl md:text-5xl font-bold text-white mb-2 text-shadow-lg">Elite Computer Classes</h1>
@@ -96,25 +127,37 @@
         </div>
     </div>
 
-    <div class="card p-4 mb-8">
-        <div class="flex flex-col md:flex-row items-center">
-            <div class="w-full md:w-1/2 mb-4 md:mb-0 md:pr-4">
-                <h3 class="text-xl font-bold text-indigo-800 mb-2 border-b-2 border-indigo-200 pb-1">OVERALL TOP-10 STUDENTS</h3>
-                <div class="overflow-x-auto">
-                    <table id="overallTopTable" class="min-w-full bg-white rounded-lg overflow-hidden">
-                        <thead class="bg-indigo-600 text-white">
-                            <tr>
-                                <th class="p-2 text-left">Rank</th>
-                                <th class="p-2 text-left">Name</th>
-                                <th class="p-2 text-left">Total</th>
-                            </tr>
-                        </thead>
-                        <tbody id="overallTopBody"></tbody>
-                    </table>
-                </div>
+    <div id="pdfContainer" class="card p-2 md:p-4 pdf-container">
+        <div class="text-center mb-2 md:mb-4">
+            <h3 class="text-lg md:text-xl font-bold text-indigo-800">Test Result - December 2025</h3>
+        </div>
+        <div class="w-full overflow-hidden">
+            <iframe id="pdfViewer" class="pdf-viewer" src="" type="application/pdf"></iframe>
+        </div>
+    </div>
+
+    <div id="tableContainer" class="table-container">
+    <div id="writtenTestHeader" class="text-center mb-6" style="display: none;">
+        <h2 class="text-3xl font-bold text-white bg-gradient-to-r from-indigo-600 to-purple-600 p-4 rounded-lg shadow-lg">Written Test</h2>
+    </div>
+    
+    <div id="topStudentsCard" class="card p-4 mb-8">
+        <div class="w-full">
+            <h3 class="text-xl font-bold text-indigo-800 mb-2 border-b-2 border-indigo-200 pb-1 text-center">OVERALL TOP-10 STUDENTS</h3>
+            <div class="overflow-x-auto">
+                <table id="overallTopTable" class="min-w-full bg-white rounded-lg overflow-hidden">
+                    <thead class="bg-indigo-600 text-white">
+                        <tr>
+                            <th class="p-2 text-left">Rank</th>
+                            <th class="p-2 text-left">Name</th>
+                            <th class="p-2 text-left">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="overallTopBody"></tbody>
+                </table>
             </div>
-            <div class="w-full md:w-1/2">
-                <div class="mb-6">
+            <div id="typingWrittenSection" class="flex flex-col md:flex-row mt-6">
+                <div class="w-full md:w-1/2 mb-6 md:mb-0 md:pr-3">
                     <h3 class="text-xl font-bold text-indigo-800 mb-2 border-b-2 border-indigo-200 pb-1">TYPING TOP-3 STUDENTS</h3>
                     <div class="overflow-x-auto">
                         <table id="typingTopTable" class="min-w-full bg-white rounded-lg overflow-hidden">
@@ -129,7 +172,7 @@
                         </table>
                     </div>
                 </div>
-                <div>
+                <div class="w-full md:w-1/2 md:pl-3">
                     <h3 class="text-xl font-bold text-indigo-800 mb-2 border-b-2 border-indigo-200 pb-1">WRITTEN TOP-3 STUDENTS</h3>
                     <div class="overflow-x-auto">
                         <table id="writtenTopTable" class="min-w-full bg-white rounded-lg overflow-hidden">
@@ -160,24 +203,25 @@
     </div>
 
     <div class="card p-4">
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto" id="tableWrapper">
             <table id="resultsTable" class="responsive-table min-w-full">
                 <thead>
                     <tr class="bg-indigo-600 text-white">
                         <th class="p-3 text-left">Rank</th>
                         <th class="p-3 text-left">Student's Name</th>
                         <th class="p-3 text-left">Class Time</th>
-                        <th class="p-3 text-left hidden md:table-cell">S.T/T.M</th>
-                        <th class="p-3 text-left hidden md:table-cell">Typing Spd</th>
-                        <th class="p-3 text-left hidden md:table-cell">WPR%</th>
-                        <th class="p-3 text-left">Type Marks</th>
-                        <th class="p-3 text-left">Written</th>
-                        <th class="p-3 text-left">Total</th>
+                        <th class="p-3 text-left hidden md:table-cell" id="col4Header">S.T/T.M</th>
+                        <th class="p-3 text-left hidden md:table-cell" id="col5Header">Typing Spd</th>
+                        <th class="p-3 text-left hidden md:table-cell" id="col6Header">WPR%</th>
+                        <th class="p-3 text-left" id="col7Header">Type Marks</th>
+                        <th class="p-3 text-left" id="col8Header">Written</th>
+                        <th class="p-3 text-left" id="col9Header">Total</th>
                     </tr>
                 </thead>
                 <tbody id="resultsBody" class="divide-y divide-gray-200"></tbody>
             </table>
         </div>
+    </div>
     </div>
 </div>
 
@@ -188,58 +232,126 @@
         const tbody = document.getElementById('resultsBody');
         tbody.innerHTML = '';
 
+        // Update headers based on data type
+        const isDecemberData = data.length > 0 && data[0].total_marks && data[0].obtained_marks;
+        
+        // Add December class for mobile styling
+        const table = document.getElementById('resultsTable');
+        const tableWrapper = document.getElementById('tableWrapper');
+        
+        if (isDecemberData) {
+            table.classList.add('december-table');
+            // Force horizontal scroll on mobile for December
+            tableWrapper.style.overflowX = 'scroll';
+            tableWrapper.style.webkitOverflowScrolling = 'touch';
+            
+            document.getElementById('col4Header').textContent = 'Total Marks';
+            document.getElementById('col5Header').textContent = 'Obtained';
+            document.getElementById('col6Header').textContent = 'Percentage';
+            // Show only first 6 columns for December
+            document.getElementById('col4Header').style.display = 'table-cell';
+            document.getElementById('col5Header').style.display = 'table-cell';
+            document.getElementById('col6Header').style.display = 'table-cell';
+            document.getElementById('col7Header').style.display = 'none';
+            document.getElementById('col8Header').style.display = 'none';
+            document.getElementById('col9Header').style.display = 'none';
+        } else {
+            table.classList.remove('december-table');
+            tableWrapper.style.overflowX = 'auto';
+            
+            document.getElementById('col4Header').textContent = 'S.T/T.M';
+            document.getElementById('col5Header').textContent = 'Typing Spd';
+            document.getElementById('col6Header').textContent = 'WPR%';
+            document.getElementById('col4Header').classList.add('hidden', 'md:table-cell');
+            document.getElementById('col5Header').classList.add('hidden', 'md:table-cell');
+            document.getElementById('col6Header').classList.add('hidden', 'md:table-cell');
+            document.getElementById('col7Header').style.display = 'table-cell';
+            document.getElementById('col8Header').style.display = 'table-cell';
+            document.getElementById('col9Header').style.display = 'table-cell';
+        }
+
         data.forEach(student => {
             const row = document.createElement('tr');
             row.className = `table-row fade-in ${student.rank <= 3 ? 'rank-' + student.rank : ''} ${student.rank <= 10 ? 'top-student' : ''}`;
 
-            row.innerHTML = `
-                <td class="p-3 font-medium">${student.rank || '-'}</td>
-                <td class="p-3">${student.highlightedName || student.name}</td>
-                <td class="p-3">${student.class_time}</td>
-                <td class="p-3 hidden md:table-cell">${student.st_tm || 'S.T'}</td>
-                <td class="p-3 hidden md:table-cell">${student.typing_speed || '-'}</td>
-                <td class="p-3 hidden md:table-cell">${student.wpr_percent || '-'}</td>
-                <td class="p-3">${student.typing_marks}</td>
-                <td class="p-3">${student.written_marks}</td>
-                <td class="p-3 font-semibold">${student.total_marks}</td>
-            `;
+            if (isDecemberData) {
+                row.innerHTML = `
+                    <td class="p-3 font-medium">${student.rank || '-'}</td>
+                    <td class="p-3">${student.highlightedName || student.name}</td>
+                    <td class="p-3">${student.class_time}</td>
+                    <td class="p-3">${student.total_marks}</td>
+                    <td class="p-3">${student.obtained_marks}</td>
+                    <td class="p-3">${student.percentage}</td>
+                `;
+            } else {
+                row.innerHTML = `
+                    <td class="p-3 font-medium">${student.rank || '-'}</td>
+                    <td class="p-3">${student.highlightedName || student.name}</td>
+                    <td class="p-3">${student.class_time}</td>
+                    <td class="p-3 hidden md:table-cell">${student.st_tm || 'S.T'}</td>
+                    <td class="p-3 hidden md:table-cell">${student.typing_speed || '-'}</td>
+                    <td class="p-3 hidden md:table-cell">${student.wpr_percent || '-'}</td>
+                    <td class="p-3">${student.typing_marks}</td>
+                    <td class="p-3">${student.written_marks}</td>
+                    <td class="p-3 font-semibold">${student.total_marks}</td>
+                `;
+            }
             tbody.appendChild(row);
         });
     }
 
     function populateTopTables(data) {
-        // Overall Top-10
-        const overallTopBody = document.getElementById('overallTopBody');
-        overallTopBody.innerHTML = '';
-        data.slice(0, 10).forEach(student => {
-            const row = document.createElement('tr');
-            row.className = `${student.rank <= 3 ? 'rank-' + student.rank : 'top-student'}`;
-            const displayValue = student.percentage || student.total_marks;
-            row.innerHTML = `<td class="p-2">${student.rank}</td><td class="p-2 text-sm">${student.name}</td><td class="p-2">${displayValue}</td>`;
-            overallTopBody.appendChild(row);
-        });
+        // Check if it's December data
+        const isDecemberData = data.length > 0 && data[0].total_marks && data[0].obtained_marks;
+        
+        // Show/hide Written Test header for December
+        const writtenTestHeader = document.getElementById('writtenTestHeader');
+        if (isDecemberData) {
+            writtenTestHeader.style.display = 'block';
+        } else {
+            writtenTestHeader.style.display = 'none';
+        }
+        
+        // Hide entire top students card for December
+        const topStudentsCard = document.getElementById('topStudentsCard');
+        if (isDecemberData) {
+            topStudentsCard.style.display = 'none';
+        } else {
+            topStudentsCard.style.display = 'block';
+            
+            // Overall Top-10
+            const overallTopBody = document.getElementById('overallTopBody');
+            overallTopBody.innerHTML = '';
+            data.slice(0, 10).forEach(student => {
+                const row = document.createElement('tr');
+                row.className = `${student.rank <= 3 ? 'rank-' + student.rank : 'top-student'}`;
+                const displayValue = student.percentage || student.total_marks;
+                row.innerHTML = `<td class="p-2">${student.rank}</td><td class="p-2 text-sm">${student.name}</td><td class="p-2">${displayValue}</td>`;
+                overallTopBody.appendChild(row);
+            });
 
-        // Typing Top-3 (Safely handle null typing speeds)
-        const typingTopBody = document.getElementById('typingTopBody');
-        typingTopBody.innerHTML = '';
-        const topTyping = [...data].sort((a, b) => (parseInt(b.typing_speed) || 0) - (parseInt(a.typing_speed) || 0)).slice(0, 3);
-        topTyping.forEach((student, index) => {
-            const row = document.createElement('tr');
-            row.className = `rank-${index + 1}`;
-            row.innerHTML = `<td class="p-2">${index + 1}</td><td class="p-2 text-sm">${student.name}</td><td class="p-2">${student.typing_speed || student.wpr_percent}</td>`;
-            typingTopBody.appendChild(row);
-        });
+            // Typing Top-3
+            const typingTopBody = document.getElementById('typingTopBody');
+            typingTopBody.innerHTML = '';
+            const topTyping = [...data].sort((a, b) => (parseInt(b.typing_speed) || 0) - (parseInt(a.typing_speed) || 0)).slice(0, 3);
+            topTyping.forEach((student, index) => {
+                const row = document.createElement('tr');
+                row.className = `rank-${index + 1}`;
+                row.innerHTML = `<td class="p-2">${index + 1}</td><td class="p-2 text-sm">${student.name}</td><td class="p-2">${student.typing_speed || student.wpr_percent}</td>`;
+                typingTopBody.appendChild(row);
+            });
 
-        // Written Top-3
-        const writtenTopBody = document.getElementById('writtenTopBody');
-        writtenTopBody.innerHTML = '';
-        const topWritten = [...data].sort((a, b) => (parseInt(b.written_marks) || 0) - (parseInt(a.written_marks) || 0)).slice(0, 3);
-        topWritten.forEach((student, index) => {
-            const row = document.createElement('tr');
-            row.className = `rank-${index + 1}`;
-            row.innerHTML = `<td class="p-2">${index + 1}</td><td class="p-2 text-sm">${student.name}</td><td class="p-2">${student.written_marks}</td>`;
-            writtenTopBody.appendChild(row);
-        });
+            // Written Top-3
+            const writtenTopBody = document.getElementById('writtenTopBody');
+            writtenTopBody.innerHTML = '';
+            const topWritten = [...data].sort((a, b) => (parseInt(b.written_marks) || 0) - (parseInt(a.written_marks) || 0)).slice(0, 3);
+            topWritten.forEach((student, index) => {
+                const row = document.createElement('tr');
+                row.className = `rank-${index + 1}`;
+                row.innerHTML = `<td class="p-2">${index + 1}</td><td class="p-2 text-sm">${student.name}</td><td class="p-2">${student.written_marks}</td>`;
+                writtenTopBody.appendChild(row);
+            });
+        }
     }
 
     function filterTable() {
@@ -262,6 +374,33 @@
             'august': './result_august.json',
             'december': './result_december.json'
         };
+        
+        const pdfMap = {
+            'december': './test-result-dec.pdf'
+        };
+
+        // Check if PDF exists for this month
+        if (pdfMap[month]) {
+            try {
+                const pdfResponse = await fetch(pdfMap[month]);
+                if (pdfResponse.ok) {
+                    // Show PDF
+                    document.getElementById('pdfContainer').style.display = 'block';
+                    document.getElementById('tableContainer').style.display = 'none';
+                    document.getElementById('pdfViewer').src = pdfMap[month];
+                    
+                    const monthNames = { 'july': 'July', 'august': 'August', 'december': 'December' };
+                    document.getElementById('resultTitle').textContent = `Test Results (${monthNames[month]} 2025)`;
+                    return;
+                }
+            } catch (error) {
+                console.log('PDF not found, loading JSON data');
+            }
+        }
+        
+        // Show table and hide PDF
+        document.getElementById('pdfContainer').style.display = 'none';
+        document.getElementById('tableContainer').style.display = 'block';
 
         try {
             const response = await fetch(fileMap[month]);
