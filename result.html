@@ -257,14 +257,14 @@
 
     async function loadResults(month) {
         const fileMap = {
-            'july': 'result_july.json',
-            'august': 'result_august.json',
-            'december': 'result_december.json'
+            'july': './result_july.json',
+            'august': './result_august.json',
+            'december': './result_december.json'
         };
 
         try {
             const response = await fetch(fileMap[month]);
-            if (!response.ok) throw new Error('File not found');
+            if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
             currentData = await response.json();
             
             const monthNames = { 'july': 'July', 'august': 'August', 'december': 'December' };
