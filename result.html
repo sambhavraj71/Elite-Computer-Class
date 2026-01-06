@@ -80,7 +80,7 @@
 <body class="text-gray-800 flex flex-col items-center py-8 px-4">
 <div class="container mx-auto max-w-6xl">
     <div class="text-center mb-8 animate__animated animate__fadeIn">
-        <h1 class="text-4xl md:text-5xl font-bold text-white mb-2 text-shadow-lg">Elite Computer Classes</h1>
+        <h1 class="text-4xl md:text-5xl font-bold text-white mb-2">Elite Computer Classes</h1>
         <h2 id="resultTitle" class="text-2xl md:text-3xl font-semibold text-indigo-200">Test Results (2025)</h2>
     </div>
 
@@ -105,7 +105,7 @@
                             <tr>
                                 <th class="p-2 text-left">Rank</th>
                                 <th class="p-2 text-left">Name</th>
-                                <th class="p-2 text-left">Total</th>
+                                <th class="p-2 text-left">Percentage</th>
                             </tr>
                         </thead>
                         <tbody id="overallTopBody"></tbody>
@@ -121,7 +121,7 @@
                                 <tr>
                                     <th class="p-2 text-left">Rank</th>
                                     <th class="p-2 text-left">Name</th>
-                                    <th class="p-2 text-left">Value</th>
+                                    <th class="p-2 text-left">Speed</th>
                                 </tr>
                             </thead>
                             <tbody id="typingTopBody"></tbody>
@@ -207,24 +207,32 @@
     }
 
     function populateTopTables(data) {
-        // Overall Top-10
+        // Overall Top-10 (Now displaying Percentage)
         const overallTopBody = document.getElementById('overallTopBody');
         overallTopBody.innerHTML = '';
         data.slice(0, 10).forEach(student => {
             const row = document.createElement('tr');
             row.className = `${student.rank <= 3 ? 'rank-' + student.rank : 'top-student'}`;
-            row.innerHTML = `<td class="p-2">${student.rank}</td><td class="p-2 text-sm">${student.name}</td><td class="p-2">${student.total_marks}</td>`;
+            row.innerHTML = `
+                <td class="p-2">${student.rank}</td>
+                <td class="p-2 text-sm">${student.name}</td>
+                <td class="p-2">${student.wpr_percent}</td>
+            `;
             overallTopBody.appendChild(row);
         });
 
-        // Typing Top-3 (Safely handle null typing speeds)
+        // Typing Top-3
         const typingTopBody = document.getElementById('typingTopBody');
         typingTopBody.innerHTML = '';
         const topTyping = [...data].sort((a, b) => (parseInt(b.typing_speed) || 0) - (parseInt(a.typing_speed) || 0)).slice(0, 3);
         topTyping.forEach((student, index) => {
             const row = document.createElement('tr');
             row.className = `rank-${index + 1}`;
-            row.innerHTML = `<td class="p-2">${index + 1}</td><td class="p-2 text-sm">${student.name}</td><td class="p-2">${student.typing_speed || student.wpr_percent}</td>`;
+            row.innerHTML = `
+                <td class="p-2">${index + 1}</td>
+                <td class="p-2 text-sm">${student.name}</td>
+                <td class="p-2">${student.typing_speed || student.wpr_percent}</td>
+            `;
             typingTopBody.appendChild(row);
         });
 
@@ -274,12 +282,12 @@
             document.getElementById('searchInput').value = '';
         } catch (error) {
             console.error('Error:', error);
-            document.getElementById('resultsBody').innerHTML = `<tr><td colspan="9" class="p-8 text-center text-red-500 font-bold">Error loading ${month} data. Ensure ${fileMap[month]} exists in the directory.</td></tr>`;
+            document.getElementById('resultsBody').innerHTML = `<tr><td colspan="9" class="p-8 text-center text-red-500 font-bold">Error loading data.</td></tr>`;
         }
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-        loadResults('december'); // Default to December
+        loadResults('december');
         document.getElementById('monthSelect').addEventListener('change', (e) => loadResults(e.target.value));
         document.getElementById('searchInput').addEventListener('input', filterTable);
     });
