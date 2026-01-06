@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Result Search - Elite Computer Classes</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body{
+    background:linear-gradient(135deg,#1e3a8a,#4f46e5);
+    min-height:100vh;
+    font-family:'Poppins',sans-serif;
+}
+
+.card{
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(10px);
+    border-radius:12px;
+    box-shadow:0 8px 32px rgba(0,0,0,.25);
+    transition:.3s;
+}
+.card:hover{transform:translateY(-4px)}
+
+.rank-1{background:#fde68a;font-weight:600}
+.rank-2{background:#e5e7eb;font-weight:600}
+.rank-3{background:#fbcfe8;font-weight:600}
+.top-student{background:#fef3c7}
+
+.highlight{background:#fef08a;padding:0 3px;border-radius:4px}
+
+@media(max-width:768px){
+    .responsive-table th:nth-child(4),
+    .responsive-table td:nth-child(4),
+    .responsive-table th:nth-child(5),
+    .responsive-table td:nth-child(5),
+    .responsive-table th:nth-child(6),
+    .responsive-table td:nth-child(6){
+        display:none;
+    }
+}
+</style>
+</head>
+
+<body class="flex justify-center px-4 py-8">
+
+<div class="container max-w-6xl">
+
+<!-- HEADER -->
+<div class="text-center mb-8 animate__animated animate__fadeIn">
+    <h1 class="text-4xl md:text-5xl font-bold text-white">Elite Computer Classes</h1>
+    <h2 id="resultTitle" class="text-indigo-200 text-2xl mt-2">Test Results (December 2025)</h2>
+</div>
+
+<!-- MONTH SELECT -->
+<div class="card p-6 mb-6">
+    <label class="block font-semibold mb-2">Select Examination Month</label>
+    <select id="monthSelect" class="w-full p-3 rounded-lg shadow">
+        <option value="july">July 2025</option>
+        <option value="august">August 2025</option>
+        <option value="december" selected>December 2025</option>
+    </select>
+</div>
+
+<!-- TOP TABLES -->
+<div class="card p-5 mb-8 grid md:grid-cols-2 gap-6">
+
+<!-- OVERALL TOP 10 -->
+<div>
+<h3 class="font-bold text-indigo-700 mb-2">OVERALL TOP-10</h3>
+<table class="w-full">
+<thead class="bg-indigo-600 text-white">
+<tr><th>Rank</th><th>Name</th><th>Total</th></tr>
+</thead>
+<tbody id="overallTopBody"></tbody>
+</table>
+</div>
+
+<!-- TYPING + WRITTEN -->
+<div class="space-y-5">
+
+<div>
+<h3 class="font-bold text-indigo-700 mb-2">TYPING TOP-3</h3>
+<table class="w-full">
+<thead class="bg-indigo-600 text-white">
+<tr><th>Rank</th><th>Name</th><th>Speed</th></tr>
+</thead>
+<tbody id="typingTopBody"></tbody>
+</table>
+</div>
+
+<div>
+<h3 class="font-bold text-indigo-700 mb-2">WRITTEN TOP-3</h3>
+<table class="w-full">
+<thead class="bg-indigo-600 text-white">
+<tr><th>Rank</th><th>Name</th><th>Marks</th></tr>
+</thead>
+<tbody id="writtenTopBody"></tbody>
+</table>
+</div>
+
+</div>
+</div>
+
+<!-- SEARCH -->
+<div class="card p-5 mb-6">
+<input id="searchInput" class="w-full p-3 rounded-lg shadow" placeholder="Search student name…">
+</div>
+
+<!-- MAIN TABLE -->
+<div class="card p-4">
+<table class="responsive-table w-full">
+<thead class="bg-indigo-600 text-white">
+<tr>
+<th>Rank</th>
+<th>Name</th>
+<th>Class</th>
+<th>S.T/T.M</th>
+<th>Typing</th>
+<th>WPR%</th>
+<th>Type</th>
+<th>Written</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody id="resultsBody"></tbody>
+</table>
+</div>
+
+</div>
+
+<script>
+let currentData=[];
+
+function assignRank(data){
+    return data
+    .sort((a,b)=>b.total_marks-a.total_marks)
+    .map((s,i)=>({...s,rank:i+1}));
+}
+
+function populateMainTable(data){
+    const body=document.getElementById("resultsBody");
+    body.innerHTML="";
+    data.forEach(s=>{
+        const tr=document.createElement("tr");
+        tr.className=`${s.rank<=3?`rank-${s.rank}`:""} ${s.rank<=10?"top-student":""}`;
+        tr.innerHTML=`
+        <td>${s.rank}</td>
+        <td>${s.highlightedName||s.name}</td>
+        <td>${s.class_time||"-"}</td>
+        <td>${s.st_tm||"-"}</td>
+        <td>${s.typing_speed||"-"}</td>
+        <td>${s.wpr_percent||"-"}</td>
+        <td>${s.typing_marks||0}</td>
+        <td>${s.written_marks||0}</td>
+        <td class="font-semibold">${s.total_marks}</td>`;
+        body.appendChild(tr);
+    });
+}
+
+function populateTopTables(data){
+    const overall=document.getElementById("overallTopBody");
+    overall.innerHTML="";
+    data.slice(0,10).forEach(s=>{
+        overall.innerHTML+=`<tr><td>${s.rank}</td><td>${s.name}</td><td>${s.total_marks}</td></tr>`;
+    });
+
+    const typing=[...data].sort((a,b)=>(b.typing_speed||0)-(a.typing_speed||0)).slice(0,3);
+    document.getElementById("typingTopBody").innerHTML=
+        typing.map((s,i)=>`<tr><td>${i+1}</td><td>${s.name}</td><td>${s.typing_speed||"-"}</td></tr>`).join("");
+
+    const written=[...data].sort((a,b)=>(b.written_marks||0)-(a.written_marks||0)).slice(0,3);
+    document.getElementById("writtenTopBody").innerHTML=
+        written.map((s,i)=>`<tr><td>${i+1}</td><td>${s.name}</td><td>${s.written_marks}</td></tr>`).join("");
+}
+
+function filterTable(){
+    const q=searchInput.value.toLowerCase();
+    populateMainTable(currentData.map(s=>({
+        ...s,
+        highlightedName:q?s.name.replace(new RegExp(q,"gi"),m=>`<span class="highlight">${m}</span>`):s.name
+    })).filter(s=>s.name.toLowerCase().includes(q)));
+}
+
+async function loadResults(month){
+    const files={
+        july:"./result_july.json",
+        august:"./result_august.json",
+        december:"./result_december.json"
+    };
+    const res=await fetch(files[month]);
+    const json=await res.json();
+    currentData=assignRank(json);
+    populateMainTable(currentData);
+    populateTopTables(currentData);
+    document.getElementById("resultTitle").innerText=`Test Results (${month.toUpperCase()} 2025)`;
+}
+
+monthSelect.onchange=e=>loadResults(e.target.value);
+searchInput.oninput=filterTable;
+
+loadResults("december");
+</script>
+
+</body>
+</html>
