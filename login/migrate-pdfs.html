@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Migrate PDFs to Firebase</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; }
+        button { background: #667eea; color: white; border: none; padding: 15px 30px; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #5568d3; }
+        .log { margin-top: 20px; padding: 15px; background: #f9f9f9; border-radius: 5px; max-height: 400px; overflow-y: auto; }
+        .success { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Migrate Existing PDFs to Firebase</h1>
+        <p>This will add all hardcoded PDFs from the app to Firebase so you can manage them from admin panel.</p>
+        <button onclick="migratePdfs()">Start Migration</button>
+        <div class="log" id="log"></div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script>
+        // Check authentication first
+        firebase.auth().onAuthStateChanged(async (user) => {
+            if (!user) {
+                alert('Please login first!');
+                window.location.href = 'login.html';
+            }
+        });
+
+        const pdfsToMigrate = [
+            // MCQs Section
+            { name: "MS Word", section: "free", type: "MCQs", subCategory: "MS Word", iconUrl: "https://img.icons8.com/color/96/microsoft-word-2019--v2.png", pdfUrl: "https://drive.google.com/file/d/10k2_quJVKmAri7gRY9xvNlBa3BUWdpR5/view?usp=drive_link" },
+            { name: "Excel", section: "free", type: "MCQs", subCategory: "Excel", iconUrl: "https://img.icons8.com/color/96/microsoft-excel-2019--v1.png", pdfUrl: "https://drive.google.com/file/d/1SKoSQB_fswe1BVyL-WogkLBeMY6-bdwZ/view?usp=drive_link" },
+            
+            // Shortcuts Section
+            { name: "Word Shortcuts", section: "free", type: "Shortcuts", subCategory: "Word", iconUrl: "https://img.icons8.com/color/96/keyboard.png", pdfUrl: "https://drive.google.com/file/d/1Z2TYNmbM0T1SM_HCaOoIgUvxhDB1iqzp/view?usp=drive_link" },
+            { name: "Excel Shortcuts", section: "free", type: "Shortcuts", subCategory: "Excel", iconUrl: "https://img.icons8.com/color/96/keyboard.png", pdfUrl: "https://drive.google.com/file/d/1xpXRHUpZ-JqMgO_mSAZhA81Jc3RfwzkS/view?usp=drive_link" },
+            
+            // Checklists Section
+            { name: "Excel Checklist", section: "free", type: "Checklists", subCategory: "Excel", iconUrl: "https://img.icons8.com/color/96/checklist.png", pdfUrl: "https://drive.google.com/file/d/1NZsN_0qyxxTVJXajZE2zkKAFf9HnLqFh/view?usp=drive_link" },
+            { name: "Word Checklist", section: "free", type: "Checklists", subCategory: "Word", iconUrl: "https://img.icons8.com/color/96/checklist.png", pdfUrl: "https://drive.google.com/file/d/1hp3m2xbYsEUEsyylqtrtSn42CwPwthFf/view?usp=drive_link" },
+            { name: "PowerPoint Checklist", section: "free", type: "Checklists", subCategory: "PowerPoint", iconUrl: "https://img.icons8.com/color/96/checklist.png", pdfUrl: "https://drive.google.com/file/d/1MXkYd6Xfi8in0sBgn57bn4KMZjiKswJM/view?usp=drive_link" },
+            
+            // Notes Section
+            { name: "MS Word Complete", section: "free", type: "Notes", subCategory: "MS Word", iconUrl: "https://img.icons8.com/color/96/book.png", pdfUrl: "https://drive.google.com/file/d/1RL6JSAGhdAH1zjiXltVbnTHNSiqCdhJ9/view?usp=drive_link" },
+            { name: "PowerPoint Complete", section: "free", type: "Notes", subCategory: "PowerPoint", iconUrl: "https://img.icons8.com/color/96/book.png", pdfUrl: "https://drive.google.com/file/d/1rtz9oPw1nWAnF1vR2CaYbmkR7hKB0sNG/view?usp=drive_link" },
+            { name: "Excel Complete", section: "free", type: "Notes", subCategory: "Excel", iconUrl: "https://img.icons8.com/color/96/book.png", pdfUrl: "https://drive.google.com/file/d/1J0Iydmu3fssNarj7Rj9J1eepW3SkD6Zr/view?usp=drive_link" },
+            { name: "Photoshop Complete", section: "free", type: "Notes", subCategory: "Photoshop", iconUrl: "https://img.icons8.com/color/96/book.png", pdfUrl: "https://drive.google.com/file/d/1W-u5k2Cgs-o05JV-FgivDjHRn9p3vjDk/view?usp=drive_link" },
+            { name: "Computer Basics", section: "free", type: "Notes", subCategory: "Computer Basics", iconUrl: "https://img.icons8.com/color/96/book.png", pdfUrl: "https://drive.google.com/file/d/1S-q8lGOUdsJuXeB_sXXiJfu7Jy4RLRfj/view?usp=drive_link" },
+            { name: "Internet Basics", section: "free", type: "Notes", subCategory: "Internet", iconUrl: "https://img.icons8.com/color/96/book.png", pdfUrl: "https://drive.google.com/file/d/1ZnkO7aB-YyX4ZD_6LpWJdvf3dm4RzU8Z/view?usp=drive_link" },
+            { name: "PageMaker Complete", section: "free", type: "Notes", subCategory: "PageMaker", iconUrl: "https://img.icons8.com/color/96/book.png", pdfUrl: "https://drive.google.com/file/d/17ROaBc0eQBDwYSVwNSPDe7kZwFPPWlWv/view?usp=drive_link" },
+            
+            // Typing Section
+            { name: "Hindi Level 1", section: "free", type: "Typing", subCategory: "Hindi", iconUrl: "https://img.icons8.com/color/96/keyboard.png", pdfUrl: "https://drive.google.com/file/d/1KN0FEpqvBsbIsSNMJbWr1LuSth_I9ee9/view?usp=drivesdk" },
+            { name: "Hindi Level 2", section: "free", type: "Typing", subCategory: "Hindi", iconUrl: "https://img.icons8.com/color/96/keyboard.png", pdfUrl: "https://drive.google.com/file/d/1bnYin8w90hdFKWVFipL2x8z92R-k-M3m/view?usp=drivesdk" },
+            { name: "Hindi Level 3", section: "free", type: "Typing", subCategory: "Hindi", iconUrl: "https://img.icons8.com/color/96/keyboard.png", pdfUrl: "https://drive.google.com/file/d/1v4HMwRfG3OpRhJ6sZOG0Se67ES6d-BDx/view?usp=drivesdk" },
+            { name: "English Level 1", section: "free", type: "Typing", subCategory: "English", iconUrl: "https://img.icons8.com/color/96/keyboard.png", pdfUrl: "https://drive.google.com/file/d/1XG4pDmjHgTFSjMhue1SwD0rO9Im4Qh9s/view?usp=drive_link" },
+            { name: "English Level 2", section: "free", type: "Typing", subCategory: "English", iconUrl: "https://img.icons8.com/color/96/keyboard.png", pdfUrl: "https://drive.google.com/file/d/1SzNNvOa5Cd09FhyGkVeEGCSPY8iauixH/view?usp=drive_link" },
+            { name: "English Level 3", section: "free", type: "Typing", subCategory: "English", iconUrl: "https://img.icons8.com/color/96/keyboard.png", pdfUrl: "https://drive.google.com/file/d/1TNrZmdAAzC2NLpv_3iPZ49lzPXx8rAuG/view?usp=drive_link" },
+            { name: "Mix Level 1", section: "free", type: "Typing", subCategory: "Hindi-English Mix", iconUrl: "https://img.icons8.com/color/96/keyboard.png", pdfUrl: "https://drive.google.com/file/d/1sd_FhChLOka0EoWZlRbLaKIdKYX0zZto/view?usp=drive_link" },
+            { name: "Mix Level 2", section: "free", type: "Typing", subCategory: "Hindi-English Mix", iconUrl: "https://img.icons8.com/color/96/keyboard.png", pdfUrl: "https://drive.google.com/file/d/1x7J6Q946xsaKDcJ-WCs5eyUdCAQF4dFR/view?usp=drive_link" },
+            { name: "Mix Level 3", section: "free", type: "Typing", subCategory: "Hindi-English Mix", iconUrl: "https://img.icons8.com/color/96/keyboard.png", pdfUrl: "https://drive.google.com/file/d/1XG4pDmjHgTFSjMhue1SwD0rO9Im4Qh9s/view?usp=drivesdk" }
+        ];
+
+        function log(message, type = 'info') {
+            const logDiv = document.getElementById('log');
+            const p = document.createElement('p');
+            p.className = type;
+            p.textContent = message;
+            logDiv.appendChild(p);
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+
+        async function migratePdfs() {
+            log('Starting migration...', 'info');
+            const db = firebase.firestore();
+            let success = 0;
+            let failed = 0;
+
+            for (const pdf of pdfsToMigrate) {
+                try {
+                    await db.collection('pdfCategories').add({
+                        ...pdf,
+                        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                    log(`✓ Added: ${pdf.name} (${pdf.type})`, 'success');
+                    success++;
+                } catch (error) {
+                    log(`✗ Failed: ${pdf.name} - ${error.message}`, 'error');
+                    failed++;
+                }
+            }
+
+            log(`\nMigration complete! Success: ${success}, Failed: ${failed}`, success > 0 ? 'success' : 'error');
+        }
+    </script>
+</body>
+</html>

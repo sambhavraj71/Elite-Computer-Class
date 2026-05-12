@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - ECC Student</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; background: white; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); overflow: hidden; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; text-align: center; color: white; }
+        .profile-img { width: 120px; height: 120px; border-radius: 50%; border: 5px solid white; object-fit: cover; margin-bottom: 15px; }
+        .header h1 { font-size: 28px; margin-bottom: 5px; }
+        .header p { opacity: 0.9; font-size: 16px; }
+        .content { padding: 30px; }
+        .info-group { margin-bottom: 25px; }
+        .info-label { font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+        .info-value { font-size: 18px; color: #333; font-weight: 500; padding: 10px; background: #f5f5f5; border-radius: 8px; }
+        .logout-btn { width: 100%; padding: 15px; background: #e74c3c; color: white; border: none; border-radius: 10px; font-size: 16px; cursor: pointer; margin-top: 20px; }
+        .logout-btn:hover { background: #c0392b; }
+        .loading { text-align: center; padding: 50px; color: #667eea; font-size: 18px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="loadingDiv" class="loading">Loading profile...</div>
+        <div id="profileDiv" style="display:none;">
+            <div class="header">
+                <img id="profileImage" class="profile-img" src="https://via.placeholder.com/120" alt="Profile">
+                <h1 id="fullName">Student Name</h1>
+                <p id="email">student@email.com</p>
+            </div>
+            <div class="content">
+                <div class="info-group">
+                    <div class="info-label">Phone Number</div>
+                    <div class="info-value" id="phone">-</div>
+                </div>
+                <div class="info-group">
+                    <div class="info-label">Address</div>
+                    <div class="info-value" id="address">-</div>
+                </div>
+                <div class="info-group" id="courseGroup">
+                    <div class="info-label">Course</div>
+                    <div class="info-value" id="course">-</div>
+                </div>
+                <div class="info-group" id="regGroup">
+                    <div class="info-label">Registration Number</div>
+                    <div class="info-value" id="registrationNumber">-</div>
+                </div>
+                <div class="info-group">
+                    <div class="info-label">Date of Birth</div>
+                    <div class="info-value" id="dateOfBirth">-</div>
+                </div>
+                <div class="info-group" id="batchGroup">
+                    <div class="info-label">Batch Time</div>
+                    <div class="info-value" id="batchTime">-</div>
+                </div>
+                <div class="info-group" id="durationGroup">
+                    <div class="info-label">Duration</div>
+                    <div class="info-value" id="duration">-</div>
+                </div>
+                <div class="info-group" id="yearGroup">
+                    <div class="info-label">Year</div>
+                    <div class="info-value" id="year">-</div>
+                </div>
+                <div class="info-group" id="feesGroup">
+                    <div class="info-label">Total Fees</div>
+                    <div class="info-value" id="totalFees">-</div>
+                </div>
+                <div class="info-group" id="pendingGroup">
+                    <div class="info-label">Pending Fees</div>
+                    <div class="info-value" id="pendingFees">-</div>
+                </div>
+                <button class="logout-btn" onclick="resetPassword()" style="background:#3498db; margin-bottom:10px;">🔑 Reset Password</button>
+                <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script>
+        firebase.auth().onAuthStateChanged(async (user) => {
+            if (!user) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            try {
+                const userDoc = await firebase.firestore().collection('users').doc(user.uid).get();
+                
+                if (!userDoc.exists) {
+                    alert('User data not found!');
+                    logout();
+                    return;
+                }
+
+                const userData = userDoc.data();
+                console.log('User data from Firestore:', userData);
+                
+                document.getElementById('fullName').textContent = userData.fullName || 'N/A';
+                document.getElementById('email').textContent = userData.email || user.email;
+                document.getElementById('phone').textContent = userData.phone || 'Not provided';
+                document.getElementById('address').textContent = userData.address || 'Not provided';
+                document.getElementById('dateOfBirth').textContent = userData.dateOfBirth || 'Not provided';
+                
+                if (userData.profileImageUrl) {
+                    document.getElementById('profileImage').src = userData.profileImageUrl;
+                }
+
+                console.log('isEccStudent:', userData.isEccStudent);
+                console.log('Has course:', userData.course);
+                console.log('Has registrationNumber:', userData.registrationNumber);
+                
+                // Check if user has ECC student data (course, registrationNumber, etc.)
+                const hasEccData = userData.course || userData.registrationNumber || userData.batchTime;
+                
+                if (userData.isEccStudent !== false && hasEccData) {
+                    console.log('Showing ECC student fields');
+                    document.getElementById('course').textContent = userData.course || 'Not provided';
+                    document.getElementById('registrationNumber').textContent = userData.registrationNumber || 'Not provided';
+                    document.getElementById('batchTime').textContent = userData.batchTime || 'Not provided';
+                    document.getElementById('duration').textContent = userData.duration || 'Not provided';
+                    document.getElementById('year').textContent = userData.year || 'Not provided';
+                    document.getElementById('totalFees').textContent = userData.totalFees ? '₹' + userData.totalFees : 'Not provided';
+                    document.getElementById('pendingFees').textContent = userData.pendingFees ? '₹' + userData.pendingFees : 'Not provided';
+                } else {
+                    console.log('Hiding ECC student fields - not an ECC student');
+                    document.getElementById('courseGroup').style.display = 'none';
+                    document.getElementById('regGroup').style.display = 'none';
+                    document.getElementById('batchGroup').style.display = 'none';
+                    document.getElementById('durationGroup').style.display = 'none';
+                    document.getElementById('yearGroup').style.display = 'none';
+                    document.getElementById('feesGroup').style.display = 'none';
+                    document.getElementById('pendingGroup').style.display = 'none';
+                }
+
+                document.getElementById('loadingDiv').style.display = 'none';
+                document.getElementById('profileDiv').style.display = 'block';
+
+            } catch (error) {
+                console.error('Error loading profile:', error);
+                console.error('Error details:', error.message, error.code);
+                alert('Error loading profile: ' + error.message);
+            }
+        });
+
+        function resetPassword() {
+            const user = firebase.auth().currentUser;
+            if (user && user.email) {
+                firebase.auth().sendPasswordResetEmail(user.email)
+                    .then(() => {
+                        alert('Password reset email sent to ' + user.email);
+                    })
+                    .catch(error => {
+                        alert('Error: ' + error.message);
+                    });
+            }
+        }
+
+        function logout() {
+            firebase.auth().signOut().then(() => {
+                window.location.href = 'index.html';
+            });
+        }
+    </script>
+</body>
+</html>

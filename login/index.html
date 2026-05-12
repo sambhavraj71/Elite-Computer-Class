@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Login Panel</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="login-container" id="loginContainer" style="display:none;">
+        <div class="login-card">
+            <h1>Elite Login Panel</h1>
+            <input type="email" id="adminEmail" placeholder="Enter Your Email">
+            <input type="password" id="adminPassword" placeholder="Password">
+            <button onclick="adminLogin()">Login</button>
+            <p id="loginError"></p>
+            <a href="#" onclick="forgotPassword(); return false;" style="color: #667eea; text-decoration: none; display: block; text-align: center; margin-top: 10px;">Forgot Password?</a>
+            <p style="text-align: center; margin-top: 15px; color: #666; font-size: 14px;">Access your LMS Portal here</p>
+            <a href="https://sunlightskills.in/apprise/student/login.php" target="_blank" onclick="this.href=this.href+'?desktop=1'" style="color: #667eea; text-decoration: none; display: block; text-align: center; margin-top: 5px; font-weight: bold;">LMS Portal</a>
+        </div>
+    </div>
+
+    <div class="dashboard" id="dashboard" style="display:none;">
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+        
+        <nav class="sidebar" id="sidebar">
+            <h2>Elite Login</h2>
+            <ul>
+                <li onclick="showSection('students'); closeMobileMenu()">👨🎓 Students</li>
+                <li onclick="showSection('faculties'); closeMobileMenu()">👨🏫 Faculties</li>
+                <li onclick="window.location.href='pdf-notes.html'">📄 PDF Notes</li>
+                <li onclick="window.location.href='sections.html'">📂 Sections</li>
+                <li onclick="showSection('gallery'); closeMobileMenu()">🖼️ Gallery</li>
+                <li onclick="adminLogout()">🚪 Logout</li>
+            </ul>
+        </nav>
+
+        <main class="content">
+            <div id="studentsSection">
+                <div class="header">
+                    <h1>Manage Students</h1>
+                    <input type="text" id="searchStudent" placeholder="Search students..." onkeyup="searchStudents()">
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Reg No</th>
+                                <th>Course</th>
+                                <th>Batch</th>
+                                <th>Total Fees</th>
+                                <th>Pending</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentsTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="facultiesSection" style="display:none;">
+                <div class="header">
+                    <h1>Manage Faculties</h1>
+                    <button class="btn-add" onclick="showAddFacultyModal()">+ Add Faculty</button>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Role</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="facultiesTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Gallery Section -->
+            <div id="gallerySection" style="display:none;">
+                <div class="header">
+                    <h1>🖼️ Gallery Management</h1>
+                </div>
+
+                <!-- Stats -->
+                <div id="galleryStatsRow" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;"></div>
+
+                <!-- Upload Card -->
+                <div class="table-container" style="margin-bottom:20px;">
+                    <h3 style="color:#667eea;margin-bottom:15px;">⬆️ Upload Images</h3>
+
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:15px;">
+                        <div>
+                            <label style="font-weight:500;display:block;margin-bottom:5px;">Category</label>
+                            <select id="galleryUploadCategory" style="width:100%;padding:10px;border:2px solid #e0e0e0;border-radius:8px;font-size:14px;">
+                                <option value="director">Director's Corner</option>
+                                <option value="job">Job 2025</option>
+                                <option value="award">Award Ceremony</option>
+                                <option value="certification">Certification</option>
+                                <option value="social">Social Media</option>
+                                <option value="students">Students Corner</option>
+                                <option value="batch">New Batch 2025</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-weight:500;display:block;margin-bottom:5px;">Caption (optional)</label>
+                            <input type="text" id="galleryCaption" placeholder="e.g. Award Ceremony 2025" style="width:100%;padding:10px;border:2px solid #e0e0e0;border-radius:8px;font-size:14px;">
+                        </div>
+                    </div>
+
+                    <div style="display:flex;gap:8px;margin-bottom:15px;">
+                        <button id="gTab-file" class="tab-btn active" onclick="switchGalleryTab('file')">📁 File Upload</button>
+                        <button id="gTab-url" class="tab-btn" onclick="switchGalleryTab('url')">🔗 Image URL</button>
+                    </div>
+
+                    <!-- File Tab -->
+                    <div id="gTabContent-file">
+                        <div id="galleryDropZone" onclick="document.getElementById('galleryFileInput').click()" style="border:2px dashed #c7d2fe;border-radius:12px;padding:30px;text-align:center;cursor:pointer;background:#f8f9ff;transition:all 0.2s;">
+                            <div style="font-size:2rem;margin-bottom:8px;">☁️</div>
+                            <p style="font-weight:600;">Click to select or drag & drop images</p>
+                            <p style="color:#999;font-size:13px;margin-top:5px;">JPG, PNG, WEBP • Multiple files allowed</p>
+                            <input type="file" id="galleryFileInput" accept="image/*" multiple style="display:none;">
+                        </div>
+                        <div id="galleryPreviewGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px;margin-top:12px;"></div>
+                        <div id="galleryProgressWrap" style="display:none;background:#e2e8f0;border-radius:99px;height:8px;margin:12px 0;overflow:hidden;">
+                            <div id="galleryProgressFill" style="height:100%;background:linear-gradient(90deg,#667eea,#764ba2);border-radius:99px;transition:width 0.3s;width:0%;"></div>
+                        </div>
+                        <button id="galleryUploadBtn" onclick="uploadGalleryFiles()" disabled class="btn-add" style="margin-top:12px;">⬆ Upload to ImgBB</button>
+                    </div>
+
+                    <!-- URL Tab -->
+                    <div id="gTabContent-url" style="display:none;">
+                        <input type="url" id="galleryUrlInput" oninput="galleryPreviewUrl()" placeholder="https://example.com/image.jpg" style="width:100%;padding:10px;border:2px solid #e0e0e0;border-radius:8px;font-size:14px;margin-bottom:10px;">
+                        <div id="galleryUrlPreviewWrap" style="display:none;margin-bottom:12px;">
+                            <img id="galleryUrlPreview" src="" alt="Preview" style="max-height:120px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+                        </div>
+                        <button onclick="addGalleryFromUrl()" class="btn-add">+ Add Image</button>
+                    </div>
+                </div>
+
+                <!-- Manage Card -->
+                <div class="table-container">
+                    <h3 style="color:#667eea;margin-bottom:15px;">🗂 Manage Gallery Images</h3>
+                    <div id="galleryCatTabs" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:15px;"></div>
+                    <div id="galleryManageGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('editModal')">&times;</span>
+            <h2>Edit Student</h2>
+            <form id="editForm">
+                <input type="text" id="editName" placeholder="Full Name" readonly>
+                <input type="email" id="editEmail" placeholder="Email" readonly>
+                <input type="text" id="editPhone" placeholder="Phone" readonly>
+                <input type="text" id="editRegNo" placeholder="Registration Number" readonly>
+                <input type="text" id="editCourse" placeholder="Course (e.g., ADCA, DCA)">
+                <input type="text" id="editBatchTime" placeholder="Batch Time (e.g., 10:00 AM - 12:00 PM)">
+                <input type="number" id="editTotalFees" placeholder="Total Fees">
+                <input type="number" id="editPendingFees" placeholder="Pending Fees">
+                <input type="text" id="editDuration" placeholder="Duration (e.g., 6 Months)">
+                <input type="text" id="editYear" placeholder="Year (e.g., 2024)">
+                <button type="button" onclick="saveStudent()">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="addFacultyModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('addFacultyModal')">&times;</span>
+            <h2>Add Faculty</h2>
+            <form id="addFacultyForm">
+                <input type="text" id="facultyName" placeholder="Full Name" required>
+                <input type="email" id="facultyEmail" placeholder="Email" required>
+                <input type="password" id="facultyPassword" placeholder="Password" required>
+                <input type="text" id="facultyPhone" placeholder="Phone Number" required>
+                <select id="facultyRole" required>
+                    <option value="">Select Role</option>
+                    <option value="faculty">Faculty (View Only)</option>
+                    <option value="admin">Admin (Full Access)</option>
+                </select>
+                <button type="button" onclick="addFaculty()">Add Faculty</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="editFacultyModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('editFacultyModal')">&times;</span>
+            <h2>Edit Faculty</h2>
+            <form id="editFacultyForm">
+                <input type="text" id="editFacultyName" placeholder="Full Name" readonly>
+                <input type="email" id="editFacultyEmail" placeholder="Email" readonly>
+                <input type="text" id="editFacultyPhone" placeholder="Phone Number">
+                <select id="editFacultyRole" required>
+                    <option value="faculty">Faculty (View Only)</option>
+                    <option value="admin">Admin (Full Access)</option>
+                </select>
+                <button type="button" onclick="saveFaculty()">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/faculty.js"></script>
+    <script src="js/gallery.js"></script>
+</body>
+</html>

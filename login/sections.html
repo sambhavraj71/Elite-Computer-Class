@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Sections - Elite Admin</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .section-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .section-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .section-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 12px;
+        }
+        .section-info {
+            flex: 1;
+        }
+        .section-name {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .section-count {
+            color: #666;
+            font-size: 14px;
+        }
+        .section-actions {
+            display: flex;
+            gap: 10px;
+        }
+        .btn-edit, .btn-delete {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .btn-edit {
+            background: #667eea;
+            color: white;
+        }
+        .btn-edit:hover {
+            background: #5568d3;
+        }
+        .btn-delete {
+            background: #f56565;
+            color: white;
+        }
+        .btn-delete:hover {
+            background: #e53e3e;
+        }
+        .icon-preview {
+            width: 80px;
+            height: 80px;
+            border: 2px dashed #ddd;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            margin: 10px 0;
+            background: #f7fafc;
+        }
+        .icon-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        .icon-type-selector {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .icon-type-btn {
+            padding: 8px 16px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .icon-type-btn.active {
+            border-color: #667eea;
+            background: #667eea;
+            color: white;
+        }
+        .icon-input-group {
+            display: none;
+        }
+        .icon-input-group.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+        
+        <nav class="sidebar" id="sidebar">
+            <h2>Elite Admin</h2>
+            <ul>
+                <li onclick="window.location.href='index.html'">👨🎓 Students</li>
+                <li onclick="window.location.href='index.html'">👨🏫 Faculties</li>
+                <li onclick="window.location.href='pdf-notes.html'">📄 PDF Notes</li>
+                <li onclick="window.location.href='sections.html'" style="background: rgba(102, 126, 234, 0.1);">📂 Sections</li>
+                <li onclick="adminLogout()">🚪 Logout</li>
+            </ul>
+        </nav>
+
+        <main class="content">
+            <div class="header">
+                <h1>Manage Sections</h1>
+                <button class="btn-add" onclick="showAddSectionModal()">+ Add Section</button>
+            </div>
+            
+            <div id="sectionsContainer"></div>
+        </main>
+    </div>
+
+    <!-- Add Section Modal -->
+    <div class="modal" id="addSectionModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('addSectionModal')">&times;</span>
+            <h2>Add New Section</h2>
+            <form id="addSectionForm">
+                <input type="text" id="sectionName" placeholder="Section Name (e.g., Notes, Shortcuts)" required>
+                
+                <label>Icon Type:</label>
+                <div class="icon-type-selector">
+                    <button type="button" class="icon-type-btn active" onclick="selectIconType('emoji')">😀 Emoji</button>
+                    <button type="button" class="icon-type-btn" onclick="selectIconType('url')">🔗 Image URL</button>
+                    <button type="button" class="icon-type-btn" onclick="selectIconType('base64')">📷 Base64</button>
+                </div>
+
+                <div id="emojiInput" class="icon-input-group active">
+                    <input type="text" id="emojiIcon" placeholder="Enter Emoji (e.g., 📚, 💻, 📝)" maxlength="10">
+                    <small style="color: #666; display: block; margin-top: 5px;">Enter emoji only (max 10 characters)</small>
+                </div>
+
+                <div id="urlInput" class="icon-input-group">
+                    <input type="text" id="urlIcon" placeholder="Enter Image URL (e.g., https://example.com/icon.png)">
+                    <small style="color: #666; display: block; margin-top: 5px;">Paste full image URL starting with http:// or https://</small>
+                </div>
+
+                <div id="base64Input" class="icon-input-group">
+                    <textarea id="base64Icon" placeholder="Paste Base64 image data (data:image/png;base64,...)" rows="6" style="font-size: 12px;"></textarea>
+                    <small style="color: #666; display: block; margin-top: 5px;">Paste complete Base64 string starting with data:image/</small>
+                </div>
+
+                <label>Icon Preview:</label>
+                <div class="icon-preview" id="iconPreview">?</div>
+
+                <button type="button" onclick="previewIcon()">Preview Icon</button>
+                <button type="button" onclick="addSection()">Add Section</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Section Modal -->
+    <div class="modal" id="editSectionModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('editSectionModal')">&times;</span>
+            <h2>Edit Section</h2>
+            <form id="editSectionForm">
+                <input type="hidden" id="editSectionOldName">
+                <input type="text" id="editSectionName" placeholder="Section Name" required>
+                
+                <label>Icon Type:</label>
+                <div class="icon-type-selector">
+                    <button type="button" class="icon-type-btn" onclick="selectEditIconType('emoji')">😀 Emoji</button>
+                    <button type="button" class="icon-type-btn" onclick="selectEditIconType('url')">🔗 Image URL</button>
+                    <button type="button" class="icon-type-btn" onclick="selectEditIconType('base64')">📷 Base64</button>
+                </div>
+
+                <div id="editEmojiInput" class="icon-input-group">
+                    <input type="text" id="editEmojiIcon" placeholder="Enter Emoji" maxlength="10">
+                    <small style="color: #666; display: block; margin-top: 5px;">Enter emoji only (max 10 characters)</small>
+                </div>
+
+                <div id="editUrlInput" class="icon-input-group">
+                    <input type="text" id="editUrlIcon" placeholder="Enter Image URL">
+                    <small style="color: #666; display: block; margin-top: 5px;">Paste full image URL starting with http:// or https://</small>
+                </div>
+
+                <div id="editBase64Input" class="icon-input-group">
+                    <textarea id="editBase64Icon" placeholder="Paste Base64 image data" rows="6" style="font-size: 12px;"></textarea>
+                    <small style="color: #666; display: block; margin-top: 5px;">Paste complete Base64 string starting with data:image/</small>
+                </div>
+
+                <label>Icon Preview:</label>
+                <div class="icon-preview" id="editIconPreview">?</div>
+
+                <button type="button" onclick="previewEditIcon()">Preview Icon</button>
+                <button type="button" onclick="saveSection()">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/sections.js"></script>
+</body>
+</html>

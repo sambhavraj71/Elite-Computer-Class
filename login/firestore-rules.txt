@@ -1,0 +1,33 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Users (Students) Collection
+    match /users/{userId} {
+      // Students can read/write their own data
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      
+      // Faculties and Admins can read all students
+      allow read: if request.auth != null && 
+                     exists(/databases/$(database)/documents/faculties/$(request.auth.uid));
+      
+      // Only Admins can write/update/delete students
+      allow write: if request.auth != null && 
+                      get(/databases/$(database)/documents/faculties/$(request.auth.uid)).data.role == 'admin';
+    }
+    
+    // Faculties Collection
+    match /faculties/{facultyId} {
+      // Faculties can read their own data
+      allow read: if request.auth != null && request.auth.uid == facultyId;
+      
+      // Admins can read all faculties
+      allow read: if request.auth != null && 
+                     get(/databases/$(database)/documents/faculties/$(request.auth.uid)).data.role == 'admin';
+      
+      // Only Admins can create/update/delete faculties
+      allow write: if request.auth != null && 
+                      get(/databases/$(database)/documents/faculties/$(request.auth.uid)).data.role == 'admin';
+    }
+  }
+}

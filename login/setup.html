@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup Admin - Elite</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .setup-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            width: 500px;
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .step {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .step h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        .success {
+            background: #4CAF50;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+        }
+        .error {
+            background: #f44336;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+        }
+        .info {
+            background: #2196F3;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="setup-card">
+        <h1>🚀 Setup Admin Panel</h1>
+        
+        <div class="info">
+            <strong>Step 1:</strong> Pehle ek admin account banao (signup karo Android app se ya yahan se)
+        </div>
+
+        <div class="step">
+            <h3>Create First Admin</h3>
+            <input type="text" id="adminName" placeholder="Admin Name">
+            <input type="email" id="adminEmail" placeholder="Admin Email">
+            <input type="password" id="adminPassword" placeholder="Password (min 6 characters)">
+            <input type="text" id="adminPhone" placeholder="Phone Number">
+            <button onclick="createAdmin()">Create Admin Account</button>
+        </div>
+
+        <div class="success" id="successMsg"></div>
+        <div class="error" id="errorMsg"></div>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="index.html" style="color: #667eea; text-decoration: none; font-weight: bold;">Go to Admin Panel →</a>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script>
+        function createAdmin() {
+            const name = document.getElementById('adminName').value.trim();
+            const email = document.getElementById('adminEmail').value.trim();
+            const password = document.getElementById('adminPassword').value;
+            const phone = document.getElementById('adminPhone').value.trim();
+
+            const successMsg = document.getElementById('successMsg');
+            const errorMsg = document.getElementById('errorMsg');
+            
+            successMsg.style.display = 'none';
+            errorMsg.style.display = 'none';
+
+            if (!name || !email || !password || !phone) {
+                errorMsg.textContent = 'Please fill all fields';
+                errorMsg.style.display = 'block';
+                return;
+            }
+
+            if (password.length < 6) {
+                errorMsg.textContent = 'Password must be at least 6 characters';
+                errorMsg.style.display = 'block';
+                return;
+            }
+
+            // Create Firebase Auth user
+            auth.createUserWithEmailAndPassword(email, password)
+                .then(userCredential => {
+                    const userId = userCredential.user.uid;
+                    
+                    // Add to faculties collection with admin role
+                    return db.collection('faculties').doc(userId).set({
+                        name: name,
+                        email: email,
+                        phone: phone,
+                        role: 'admin',
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                })
+                .then(() => {
+                    successMsg.innerHTML = `
+                        <strong>✅ Success!</strong><br>
+                        Admin account created successfully!<br>
+                        Email: ${email}<br>
+                        <br>
+                        <a href="index.html" style="color: white; text-decoration: underline;">Click here to login</a>
+                    `;
+                    successMsg.style.display = 'block';
+                    
+                    // Clear form
+                    document.getElementById('adminName').value = '';
+                    document.getElementById('adminEmail').value = '';
+                    document.getElementById('adminPassword').value = '';
+                    document.getElementById('adminPhone').value = '';
+                })
+                .catch(error => {
+                    errorMsg.textContent = 'Error: ' + error.message;
+                    errorMsg.style.display = 'block';
+                });
+        }
+    </script>
+</body>
+</html>

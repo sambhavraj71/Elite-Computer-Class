@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Notes - ECC Admin</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="dashboard">
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+        
+        <nav class="sidebar" id="sidebar">
+            <h2>Elite Admin</h2>
+            <ul>
+                <li onclick="window.location.href='index.html'">👨🎓 Students</li>
+                <li onclick="window.location.href='users.html'">👥 Users</li>
+                <li onclick="window.location.href='faculty.html'">👨🏫 Faculties</li>
+                <li style="background: #667eea; color: white;">📄 PDF Notes</li>
+                <li onclick="adminLogout()">🚪 Logout</li>
+            </ul>
+        </nav>
+
+        <main class="content">
+            <div class="header">
+                <h1>PDF Notes Management</h1>
+                <button class="btn-add" onclick="showAddModal()">+ Add PDF</button>
+            </div>
+
+            <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <button class="tab-btn active" onclick="switchTab('free')" id="freeTab">📗 Free PDFs</button>
+                    <button class="tab-btn" onclick="switchTab('paid')" id="paidTab" style="margin-left: 10px;">💰 Paid PDFs</button>
+                </div>
+                <button class="btn-delete" onclick="deleteSelected()" id="deleteBtn" style="display:none; background:#e74c3c;">🗑️ Delete Selected</button>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" id="selectAll" onclick="toggleSelectAll()"></th>
+                            <th>Name</th>
+                            <th>Section</th>
+                            <th>Free/Paid</th>
+                            <th>PDF Link</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pdfTableBody">
+                        <tr>
+                            <td colspan="5" style="text-align: center; padding: 40px; color: #667eea;">Loading...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal" id="pdfModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('pdfModal')">&times;</span>
+            <h2 id="modalTitle">Add PDF</h2>
+            <form id="pdfForm">
+                <input type="text" id="pdfName" placeholder="PDF Name (e.g., MS Word 1, MS Word 2)" required>
+                <select id="pdfSection" onchange="toggleCustomSection()" required>
+                    <option value="">Select Section</option>
+                </select>
+                <input type="text" id="customSection" placeholder="Or enter new section name" style="display:none; margin-top:10px;">
+                <input type="text" id="subCategory" placeholder="Sub-Category (e.g., MS Word, Excel)" required>
+                <input type="text" id="iconUrl" placeholder="Icon: Emoji (💻) or URL (https://example.com/icon.png)" required>
+                <input type="url" id="pdfUrl" placeholder="Google Drive Link" required>
+                <button type="button" onclick="savePdf()">Save PDF</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/pdf-notes.js"></script>
+</body>
+</html>

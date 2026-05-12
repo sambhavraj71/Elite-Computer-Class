@@ -1,0 +1,36 @@
+// Copy these rules to Firebase Console -> Firestore Database -> Rules
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Users collection - authenticated users can read their own data
+    match /users/{userId} {
+      allow read: if request.auth != null && request.auth.uid == userId;
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Faculties collection - authenticated users can read
+    match /faculties/{facultyId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+    }
+    
+    // PDF Categories - authenticated users can read, faculty can write
+    match /pdfCategories/{pdfId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+    }
+
+    // Gallery Images - PUBLIC read (website par dikhne ke liye), authenticated write
+    match /galleryImages/{imageId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+    
+    // Allow all other authenticated operations
+    match /{document=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
