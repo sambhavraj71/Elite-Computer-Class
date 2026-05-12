@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banner Management - Elite Admin</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .banner-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .banner-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .banner-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+        .banner-img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+        .banner-info {
+            padding: 15px;
+        }
+        .banner-order {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .banner-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        .btn-delete {
+            flex: 1;
+            padding: 8px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .btn-delete:hover {
+            background: #dc2626;
+        }
+        .upload-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .upload-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        .preview-img {
+            max-width: 200px;
+            max-height: 120px;
+            border-radius: 8px;
+            margin: 10px 0;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+        
+        <nav class="sidebar" id="sidebar">
+            <h2>Elite Admin</h2>
+            <ul>
+                <li onclick="window.location.href='index.html'">👨🎓 Students</li>
+                <li onclick="window.location.href='index.html'">👨🏫 Faculties</li>
+                <li onclick="window.location.href='pdf-notes.html'">📄 PDF Notes</li>
+                <li onclick="window.location.href='sections.html'">📂 Sections</li>
+                <li onclick="window.location.href='banners.html'" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">🎨 Banners</li>
+                <li onclick="window.location.href='index.html'">🖼️ Gallery</li>
+                <li onclick="adminLogout()">🚪 Logout</li>
+            </ul>
+        </nav>
+
+        <main class="content">
+            <div class="header">
+                <h1>🎨 Banner Management</h1>
+            </div>
+
+            <div class="upload-section">
+                <h3 style="color: #667eea; margin-bottom: 15px;">➕ Add New Banner</h3>
+                <input type="url" id="bannerUrl" class="upload-input" placeholder="Enter ImgBB image URL" oninput="previewBanner()">
+                <img id="previewImg" class="preview-img" alt="Preview">
+                <input type="number" id="bannerOrder" class="upload-input" placeholder="Display Order (1, 2, 3...)" min="1">
+                <button class="btn-add" onclick="addBanner()">Add Banner</button>
+            </div>
+
+            <div class="table-container">
+                <h3 style="color: #667eea; margin-bottom: 15px;">📋 Current Banners</h3>
+                <div id="bannersGrid" class="banner-grid"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/banners.js"></script>
+</body>
+</html>
