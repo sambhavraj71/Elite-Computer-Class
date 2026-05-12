@@ -976,11 +976,52 @@
         <div class="popup-counter" id="popupCounter"></div>
     </div>
 
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        const firebaseConfig = {
+            apiKey: "AIzaSyDZV8cacx2RcuGg2vhscbvZfzcBcSkyWQA",
+            authDomain: "elite-computer-classes-71185.firebaseapp.com",
+            projectId: "elite-computer-classes-71185",
+            storageBucket: "elite-computer-classes-71185.firebasestorage.app",
+            messagingSenderId: "173735983438",
+            appId: "1:173735983438:web:d8a011e972f81e7b48c61f"
+        };
+        if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+        const galleryDb = firebase.firestore();
+
+        async function loadFirestoreGalleryImages() {
+            try {
+                const snap = await galleryDb.collection('galleryImages').get();
+                const catMap = {
+                    director: 'director-gallery',
+                    job: 'job-gallery',
+                    award: 'award-gallery',
+                    certification: 'certification-gallery',
+                    social: 'social-gallery',
+                    students: 'students-gallery',
+                    batch: 'batch-gallery'
+                };
+                snap.forEach(doc => {
+                    const data = doc.data();
+                    const gridId = catMap[data.category];
+                    if (!gridId) return;
+                    const grid = document.getElementById(gridId);
+                    if (!grid) return;
+                    const div = document.createElement('div');
+                    div.className = 'gallery-item';
+                    div.innerHTML = `<img src="${data.url}" alt="${data.caption}" class="gallery-img" data-caption="${data.caption}" loading="lazy"><div class="gallery-overlay"><span class="gallery-caption">${data.caption}</span></div>`;
+                    grid.appendChild(div);
+                });
+            } catch (e) {
+                console.error('Gallery load error:', e);
+            }
+        }
+    </script>
             // Loader
             const loader = document.querySelector('.loader');
             window.addEventListener('load', () => {
+                loadFirestoreGalleryImages();
                 setTimeout(() => loader.classList.add('hidden'), 500);
             });
 
@@ -1040,13 +1081,13 @@
             let currentIndex = 0;
             let isZoomed = false;
 
-            document.querySelectorAll('.gallery-item').forEach(item => {
-                item.addEventListener('click', () => {
-                    const galleryId = item.closest('.gallery-grid').id;
-                    currentGallery = Array.from(document.querySelectorAll(`#${galleryId} .gallery-img`));
-                    currentIndex = currentGallery.findIndex(img => img.src === item.querySelector('img').src);
-                    openPopup();
-                });
+            document.querySelector('.container').addEventListener('click', (e) => {
+                const item = e.target.closest('.gallery-item');
+                if (!item) return;
+                const galleryId = item.closest('.gallery-grid').id;
+                currentGallery = Array.from(document.querySelectorAll(`#${galleryId} .gallery-img`));
+                currentIndex = currentGallery.findIndex(img => img.src === item.querySelector('img').src);
+                openPopup();
             });
 
             function openPopup() {
