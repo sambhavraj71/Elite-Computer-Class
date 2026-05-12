@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -909,9 +909,6 @@
                     <div class="gallery-item"><img src="Images/NEWBatch/NewBatch1.jpg" alt="New Batch 2025" class="gallery-img" data-caption="Orientation Day"><div class="gallery-overlay"><span class="gallery-caption">Orientation Day</span></div></div>
                     <div class="gallery-item"><img src="Images/NEWBatch/NewBatch2.jpg" alt="New Batch 2025" class="gallery-img" data-caption="Welcome Session"><div class="gallery-overlay"><span class="gallery-caption">Welcome Session</span></div></div>
                     <div class="gallery-item"><img src="Images/NEWBatch/NewBatch3.jpg" alt="New Batch 2025" class="gallery-img" data-caption="Icebreaker Activity"><div class="gallery-overlay"><span class="gallery-caption">Icebreaker Activity</span></div></div>
-                    <div class="gallery-item"><img src="Images/NEWBatch/NewBatch4.jpg" alt="New Batch 2025" class="gallery-img" data-caption="Faculty Introduction"><div class="gallery-overlay"><span class="gallery-caption">Faculty Introduction</span></div></div>
-                    <div class="gallery-item"><img src="Images/NEWBatch/NewBatch5.jpg" alt="New Batch 2025" class="gallery-img" data-caption="Campus Tour"><div class="gallery-overlay"><span class="gallery-caption">Campus Tour</span></div></div>
-                    <div class="gallery-item"><img src="Images/NEWBatch/NewBatch6.jpg" alt="New Batch 2025" class="gallery-img" data-caption="First Day Photo"><div class="gallery-overlay"><span class="gallery-caption">First Day Photo</span></div></div>
                 </div>
                 <button class="see-more" data-gallery="batch">See More</button>
             </section>
@@ -956,7 +953,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2025 Elite Computer Classes. All Rights Reserved.</p>
+            <p>Â© 2025 Elite Computer Classes. All Rights Reserved.</p>
         </div>
     </footer>
 
@@ -1018,12 +1015,11 @@
             }
         }
     </script>
-            // Loader
-            const loader = document.querySelector('.loader');
-            window.addEventListener('load', () => {
-                loadFirestoreGalleryImages();
-                setTimeout(() => loader.classList.add('hidden'), 500);
-            });
+    <script>
+        const loader = document.querySelector('.loader'); window.addEventListener('load', () => { loadFirestoreGalleryImages(); setTimeout(() => loader.classList.add('hidden'), 500); });
+
+
+
 
             // Mobile Navigation
             const navToggle = document.getElementById('navToggle');
@@ -1187,7 +1183,8 @@
                     btn.textContent = isCollapsed ? 'See Less' : 'See More';
                 });
             });
-        });
     </script>
 </body>
 </html>
+
+
