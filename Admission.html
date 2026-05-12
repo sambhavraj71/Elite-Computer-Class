@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <title>Student Admission Form</title>
+  <title>Student Enquiry Form</title>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <!-- Google Fonts -->
@@ -548,7 +548,7 @@
     <div class="header-icon">
       <i class="fas fa-graduation-cap"></i>
     </div>
-    <h2>Student Admission Form</h2>
+    <h2>Student Enquiry Form</h2>
     <p class="subtitle">Join Elite Computer Classes - Your Gateway to IT Excellence</p>
   </div>
   
@@ -571,12 +571,7 @@
         </div>
       </div>
 
-      <div class="form-row two-cols">
-        <div class="form-group">
-          <label><i class="fas fa-envelope label-icon"></i>Email Address <span class="required">*</span></label>
-          <input type="email" id="email" required placeholder="your.email@example.com">
-          <span class="error-message" id="emailError">Please enter a valid email address.</span>
-        </div>
+      <div class="form-row">
         <div class="form-group">
           <label><i class="fas fa-phone label-icon"></i>Mobile Number <span class="required">*</span></label>
           <input type="tel" id="mobile" required placeholder="10-digit mobile number">
@@ -586,9 +581,8 @@
 
       <div class="form-row">
         <div class="form-group">
-          <label><i class="fas fa-map-marker-alt label-icon"></i>Complete Address <span class="required">*</span></label>
-          <textarea id="address" rows="4" required placeholder="Enter your complete address with city, state, and pincode"></textarea>
-          <span class="error-message" id="addressError">Please enter a valid address.</span>
+          <label><i class="fas fa-map-marker-alt label-icon"></i>Complete Address</label>
+          <textarea id="address" rows="4" placeholder="Enter your complete address (optional)"></textarea>
         </div>
       </div>
     </div>
@@ -623,9 +617,9 @@
 
     <button type="submit" class="btn">
       <i class="fas fa-paper-plane"></i>
-      Submit Application
+      Submit Enquiry
     </button>
-    <div class="success-message" id="successMessage">Form submitted successfully! Redirecting to WhatsApp...</div>
+    <div class="success-message" id="successMessage">Enquiry submitted successfully! Redirecting to WhatsApp...</div>
   </form>
 </div>
 
@@ -661,9 +655,7 @@
     // Get form values
     const name = document.getElementById('name').value.trim();
     const fatherName = document.getElementById('fatherName').value.trim();
-    const email = document.getElementById('email').value.trim();
     const mobile = document.getElementById('mobile').value.trim();
-    const address = document.getElementById('address').value.trim();
     const course = document.getElementById('course').value;
     const batch = document.getElementById('batch').value;
 
@@ -682,23 +674,10 @@
       isValid = false;
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      document.getElementById('emailError').style.display = 'block';
-      document.getElementById('email').classList.add('error');
-      isValid = false;
-    }
-
     const mobileRegex = /^\d{10}$/;
     if (!mobileRegex.test(mobile)) {
       document.getElementById('mobileError').style.display = 'block';
       document.getElementById('mobile').classList.add('error');
-      isValid = false;
-    }
-
-    if (address.length < 10) {
-      document.getElementById('addressError').style.display = 'block';
-      document.getElementById('address').classList.add('error');
       isValid = false;
     }
 
@@ -718,17 +697,18 @@
     document.getElementById('progressFill').style.width = '100%';
 
     // Prepare WhatsApp message
-    const phoneNumber = "918292879444"; // Replace with your number
-    const message = `*🎓 New Admission Form*\n\n` +
-      `👤 *Name:* ${name}\n` +
-      `👨‍👧 *Father's Name:* ${fatherName}\n` +
-      `📧 *Email:* ${email}\n` +
-      `📱 *Mobile:* ${mobile}\n` +
-      `🏠 *Address:* ${address}\n` +
-      `📚 *Course:* ${course}\n` +
-      `🕒 *Batch:* ${batch || 'Not specified'}`;
+    const phoneNumber = "918292879444";
+    const address = document.getElementById('address').value.trim();
+    const addressLine = address ? '\u{1F3E0} *Address:* ' + address + '\n' : '';
+    const message = '\u{1F4CB} *New Enquiry Form*\n\n' +
+      '\u{1F464} *Name:* ' + name + '\n' +
+      '\u{1F468}\u{200D}\u{1F467} *Father Name:* ' + fatherName + '\n' +
+      '\u{1F4F1} *Mobile:* ' + mobile + '\n' +
+      addressLine +
+      '\u{1F4DA} *Course:* ' + course + '\n' +
+      '\u{1F552} *Batch:* ' + (batch || 'Not specified');
 
-    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    const url = 'https://wa.me/' + phoneNumber + '?text=' + encodeURIComponent(message);
 
     // Redirect to WhatsApp after 2 seconds
     setTimeout(() => {
@@ -742,3 +722,4 @@
 
 </body>
 </html>
+
